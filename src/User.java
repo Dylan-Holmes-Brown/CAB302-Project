@@ -13,7 +13,7 @@ public class User extends Object{
     public String org;
     public int id;
 
-    //Empty method to create User Object
+    //Empty constructor to create User Object
     public User(){
 
     }

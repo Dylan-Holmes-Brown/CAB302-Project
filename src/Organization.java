@@ -5,12 +5,14 @@
  */
 
 public class Organization {
+    private int credits = 0;
+    private int assets = 0;
 
 
     public Organization() {
     }
 
 
-//this song slaps
+
 
 }
