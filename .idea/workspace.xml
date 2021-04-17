@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="user setup and permissions update pt2">
-      <change afterPath="$PROJECT_DIR$/src/Hashing.java" afterDir="false" />
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Started Create Table method, ran into issues with converting variable types into sql appropriate strings.">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sql/CreateDatabase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sql/Statement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Organization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Organization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CreateDatabase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,15 +18,11 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1r0kSskx5KRK13OgMERahdcDtiO" />
@@ -42,6 +41,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RunManager">
     <configuration name="Project" type="Application" factoryName="Application">
@@ -63,14 +63,6 @@
       <option name="presentableId" value="Default" />
       <updated>1618120400133</updated>
     </task>
-    <task id="LOCAL-00001" summary="user setup and permissions update pt2">
-      <created>1618382347150</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1618382347150</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -87,7 +79,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Created and established connection with the database" />
-    <MESSAGE value="user setup and permissions update pt2" />
-    <option name="LAST_COMMIT_MESSAGE" value="user setup and permissions update pt2" />
+    <MESSAGE value="Started Create Table method, ran into issues with converting variable types into sql appropriate strings." />
+    <option name="LAST_COMMIT_MESSAGE" value="Started Create Table method, ran into issues with converting variable types into sql appropriate strings." />
   </component>
 </project>
