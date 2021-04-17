@@ -5,6 +5,8 @@
  */
 
 public class Organization {
+    public String orgName;
+
     private int credits = 0;
     private int assets = 0;
 
