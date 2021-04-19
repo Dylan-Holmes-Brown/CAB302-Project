@@ -1,3 +1,5 @@
+package common;
+
 /**
  * This class contains the user permissions (Admin mostly) object and methods.
  *
@@ -83,33 +85,33 @@ public class UserPermissions {
     }
 
     //returns the updated state of setNewUser
-    public Boolean setNewUser(boolean update){
-        return newUser = update;
+    public void setNewUser(Boolean update){
+        newUser = update;
     }
 
     //returns the updated state of setNewAdmin
-    public Boolean setNewAdmin(boolean update){
-        return newAdmin = update;
+    public void setNewAdmin(Boolean update){
+        newAdmin = update;
     }
 
     //returns the updated state of setNewOrg
-    public Boolean setNewOrg(boolean update){
-        return newOrg = update;
+    public void setNewOrg(Boolean update){
+        newOrg = update;
     }
 
     //returns the updated state of setNewAsset
-    public Boolean setNewAsset(boolean update){
-        return newAsset = update;
+    public void setNewAsset(Boolean update){
+        newAsset = update;
     }
 
     //returns the updated state of setEditAsset
-    public Boolean setEditAsset(boolean update){
-        return editAsset = update;
+    public void setEditAsset(Boolean update){
+        editAsset = update;
     }
 
     //returns the updated state of setEditCredits
-    public Boolean setEditCredits(boolean update){
-        return editCredits = update;
+    public void setEditCredits(Boolean update){
+        editCredits = update;
     }
 
     //

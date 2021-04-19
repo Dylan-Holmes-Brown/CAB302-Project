@@ -1,3 +1,5 @@
+package common;
+
 /**
  * This class initialises a user
  *
