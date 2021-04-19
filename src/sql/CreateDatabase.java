@@ -2,9 +2,10 @@ package sql;
 
 import java.sql.*;
 import java.lang.reflect.Field;
+import java.sql.Statement;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * This class initilises the database
@@ -19,13 +20,25 @@ public class CreateDatabase {
     /**
      * Initialise a connection to the Database
      */
-    public static void build() throws Exception {
+    public static void build(Class<?> name) throws Exception {
 
-        Connection conn = null;
+        // SQLite connection string
         String url = "jdbc:sqlite:database.sqlite";
-        conn = DriverManager.getConnection(url);
 
-        System.out.println("Connection Established\n");
+        // SQLite query for creating a new table
+        String sql = CreateTable(name);
+
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+            System.out.println("Connection Established\n");
+
+            // Create a new table
+            stmt.execute(sql);
+        }
+
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -38,26 +51,28 @@ public class CreateDatabase {
         // Create Table if it does not already exist
         var sql = new StringBuilder("CREATE TABLE IF NOT EXISTS " + name.getSimpleName().toUpperCase() + " (\n");
 
+        // Create Array with fields of class name
         List<Field> fieldList = Arrays.asList(name.getFields());
+
+        // Create an empty hash map
+        HashMap<String, String> typeMap = new HashMap<>();
+
+        // Fill Hashmap with key of java field types and index to SQLite notation
+        typeMap.put("java.lang.String", "TEXT");
+        typeMap.put("int", "INT");
 
         // Loop through each field found in the class
         for (int i = 0; i < fieldList.size(); i ++) {
-//            String a = null;
-//            System.out.println(fieldList.get(i).getAnnotatedType() + "\n");
-//            if (type== "java.lang.String") {
-//                type.set(i, "text");
-//            }
+            // Create SQL query string including field names and types
+            sql.append(fieldList.get(i).getName() + " " + typeMap.get(fieldList.get(i).getType().getTypeName()));
 
-            // If the field has the correct annotation append the name and type of field to the sql query
-            //if (correctAnnotation) {
-                sql.append(fieldList.get(i).getName() + " "); //+ correctAnnotation.get().type());
-
-                if (i < fieldList.size() - 1) {
-                    sql.append(",\n");
-                }
-            //}
+            // Goto new line of string if fields still remain
+            if (i < fieldList.size() - 1) {
+                sql.append(",\n");
+            }
         }
 
+        // Close off SQL query
         sql.append(")");
         return sql.toString();
     }

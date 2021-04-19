@@ -11,12 +11,5 @@ import java.util.List;
  * @author Dylan Holmes-Brown
  */
 public class Statement {
-//    public static List<Field> getFields(Class<?> name) {
-//        List<Field> fields = new ArrayList<>();
-//        Class currentClass = name.getClass();
-//        fields.addAll(Arrays.asList(currentClass.getDeclaredFields()));
-//        currentClass = currentClass.getSuperclass();
-//        return fields;
-//        return Arrays.asList(name.getDeclaredFields());
-//    }
+
 }
