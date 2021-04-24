@@ -1,3 +1,5 @@
+package common;
+
 /**
  * This class contains the user permissions (Admin mostly) object and methods.
  *
@@ -27,6 +29,11 @@ public class UserPermissions {
     //Assign user with same level access (new IT Administration member)
     public boolean newAdmin = false;
 
+    //Empty constructor to create UserPermissions Object
+    public UserPermissions(){
+
+    }
+
     public UserPermissions(String username,
                            boolean newUser,
                            boolean newAdmin,
@@ -44,23 +51,69 @@ public class UserPermissions {
 
     }
 
+
+
     //-------------------------------- Getters and Setters section -----------------------------------------------------
 
     //return string of the username
-    public String getUsername(){return username;}
-    public Boolean getNewUser(){return newUser;}
-    public Boolean getNewAdmin(){return newAdmin;}
-    public Boolean getNewOrg(){return newOrg;}
-    public Boolean getNewAsset(){return newAsset;}
-    public Boolean getEditAsset(){return editAsset;}
-    public Boolean getEditCredits(){return editCredits;}
+    public String getUsername(){
+        return username;
+    }
 
+    public Boolean getNewUser(){
+        return newUser;
+    }
 
-//    public Boolean setNewUser(boolean update){ return newUser = update;}
-//    public Boolean setNewUser(boolean update){ return newUser = update;}
+    public Boolean getNewAdmin(){
+        return newAdmin;
+    }
 
+    public Boolean getNewOrg(){
+        return newOrg;
+    }
 
+    public Boolean getNewAsset(){
+        return newAsset;
+    }
 
+    public Boolean getEditAsset(){
+        return editAsset;
+    }
 
+    public Boolean getEditCredits(){
+        return editCredits;
+    }
+
+    //returns the updated state of setNewUser
+    public void setNewUser(Boolean update){
+        newUser = update;
+    }
+
+    //returns the updated state of setNewAdmin
+    public void setNewAdmin(Boolean update){
+        newAdmin = update;
+    }
+
+    //returns the updated state of setNewOrg
+    public void setNewOrg(Boolean update){
+        newOrg = update;
+    }
+
+    //returns the updated state of setNewAsset
+    public void setNewAsset(Boolean update){
+        newAsset = update;
+    }
+
+    //returns the updated state of setEditAsset
+    public void setEditAsset(Boolean update){
+        editAsset = update;
+    }
+
+    //returns the updated state of setEditCredits
+    public void setEditCredits(Boolean update){
+        editCredits = update;
+    }
+
+    //
 
 }
