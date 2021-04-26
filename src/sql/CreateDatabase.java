@@ -66,6 +66,12 @@ public class CreateDatabase {
             // Create SQL query string including field names and types
             sql.append(fieldList.get(i).getName() + " " + typeMap.get(fieldList.get(i).getType().getTypeName()));
 
+            // Add Primary Key if field is labelled id
+            if (fieldList.get(i).getName() == "id")
+            {
+                sql.append(" PRIMARY KEY");
+            }
+
             // Goto new line of string if fields still remain
             if (i < fieldList.size() - 1) {
                 sql.append(",\n");
