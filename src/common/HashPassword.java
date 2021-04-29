@@ -4,8 +4,9 @@ package common; /**
  * @author Laku Jackson
  */
 
-import java.security;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 public class HashPassword {
 

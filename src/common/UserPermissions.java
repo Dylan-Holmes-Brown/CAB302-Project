@@ -60,27 +60,27 @@ public class UserPermissions {
         return username;
     }
 
-    public Boolean getNewUser(){
+    public boolean getNewUser(){
         return newUser;
     }
 
-    public Boolean getNewAdmin(){
+    public boolean getNewAdmin(){
         return newAdmin;
     }
 
-    public Boolean getNewOrg(){
+    public boolean getNewOrg(){
         return newOrg;
     }
 
-    public Boolean getNewAsset(){
+    public boolean getNewAsset(){
         return newAsset;
     }
 
-    public Boolean getEditAsset(){
+    public boolean getEditAsset(){
         return editAsset;
     }
 
-    public Boolean getEditCredits(){
+    public boolean getEditCredits(){
         return editCredits;
     }
 
@@ -113,7 +113,5 @@ public class UserPermissions {
     public void setEditCredits(Boolean update){
         editCredits = update;
     }
-
-    //
 
 }

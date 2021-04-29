@@ -1,7 +1,7 @@
 package common;
 
 /**
- * This class initialises an Organization and there assets
+ * This class initialises an Organization and their assets
  *
  * @author Laku Jackson
  */
@@ -9,22 +9,36 @@ package common;
 public class Organization {
     public String orgName;
     private int credits = 0;
-    private int assets = 0;
-    private int quantity = 0;
+    private int organizationID;
 
 
     public Organization() {
 
     }
 
-    public Organization(String orgName, int credits, int assets, int quantity) {
+    public Organization(int organizationID, int credits, String orgName) {
+        this.organizationID = organizationID;
         this.orgName = orgName;
         this.credits = credits;
-        this.assets = assets;
-        this.quantity = quantity;
     }
 
+//    public User createUser(String name){
+//        //return new User(id,organizationID)
+//    }
 
+    public String getOrgName() {
+        return orgName;
+    }
 
+    public int getCredits() {
+        return credits;
+    }
 
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
 }
