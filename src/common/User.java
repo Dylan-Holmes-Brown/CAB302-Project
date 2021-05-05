@@ -9,11 +9,11 @@ package common;
 public class User extends Object{
 
     //may change these to private variables in future
+    public int id;
     public String username;
     public String password;
-    public String salt;
+    public String accountType;
     public String org;
-    public int id;
 
     //Empty constructor to create User Object
     public User(){
@@ -24,7 +24,7 @@ public class User extends Object{
     public User(String username, String password, String salt){
         this.username = username;
         this.password = password;
-        this.salt = salt;
+        this.accountType = accountType;
     }
 
     //User Constructor with their organization
@@ -32,9 +32,47 @@ public class User extends Object{
         this.id = id;
         this.username = username;
         this.password = password;
-        this.salt = salt;
+        this.accountType = salt;
         this.org = org;
     }
 
+    /**
+     * @return the username
+     */
+    public String getUsername() { return username; }
 
+    /**
+     * @param username the username to set
+     */
+    public void setName(String username) { this.username = username; }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() { return password; }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) { this.password = password; }
+
+    /**
+     * @return the accountType
+     */
+    public String getAccountType() { return accountType; }
+
+    /**
+     * @param accountType the accountType to set
+     */
+    public void setAccountType(String accountType) { this.accountType = accountType; }
+
+    /**
+     * @return the org
+     */
+    public String getOrganisationalUnit() { return org; }
+
+    /**
+     * @param org the org to set
+     */
+    public void setOrganisationalUnit(String org) { this.org = org; }
 }
