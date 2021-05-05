@@ -16,10 +16,10 @@ public class JDBCUserDataSource implements UserDataSource{
     public static final String CREATE_TABLE =
             "CREATE TABLE IF NOT EXISTS user ("
                     + "idx INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,"
-                    + "username VARCHAR(30),"
-                    + "password VARCHAR(30),"
-                    + "accountType VARCHAR(20),"
-                    + "organisationalUnit VARCHAR(10)"
+                    + "username VARCHAR(30) NOT NULL UNIQUE,"
+                    + "password VARCHAR(30) NOT NULL,"
+                    + "accountType VARCHAR(20) NOT NULL,"
+                    + "organisationalUnit VARCHAR(10) NOT NULL"
                     + ");";
 
     private static final String INSERT_USER = "INSERT INTO user (username, password, accountType, organisationalUnit) VALUES (?, ?, ?, ?);";
