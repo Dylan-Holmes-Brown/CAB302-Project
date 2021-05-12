@@ -11,6 +11,7 @@ import java.util.TreeSet;
  *
  * @author Dylan Holmes-Brown
  */
+
 public class JDBCUserDataSource implements UserDataSource{
     private Connection connection;
     public static final String CREATE_TABLE =
@@ -25,7 +26,7 @@ public class JDBCUserDataSource implements UserDataSource{
     private static final String INSERT_USER = "INSERT INTO user (username, password, accountType, organisationalUnit) VALUES (?, ?, ?, ?);";
     private PreparedStatement addUser;
 
-    private static final String GET_USERNAMES = "SELECT * username FROM user";
+    private static final String GET_USERNAMES = "SELECT username FROM user";
     private PreparedStatement getUsernamesList;
 
     private static final String GET_USER = "SELECT * FROM user WHERE username=?";
