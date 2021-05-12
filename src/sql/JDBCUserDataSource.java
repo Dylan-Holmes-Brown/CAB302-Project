@@ -31,7 +31,7 @@ public class JDBCUserDataSource implements UserDataSource{
     private static final String GET_USER = "SELECT * FROM user WHERE username=?";
     private PreparedStatement getUser;
 
-    private static final String DELETE_USER = "DELETE FROM user WHERE name=?";
+    private static final String DELETE_USER = "DELETE FROM user WHERE username=?";
     private PreparedStatement deleteUser;
 
     private static final String COUNT_ROWS = "SELECT COUNT(*) FROM user";

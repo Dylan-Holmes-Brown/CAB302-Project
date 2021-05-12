@@ -21,10 +21,11 @@ public class User extends Object{
     }
 
     //User Constructor
-    public User(String username, String password, String salt){
+    public User(String username, String password, String accountType, String org){
         this.username = username;
         this.password = password;
         this.accountType = accountType;
+        this.org = org;
     }
 
     //User Constructor with their organization
