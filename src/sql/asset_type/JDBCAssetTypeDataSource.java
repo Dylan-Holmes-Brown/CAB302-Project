@@ -1,6 +1,8 @@
-package sql;
+package sql.asset_type;
 
 import common.AssetTypes;
+import sql.DBConnection;
+import sql.asset_type.AssetTypeDataSource;
 
 import java.sql.*;
 import java.util.Set;
@@ -12,12 +14,11 @@ import java.util.TreeSet;
  * @author Adam Buchsbaum
  */
 
-public class JDBCAssetTypeDataSource implements AssetTypeDataSource{
+public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
     private Connection connection;
     public static final String CREATE_TABLE =
             "CREATE TABLE IF NOT EXISTS asset_types ("
-                    + "idx INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,"
-                    + "assetType VARCHAR(40) NOT NULL UNIQUE"
+                    + "assetType VARCHAR(40) PRIMARY KEY NOT NULL UNIQUE "
                     + ");";
 
     private static final String INSERT_ASSET_TYPE = "INSERT INTO asset_types (assetType) VALUES (?);";

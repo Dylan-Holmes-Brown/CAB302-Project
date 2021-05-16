@@ -3,6 +3,7 @@ package common;
 /**
  * This class initialises a user
  *
+ * @author Dylan Holmes-Brown
  * @author Laku Jackson
  */
 

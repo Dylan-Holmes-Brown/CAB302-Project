@@ -5,13 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Switched to MariaDB, User table complete, with methods to use with GUI.">
-      <change afterPath="$PROJECT_DIR$/src/sql/AssetTypeData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sql/AssetTypeDataSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sql/JDBCAssetTypeDataSource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/CurrentTrades.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sql/current_trade/CurrentData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sql/current_trade/CurrentDataSource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sql/current_trade/JDBCCurrentDataSource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sql/organisation/JDBCOrganisationDataSource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sql/organisation/OrganisationData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sql/organisation/OrganisationDataSource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/AssetTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/AssetTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/JDBCUserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/JDBCUserDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/Organization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Organisation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sql/AssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/asset_type/AssetTypeData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sql/AssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/asset_type/AssetTypeDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sql/JDBCAssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/asset_type/JDBCAssetTypeDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sql/JDBCUserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/user/JDBCUserDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sql/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/user/UserData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sql/UserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/user/UserDataSource.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +79,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
   </component>
   <component name="RunManager" selected="Application.Project">
     <configuration name="AddressBook" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -77,7 +87,7 @@
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="sql.*" />
+          <option name="PATTERN" value="sql.asset_type.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -86,7 +96,7 @@
       </method>
     </configuration>
     <configuration name="Project" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="15" />
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Assignment" />
@@ -94,10 +104,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="Application.Project" />
-      <item itemvalue="Application.AddressBook" />
-    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

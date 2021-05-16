@@ -1,4 +1,4 @@
-package sql;
+package sql.asset_type;
 
 import common.AssetTypes;
 

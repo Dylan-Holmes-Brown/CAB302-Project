@@ -1,4 +1,4 @@
-package sql;
+package sql.user;
 
 import common.User;
 
@@ -6,32 +6,32 @@ import java.util.Set;
 
 public interface UserDataSource {
     /**
-     * Adds a Person to the address list, if they are not already in the list
+     * Adds a User to the table, if they are not already in the table
      *
-     * @param user Person to add
+     * @param user User to add
      */
     void addUser(User user);
 
     /**
-     * Extracts all the details of a Person from the address book based on the
+     * Extracts all the details of a User from the table based on the
      * name passed in.
      *
      * @param username The name as a String to search for.
-     * @return all details in a Person object for the name
+     * @return all details in a User object for the name
      */
     User getUser(String username);
 
     /**
-     * Gets the number of addresses in the address book.
+     * Gets the number of users in the table.
      *
-     * @return size of address book.
+     * @return size of user.
      */
     int getSize();
 
     /**
-     * Deletes a Person from the address book.
+     * Deletes a User from the table.
      *
-     * @param username The name to delete from the address book.
+     * @param username The name to delete from the table.
      */
     void deleteUser(String username);
 

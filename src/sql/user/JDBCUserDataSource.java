@@ -1,6 +1,7 @@
-package sql;
+package sql.user;
 
 import common.User;
+import sql.DBConnection;
 
 import java.sql.*;
 import java.util.Set;
@@ -12,15 +13,16 @@ import java.util.TreeSet;
  * @author Dylan Holmes-Brown
  */
 
-public class JDBCUserDataSource implements UserDataSource{
+public class JDBCUserDataSource implements UserDataSource {
     private Connection connection;
     public static final String CREATE_TABLE =
             "CREATE TABLE IF NOT EXISTS user ("
-                    + "idx INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,"
+                    + "id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,"
                     + "username VARCHAR(30) NOT NULL UNIQUE,"
                     + "password VARCHAR(30) NOT NULL,"
                     + "accountType VARCHAR(20) NOT NULL,"
-                    + "organisationalUnit VARCHAR(10) NOT NULL"
+                    + "organisationalUnit VARCHAR(10) NOT NULL,"
+                    + "CONSTRAINT FK_Org FOREIGN KEY (organisationalUnit) REFERENCES organisational_unit(name)"
                     + ");";
 
     private static final String INSERT_USER = "INSERT INTO user (username, password, accountType, organisationalUnit) VALUES (?, ?, ?, ?);";
@@ -39,8 +41,9 @@ public class JDBCUserDataSource implements UserDataSource{
     private PreparedStatement rowCount;
 
     public JDBCUserDataSource() {
-        connection = DBConnection.getInstance();
         try {
+            connection = DBConnection.getInstance();
+
             Statement stmt = connection.createStatement();
             stmt.execute(CREATE_TABLE);
 
