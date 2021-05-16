@@ -13,15 +13,9 @@ import sql.organisation.JDBCOrganisationDataSource;
  */
 public class Main {
     public static void main(String[] args) throws Exception {
-        JDBCUserDataSource jdbcUserDataSource = new JDBCUserDataSource();
-        JDBCOrganisationDataSource jdbcOrganisationDataSource = new JDBCOrganisationDataSource();
         JDBCAssetTypeDataSource jdbcAssetTypeDataSource = new JDBCAssetTypeDataSource();
-
-
-        // Test User table
-        User user = new User("Dylan", "1234", "member", "amazon");
-        //jdbcUserDataSource.addUser(user);
-        //jdbcUserDataSource.deleteUser("Dylan");
+        JDBCOrganisationDataSource jdbcOrganisationDataSource = new JDBCOrganisationDataSource();
+        JDBCUserDataSource jdbcUserDataSource = new JDBCUserDataSource();
 
         // Test asset type table
         AssetTypes asset = new AssetTypes("CPU");
@@ -31,5 +25,14 @@ public class Main {
         Organisation org = new Organisation("amazon", 100, "CPU", 20);
         //jdbcOrganisationDataSource.addOrg(org);
         //jdbcOrganisationDataSource.deleteOrg("amazon");
+
+        // Test User table
+        User user = new User("Dylan", "1234", "member", "amazon");
+        //jdbcUserDataSource.addUser(user);
+        //jdbcUserDataSource.deleteUser("Dylan");
+
+        User userGet = jdbcUserDataSource.getUser("Dylan");
+        int size = jdbcUserDataSource.getSize();
+        System.out.println(userGet.username + " " + userGet.password + " " + userGet.accountType + " " + userGet.org +" \nTable size: " + size);
     }
 }

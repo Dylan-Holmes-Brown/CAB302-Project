@@ -20,7 +20,7 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
                     + "name VARCHAR(30) PRIMARY KEY NOT NULL,"
                     + "credits INTEGER NOT NULL,"
                     + "assets VARCHAR(20) NOT NULL,"
-                    + "quantity int NOT NULL"
+                    + "quantity int NOT NULL,"
                     + "CONSTRAINT FK_Asset FOREIGN KEY (assets) REFERENCES asset_types(assetType)"
                     + ");";
 

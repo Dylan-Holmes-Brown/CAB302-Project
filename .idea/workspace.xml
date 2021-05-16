@@ -4,24 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Switched to MariaDB, User table complete, with methods to use with GUI.">
-      <change afterPath="$PROJECT_DIR$/src/common/CurrentTrades.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sql/current_trade/CurrentData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sql/current_trade/CurrentDataSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sql/current_trade/JDBCCurrentDataSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sql/organisation/JDBCOrganisationDataSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sql/organisation/OrganisationData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sql/organisation/OrganisationDataSource.java" afterDir="false" />
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Organisational unit sql done, created foreign keys.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/Organization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Organisation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/AssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/asset_type/AssetTypeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/AssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/asset_type/AssetTypeDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/JDBCAssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/asset_type/JDBCAssetTypeDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/JDBCUserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/user/JDBCUserDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/user/UserData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/UserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/user/UserDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sql/organisation/JDBCOrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/organisation/JDBCOrganisationDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sql/user/JDBCUserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/user/JDBCUserDataSource.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620209534543</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Organisational unit sql done, created foreign keys.">
+      <created>1621139296416</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1621139296416</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -140,6 +134,7 @@
     <MESSAGE value="Created and established connection with the database" />
     <MESSAGE value="Started Create Table method, ran into issues with converting variable types into sql appropriate strings." />
     <MESSAGE value="Switched to MariaDB, User table complete, with methods to use with GUI." />
-    <option name="LAST_COMMIT_MESSAGE" value="Switched to MariaDB, User table complete, with methods to use with GUI." />
+    <MESSAGE value="Organisational unit sql done, created foreign keys." />
+    <option name="LAST_COMMIT_MESSAGE" value="Organisational unit sql done, created foreign keys." />
   </component>
 </project>

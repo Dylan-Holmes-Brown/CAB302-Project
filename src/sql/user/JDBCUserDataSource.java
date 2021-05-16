@@ -88,8 +88,8 @@ public class JDBCUserDataSource implements UserDataSource {
             resultSet.next();
             user.setName(resultSet.getString("username"));
             user.setPassword(resultSet.getString("password"));
-            user.setAccountType(resultSet.getString("account type"));
-            user.setOrganisationalUnit(resultSet.getString("organisational unit"));
+            user.setAccountType(resultSet.getString("accountType"));
+            user.setOrganisationalUnit(resultSet.getString("organisationalUnit"));
 
         }
         catch (SQLException sqle) {
