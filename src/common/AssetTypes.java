@@ -8,16 +8,14 @@ package common;
 
 
 public class AssetTypes {
-    private String assetName;
-    private int assetQuantity;
-
-    public AssetTypes() {
-
-    }
-
-    public AssetTypes(String assetName, int assetQuantity) {
-        this.assetName = assetName;
-        this.assetQuantity = assetQuantity;
+    public int ID;
+    public String assetType;
+    public AssetTypes(){
 
     }
+    public AssetTypes(String assetType){
+        this.assetType = assetType;
+    }
+    public String getAssetType(){ return assetType; }
+    public void setName(String assetType){ this.assetType = assetType; }
 }

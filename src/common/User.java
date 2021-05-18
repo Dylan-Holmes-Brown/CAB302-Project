@@ -3,17 +3,18 @@ package common;
 /**
  * This class initialises a user
  *
+ * @author Dylan Holmes-Brown
  * @author Laku Jackson
  */
 
 public class User extends Object{
 
     //may change these to private variables in future
-    private String username;
-    private String password;
-    private String salt;
-    private int userid;
-    private int organizationID;
+    public int id;
+    public String username;
+    public String password;
+    public String accountType;
+    public String org;
 
     //Empty constructor to create User Object
     public User(){
@@ -21,58 +22,59 @@ public class User extends Object{
     }
 
     //User Constructor
-    public User(String username, String password, String salt){
+    public User(String username, String password, String accountType, String org){
         this.username = username;
         this.password = password;
-        this.salt = salt;
+        this.accountType = accountType;
+        this.org = org;
     }
 
     //User Constructor with their organization
-    public User(int userid, int organizationID, String username, String password, String salt){
-        this.userid = userid;
-        this.organizationID = organizationID;
+    public User(int id, String username, String password, String salt, String org){
+        this.id = id;
         this.username = username;
         this.password = password;
-        this.salt = salt;
+        this.accountType = salt;
+        this.org = org;
     }
 
-    public int getId() {
-        return userid;
-    }
+    /**
+     * @return the username
+     */
+    public String getUsername() { return username; }
 
-    public int getOrganizationID() {
-        return organizationID;
-    }
+    /**
+     * @param username the username to set
+     */
+    public void setName(String username) { this.username = username; }
 
-    public String getPassword() {
-        return password;
-    }
+    /**
+     * @return the password
+     */
+    public String getPassword() { return password; }
 
-    public String getSalt() {
-        return salt;
-    }
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) { this.password = password; }
 
-    public String getUsername() {
-        return username;
-    }
+    /**
+     * @return the accountType
+     */
+    public String getAccountType() { return accountType; }
 
-    public void setId(int userid) {
-        this.userid = userid;
-    }
+    /**
+     * @param accountType the accountType to set
+     */
+    public void setAccountType(String accountType) { this.accountType = accountType; }
 
-    public void setOrganizationID(int organizationID) {
-        this.organizationID = organizationID;
-    }
+    /**
+     * @return the org
+     */
+    public String getOrganisationalUnit() { return org; }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    /**
+     * @param org the org to set
+     */
+    public void setOrganisationalUnit(String org) { this.org = org; }
 }
