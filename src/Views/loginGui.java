@@ -1,10 +1,14 @@
 package Views;
 
+import common.HashPassword;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 
 public class loginGui extends JFrame {
 
@@ -105,5 +109,17 @@ public class loginGui extends JFrame {
 
         new loginGui();
     }
+//
+//    @Override
+//    public void actionPerformed(ActionEvent e) throws NoSuchAlgorithmException {
+//        HashMap<String, String> params = new HashMap<>();
+//
+//        // get the values from the components
+//        params.put("username", userText.getText());
+//        params.put("password", HashPassword.getHashedPassword(String.valueOf(passText.getPassword())));
+//
+//        // connect to the server
+//
+//    }
 
 }

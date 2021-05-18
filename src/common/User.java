@@ -12,7 +12,7 @@ public class User extends Object{
     private String username;
     private String password;
     private String salt;
-    private int id;
+    private int userid;
     private int organizationID;
 
     //Empty constructor to create User Object
@@ -28,8 +28,8 @@ public class User extends Object{
     }
 
     //User Constructor with their organization
-    public User(int id, int organizationID, String username, String password, String salt){
-        this.id = id;
+    public User(int userid, int organizationID, String username, String password, String salt){
+        this.userid = userid;
         this.organizationID = organizationID;
         this.username = username;
         this.password = password;
@@ -37,7 +37,7 @@ public class User extends Object{
     }
 
     public int getId() {
-        return id;
+        return userid;
     }
 
     public int getOrganizationID() {
@@ -56,8 +56,8 @@ public class User extends Object{
         return username;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int userid) {
+        this.userid = userid;
     }
 
     public void setOrganizationID(int organizationID) {

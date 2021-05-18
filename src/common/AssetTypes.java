@@ -9,15 +9,15 @@ package common;
 
 public class AssetTypes {
     private String assetName;
-    private int assetquantity;
+    private int assetQuantity;
 
     public AssetTypes() {
 
     }
 
-    public AssetTypes(String assetName, int assetquantity) {
+    public AssetTypes(String assetName, int assetQuantity) {
         this.assetName = assetName;
-        this.assetquantity = assetquantity;
+        this.assetQuantity = assetQuantity;
 
     }
 }
