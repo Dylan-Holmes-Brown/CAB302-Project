@@ -1,8 +1,7 @@
-package sql.asset_type;
+package server;
 
 import common.AssetTypes;
-import sql.DBConnection;
-import sql.asset_type.AssetTypeDataSource;
+import common.sql.asset_type.AssetTypeDataSource;
 
 import java.sql.*;
 import java.util.Set;
@@ -18,7 +17,8 @@ public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
     private Connection connection;
     public static final String CREATE_TABLE =
             "CREATE TABLE IF NOT EXISTS asset_types ("
-                    + "assetType VARCHAR(40) PRIMARY KEY NOT NULL UNIQUE "
+                    + "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,"
+                    + "assetType VARCHAR(40) NOT NULL UNIQUE"
                     + ");";
 
     private static final String INSERT_ASSET_TYPE = "INSERT INTO asset_types (assetType) VALUES (?);";
@@ -70,12 +70,12 @@ public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
     /**
      * @see AssetTypeDataSource#getAsset(String)
      */
-    public AssetTypes getAsset(String assetType) {
+    public AssetTypes getAsset(String assetName) {
         AssetTypes assetTypes = new AssetTypes();
         ResultSet resultSet = null;
 
         try {
-            getAssetType.setString(1, assetType);
+            getAssetType.setString(1, assetName);
             resultSet = getAssetType.executeQuery();
             resultSet.next();
             assetTypes.setName(resultSet.getString("assetType"));
@@ -107,9 +107,9 @@ public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
     /**
      * @see AssetTypeDataSource#deleteAssetType(String)
      */
-    public void deleteAssetType(String assetType) {
+    public void deleteAssetType(String assetName) {
         try {
-            deleteAssetType.setString(1, assetType);
+            deleteAssetType.setString(1, assetName);
             deleteAssetType.executeUpdate();
         }
         catch (SQLException sqle) {

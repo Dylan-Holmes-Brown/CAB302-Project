@@ -1,9 +1,8 @@
-import common.AssetTypes;
 import common.Organisation;
 import common.User;
-import sql.user.JDBCUserDataSource;
-import sql.asset_type.JDBCAssetTypeDataSource;
-import sql.organisation.JDBCOrganisationDataSource;
+import common.sql.user.JDBCUserDataSource;
+import server.JDBCAssetTypeDataSource;
+import common.sql.organisation.JDBCOrganisationDataSource;
 
 
 /**
@@ -18,8 +17,10 @@ public class Main {
         JDBCUserDataSource jdbcUserDataSource = new JDBCUserDataSource();
 
         // Test asset type table
-        AssetTypes asset = new AssetTypes("CPU");
+        //AssetTypes asset = new AssetTypes("CPU");
         //jdbcAssetTypeDataSource.addAssetType(asset);
+        //jdbcAssetTypeDataSource.deleteAssetType("CPU");
+
 
         // Test Organisation table
         Organisation org = new Organisation("amazon", 100, "CPU", 20);
@@ -31,8 +32,8 @@ public class Main {
         //jdbcUserDataSource.addUser(user);
         //jdbcUserDataSource.deleteUser("Dylan");
 
-        User userGet = jdbcUserDataSource.getUser("Dylan");
-        int size = jdbcUserDataSource.getSize();
-        System.out.println(userGet.username + " " + userGet.password + " " + userGet.accountType + " " + userGet.org +" \nTable size: " + size);
+        //User userGet = jdbcUserDataSource.getUser("Dylan");
+        //int size = jdbcUserDataSource.getSize();
+        //System.out.println(userGet.username + " " + userGet.password + " " + userGet.accountType + " " + userGet.org +" \nTable size: " + size);
     }
 }

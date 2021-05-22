@@ -1,4 +1,4 @@
-package sql.organisation;
+package common.sql.organisation;
 
 import common.Organisation;
 

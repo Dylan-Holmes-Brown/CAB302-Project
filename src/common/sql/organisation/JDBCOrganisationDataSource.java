@@ -1,7 +1,7 @@
-package sql.organisation;
+package common.sql.organisation;
 
 import common.Organisation;
-import sql.DBConnection;
+import server.DBConnection;
 
 
 import java.sql.*;

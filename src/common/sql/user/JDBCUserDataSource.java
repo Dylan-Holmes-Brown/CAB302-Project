@@ -1,7 +1,7 @@
-package sql.user;
+package common.sql.user;
 
 import common.User;
-import sql.DBConnection;
+import server.DBConnection;
 
 import java.sql.*;
 import java.util.Set;
@@ -17,7 +17,7 @@ public class JDBCUserDataSource implements UserDataSource {
     private Connection connection;
     public static final String CREATE_TABLE =
             "CREATE TABLE IF NOT EXISTS user ("
-                    + "id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,"
+                    + "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,"
                     + "username VARCHAR(30) NOT NULL UNIQUE,"
                     + "password VARCHAR(30) NOT NULL,"
                     + "accountType VARCHAR(20) NOT NULL,"
