@@ -6,6 +6,8 @@
 
 public class Organization {
 
+    public
+
 
     public Organization() {
     }
