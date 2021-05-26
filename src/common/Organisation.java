@@ -8,22 +8,25 @@ package common;
  */
 
 public class Organisation {
-    public int id;
     public String name;
-    private int credits = 0;
-    private String assets;
-    private int quantity = 0;
+    public int credits = 0;
+    public String assets;
+    public int quantity = 0;
 
 
     public Organisation() {
 
     }
 
-    public Organisation(String name, int credits, String assets, int quantity) {
+    public Organisation(String name, String assets, int quantity) {
         this.name = name;
-        this.credits = credits;
         this.assets = assets;
         this.quantity = quantity;
+    }
+
+    public Organisation(String name, int credits) {
+        this.name = name;
+        this.credits = credits;
     }
 
     /**

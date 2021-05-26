@@ -5,7 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Changed to sqlite, Server create for asset types and client side impemented">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/NetworkDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/NetworkDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/AssetTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/AssetTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/Organisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Organisation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/asset_type/AssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/AssetTypeData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/asset_type/AssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/AssetTypeDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/asset_type/CommandAssetType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/CommandAssetType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/organisation/JDBCOrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCOrganisationDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/organisation/OrganisationData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/organisation/OrganisationData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/DBConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/JDBCAssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCAssetTypeDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/NetworkServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/NetworkServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +85,20 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.addingUserList">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="server.Main" />
+      <module name="Assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="Assignment" />
@@ -103,19 +130,6 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Assignment" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="adding" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Views.adding" />
-      <module name="Assignment" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Views.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -161,19 +175,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Project" />
-      <item itemvalue="Application.adding" />
       <item itemvalue="Application.addingUserList" />
       <item itemvalue="Application.bidList" />
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.userList" />
+      <item itemvalue="Application.Main (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.addingUserList" />
         <item itemvalue="Application.bidList" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.adding" />
       </list>
     </recent_temporary>
   </component>

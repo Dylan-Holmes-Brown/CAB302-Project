@@ -1,8 +1,9 @@
+import common.AssetTypes;
 import common.Organisation;
 import common.User;
 import common.sql.user.JDBCUserDataSource;
 import server.JDBCAssetTypeDataSource;
-import common.sql.organisation.JDBCOrganisationDataSource;
+import server.JDBCOrganisationDataSource;
 
 
 /**
@@ -17,15 +18,26 @@ public class Main {
         JDBCUserDataSource jdbcUserDataSource = new JDBCUserDataSource();
 
         // Test asset type table
-        //AssetTypes asset = new AssetTypes("CPU");
+        AssetTypes asset = new AssetTypes("CPU");
         //jdbcAssetTypeDataSource.addAssetType(asset);
         //jdbcAssetTypeDataSource.deleteAssetType("CPU");
 
+        //AssetTypes assetGet = jdbcAssetTypeDataSource.getAsset("CPU");
+        //System.out.println(assetGet.assetType);
+
 
         // Test Organisation table
-        Organisation org = new Organisation("amazon", 100, "CPU", 20);
+        Organisation org = new Organisation("amazon", 100);
+        Organisation orgAsset = new Organisation("amazon", "CPU", 10);
         //jdbcOrganisationDataSource.addOrg(org);
         //jdbcOrganisationDataSource.deleteOrg("amazon");
+        //jdbcOrganisationDataSource.updateOrg(orgAsset);
+        Organisation orgGet = jdbcOrganisationDataSource.getOrg("amazon");
+        System.out.println("Organisation:\n" +
+                orgGet.name + " " +
+                orgGet.credits + " " +
+                orgGet.assets + " " +
+                orgGet.quantity);
 
         // Test User table
         User user = new User("Dylan", "1234", "member", "amazon");

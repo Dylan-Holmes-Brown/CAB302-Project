@@ -1,19 +1,23 @@
 package client;
 
 import common.AssetTypes;
-import common.sql.asset_type.AssetTypeDataSource;
-import common.sql.asset_type.CommandAssetType;
+import common.sql.AssetTypeDataSource;
+import common.sql.CommandAssetType;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
 
+/**
+ *
+ *
+ * @author Dylan Holmes-Brown
+ */
 public class NetworkDataSource implements AssetTypeDataSource {
-    private static final String HOSTNAME = "0.0.0.0";
-    private static final int PORT = 10000;
+    private static String HOSTNAME;
+    private static int PORT;
 
     private Socket socket;
     private ObjectOutputStream outputStream;
@@ -21,12 +25,27 @@ public class NetworkDataSource implements AssetTypeDataSource {
 
     public NetworkDataSource() {
         try {
+
+            Properties properties = new Properties();
+            FileInputStream in = null;
+            in = new FileInputStream("./server.props");
+            properties.load(in);
+            in.close();
+
+            // specify the port
+            HOSTNAME = properties.getProperty("server.address");
+            String port = properties.getProperty("server.port");
+            PORT = Integer.parseInt(port);
+
             socket = new Socket(HOSTNAME, PORT);
             outputStream = new ObjectOutputStream(socket.getOutputStream());
             inputStream = new ObjectInputStream(socket.getInputStream());
-        }
-        catch (IOException e) {
+        } catch (FileNotFoundException fnfe) {
+            System.err.println(fnfe);
+        } catch (IOException e) {
             System.out.println("Failed to connect to the server");
+        } catch (NumberFormatException nfe) {
+            System.err.println(nfe);
         }
     }
 
