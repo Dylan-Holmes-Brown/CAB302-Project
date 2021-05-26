@@ -3,6 +3,7 @@ package server;
 import common.AssetTypes;
 import common.sql.AssetTypeDataSource;
 import common.sql.CommandAssetType;
+import common.sql.organisation.OrganisationDataSource;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -158,7 +159,7 @@ public class NetworkServer {
     public static int getPort() {return PORT;}
 
     public void start() throws IOException {
-        // connect
+        // connect to tables
         tableAssetType = new JDBCAssetTypeDataSource();
 
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {

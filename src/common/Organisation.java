@@ -18,8 +18,9 @@ public class Organisation {
 
     }
 
-    public Organisation(String name, String assets, int quantity) {
+    public Organisation(String name, int credits, String assets, int quantity) {
         this.name = name;
+        this.credits = credits;
         this.assets = assets;
         this.quantity = quantity;
     }

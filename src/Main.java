@@ -27,11 +27,13 @@ public class Main {
 
 
         // Test Organisation table
-        Organisation org = new Organisation("amazon", 100);
-        Organisation orgAsset = new Organisation("amazon", "CPU", 10);
+        Organisation org = new Organisation("amazon", 100, "CPU", 10);
         //jdbcOrganisationDataSource.addOrg(org);
         //jdbcOrganisationDataSource.deleteOrg("amazon");
-        //jdbcOrganisationDataSource.updateOrg(orgAsset);
+        //jdbcOrganisationDataSource.addCredits("amazon", 20);
+        //jdbcOrganisationDataSource.removeCredits("amazon", 20);
+        //jdbcOrganisationDataSource.addQuantity("amazon", "CPU", 10);
+        //jdbcOrganisationDataSource.removeQuantity("amazon", "CPU", 10);
         Organisation orgGet = jdbcOrganisationDataSource.getOrg("amazon");
         System.out.println("Organisation:\n" +
                 orgGet.name + " " +

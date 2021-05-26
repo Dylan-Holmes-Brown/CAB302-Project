@@ -19,14 +19,26 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
     public static final String CREATE_TABLE =
             "CREATE TABLE IF NOT EXISTS organisational_unit ("
                     + "name VARCHAR(30) PRIMARY KEY NOT NULL,"
-                    + "credits INTEGER NOT NULL,"
+                    + "credits INTEGER NOT NULL CHECK (credits >= 0),"
                     + "assets VARCHAR(20) NOT NULL,"
-                    + "quantity int NOT NULL,"
+                    + "quantity int NOT NULL CHECK (quantity >= 0),"
                     + "CONSTRAINT FK_Asset FOREIGN KEY (assets) REFERENCES asset_types(assetType)"
                     + ");";
 
     private static final String INSERT_ORG = "INSERT INTO organisational_unit (name, credits, assets, quantity) VALUES (?, ?, ?, ?);";
     private PreparedStatement addOrg;
+
+    private static final String ADD_CREDITS = "UPDATE organisational_unit SET credits = (credits + ?) WHERE name = ?";
+    private PreparedStatement addCredits;
+
+    private static final String REMOVE_CREDITS = "UPDATE organisational_unit SET credits = (credits - ?) WHERE name = ?";
+    private PreparedStatement removeCredits;
+
+    private static final String ADD_QUANTITY = "UPDATE organisational_unit SET quantity = (quantity + ?) WHERE name = ? AND assets = ?";
+    private PreparedStatement addQuantity;
+
+    private static final String REMOVE_QUANTITY = "UPDATE organisational_unit SET quantity = (quantity - ?) WHERE name = ? AND assets = ?";
+    private PreparedStatement removeQuantity;
 
     private static final String GET_ORGNAME = "SELECT name FROM organisational_unit";
     private PreparedStatement getOrgNameList;
@@ -49,6 +61,10 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
 
             // Initialise prepared statements for table
             addOrg = connection.prepareStatement(INSERT_ORG);
+            addCredits = connection.prepareStatement(ADD_CREDITS);
+            removeCredits = connection.prepareStatement(REMOVE_CREDITS);
+            addQuantity = connection.prepareStatement(ADD_QUANTITY);
+            removeQuantity = connection.prepareStatement(REMOVE_QUANTITY);
             getOrgNameList = connection.prepareStatement(GET_ORGNAME);
             getOrg = connection.prepareStatement(GET_ORG);
             deleteOrg = connection.prepareStatement(DELETE_ORG);
@@ -72,8 +88,64 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
         catch (SQLException sqle){
             sqle.printStackTrace();
         }
+    }
 
+    /**
+     * @see OrganisationDataSource#addCredits(String, int)
+     */
+    public void addCredits(String name, int credits) {
+        try {
+            addCredits.setInt(1, credits);
+            addCredits.setString(2, name);
+            addCredits.execute();
+        }
+        catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
 
+    /**
+     * @see OrganisationDataSource#removeCredits(String, int)
+     */
+    public void removeCredits(String name, int credits) {
+        try {
+            removeCredits.setInt(1, credits);
+            removeCredits.setString(2, name);
+            removeCredits.execute();
+        }
+        catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
+
+    /**
+     * @see OrganisationDataSource#addQuantity(String, String, int)
+     */
+    public void addQuantity(String name, String asset, int quantity) {
+        try {
+            addQuantity.setInt(1, quantity);
+            addQuantity.setString(2, name);
+            addQuantity.setString(3, asset);
+            addQuantity.execute();
+        }
+        catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
+
+    /**
+     * @see OrganisationDataSource#removeQuantity(String, String, int)
+     */
+    public void removeQuantity(String name, String asset, int quantity) {
+        try {
+            removeQuantity.setInt(1, quantity);
+            removeQuantity.setString(2, name);
+            removeQuantity.setString(3, asset);
+            removeQuantity.execute();
+        }
+        catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
     }
 
     /**

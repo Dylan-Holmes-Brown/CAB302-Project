@@ -12,8 +12,8 @@ import Views.loginGui;
 public class Main {
     private static void createAndShowGUI() {
         new loginGui();
-        new AssetTypeData();
-        new NetworkDataSource();
+            new AssetTypeData();
+                new NetworkDataSource();
     }
     public static void main(String[] args) throws Exception {
         SwingUtilities.invokeLater(new Runnable() {
