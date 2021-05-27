@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="server.props created and implemented, Asset type table fully complete, minor alterations to Organisation table.">
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="we are now able to add and remove credits and quantity of assets in an organisation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/Organisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Organisation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/organisation/OrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/organisation/OrganisationDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/organisation/OrganisationData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/OrganisationData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/organisation/OrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/OrganisationDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/user/JDBCUserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCUserDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/user/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/user/UserData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/user/UserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/user/UserDataSource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/JDBCOrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCOrganisationDataSource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/NetworkServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/NetworkServer.java" afterDir="false" />
     </list>
@@ -65,7 +67,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../prac08-with-threads" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -77,7 +79,7 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.Project">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.Main" />
       <module name="Assignment" />
@@ -126,6 +128,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="adding" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Views.adding" />
+      <module name="Assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Views.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="addingUserList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Views.addingUserList" />
       <module name="Assignment" />
@@ -139,21 +154,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="bidList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Views.bidList" />
-      <module name="Assignment" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Views.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="userList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Views.userList" />
+    <configuration name="adminOptions" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Views.adminOptions" />
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
@@ -168,17 +170,17 @@
     <list>
       <item itemvalue="Application.Project" />
       <item itemvalue="Application.addingUserList" />
-      <item itemvalue="Application.bidList" />
       <item itemvalue="Application.Main" />
-      <item itemvalue="Application.userList" />
       <item itemvalue="Application.Main (1)" />
+      <item itemvalue="Application.adminOptions" />
+      <item itemvalue="Application.adding" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.addingUserList" />
-        <item itemvalue="Application.bidList" />
+        <item itemvalue="Application.adding" />
+        <item itemvalue="Application.adminOptions" />
+        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -213,7 +215,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622027557565</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="we are now able to add and remove credits and quantity of assets in an organisation">
+      <created>1622034311664</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1622034311664</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -235,6 +244,7 @@
     <MESSAGE value="Organisational unit sql done, created foreign keys." />
     <MESSAGE value="Changed to sqlite, Server create for asset types and client side impimented." />
     <MESSAGE value="server.props created and implemented, Asset type table fully complete, minor alterations to Organisation table." />
-    <option name="LAST_COMMIT_MESSAGE" value="server.props created and implemented, Asset type table fully complete, minor alterations to Organisation table." />
+    <MESSAGE value="we are now able to add and remove credits and quantity of assets in an organisation" />
+    <option name="LAST_COMMIT_MESSAGE" value="we are now able to add and remove credits and quantity of assets in an organisation" />
   </component>
 </project>

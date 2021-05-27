@@ -1,8 +1,7 @@
 package server;
 
 import common.Organisation;
-import common.sql.organisation.OrganisationDataSource;
-import server.DBConnection;
+import common.sql.OrganisationDataSource;
 
 
 import java.sql.*;
@@ -21,7 +20,7 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
                     + "name VARCHAR(30) PRIMARY KEY NOT NULL,"
                     + "credits INTEGER NOT NULL CHECK (credits >= 0),"
                     + "assets VARCHAR(20) NOT NULL,"
-                    + "quantity int NOT NULL CHECK (quantity >= 0),"
+                    + "quantity INTEGER NOT NULL CHECK (quantity >= 0),"
                     + "CONSTRAINT FK_Asset FOREIGN KEY (assets) REFERENCES asset_types(assetType)"
                     + ");";
 

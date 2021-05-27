@@ -13,6 +13,14 @@ public interface UserDataSource {
     void addUser(User user);
 
     /**
+     * Updates the password of a user, given the username.
+     *
+     * @param username The name of the user to search for
+     * @param password The password to update
+     */
+    void updatePassword (String username, String password);
+
+    /**
      * Extracts all the details of a User from the table based on the
      * name passed in.
      *

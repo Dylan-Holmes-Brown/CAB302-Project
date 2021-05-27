@@ -1,7 +1,7 @@
 import common.AssetTypes;
 import common.Organisation;
 import common.User;
-import common.sql.user.JDBCUserDataSource;
+import server.JDBCUserDataSource;
 import server.JDBCAssetTypeDataSource;
 import server.JDBCOrganisationDataSource;
 
@@ -42,12 +42,13 @@ public class Main {
                 orgGet.quantity);
 
         // Test User table
-        User user = new User("Dylan", "1234", "member", "amazon");
+        User user = new User("Dylan", "1234", "Member", "amazon");
         //jdbcUserDataSource.addUser(user);
         //jdbcUserDataSource.deleteUser("Dylan");
+        jdbcUserDataSource.updatePassword("Dylan", "4321");
 
-        //User userGet = jdbcUserDataSource.getUser("Dylan");
-        //int size = jdbcUserDataSource.getSize();
-        //System.out.println(userGet.username + " " + userGet.password + " " + userGet.accountType + " " + userGet.org +" \nTable size: " + size);
+        User userGet = jdbcUserDataSource.getUser("Dylan");
+        int size = jdbcUserDataSource.getSize();
+        System.out.println(userGet.username + " " + userGet.password + " " + userGet.accountType + " " + userGet.org +" \nTable size: " + size);
     }
 }

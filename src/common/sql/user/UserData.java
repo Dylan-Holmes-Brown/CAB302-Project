@@ -1,6 +1,8 @@
 package common.sql.user;
 
 import common.User;
+import server.JDBCUserDataSource;
+
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
 
