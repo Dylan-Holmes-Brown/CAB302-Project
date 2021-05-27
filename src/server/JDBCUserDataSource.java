@@ -1,8 +1,7 @@
 package server;
 
 import common.User;
-import common.sql.user.UserDataSource;
-import server.DBConnection;
+import common.sql.UserDataSource;
 
 import java.sql.*;
 import java.util.Set;
@@ -174,7 +173,6 @@ public class JDBCUserDataSource implements UserDataSource {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return names;
     }
 }

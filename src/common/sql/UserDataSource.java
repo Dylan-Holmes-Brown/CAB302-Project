@@ -1,4 +1,4 @@
-package common.sql.user;
+package common.sql;
 
 import common.User;
 

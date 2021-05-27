@@ -4,16 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="we are now able to add and remove credits and quantity of assets in an organisation">
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="update password for user">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/organisation/OrganisationData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/OrganisationData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/organisation/OrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/OrganisationDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/user/JDBCUserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCUserDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/user/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/user/UserData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/user/UserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/user/UserDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/JDBCOrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCOrganisationDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/NetworkServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/NetworkServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/CurrentTrades.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/CurrentTrades.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/current_trade/CurrentDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/current_trade/CurrentDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/current_trade/JDBCCurrentDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/current_trade/JDBCCurrentDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/user/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/UserData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/user/UserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/UserDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/JDBCUserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCUserDataSource.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622034311664</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update password for user">
+      <created>1622076647306</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1622076647306</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -245,6 +251,7 @@
     <MESSAGE value="Changed to sqlite, Server create for asset types and client side impimented." />
     <MESSAGE value="server.props created and implemented, Asset type table fully complete, minor alterations to Organisation table." />
     <MESSAGE value="we are now able to add and remove credits and quantity of assets in an organisation" />
-    <option name="LAST_COMMIT_MESSAGE" value="we are now able to add and remove credits and quantity of assets in an organisation" />
+    <MESSAGE value="update password for user" />
+    <option name="LAST_COMMIT_MESSAGE" value="update password for user" />
   </component>
 </project>
