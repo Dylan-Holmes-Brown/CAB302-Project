@@ -116,7 +116,7 @@ public class addingUserList extends JFrame{
 
                 textFirstName.setText(tableSetup.getValueAt(i, 0).toString());
                 textUserName.setText(tableSetup.getValueAt(i, 1).toString());
-                textOrganisation.setText(tableSetup.getValueAt(i, 1).toString());
+                textOrganisation.setText(tableSetup.getValueAt(i, 2).toString());
                 textPassword.setText(tableSetup.getValueAt(i, 3).toString());
             }
         });
@@ -130,8 +130,8 @@ public class addingUserList extends JFrame{
 
                 if(i >= 0)
                 {
-                    tableSetup.setValueAt(textFirstName.getText(), i, 1);
-                    tableSetup.setValueAt(textUserName.getText(), i, 2);
+                    tableSetup.setValueAt(textFirstName.getText(), i, 0);
+                    tableSetup.setValueAt(textUserName.getText(), i, 1);
                     tableSetup.setValueAt(textOrganisation.getText(), i, 2);
                     tableSetup.setValueAt(textPassword.getText(), i, 3);
                 }

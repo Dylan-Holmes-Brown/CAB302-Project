@@ -33,8 +33,7 @@ public class DBConnection {
          String schema = properties.getProperty("jdbc.schema");
 
          // get a connection
-         instance = DriverManager.getConnection(url + "/" + schema, username,
-               password);
+         instance = DriverManager.getConnection(url + "/" + schema, username, password);
       } catch (SQLException sqle) {
          System.err.println(sqle);
       } catch (FileNotFoundException fnfe) {
@@ -46,7 +45,7 @@ public class DBConnection {
 
    /**
     * Provides global access to the singleton instance of the UrlSet.
-    * 
+    *
     * @return a handle to the singleton instance of the UrlSet.
     */
    public static Connection getInstance() {
