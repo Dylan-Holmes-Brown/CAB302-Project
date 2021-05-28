@@ -3,18 +3,18 @@ package Views;
 import javax.swing.*;
 import java.awt.*;
 
-public class adminOptions extends JFrame{
+public class userOptions extends JFrame{
     private static JLabel userLabel;
     private static JButton button;
     private static JLabel success;
 
-    public adminOptions() {
+    public userOptions() {
         JLabel label = new JLabel();
         JFrame frame = new JFrame();
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        frame.setTitle("Admin Options");
+        frame.setTitle("User Options");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(400,400));
 
@@ -22,25 +22,26 @@ public class adminOptions extends JFrame{
         userNameLabel.setBounds(80,80,180,25);
         panel.add(userNameLabel);
 
-        JButton button = new JButton("Create Organisational Units");
+        JButton button = new JButton("Buy/Sell");
         button.setBounds(100,120,150, 20);
         panel.add(button);
 
-        JButton buttonUser = new JButton("Edit Organisational Credits");
+        JButton buttonUser = new JButton("Updates");
         buttonUser.setBounds(100,150,150, 20);
         panel.add(buttonUser);
 
-        JButton buttonOptions = new JButton("Edit Assest");
-        buttonOptions.setBounds(100,180,150, 20);
-        panel.add(buttonOptions);
-
-        JButton buttonAnother = new JButton("Add New User");
-        buttonAnother.setBounds(100,210,150, 20);
+        JButton buttonAnother = new JButton("Asset Graph");
+        buttonAnother.setBounds(100,180,150, 20);
         panel.add(buttonAnother);
+
+        JButton buttonother = new JButton("Change Password");
+        buttonother.setBounds(100,210,150, 20);
+        panel.add(buttonother);
 
         JButton buttonLogOut = new JButton("Log Out");
         buttonLogOut.setBounds(100,240,150, 20);
         panel.add(buttonLogOut);
+
 
         frame.getContentPane().add(panel);
         frame.pack();
@@ -51,6 +52,6 @@ public class adminOptions extends JFrame{
 
     public static void main(String[] args){
 
-        new adminOptions();
+        new userOptions();
     }
 }

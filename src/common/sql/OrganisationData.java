@@ -1,9 +1,7 @@
-package sql.organisation;
+package common.sql;
 
 import common.Organisation;
-import common.User;
-import sql.user.JDBCUserDataSource;
-import sql.user.UserDataSource;
+import server.JDBCOrganisationDataSource;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;

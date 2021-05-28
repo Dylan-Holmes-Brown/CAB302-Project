@@ -1,8 +1,7 @@
-package sql.asset_type;
+package server;
 
 import common.AssetTypes;
-import sql.DBConnection;
-import sql.asset_type.AssetTypeDataSource;
+import common.sql.AssetTypeDataSource;
 
 import java.sql.*;
 import java.util.Set;
@@ -18,7 +17,8 @@ public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
     private Connection connection;
     public static final String CREATE_TABLE =
             "CREATE TABLE IF NOT EXISTS asset_types ("
-                    + "assetType VARCHAR(40) PRIMARY KEY NOT NULL UNIQUE "
+                    + "assetType VARCHAR(40) NOT NULL UNIQUE,"
+                    + " PRIMARY KEY(assetType)"
                     + ");";
 
     private static final String INSERT_ASSET_TYPE = "INSERT INTO asset_types (assetType) VALUES (?);";
@@ -27,8 +27,8 @@ public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
     private static final String GET_ALL_ASSET_TYPES = "SELECT assetType FROM asset_types";
     private PreparedStatement getAllAssetTypes;
 
-    private static final String GET_ASSET_TYPE = "SELECT * FROM asset_types WHERE assetType=?";
-    private PreparedStatement getAssetType;
+    private static final String GET_ASSET = "SELECT * FROM asset_types WHERE assetType=?";
+    private PreparedStatement getAsset;
 
     private static final String DELETE_ASSET_TYPE = "DELETE FROM asset_types WHERE assetType=?";
     private PreparedStatement deleteAssetType;
@@ -45,7 +45,7 @@ public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
             // Initialise prepared statements for table
             addAssetType = connection.prepareStatement(INSERT_ASSET_TYPE);
             getAllAssetTypes = connection.prepareStatement(GET_ALL_ASSET_TYPES);
-            getAssetType = connection.prepareStatement(GET_ASSET_TYPE);
+            getAsset = connection.prepareStatement(GET_ASSET);
             deleteAssetType = connection.prepareStatement(DELETE_ASSET_TYPE);
             rowCount = connection.prepareStatement(COUNT_ROWS);
         }
@@ -59,7 +59,7 @@ public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
      */
     public void addAssetType(AssetTypes asset) {
         try {
-            addAssetType.setString(1, asset.getAssetType());
+            addAssetType.setString(1, asset.getAsset());
             addAssetType.execute();
         }
         catch (SQLException sqle) {
@@ -70,13 +70,13 @@ public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
     /**
      * @see AssetTypeDataSource#getAsset(String)
      */
-    public AssetTypes getAsset(String assetType) {
+    public AssetTypes getAsset(String assetName) {
         AssetTypes assetTypes = new AssetTypes();
         ResultSet resultSet = null;
 
         try {
-            getAssetType.setString(1, assetType);
-            resultSet = getAssetType.executeQuery();
+            getAsset.setString(1, assetName);
+            resultSet = getAsset.executeQuery();
             resultSet.next();
             assetTypes.setName(resultSet.getString("assetType"));
         }
@@ -107,9 +107,9 @@ public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
     /**
      * @see AssetTypeDataSource#deleteAssetType(String)
      */
-    public void deleteAssetType(String assetType) {
+    public void deleteAssetType(String assetName) {
         try {
-            deleteAssetType.setString(1, assetType);
+            deleteAssetType.setString(1, assetName);
             deleteAssetType.executeUpdate();
         }
         catch (SQLException sqle) {

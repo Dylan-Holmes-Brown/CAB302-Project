@@ -1,34 +1,29 @@
-package sql.asset_type;
+package common.sql;
 
-import common.AssetTypes;
+import common.User;
+import server.JDBCUserDataSource;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
 
 /**
- *
- *
- * @author Adam Buchsbaum
+ * This class uses an UserDataSource and its methods to retrieve data
  */
-
-/**
- * This class uses an AssetTypeDataSource and its methods to retrieve data
- */
-
-public class AssetTypeData {
+public class UserData {
     DefaultListModel listModel;
-    AssetTypeDataSource assetTypeData;
+    UserDataSource userData;
 
     /**
      * Constructor initializes the list model that holds names as Strings and
      * attempts to read any data saved from previous invocations of the
      * application.
+     *
      */
-    public AssetTypeData() {
+    public UserData() {
         listModel = new DefaultListModel();
-        assetTypeData = new JDBCAssetTypeDataSource();
+        userData = new JDBCUserDataSource();
 
-        for (String name : assetTypeData.nameSet()) {
+        for (String name : userData.nameSet()){
             listModel.addElement(name);
         }
     }
@@ -41,15 +36,13 @@ public class AssetTypeData {
     public void remove(Object key) {
         // remove from both list and map
         listModel.removeElement(key);
-        assetTypeData.deleteAssetType((String) key);
+        userData.deleteUser((String) key);
     }
 
     /**
      * Saves the data in the user table using the persistence mechanism.
      */
-    public void persist() {
-        assetTypeData.close();
-    }
+    public void persist() { userData.close(); }
 
     /**
      * Retrieves User details from the model.
@@ -57,23 +50,18 @@ public class AssetTypeData {
      * @param key the name to retrieve.
      * @return the User object related to the name.
      */
-    public AssetTypes get(Object key) {
-        return assetTypeData.getAsset((String) key);
-    }
+    public User get(Object key) { return userData.getUser((String) key); }
 
     /**
      * Accessor for the list model.
      *
      * @return the listModel to display.
      */
-    public ListModel getModel() {
-        return listModel;
-    }
+    public ListModel getModel() { return listModel; }
 
     /**
+     *
      * @return the number of names in the user table.
      */
-    public int getSize() {
-        return assetTypeData.getSize();
-    }
+    public int getSize() { return userData.getSize(); }
 }

@@ -1,4 +1,4 @@
-package sql.current_trade;
+package common.sql.current_trade;
 
 /**
  *

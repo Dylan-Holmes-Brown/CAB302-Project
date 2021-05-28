@@ -1,4 +1,4 @@
-package sql.asset_type;
+package common.sql;
 
 import common.AssetTypes;
 
@@ -15,18 +15,18 @@ public interface AssetTypeDataSource {
     /**
      * Adds an Asset Type to the asset list, if it is not already in the list
      *
-     * @param Asset Asset to add
+     * @param asset Asset to add
      */
-    void addAssetType(AssetTypes Asset);
+    void addAssetType(AssetTypes asset);
 
     /**
      * Extracts all the details of a Person from the address book based on the
      * name passed in.
      *
-     * @param assetType The name as a String to search for.
+     * @param assetName The name as a String to search for.
      * @return all details in a Person object for the name
      */
-    AssetTypes getAsset(String assetType);
+    AssetTypes getAsset(String assetName);
 
     /**
      * Gets the number of addresses in the address book.
@@ -38,9 +38,9 @@ public interface AssetTypeDataSource {
     /**
      * Deletes a Person from the address book.
      *
-     * @param AssetType The name to delete from the address book.
+     * @param assetName The name to delete from the address book.
      */
-    void deleteAssetType(String AssetType);
+    void deleteAssetType(String assetName);
 
     /**
      * Finalizes any resources used by the data source and ensures data is
