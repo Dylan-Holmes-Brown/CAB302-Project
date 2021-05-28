@@ -4,30 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Changed to sqlite, Server create for asset types and client side impimented.">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_xerial_sqlite_jdbc_3_34_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/NetworkDataSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/sql/asset_type/CommandAssetType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/NetworkServer.java" afterDir="false" />
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="ignore this">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.props" beforeDir="false" afterPath="$PROJECT_DIR$/db.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/DBConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/asset_type/AssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/asset_type/AssetTypeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/asset_type/AssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/asset_type/AssetTypeDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/asset_type/JDBCAssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCAssetTypeDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/current_trade/CurrentData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/current_trade/CurrentData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/current_trade/CurrentDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/current_trade/CurrentDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/current_trade/JDBCCurrentDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/current_trade/JDBCCurrentDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/organisation/JDBCOrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/organisation/JDBCOrganisationDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/organisation/OrganisationData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/organisation/OrganisationData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/organisation/OrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/organisation/OrganisationDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/user/JDBCUserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/user/JDBCUserDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/user/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/user/UserData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sql/user/UserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/user/UserDataSource.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,32 +60,19 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
   </component>
-  <component name="RunManager" selected="Application.Main (1)">
+  <component name="RunManager" selected="Application.userList">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="client.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="server.Main" />
-      <module name="Assignment" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -124,8 +89,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="adding" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Views.adding" />
+    <configuration name="adminOptions" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Views.adminOptions" />
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
@@ -137,8 +102,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="loginGui" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Views.loginGui" />
+    <configuration name="bidArena" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Views.bidArena" />
+      <module name="Assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Views.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bidList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Views.bidList" />
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
@@ -165,11 +143,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main (1)" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.adding" />
-        <item itemvalue="Application.loginGui" />
         <item itemvalue="Application.userList" />
+        <item itemvalue="Application.bidList" />
+        <item itemvalue="Application.bidArena" />
+        <item itemvalue="Application.adminOptions" />
+        <item itemvalue="Application.Main (1)" />
       </list>
     </recent_temporary>
   </component>
