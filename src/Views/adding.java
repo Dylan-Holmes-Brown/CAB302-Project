@@ -71,6 +71,8 @@ public class adding extends JFrame {
         frame.setVisible(true);
     }
 
+
+
     // create one Frame
     public static void main(String[] args) {
 

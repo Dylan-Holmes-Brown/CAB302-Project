@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="ds">
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="continued">
+      <change afterPath="$PROJECT_DIR$/src/Utils/PasswordHash.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Utils/Random.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/Permissions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/adding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/adding.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/loginGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/loginGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/AssetTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/AssetTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/HashPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/HashPassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/UserPermissions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/UserPermissions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +66,7 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
   </component>
-  <component name="RunManager" selected="Application.HashPassword">
+  <component name="RunManager" selected="Application.adding">
     <configuration name="HashPassword" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="common.HashPassword" />
       <module name="Assignment" />
@@ -115,9 +117,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.adding" />
         <item itemvalue="Application.HashPassword" />
         <item itemvalue="Application.loginGui" />
-        <item itemvalue="Application.adding" />
       </list>
     </recent_temporary>
   </component>
@@ -130,6 +132,14 @@
       <option name="presentableId" value="Default" />
       <updated>1618120400133</updated>
     </task>
+    <task id="LOCAL-00001" summary="continued">
+      <created>1621305178272</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1621305178272</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -147,6 +157,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Created and established connection with the database" />
     <MESSAGE value="Started Create Table method, ran into issues with converting variable types into sql appropriate strings." />
-    <option name="LAST_COMMIT_MESSAGE" value="Started Create Table method, ran into issues with converting variable types into sql appropriate strings." />
+    <MESSAGE value="continued" />
+    <option name="LAST_COMMIT_MESSAGE" value="continued" />
   </component>
 </project>
