@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Changed to sqlite, Server create for asset types and client side impemented">
-      <change afterPath="$PROJECT_DIR$/src/Views/addingUserList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/adding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/adding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/loginGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/loginGui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

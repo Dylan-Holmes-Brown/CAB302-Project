@@ -2,7 +2,7 @@ package Views;
 
 import Utils.PasswordHash;
 import common.HashPassword;
-import sql.DBConnection;
+//import sql.DBConnection;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -112,22 +112,22 @@ public class loginGui extends JFrame {
         new loginGui();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        HashMap<String, String> params = new HashMap<>();
-
-        // get the values from the components
-        params.put("username", userText.getText());
-        params.put("password", PasswordHash.Hashpassword(String.valueOf(passText.getPassword())));
-
-        // connect to the server
-        try{
-            
-
-
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-    }
+//    @Override
+//    public void actionPerformed(ActionEvent e) {
+//        HashMap<String, String> params = new HashMap<>();
+//
+//        // get the values from the components
+//        params.put("username", userText.getText());
+//        params.put("password", PasswordHash.Hashpassword(String.valueOf(passText.getPassword())));
+//
+//        // connect to the server
+//        try{
+//
+//
+//
+//        } catch (Exception exception) {
+//            exception.printStackTrace();
+//        }
+//    }
 
 }
