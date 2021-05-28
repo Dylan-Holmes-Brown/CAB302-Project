@@ -1,17 +1,23 @@
 package server;
 
 import common.AssetTypes;
-import common.sql.asset_type.AssetTypeDataSource;
-import common.sql.asset_type.CommandAssetType;
+import common.sql.AssetTypeDataSource;
+import common.sql.CommandAssetType;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ *
+ *
+ * @author Dylan Holmes-Brown
+ */
 public class NetworkServer {
-    private static final int PORT = 10000;
+    private static int PORT;
 
     // The timeout period between accepting clients, not reading from the socket itself
     private static final int SOCKET_ACCEPT_TIMEOUT = 100;
@@ -23,6 +29,26 @@ public class NetworkServer {
 
     // The connections to the database where everything is stored.
     private AssetTypeDataSource tableAssetType;
+
+    public NetworkServer(){
+        Properties properties = new Properties();
+        FileInputStream in = null;
+        try {
+            in = new FileInputStream("./server.props");
+            properties.load(in);
+            in.close();
+
+            // specify the port
+            String port = properties.getProperty("server.port");
+            PORT = Integer.parseInt(port);
+        } catch (FileNotFoundException fnfe) {
+            System.err.println(fnfe);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (NumberFormatException nfe) {
+            System.err.println(nfe);
+        }
+    }
 
     /**
      *
@@ -66,9 +92,9 @@ public class NetworkServer {
                     tableAssetType.addAssetType(a);
                 }
                 System.out.println(String.format("Added asset '%s' to database from client %s",
-                        a.getAssetType(), socket.toString()));
+                        a.getAsset(), socket.toString()));
             }
-                break;
+            break;
 
             case GET_ASSET: {
                 // Client sends the name of the asset to retrieve
@@ -82,12 +108,12 @@ public class NetworkServer {
                     outputStream.writeObject(assetTypes);
                     if (assetTypes != null) {
                         System.out.println(String.format("Sent asset '%s' to client '%s'",
-                                assetTypes.getAssetType(), socket.toString()));
+                                assetTypes.getAsset(), socket.toString()));
                     }
                     outputStream.flush();
                 }
             }
-                break;
+            break;
 
             case DELETE_ASSET: {
                 // Parameter - the asset name
@@ -98,7 +124,7 @@ public class NetworkServer {
                 System.out.println(String.format("Deleted asset '%s' on behalf of client %s",
                         assetName, socket.toString()));
             }
-                break;
+            break;
 
             case GET_SIZE: {
                 // No parameters
@@ -110,7 +136,7 @@ public class NetworkServer {
                 System.out.println(String.format("Sent size of %d to client %s",
                         tableAssetType.getSize(), socket.toString()));
             }
-                break;
+            break;
             case GET_NAME_SET: {
                 // No parameters
                 // Send the client the name set
@@ -121,7 +147,7 @@ public class NetworkServer {
                 System.out.println(String.format("Sent name set to client %s",
                         socket.toString()));
             }
-                break;
+            break;
         }
     }
 
@@ -132,7 +158,7 @@ public class NetworkServer {
     public static int getPort() {return PORT;}
 
     public void start() throws IOException {
-        // connect
+        // connect to tables
         tableAssetType = new JDBCAssetTypeDataSource();
 
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {

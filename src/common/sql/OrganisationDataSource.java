@@ -1,4 +1,4 @@
-package common.sql.organisation;
+package common.sql;
 
 import common.Organisation;
 
@@ -16,6 +16,40 @@ public interface OrganisationDataSource {
      * @param org Organisation to add
      */
     void addOrg(Organisation org);
+
+    /**
+     * Adds credits to an organisation given the name.
+     *
+     * @param name The name as a String to search for
+     * @param credits The quantity amount to add
+     */
+    void addCredits (String name, int credits);
+
+    /**
+     * Remove credits from a given organisation
+     *
+     * @param name The name as a String to search for
+     * @param credits The quantity amount to remove
+     */
+    void removeCredits (String name, int credits);
+
+    /**
+     * Adds quantity to an organisation given the name.
+     *
+     * @param name The name as a String to search for
+     * @param asset The name of the asset to search for
+     * @param credits The quantity amount to add
+     */
+    void addQuantity (String name, String asset, int credits);
+
+    /**
+     * Remove credits from a given organisation
+     *
+     * @param name The name as a String to search for
+     * @param asset The name of the asset to search for
+     * @param credits The quantity amount to remove
+     */
+    void removeQuantity (String name, String asset, int credits);
 
     /**
      * Extracts all the details of a Organisation from the table based on the

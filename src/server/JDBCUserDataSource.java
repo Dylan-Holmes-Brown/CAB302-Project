@@ -1,7 +1,7 @@
-package common.sql.user;
+package server;
 
 import common.User;
-import server.DBConnection;
+import common.sql.UserDataSource;
 
 import java.sql.*;
 import java.util.Set;
@@ -17,10 +17,9 @@ public class JDBCUserDataSource implements UserDataSource {
     private Connection connection;
     public static final String CREATE_TABLE =
             "CREATE TABLE IF NOT EXISTS user ("
-                    + "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,"
-                    + "username VARCHAR(30) NOT NULL UNIQUE,"
+                    + "username VARCHAR(30) PRIMARY KEY NOT NULL UNIQUE,"
                     + "password VARCHAR(30) NOT NULL,"
-                    + "accountType VARCHAR(20) NOT NULL,"
+                    + "accountType VARCHAR(20) NOT NULL CHECK(accountType IN ('Admin', 'Member')),"
                     + "organisationalUnit VARCHAR(10) NOT NULL,"
                     + "CONSTRAINT FK_Org FOREIGN KEY (organisationalUnit) REFERENCES organisational_unit(name)"
                     + ");";
@@ -28,16 +27,19 @@ public class JDBCUserDataSource implements UserDataSource {
     private static final String INSERT_USER = "INSERT INTO user (username, password, accountType, organisationalUnit) VALUES (?, ?, ?, ?);";
     private PreparedStatement addUser;
 
-    private static final String GET_USERNAMES = "SELECT username FROM user";
+    private static final String UPDATE_PASSWORD = "UPDATE user SET password = ? WHERE username = ?;";
+    private PreparedStatement updatePassword;
+
+    private static final String GET_USERNAMES = "SELECT username FROM user;";
     private PreparedStatement getUsernamesList;
 
-    private static final String GET_USER = "SELECT * FROM user WHERE username=?";
+    private static final String GET_USER = "SELECT * FROM user WHERE username=?;";
     private PreparedStatement getUser;
 
-    private static final String DELETE_USER = "DELETE FROM user WHERE username=?";
+    private static final String DELETE_USER = "DELETE FROM user WHERE username=?;";
     private PreparedStatement deleteUser;
 
-    private static final String COUNT_ROWS = "SELECT COUNT(*) FROM user";
+    private static final String COUNT_ROWS = "SELECT COUNT(*) FROM user;";
     private PreparedStatement rowCount;
 
     public JDBCUserDataSource() {
@@ -49,6 +51,7 @@ public class JDBCUserDataSource implements UserDataSource {
 
             // Initialise prepared statements for table
             addUser = connection.prepareStatement(INSERT_USER);
+            updatePassword = connection.prepareStatement(UPDATE_PASSWORD);
             getUsernamesList = connection.prepareStatement(GET_USERNAMES);
             getUser = connection.prepareStatement(GET_USER);
             deleteUser = connection.prepareStatement(DELETE_USER);
@@ -69,6 +72,20 @@ public class JDBCUserDataSource implements UserDataSource {
             addUser.setString(3, user.getAccountType());
             addUser.setString(4, user.getOrganisationalUnit());
             addUser.execute();
+        }
+        catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
+
+    /**
+     * @see UserDataSource#updatePassword(String, String)
+     */
+    public void updatePassword(String username, String password) {
+        try {
+            updatePassword.setString(1, password);
+            updatePassword.setString(2, username);
+            updatePassword.execute();
         }
         catch (SQLException sqle) {
             sqle.printStackTrace();
@@ -156,7 +173,6 @@ public class JDBCUserDataSource implements UserDataSource {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return names;
     }
 }
