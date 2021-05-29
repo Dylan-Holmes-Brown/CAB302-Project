@@ -1,5 +1,7 @@
 package Views;
 
+import common.sql.UserData;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
@@ -14,7 +16,7 @@ public class adding extends JFrame {
     private static JButton button;
     private static JLabel success;
 
-    public adding() {
+    public adding(UserData data) {
         JLabel label = new JLabel();
         JFrame frame = new JFrame();
         JPanel panel = new JPanel();
@@ -71,10 +73,10 @@ public class adding extends JFrame {
         frame.setVisible(true);
     }
 
-    // create one Frame
-    public static void main(String[] args) {
-        new adding();
-    }
+     //create one Frame
+//    public static void main(String[] args) {
+//        new adding();
+//    }
 }
 
 

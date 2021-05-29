@@ -29,7 +29,7 @@ public class AssetTypeData {
         listModel = new DefaultListModel();
         assetTypeData = new JDBCAssetTypeDataSource();
 
-        for (String name : assetTypeData.AssetnameSet()) {
+        for (String name : assetTypeData.AssetNameSet()) {
             listModel.addElement(name);
         }
     }

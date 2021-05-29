@@ -1,5 +1,7 @@
 package common;
 
+import java.io.Serializable;
+
 /**
  * This class initialises a user
  *
@@ -7,10 +9,10 @@ package common;
  * @author Laku Jackson
  */
 
-public class User extends Object{
+public class User extends Object implements Serializable {
 
     //may change these to private variables in future
-    public int id;
+    private static final long serialVersionUID = 10L;
     public String username;
     public String password;
     public String accountType;
@@ -26,15 +28,6 @@ public class User extends Object{
         this.username = username;
         this.password = password;
         this.accountType = accountType;
-        this.org = org;
-    }
-
-    //User Constructor with their organization
-    public User(int id, String username, String password, String salt, String org){
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.accountType = salt;
         this.org = org;
     }
 
@@ -77,4 +70,9 @@ public class User extends Object{
      * @param org the org to set
      */
     public void setOrganisationalUnit(String org) { this.org = org; }
+
+    /**
+     * @see Object#toString()
+     */
+    public String toString() { return username + " " + password + ", " + accountType + " " + org + " "; }
 }

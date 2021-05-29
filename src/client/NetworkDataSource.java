@@ -2,9 +2,11 @@ package client;
 
 import common.AssetTypes;
 import common.Organisation;
+import common.User;
 import common.sql.AssetTypeDataSource;
 import common.sql.Commands;
 import common.sql.OrganisationDataSource;
+import common.sql.UserDataSource;
 
 import java.io.*;
 import java.net.Socket;
@@ -13,11 +15,11 @@ import java.util.Properties;
 import java.util.Set;
 
 /**
- *
+ *This class uses the JDBC classes of all tables within the database to communicate with the server
  *
  * @author Dylan Holmes-Brown
  */
-public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataSource {
+public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataSource, UserDataSource {
     private static String HOSTNAME;
     private static int PORT;
 
@@ -25,28 +27,39 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
     private ObjectOutputStream outputStream;
     private ObjectInputStream inputStream;
 
+    /**
+     *
+     */
     public NetworkDataSource() {
-        try {
+        Properties properties = new Properties();
+        FileInputStream in = null;
 
-            Properties properties = new Properties();
-            FileInputStream in = null;
+        try {
+            // File to read
             in = new FileInputStream("./server.props");
             properties.load(in);
             in.close();
 
-            // specify the port
+            // Specify the server address and port
             HOSTNAME = properties.getProperty("server.address");
             String port = properties.getProperty("server.port");
             PORT = Integer.parseInt(port);
 
+            // Persist a single connection throughout the runtime.
             socket = new Socket(HOSTNAME, PORT);
             outputStream = new ObjectOutputStream(socket.getOutputStream());
             inputStream = new ObjectInputStream(socket.getInputStream());
-        } catch (FileNotFoundException fnfe) {
+        }
+        // server.props file doesn't exist
+        catch (FileNotFoundException fnfe) {
             System.err.println(fnfe);
-        } catch (IOException e) {
+        }
+        // Cannot connect to the server
+        catch (IOException e) {
             System.out.println("Failed to connect to the server");
-        } catch (NumberFormatException nfe) {
+        }
+        // Port cannot be converted to integer
+        catch (NumberFormatException nfe) {
             System.err.println(nfe);
         }
     }
@@ -54,12 +67,17 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
     /*
     Asset Type
      */
+
+    /**
+     * @see AssetTypeDataSource#addAssetType(common.AssetTypes)
+     */
     @Override
     public void addAssetType(AssetTypes asset) {
+        // asset object is null
         if (asset == null)
             throw new IllegalArgumentException("Asset cannot be null");
         try {
-            // Tell sever - expect a asset's details
+            // Tell sever - expect an asset's details
             outputStream.writeObject(Commands.ADD_ASSET);
 
             // Send the data
@@ -71,6 +89,9 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
         }
     }
 
+    /**
+     * @see AssetTypeDataSource#getAsset(String)
+     */
     @Override
     public AssetTypes getAsset(String assetName) {
         try {
@@ -90,9 +111,13 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
         }
     }
 
+    /**
+     * @see AssetTypeDataSource#getAssetSize()
+     */
     @Override
     public int getAssetSize() {
         try {
+            // No parameters
             outputStream.writeObject(Commands.GET_ASSET_SIZE);
             outputStream.flush();
 
@@ -105,9 +130,13 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
         }
     }
 
+    /**
+     * @see AssetTypeDataSource#deleteAssetType(String)
+     */
     @Override
     public void deleteAssetType(String assetName) {
         try {
+            // Tell server - expect asset name, and send the details
             outputStream.writeObject(Commands.DELETE_ASSET);
             outputStream.writeObject(assetName);
             outputStream.flush();
@@ -117,8 +146,11 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
         }
     }
 
+    /**
+     * @see AssetTypeDataSource#AssetNameSet()
+     */
     @Override
-    public Set<String> AssetnameSet() {
+    public Set<String> AssetNameSet() {
         try {
             outputStream.writeObject(Commands.GET_ASSET_NAME_SET);
             outputStream.flush();
@@ -132,6 +164,10 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
 
     /*
     Organisation
+     */
+
+    /**
+     * @see OrganisationDataSource#addOrg(common.Organisation)
      */
     @Override
     public void addOrg(Organisation org) {
@@ -150,6 +186,9 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
         }
     }
 
+    /**
+     * @see OrganisationDataSource#deleteOrg(String)
+     */
     @Override
     public void deleteOrg(String name) {
         try {
@@ -161,6 +200,9 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
         }
     }
 
+    /**
+     * @see OrganisationDataSource#addCredits(String, int)
+     */
     @Override
     public void addCredits(String name, int credits) {
         try {
@@ -173,6 +215,9 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
         }
     }
 
+    /**
+     * @see OrganisationDataSource#removeCredits(String, int)
+     */
     @Override
     public void removeCredits(String name, int credits) {
         try {
@@ -185,6 +230,9 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
         }
     }
 
+    /**
+     * @see OrganisationDataSource#addQuantity(String, String, int)
+     */
     @Override
     public void addQuantity(String name, String asset, int credits) {
         try {
@@ -198,6 +246,9 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
         }
     }
 
+    /**
+     * @see OrganisationDataSource#removeQuantity(String, String, int)
+     */
     @Override
     public void removeQuantity(String name, String asset, int credits) {
         try {
@@ -211,6 +262,9 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
         }
     }
 
+    /**
+     * @see OrganisationDataSource#getOrg(String)
+     */
     @Override
     public Organisation getOrg(String name) {
         try {
@@ -227,6 +281,9 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
         }
     }
 
+    /**
+     * @see OrganisationDataSource#getOrgSize()
+     */
     @Override
     public int getOrgSize() {
         try {
@@ -242,6 +299,9 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
         }
     }
 
+    /**
+     * @see OrganisationDataSource#OrgNameSet()
+     */
     @Override
     public Set<String> OrgNameSet() {
         try {
@@ -257,6 +317,109 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
     /*
     User
      */
+    /**
+     * @see UserDataSource#addUser(common.User)
+     */
+    @Override
+    public void addUser(User user) {
+        if (user == null) {
+            throw new IllegalArgumentException("User cannot be null");
+        }
+
+        try {
+            // Tell the server to expect a user's details
+            outputStream.writeObject(Commands.ADD_USER);
+
+            // Send the user data
+            outputStream.writeObject(user);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @see UserDataSource#updatePassword(String, String)
+     */
+    @Override
+    public void updatePassword(String username, String password) {
+        try {
+            // Tell the server to expect a user's details
+            outputStream.writeObject(Commands.UPDATE_PASSWORD);
+
+            // Send the data
+            outputStream.writeObject(username);
+            outputStream.writeObject(password);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @see UserDataSource#getUser(String)
+     */
+    @Override
+    public User getUser(String username) {
+        try {
+            // Tell the server to expect the user's username, and send the details
+            outputStream.writeObject(Commands.GET_USER);
+            outputStream.writeObject(username);
+            outputStream.flush();
+
+            // Read the users details from the server
+            return (User) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException | ClassCastException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * @see UserDataSource#getUserSize()
+     */
+    @Override
+    public int getUserSize() {
+        try {
+            outputStream.writeObject(Commands.GET_USER_SIZE);
+            outputStream.flush();
+
+            // Read the user details from the server
+            return inputStream.readInt();
+        } catch (IOException | ClassCastException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    /**
+     * @see UserDataSource#deleteUser(String)
+     */
+    @Override
+    public void deleteUser(String username) {
+        try {
+            outputStream.writeObject(Commands.DELETE_USER);
+            outputStream.writeObject(username);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @see UserDataSource#UsernameSet()
+     */
+    @Override
+    public Set<String> UsernameSet() {
+        try {
+            outputStream.writeObject(Commands.GET_USER_NAME_SET);
+            outputStream.flush();
+            return (Set<String>) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException | ClassCastException e) {
+            e.printStackTrace();
+            return new HashSet<>();
+        }
+    }
 
     /*
     Current Trade

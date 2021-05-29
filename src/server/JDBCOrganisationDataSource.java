@@ -212,7 +212,6 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
         }
     }
 
-    //TODO: Maybe Remove?
     /**
      * @see OrganisationDataSource#OrgNameSet()
      */

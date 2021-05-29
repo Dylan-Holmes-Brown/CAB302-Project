@@ -2,8 +2,9 @@ package client;
 
 import javax.swing.*;
 import common.sql.AssetTypeData;
-import Views.loginGui;
+import Views.*;
 import common.sql.OrganisationData;
+import common.sql.UserData;
 
 /**
  *
@@ -12,9 +13,8 @@ import common.sql.OrganisationData;
  */
 public class Main {
     private static void createAndShowGUI() {
-        new loginGui();
-            new OrganisationData();
-                new NetworkDataSource();
+
+        new adding( new UserData(new NetworkDataSource()));
     }
     public static void main(String[] args) throws Exception {
         SwingUtilities.invokeLater(new Runnable() {

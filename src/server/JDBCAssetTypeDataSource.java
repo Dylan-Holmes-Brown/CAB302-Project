@@ -129,11 +129,10 @@ public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
         }
     }
 
-    //TODO: Maybe Remove?
     /**
-     * @see AssetTypeDataSource#AssetnameSet()
+     * @see AssetTypeDataSource#AssetNameSet()
      */
-    public Set<String> AssetnameSet() {
+    public Set<String> AssetNameSet() {
         Set<String> names = new TreeSet<String>();
         ResultSet resultSet = null;
 

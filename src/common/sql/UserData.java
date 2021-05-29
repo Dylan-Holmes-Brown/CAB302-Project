@@ -1,6 +1,7 @@
 package common.sql;
 
 import common.User;
+import server.JDBCOrganisationDataSource;
 import server.JDBCUserDataSource;
 
 import javax.swing.DefaultListModel;
@@ -8,6 +9,8 @@ import javax.swing.ListModel;
 
 /**
  * This class uses an UserDataSource and its methods to retrieve data
+ *
+ * @author Dylan Holmes-Brown
  */
 public class UserData {
     DefaultListModel listModel;
@@ -19,9 +22,9 @@ public class UserData {
      * application.
      *
      */
-    public UserData() {
+    public UserData(UserDataSource dataSource) {
         listModel = new DefaultListModel();
-        userData = new JDBCUserDataSource();
+        userData = dataSource;
 
         for (String name : userData.UsernameSet()){
             listModel.addElement(name);

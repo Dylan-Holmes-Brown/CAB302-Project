@@ -158,7 +158,6 @@ public class JDBCUserDataSource implements UserDataSource {
         }
     }
 
-    //TODO: Maybe Remove?
     /**
      * @see UserDataSource#UsernameSet()
      */

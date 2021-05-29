@@ -4,22 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="CurrentTrades table implemented">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_1.xml" afterDir="false" />
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Organisation Server side implemented">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/adding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/adding.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/NetworkDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/NetworkDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/Organisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Organisation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/sql/AssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/AssetTypeData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/sql/AssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/AssetTypeDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/CommandAssetType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/Commands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/OrganisationData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/OrganisationData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/OrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/OrganisationDataSource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/sql/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/UserData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/UserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/UserDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/current_trade/CurrentDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/current_trade/CurrentDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/current_trade/JDBCCurrentDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCCurrentDataSource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/JDBCAssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCAssetTypeDataSource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/JDBCOrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCOrganisationDataSource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/JDBCUserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCUserDataSource.java" afterDir="false" />
@@ -77,7 +71,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../prac08-with-threads" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -89,7 +83,7 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.Main (1)">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.Main" />
       <module name="Assignment" />
@@ -179,11 +173,11 @@
     </configuration>
     <list>
       <item itemvalue="Application.Project" />
-      <item itemvalue="Application.Main (1)" />
       <item itemvalue="Application.Main" />
-      <item itemvalue="Application.addingUserList" />
       <item itemvalue="Application.adding" />
       <item itemvalue="Application.adminOptions" />
+      <item itemvalue="Application.addingUserList" />
+      <item itemvalue="Application.Main (1)" />
     </list>
     <recent_temporary>
       <list>
@@ -239,7 +233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622076647306</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Organisation Server side implemented">
+      <created>1622255613971</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1622255613971</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -263,6 +264,7 @@
     <MESSAGE value="server.props created and implemented, Asset type table fully complete, minor alterations to Organisation table." />
     <MESSAGE value="we are now able to add and remove credits and quantity of assets in an organisation" />
     <MESSAGE value="update password for user" />
-    <option name="LAST_COMMIT_MESSAGE" value="update password for user" />
+    <MESSAGE value="Organisation Server side implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="Organisation Server side implemented" />
   </component>
 </project>

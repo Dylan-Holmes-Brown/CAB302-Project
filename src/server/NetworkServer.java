@@ -2,9 +2,11 @@ package server;
 
 import common.AssetTypes;
 import common.Organisation;
+import common.User;
 import common.sql.AssetTypeDataSource;
 import common.sql.Commands;
 import common.sql.OrganisationDataSource;
+import common.sql.UserDataSource;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -32,6 +34,7 @@ public class NetworkServer {
     // The connections to the database where everything is stored.
     private AssetTypeDataSource tableAssetType;
     private OrganisationDataSource tableOrg;
+    private UserDataSource tableUser;
 
     public NetworkServer(){
         Properties properties = new Properties();
@@ -257,32 +260,69 @@ public class NetworkServer {
             User Commands
              */
             case ADD_USER: {
-
+                final User user = (User) inputStream.readObject();
+                synchronized (tableUser) {
+                    tableUser.addUser(user);
+                }
+                System.out.println(String.format("Added person '%s' to database from client %s",
+                        user.getUsername(), socket.toString()));
             }
             break;
 
             case UPDATE_PASSWORD: {
-
+                final String username = (String) inputStream.readObject();
+                final String password = (String) inputStream.readObject();
+                synchronized (tableUser) {
+                    tableUser.updatePassword(username, password);
+                }
+                System.out.println(String.format("Updated password for '%s' from client '%s'",
+                        username, socket.toString()));
             }
             break;
 
             case GET_USER: {
+                final String username = (String) inputStream.readObject();
+                synchronized (tableUser) {
+                    final User user = tableUser.getUser(username);
 
+                    outputStream.writeObject(user);
+                    if (user != null)
+                        System.out.println(String.format("Sent user '%s' to client %s",
+                                user.getUsername(), socket.toString()));
+                }
+                outputStream.flush();
             }
             break;
 
             case DELETE_USER: {
-
+                final String username = (String) inputStream.readObject();
+                synchronized (tableUser) {
+                    tableUser.deleteUser(username);
+                }
+                System.out.println(String.format("Deleted user '%s' on behalf of client '%s'",
+                        username, socket.toString()));
             }
             break;
 
             case GET_USER_SIZE: {
+                synchronized (tableUser) {
+                    outputStream.writeInt(tableUser.getUserSize());
+                }
+                outputStream.flush();
 
+                System.out.println(String.format("Sent size of %d to client %s",
+                        tableUser.getUserSize(), socket.toString()));
             }
             break;
 
             case GET_USER_NAME_SET: {
+                synchronized (tableUser) {
+                    outputStream.writeObject(tableUser.UsernameSet());
+                }
+                outputStream.flush();
 
+                System.out.println(String.format("Sent name set to client %s",
+                        socket.toString()));
             }
             break;
 
@@ -330,6 +370,8 @@ public class NetworkServer {
     public void start() throws IOException {
         // connect to tables
         tableAssetType = new JDBCAssetTypeDataSource();
+        tableOrg = new JDBCOrganisationDataSource();
+        tableUser = new JDBCUserDataSource();
 
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             serverSocket.setSoTimeout(SOCKET_ACCEPT_TIMEOUT);

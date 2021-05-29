@@ -8,6 +8,7 @@ package common;
 
 
 public class AssetTypes {
+    private static final long serialVersionUID = 30L;
     public String assetType;
     public AssetTypes() {
 

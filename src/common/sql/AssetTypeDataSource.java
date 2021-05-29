@@ -54,5 +54,5 @@ public interface AssetTypeDataSource {
      *
      * @return set of names.
      */
-    Set<String> AssetnameSet();
+    Set<String> AssetNameSet();
 }
