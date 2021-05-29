@@ -1,8 +1,10 @@
 package client;
 
 import common.AssetTypes;
+import common.Organisation;
 import common.sql.AssetTypeDataSource;
-import common.sql.CommandAssetType;
+import common.sql.Commands;
+import common.sql.OrganisationDataSource;
 
 import java.io.*;
 import java.net.Socket;
@@ -15,7 +17,7 @@ import java.util.Set;
  *
  * @author Dylan Holmes-Brown
  */
-public class NetworkDataSource implements AssetTypeDataSource {
+public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataSource {
     private static String HOSTNAME;
     private static int PORT;
 
@@ -49,13 +51,16 @@ public class NetworkDataSource implements AssetTypeDataSource {
         }
     }
 
+    /*
+    Asset Type
+     */
     @Override
     public void addAssetType(AssetTypes asset) {
         if (asset == null)
             throw new IllegalArgumentException("Asset cannot be null");
         try {
             // Tell sever - expect a asset's details
-            outputStream.writeObject(CommandAssetType.ADD_ASSET);
+            outputStream.writeObject(Commands.ADD_ASSET);
 
             // Send the data
             outputStream.writeObject(asset);
@@ -70,7 +75,7 @@ public class NetworkDataSource implements AssetTypeDataSource {
     public AssetTypes getAsset(String assetName) {
         try {
             // Tell server - expect asset name, and send the details
-            outputStream.writeObject(CommandAssetType.GET_ASSET);
+            outputStream.writeObject(Commands.GET_ASSET);
             outputStream.writeObject(assetName);
 
             // Flush as the request might not be sent yet, and we're waiting for a response
@@ -86,9 +91,9 @@ public class NetworkDataSource implements AssetTypeDataSource {
     }
 
     @Override
-    public int getSize() {
+    public int getAssetSize() {
         try {
-            outputStream.writeObject(CommandAssetType.GET_SIZE);
+            outputStream.writeObject(Commands.GET_ASSET_SIZE);
             outputStream.flush();
 
             // Read the asset details back from the server
@@ -103,7 +108,7 @@ public class NetworkDataSource implements AssetTypeDataSource {
     @Override
     public void deleteAssetType(String assetName) {
         try {
-            outputStream.writeObject(CommandAssetType.DELETE_ASSET);
+            outputStream.writeObject(Commands.DELETE_ASSET);
             outputStream.writeObject(assetName);
             outputStream.flush();
         }
@@ -113,14 +118,9 @@ public class NetworkDataSource implements AssetTypeDataSource {
     }
 
     @Override
-    public void close() {
-
-    }
-
-    @Override
-    public Set<String> nameSet() {
+    public Set<String> AssetnameSet() {
         try {
-            outputStream.writeObject(CommandAssetType.GET_NAME_SET);
+            outputStream.writeObject(Commands.GET_ASSET_NAME_SET);
             outputStream.flush();
             return (Set<String>)  inputStream.readObject();
         }
@@ -128,5 +128,141 @@ public class NetworkDataSource implements AssetTypeDataSource {
             e.printStackTrace();
             return new HashSet<>();
         }
+    }
+
+    /*
+    Organisation
+     */
+    @Override
+    public void addOrg(Organisation org) {
+        if (org == null)
+            throw new IllegalArgumentException("Organisation cannot be null");
+
+        try {
+            // Tell the server to expect a organisation's details
+            outputStream.writeObject(Commands.ADD_ORG);
+
+            // Send organisation data
+            outputStream.writeObject(org);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteOrg(String name) {
+        try {
+            outputStream.writeObject(Commands.DELETE_ORG);
+            outputStream.writeObject(name);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addCredits(String name, int credits) {
+        try {
+            outputStream.writeObject(Commands.ADD_CREDITS);
+            outputStream.writeObject(name);
+            outputStream.writeObject(credits);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void removeCredits(String name, int credits) {
+        try {
+            outputStream.writeObject(Commands.REMOVE_CREDITS);
+            outputStream.writeObject(name);
+            outputStream.writeObject(credits);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addQuantity(String name, String asset, int credits) {
+        try {
+            outputStream.writeObject(Commands.ADD_QUANTITY);
+            outputStream.writeObject(name);
+            outputStream.writeObject(asset);
+            outputStream.writeObject(credits);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void removeQuantity(String name, String asset, int credits) {
+        try {
+            outputStream.writeObject(Commands.REMOVE_QUANTITY);
+            outputStream.writeObject(name);
+            outputStream.writeObject(asset);
+            outputStream.writeObject(credits);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Organisation getOrg(String name) {
+        try {
+            // Tell server to expect a organisations name, and send the details
+            outputStream.writeObject(Commands.GET_ORG);
+            outputStream.writeObject(name);
+            outputStream.flush();
+
+            // Read the organisation's details from the server
+            return (Organisation) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException  | ClassCastException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public int getOrgSize() {
+        try {
+            outputStream.writeObject(Commands.GET_ORG_SIZE);
+            outputStream.flush();
+
+            // Read the asset details back from the server
+            return inputStream.readInt();
+        }
+        catch (IOException | ClassCastException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    @Override
+    public Set<String> OrgNameSet() {
+        try {
+            outputStream.writeObject(Commands.GET_ORG_NAME_SET);
+            outputStream.flush();
+            return (Set<String>) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException | ClassCastException e) {
+            e.printStackTrace();
+            return new HashSet<>();
+        }
+    }
+
+    /*
+    User
+     */
+
+    /*
+    Current Trade
+     */
+
+    @Override
+    public void close() {
     }
 }

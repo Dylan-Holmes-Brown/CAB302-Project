@@ -1,8 +1,9 @@
-package common.sql.current_trade;
+package server;
 
 import common.CurrentTrades;
 import common.User;
 import common.sql.UserDataSource;
+import common.sql.current_trade.CurrentDataSource;
 import server.DBConnection;
 
 import java.sql.*;
@@ -130,6 +131,19 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
     }
 
     /**
+     * @see CurrentDataSource#deleteTrade(int)
+     */
+    public void deleteTrade(int id) {
+        try {
+            deleteTrade.setInt(1, id);
+            deleteTrade.executeUpdate();
+        }
+        catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
+
+    /**
      * @see CurrentDataSource#getSize()
      */
     public int getSize() {
@@ -148,19 +162,6 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
     }
 
     /**
-     * @see CurrentDataSource#deleteOrg(int)
-     */
-    public void deleteOrg(int id) {
-        try {
-            deleteTrade.setInt(1, id);
-            deleteTrade.executeUpdate();
-        }
-        catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-    }
-
-    /**
      * @see CurrentDataSource#close()
      */
     public void close() {
@@ -172,6 +173,7 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
         }
     }
 
+    //TODO: Maybe Remove?
     /**
      * @see CurrentDataSource#idSet()
      */

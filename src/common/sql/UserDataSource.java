@@ -34,7 +34,7 @@ public interface UserDataSource {
      *
      * @return size of user.
      */
-    int getSize();
+    int getUserSize();
 
     /**
      * Deletes a User from the table.
@@ -55,5 +55,5 @@ public interface UserDataSource {
      *
      * @return set of names.
      */
-    Set<String> nameSet();
+    Set<String> UsernameSet();
 }

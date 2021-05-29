@@ -65,7 +65,7 @@ public interface OrganisationDataSource {
      *
      * @return size of organisation table.
      */
-    int getSize();
+    int getOrgSize();
 
     /**
      * Deletes a Organisation from the table.
@@ -86,5 +86,5 @@ public interface OrganisationDataSource {
      *
      * @return set of names.
      */
-    Set<String> nameSet();
+    Set<String> OrgNameSet();
 }

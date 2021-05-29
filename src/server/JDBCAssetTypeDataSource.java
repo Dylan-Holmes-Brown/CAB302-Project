@@ -9,8 +9,8 @@ import java.util.TreeSet;
 
 /**
  *
- *
  * @author Adam Buchsbaum
+ * @author Dylan Holmes-Brown
  */
 
 public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
@@ -87,9 +87,9 @@ public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
     }
 
     /**
-     * @see AssetTypeDataSource#getSize()
+     * @see AssetTypeDataSource#getAssetSize()
      */
-    public int getSize() {
+    public int getAssetSize() {
         ResultSet resultSet = null;
         int rows = 0;
 
@@ -129,10 +129,11 @@ public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
         }
     }
 
+    //TODO: Maybe Remove?
     /**
-     * @see AssetTypeDataSource#nameSet()
+     * @see AssetTypeDataSource#AssetnameSet()
      */
-    public Set<String> nameSet() {
+    public Set<String> AssetnameSet() {
         Set<String> names = new TreeSet<String>();
         ResultSet resultSet = null;
 

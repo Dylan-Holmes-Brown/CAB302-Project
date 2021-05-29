@@ -116,9 +116,22 @@ public class JDBCUserDataSource implements UserDataSource {
     }
 
     /**
-     * @see UserDataSource#getSize()
+     * @see UserDataSource#deleteUser(String)
      */
-    public int getSize() {
+    public void deleteUser(String username) {
+        try {
+            deleteUser.setString(1, username);
+            deleteUser.executeUpdate();
+        }
+        catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
+
+    /**
+     * @see UserDataSource#getUserSize()
+     */
+    public int getUserSize() {
         ResultSet resultSet = null;
         int rows = 0;
 
@@ -134,19 +147,6 @@ public class JDBCUserDataSource implements UserDataSource {
     }
 
     /**
-     * @see UserDataSource#deleteUser(String)
-     */
-    public void deleteUser(String username) {
-        try {
-            deleteUser.setString(1, username);
-            deleteUser.executeUpdate();
-        }
-        catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-    }
-
-    /**
      * @see UserDataSource#close()
      */
     public void close() {
@@ -158,10 +158,11 @@ public class JDBCUserDataSource implements UserDataSource {
         }
     }
 
+    //TODO: Maybe Remove?
     /**
-     * @see UserDataSource#nameSet()
+     * @see UserDataSource#UsernameSet()
      */
-    public Set<String> nameSet() {
+    public Set<String> UsernameSet() {
         Set<String> names = new TreeSet<String>();
         ResultSet resultSet = null;
 
