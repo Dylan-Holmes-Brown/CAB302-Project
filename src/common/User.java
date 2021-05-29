@@ -38,6 +38,12 @@ public class User extends Object{
         this.org = org;
     }
 
+    //test constructor
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     /**
      * @return the username
      */

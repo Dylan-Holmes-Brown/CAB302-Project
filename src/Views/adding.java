@@ -1,20 +1,40 @@
 package Views;
 
+import common.User;
+import common.sql.UserData;
+
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
-public class adding extends JFrame {
-    private static JLabel userLabel;
-    private static JTextField userText;
-    private static JLabel passLabel;
-    private static JPasswordField passText;
-    private static JButton button;
-    private static JLabel success;
+public class adding extends JFrame implements ActionListener {
+    //name
+    private JLabel userNameLabel;
+    private JTextField userNameField;
 
-    public adding() {
+    //username
+    private JLabel userLabel;
+    private JTextField userField;
+
+    //password
+    private JLabel passLabel;
+    private JTextField passField;
+
+    //create button
+    private JButton create_user;
+
+    //verification
+    private JLabel success;
+
+
+    UserData data;
+
+    public adding(UserData data) {
+        this.data = data;
+
         JLabel label = new JLabel();
         JFrame frame = new JFrame();
         JPanel panel = new JPanel();
@@ -48,9 +68,10 @@ public class adding extends JFrame {
         passField.setBounds(140,130,165,25);
         panel.add(passField);
 
-        JButton button = new JButton("Create User");
-        button.setBounds(140,210,150, 20);
-        panel.add(button);
+        JButton create_user = new JButton("Create User");
+        create_user.setBounds(140,210,150, 20);
+        create_user.addActionListener(this);
+        panel.add(create_user);
 
         JRadioButton userButton = new JRadioButton("User");
         userButton.setBounds(210,170,80,25);
@@ -71,11 +92,30 @@ public class adding extends JFrame {
         frame.setVisible(true);
     }
 
+    private void savePressed() {
+        if (userField.getText() != null && !userField.getText().equals("")) {
+            User u = new User(userField.getText(), passField.getText());
+            data.add(u);
+        }
+    }
+
+
+
 
 
     // create one Frame
     public static void main(String[] args) {
-        new adding();
+        new adding(new UserData());
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        int size = data.getSize();
+
+        JButton source = new JButton();
+        if(source == create_user){
+            savePressed();
+        }
     }
 }
 

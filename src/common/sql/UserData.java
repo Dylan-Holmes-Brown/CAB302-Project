@@ -40,6 +40,20 @@ public class UserData {
     }
 
     /**
+     * Adds a user to the user table.
+     *
+     * @param u A Person to add to the user table.
+     */
+    public void add(User u) {
+
+
+        if (!listModel.contains(u.getUsername())) {
+            listModel.addElement(u.getUsername());
+            userData.addUser(u);
+        }
+    }
+
+    /**
      * Saves the data in the user table using the persistence mechanism.
      */
     public void persist() { userData.close(); }
