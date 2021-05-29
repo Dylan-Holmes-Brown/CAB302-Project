@@ -1,16 +1,9 @@
 package Views;
 
-import Utils.PasswordHash;
-import common.HashPassword;
-//import sql.DBConnection;
-
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
+
+//import sql.DBConnection;
 
 public class loginGui extends JFrame {
 
