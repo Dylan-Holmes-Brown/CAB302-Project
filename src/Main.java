@@ -3,7 +3,7 @@ import common.CurrentTrades;
 import java.sql.Date;
 import common.Organisation;
 import common.User;
-import common.sql.current_trade.JDBCCurrentDataSource;
+import server.JDBCCurrentDataSource;
 import server.JDBCUserDataSource;
 import server.JDBCAssetTypeDataSource;
 import server.JDBCOrganisationDataSource;
@@ -52,7 +52,7 @@ public class Main {
         //jdbcUserDataSource.updatePassword("Dylan", "4321");
 
         User userGet = jdbcUserDataSource.getUser("Dylan");
-        int size = jdbcUserDataSource.getSize();
+        int size = jdbcUserDataSource.getUserSize();
         System.out.println(userGet.username + " " + userGet.password + " " + userGet.accountType + " " + userGet.org +" \nTable size: " + size);
 
         // Test Current Trades Table

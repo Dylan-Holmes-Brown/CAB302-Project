@@ -3,6 +3,7 @@ package client;
 import javax.swing.*;
 import common.sql.AssetTypeData;
 import Views.loginGui;
+import common.sql.OrganisationData;
 
 /**
  *
@@ -12,7 +13,7 @@ import Views.loginGui;
 public class Main {
     private static void createAndShowGUI() {
         new loginGui();
-            new AssetTypeData();
+            new OrganisationData();
                 new NetworkDataSource();
     }
     public static void main(String[] args) throws Exception {

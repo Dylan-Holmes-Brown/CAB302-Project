@@ -23,7 +23,7 @@ public class UserData {
         listModel = new DefaultListModel();
         userData = new JDBCUserDataSource();
 
-        for (String name : userData.nameSet()){
+        for (String name : userData.UsernameSet()){
             listModel.addElement(name);
         }
     }
@@ -63,5 +63,5 @@ public class UserData {
      *
      * @return the number of names in the user table.
      */
-    public int getSize() { return userData.getSize(); }
+    public int getSize() { return userData.getUserSize(); }
 }

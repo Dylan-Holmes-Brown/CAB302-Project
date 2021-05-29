@@ -4,17 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="updated">
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="CurrentTrades table implemented">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/loginGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/loginGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/NetworkDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/NetworkDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/AssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/AssetTypeData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/AssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/AssetTypeDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/CommandAssetType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/Commands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/OrganisationData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/OrganisationData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/OrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/OrganisationDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/UserData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/UserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/UserDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/current_trade/CurrentDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/current_trade/CurrentDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/current_trade/JDBCCurrentDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCCurrentDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/JDBCAssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCAssetTypeDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/JDBCOrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCOrganisationDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/JDBCUserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCUserDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/NetworkServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/NetworkServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="CodeInsightWorkspaceSettings">
-    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -63,20 +77,33 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../prac08-with-threads" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main (1)">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="server.Main" />
+      <module name="Assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="Assignment" />
       <extension name="coverage">
@@ -103,7 +130,7 @@
       </method>
     </configuration>
     <configuration name="Project" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH" value="15" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Assignment" />
@@ -124,8 +151,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="loginGui" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Views.loginGui" />
+    <configuration name="addingUserList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Views.addingUserList" />
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
@@ -137,8 +164,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="userList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Views.userList" />
+    <configuration name="adminOptions" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Views.adminOptions" />
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
@@ -150,13 +177,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Project" />
+      <item itemvalue="Application.Main (1)" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.addingUserList" />
+      <item itemvalue="Application.adding" />
+      <item itemvalue="Application.adminOptions" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main (1)" />
+        <item itemvalue="Application.adminOptions" />
         <item itemvalue="Application.adding" />
-        <item itemvalue="Application.loginGui" />
-        <item itemvalue="Application.userList" />
+        <item itemvalue="Application.addingUserList" />
       </list>
     </recent_temporary>
   </component>
@@ -183,14 +218,28 @@
       <option name="project" value="LOCAL" />
       <updated>1621139296416</updated>
     </task>
-    <task id="LOCAL-00003" summary="updated">
-      <created>1622169542008</created>
+    <task id="LOCAL-00003" summary="server.props created and implemented, Asset type table fully complete, minor alterations to Organisation table.">
+      <created>1622027557565</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1622169542008</updated>
+      <updated>1622027557565</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="we are now able to add and remove credits and quantity of assets in an organisation">
+      <created>1622034311664</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1622034311664</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update password for user">
+      <created>1622076647306</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1622076647306</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -211,7 +260,9 @@
     <MESSAGE value="Switched to MariaDB, User table complete, with methods to use with GUI." />
     <MESSAGE value="Organisational unit sql done, created foreign keys." />
     <MESSAGE value="Changed to sqlite, Server create for asset types and client side impimented." />
-    <MESSAGE value="updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated" />
+    <MESSAGE value="server.props created and implemented, Asset type table fully complete, minor alterations to Organisation table." />
+    <MESSAGE value="we are now able to add and remove credits and quantity of assets in an organisation" />
+    <MESSAGE value="update password for user" />
+    <option name="LAST_COMMIT_MESSAGE" value="update password for user" />
   </component>
 </project>

@@ -25,7 +25,7 @@ public class OrganisationData {
         listModel = new DefaultListModel();
         orgData = new JDBCOrganisationDataSource();
 
-        for (String name : orgData.nameSet()){
+        for (String name : orgData.OrgNameSet()){
             listModel.addElement(name);
         }
     }
@@ -66,5 +66,5 @@ public class OrganisationData {
      *
      * @return the number of names in the organisation table.
      */
-    public int getSize() { return orgData.getSize(); }
+    public int getSize() { return orgData.getOrgSize(); }
 }
