@@ -1,5 +1,6 @@
 package Views;
 
+import common.HashPassword;
 import common.User;
 import common.sql.UserData;
 
@@ -245,7 +246,12 @@ public class adding extends JFrame {
                 }
 
                 // Add user to database and clear fields
-                User u = new User(userField.getText(), password, accountType, org);
+                User u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getPassword())), accountType, org);
+//                User u = new User();
+//                u.setName(userField.getText());
+//                u.setHashedPassword(passField.getSelectedText());
+//                u.setAccountType(accountType);
+//                u.setOrganisationalUnit(org);
                 data.add(u);
                 userField.setText("");
                 passField.setText("");

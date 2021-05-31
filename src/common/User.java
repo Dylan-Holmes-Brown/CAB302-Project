@@ -51,6 +51,11 @@ public class User extends Object implements Serializable {
      */
     public void setPassword(String password) { this.password = password; }
 
+//    /**
+//     * @param password the password is hashed and set
+//     */
+//    public void setHashedPassword(String password) { this.password = HashPassword.toHex(HashPassword.getHashSHA512(password)); }
+
     /**
      * @return the accountType
      */
