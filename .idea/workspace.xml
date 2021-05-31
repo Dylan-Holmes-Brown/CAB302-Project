@@ -5,18 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Organisation Server side implemented">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am_[Default_Changelist]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/adding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/adding.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/addingUserList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingUserList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/adminOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/adminOptions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/bidArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/bidArena.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/bidList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/bidList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/loginGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/loginGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/userList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/userList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/userOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/userOptions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/NetworkDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/NetworkDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/Organisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Organisation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/AssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/AssetTypeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/AssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/AssetTypeDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/UserData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/JDBCAssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCAssetTypeDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/JDBCOrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCOrganisationDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/JDBCUserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCUserDataSource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/NetworkServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/NetworkServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +83,7 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main (1)">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.Main" />
       <module name="Assignment" />

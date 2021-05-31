@@ -5,8 +5,9 @@ import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
-public class loginGui extends JFrame {
+public class loginGui extends JFrame implements Serializable {
 
     private static JLabel userLabel;
     private static JTextField userText;
@@ -14,6 +15,7 @@ public class loginGui extends JFrame {
     private static JPasswordField passText;
     private static JButton button;
     private static JLabel success;
+    private static final long serialVersionUID = 66L;
 
     public loginGui() {
         super("Action Time");

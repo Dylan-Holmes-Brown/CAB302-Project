@@ -1,12 +1,14 @@
 package server;
 
 import common.AssetTypes;
+import common.CurrentTrades;
 import common.Organisation;
 import common.User;
 import common.sql.AssetTypeDataSource;
 import common.sql.Commands;
 import common.sql.OrganisationDataSource;
 import common.sql.UserDataSource;
+import common.sql.current_trade.CurrentDataSource;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -35,6 +37,7 @@ public class NetworkServer {
     private AssetTypeDataSource tableAssetType;
     private OrganisationDataSource tableOrg;
     private UserDataSource tableUser;
+    private CurrentDataSource tableCurrentTrade;
 
     public NetworkServer(){
         Properties properties = new Properties();
@@ -330,32 +333,73 @@ public class NetworkServer {
             CurrentTrade Commands
              */
             case ADD_TRADE: {
-
+                final CurrentTrades a = (CurrentTrades) inputStream.readObject();
+                synchronized (tableCurrentTrade) {
+                    tableCurrentTrade.addTrade(a);
+                }
+                System.out.println(String.format("Added trade '%s' to ??? from ??? '%s'.",
+                        a.getBuySell(), socket.toString()));
             }
             break;
 
             case GET_BUY_SELL: {
+                final String type = (String) inputStream.readObject();
+                synchronized (tableCurrentTrade) {
+                    final CurrentTrades currentTrades = tableCurrentTrade.getBuySell(type);
 
+                    outputStream.writeObject(currentTrades);
+                    if (currentTrades != null) {
+                        System.out.println(String.format("Sent ??? '%s' to ??? '%x'.",
+                                currentTrades.getBuySell(), socket.toString()));
+                    }
+                    outputStream.flush();
+                }
             }
             break;
 
             case GET_ORGTRADE: {
+                final String organisation = (String) inputStream.readObject();
+                synchronized (tableCurrentTrade) {
+                    final CurrentTrades currentTrades = tableCurrentTrade.getBuySell(organisation);
 
+                    outputStream.writeObject(currentTrades);
+                    if (currentTrades != null) {
+                        System.out.println(String.format("Sent ??? '%s' to ??? '%x'.",
+                                currentTrades.getBuySell(), socket.toString()));
+                    }
+                    outputStream.flush();
+                }
             }
             break;
 
             case DELETE_TRADE: {
-
+                final int id = (int) inputStream.readObject();
+                synchronized (tableCurrentTrade) {
+                    tableCurrentTrade.deleteTrade(id);
+                }
+                System.out.println(String.format("Deleted ??? '%s' '%s'.",
+                        id, socket.toString()));
             }
             break;
 
             case GET_TRADE_SIZE: {
-
+                synchronized (tableCurrentTrade) {
+                    outputStream.writeInt(tableCurrentTrade.getSize());
+                }
+                outputStream.flush();
+                System.out.println(String.format("Sent size of %d to client '%s'.",
+                        tableCurrentTrade.getSize(), socket.toString()));
             }
             break;
 
             case GET_TRADE_NAME_SET: {
+                synchronized (tableCurrentTrade) {
+                    outputStream.writeObject((tableCurrentTrade.idSet()));
+                }
+                outputStream.flush();
 
+                System.out.println(String.format("Sent id set to client %s",
+                        socket.toString()));
             }
             break;
         }

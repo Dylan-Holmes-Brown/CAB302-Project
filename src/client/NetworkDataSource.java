@@ -1,12 +1,14 @@
 package client;
 
 import common.AssetTypes;
+import common.CurrentTrades;
 import common.Organisation;
 import common.User;
 import common.sql.AssetTypeDataSource;
 import common.sql.Commands;
 import common.sql.OrganisationDataSource;
 import common.sql.UserDataSource;
+import common.sql.current_trade.CurrentDataSource;
 
 import java.io.*;
 import java.net.Socket;
@@ -19,7 +21,7 @@ import java.util.Set;
  *
  * @author Dylan Holmes-Brown
  */
-public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataSource, UserDataSource {
+public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataSource, UserDataSource, CurrentDataSource {
     private static String HOSTNAME;
     private static int PORT;
 
@@ -424,6 +426,85 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
     /*
     Current Trade
      */
+    @Override
+    public void addTrade(CurrentTrades trades) {
+        if (trades == null) {
+            throw new IllegalArgumentException("Trade cannot be null");
+        }
+
+        try {
+            outputStream.writeObject(Commands.ADD_TRADE);
+
+            outputStream.writeObject(trades);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public CurrentTrades getBuySell(String type) {
+        try {
+            outputStream.writeObject(Commands.GET_BUY_SELL);
+            outputStream.writeObject(type);
+            outputStream.flush();
+
+            return (CurrentTrades) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException | ClassCastException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public CurrentTrades getOrgTrade(String organisation) {
+        try {
+            outputStream.writeObject(Commands.GET_USER);
+            outputStream.writeObject(organisation);
+            outputStream.flush();
+
+            return (CurrentTrades) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException | ClassCastException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public int getSize() {
+        try {
+            outputStream.writeObject(Commands.GET_TRADE_SIZE);
+            outputStream.flush();
+
+            return inputStream.readInt();
+        } catch (IOException | ClassCastException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    @Override
+    public void deleteTrade(int id) {
+        try {
+            outputStream.writeObject(Commands.DELETE_TRADE);
+            outputStream.writeObject(id);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Set<Integer> idSet() {
+        try {
+            outputStream.writeObject(Commands.GET_TRADE_NAME_SET);
+            outputStream.flush();
+            return (Set<Integer>) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException | ClassCastException e) {
+            e.printStackTrace();
+            return new HashSet<>();
+        }
+    }
 
     @Override
     public void close() {

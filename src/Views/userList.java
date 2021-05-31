@@ -2,11 +2,13 @@ package Views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
-public class userList extends JFrame{
+public class userList extends JFrame implements Serializable {
 
     private static JButton button;
     private static JLabel success;
+    private static final long serialVersionUID = 67L;
 
     public userList() {
         JLabel label = new JLabel();

@@ -2,10 +2,13 @@ package Views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
-public class bidArena extends JFrame{
+public class bidArena extends JFrame implements Serializable {
+
     private static JButton button;
     private static JLabel success;
+    private static final long serialVersionUID = 64L;
 
     public bidArena() {
         JLabel label = new JLabel();
