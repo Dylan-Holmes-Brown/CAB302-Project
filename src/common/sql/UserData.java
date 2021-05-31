@@ -32,6 +32,20 @@ public class UserData {
     }
 
     /**
+     * Adds a User to the user table
+     *
+     * @param u A User to add to the user table.
+     */
+    public void add(User u) {
+
+        // Check to see if the user has already been added
+        if (!listModel.contains(u.getUsername())) {
+            listModel.addElement(u.getUsername());
+            userData.addUser(u);
+        }
+    }
+
+    /**
      * Based on the name of the user in the user table, delete the user.
      *
      * @param key

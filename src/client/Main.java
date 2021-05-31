@@ -17,10 +17,6 @@ public class Main {
         new adding( new UserData(new NetworkDataSource()));
     }
     public static void main(String[] args) throws Exception {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
+        SwingUtilities.invokeLater(Main::createAndShowGUI);
     }
 }
