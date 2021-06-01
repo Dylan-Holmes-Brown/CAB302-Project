@@ -107,12 +107,12 @@ public class JDBCUserDataSource implements UserDataSource {
             user.setPassword(resultSet.getString("password"));
             user.setAccountType(resultSet.getString("accountType"));
             user.setOrganisationalUnit(resultSet.getString("organisationalUnit"));
-
+            return user;
         }
         catch (SQLException sqle) {
             sqle.printStackTrace();
+            return null;
         }
-        return user;
     }
 
     /**
