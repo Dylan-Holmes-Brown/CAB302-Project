@@ -79,5 +79,5 @@ public class User extends Object implements Serializable {
     /**
      * @see Object#toString()
      */
-    public String toString() { return username + " " + password + ", " + accountType + " " + org + " "; }
+    public String toString() { return username + ", " + password + ", " + accountType + ", " + org; }
 }

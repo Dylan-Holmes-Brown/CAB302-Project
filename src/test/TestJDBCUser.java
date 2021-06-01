@@ -13,6 +13,7 @@ public class TestJDBCUser {
 
     private static JDBCUserDataSource jdbcUserDataSource;
     private final String name = "Blah";
+    String expectedUser = "Blah, 1234, Member, Apple";
 
     @BeforeEach
     public void ConstructUserTable() {
@@ -40,10 +41,7 @@ public class TestJDBCUser {
     @Order(2)
     public void TestGetUser() {
         User u = jdbcUserDataSource.getUser(name);
-        assertEquals(name, u.getUsername());
-        assertEquals("1234", u.getPassword());
-        assertEquals("Member", u.getAccountType());
-        assertEquals("Apple", u.getOrganisationalUnit());
+        assertEquals(expectedUser, (String.format("%s, %s, %s, %s", u.getUsername(), u.getPassword(), u.getAccountType(), u.getOrganisationalUnit())));
     }
 
     @Test
@@ -79,7 +77,7 @@ public class TestJDBCUser {
             assertFalse(listModel2.contains(name));
         }
         else {
-            fail(String.format("User '%s' could not be found in the table", name));
+            fail(String.format("User '%s' could not be found in the table and therefore could not be deleted", name));
         }
     }
 }
