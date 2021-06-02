@@ -2,7 +2,9 @@ package client;
 
 import javax.swing.*;
 import common.sql.AssetTypeData;
-import Views.loginGui;
+import Views.*;
+import common.sql.OrganisationData;
+import common.sql.UserData;
 
 /**
  *
@@ -11,15 +13,14 @@ import Views.loginGui;
  */
 public class Main {
     private static void createAndShowGUI() {
-        new loginGui();
-            new AssetTypeData();
-                new NetworkDataSource();
+
+        new adding( new UserData(new NetworkDataSource()));
     }
     public static void main(String[] args) throws Exception {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
+        SwingUtilities.invokeLater(Main::createAndShowGUI);
+    }
+
+    public static void createAndShowLoginGUI() {
+        new loginGui( new UserData(new NetworkDataSource()));
     }
 }

@@ -46,7 +46,7 @@ public interface CurrentDataSource {
      *
      * @param id The id of the trade to delete
      */
-    void deleteOrg(int id);
+    void deleteTrade(int id);
 
     /**
      * Finalizes any resources used by the data source and ensures data is

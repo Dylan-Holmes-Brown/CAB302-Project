@@ -1,6 +1,7 @@
 package common.sql;
 
 import common.User;
+import server.JDBCOrganisationDataSource;
 import server.JDBCUserDataSource;
 
 import javax.swing.DefaultListModel;
@@ -8,6 +9,8 @@ import javax.swing.ListModel;
 
 /**
  * This class uses an UserDataSource and its methods to retrieve data
+ *
+ * @author Dylan Holmes-Brown
  */
 public class UserData {
     DefaultListModel listModel;
@@ -19,12 +22,26 @@ public class UserData {
      * application.
      *
      */
-    public UserData() {
+    public UserData(UserDataSource dataSource) {
         listModel = new DefaultListModel();
-        userData = new JDBCUserDataSource();
+        userData = dataSource;
 
-        for (String name : userData.nameSet()){
+        for (String name : userData.UsernameSet()){
             listModel.addElement(name);
+        }
+    }
+
+    /**
+     * Adds a User to the user table
+     *
+     * @param u A User to add to the user table.
+     */
+    public void add(User u) {
+
+        // Check to see if the user has already been added
+        if (!listModel.contains(u.getUsername())) {
+            listModel.addElement(u.getUsername());
+            userData.addUser(u);
         }
     }
 
@@ -63,5 +80,5 @@ public class UserData {
      *
      * @return the number of names in the user table.
      */
-    public int getSize() { return userData.getSize(); }
+    public int getSize() { return userData.getUserSize(); }
 }

@@ -170,9 +170,22 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
     }
 
     /**
-     * @see OrganisationDataSource#getSize()
+     * @see OrganisationDataSource#deleteOrg(String)
      */
-    public int getSize() {
+    public void deleteOrg(String name) {
+        try {
+            deleteOrg.setString(1, name);
+            deleteOrg.executeUpdate();
+        }
+        catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
+
+    /**
+     * @see OrganisationDataSource#getOrgSize()
+     */
+    public int getOrgSize() {
         ResultSet resultSet = null;
         int rows = 0;
 
@@ -188,19 +201,6 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
     }
 
     /**
-     * @see OrganisationDataSource#deleteOrg(String)
-     */
-    public void deleteOrg(String name) {
-        try {
-            deleteOrg.setString(1, name);
-            deleteOrg.executeUpdate();
-        }
-        catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-    }
-
-    /**
      * @see OrganisationDataSource#close()
      */
     public void close() {
@@ -213,9 +213,9 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
     }
 
     /**
-     * @see OrganisationDataSource#nameSet()
+     * @see OrganisationDataSource#OrgNameSet()
      */
-    public Set<String> nameSet() {
+    public Set<String> OrgNameSet() {
         Set<String> names = new TreeSet<String>();
         ResultSet resultSet = null;
 

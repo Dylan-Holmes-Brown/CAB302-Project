@@ -7,6 +7,7 @@ import java.sql.Date;
  */
 
 public class CurrentTrades {
+    private static final long serialVersionUID = 40L;
     public String buySell;
     public String organisation;
     public String asset;

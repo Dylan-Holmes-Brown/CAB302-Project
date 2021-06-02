@@ -33,7 +33,7 @@ public interface AssetTypeDataSource {
      *
      * @return size of address book.
      */
-    int getSize();
+    int getAssetSize();
 
     /**
      * Deletes a Person from the address book.
@@ -54,5 +54,5 @@ public interface AssetTypeDataSource {
      *
      * @return set of names.
      */
-    Set<String> nameSet();
+    Set<String> AssetNameSet();
 }

@@ -107,30 +107,12 @@ public class JDBCUserDataSource implements UserDataSource {
             user.setPassword(resultSet.getString("password"));
             user.setAccountType(resultSet.getString("accountType"));
             user.setOrganisationalUnit(resultSet.getString("organisationalUnit"));
-
+            return user;
         }
         catch (SQLException sqle) {
             sqle.printStackTrace();
+            return null;
         }
-        return user;
-    }
-
-    /**
-     * @see UserDataSource#getSize()
-     */
-    public int getSize() {
-        ResultSet resultSet = null;
-        int rows = 0;
-
-        try {
-            resultSet = rowCount.executeQuery();
-            resultSet.next();
-            rows = resultSet.getInt(1);
-        }
-        catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-        return rows;
     }
 
     /**
@@ -147,6 +129,24 @@ public class JDBCUserDataSource implements UserDataSource {
     }
 
     /**
+     * @see UserDataSource#getUserSize()
+     */
+    public int getUserSize() {
+        ResultSet resultSet = null;
+        int rows = 0;
+
+        try {
+            resultSet = rowCount.executeQuery();
+            resultSet.next();
+            rows = resultSet.getInt(1);
+        }
+        catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+        return rows;
+    }
+
+    /**
      * @see UserDataSource#close()
      */
     public void close() {
@@ -159,9 +159,9 @@ public class JDBCUserDataSource implements UserDataSource {
     }
 
     /**
-     * @see UserDataSource#nameSet()
+     * @see UserDataSource#UsernameSet()
      */
-    public Set<String> nameSet() {
+    public Set<String> UsernameSet() {
         Set<String> names = new TreeSet<String>();
         ResultSet resultSet = null;
 

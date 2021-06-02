@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="ignore this">
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Unit Testing for JDBCUserDataSource started just need to test exceptions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/adding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/adding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestJDBCUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestJDBCUser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,20 +61,20 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../cab302-enterprisebillboard" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.adding">
-    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.TestJDBCUser">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="Assignment" />
       <extension name="coverage">
@@ -100,23 +101,10 @@
       </method>
     </configuration>
     <configuration name="Project" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH" value="15" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Assignment" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="adding" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Views.adding" />
-      <module name="Assignment" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Views.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -134,26 +122,68 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="userList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Views.userList" />
+    <configuration name="TestJDBCUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Views.*" />
+          <option name="PATTERN" value="test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.TestJDBCUser" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestJDBCUser.TestAddUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.TestJDBCUser" />
+      <option name="METHOD_NAME" value="TestAddUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestJDBCUser.TestDeleteUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.TestJDBCUser" />
+      <option name="METHOD_NAME" value="TestDeleteUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Project" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.loginGui" />
+      <item itemvalue="JUnit.TestJDBCUser" />
+      <item itemvalue="JUnit.TestJDBCUser.TestDeleteUser" />
+      <item itemvalue="JUnit.TestJDBCUser.TestAddUser" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.adding" />
-        <item itemvalue="Application.Main (1)" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.TestJDBCUser" />
+        <item itemvalue="JUnit.TestJDBCUser.TestDeleteUser" />
+        <item itemvalue="JUnit.TestJDBCUser.TestAddUser" />
         <item itemvalue="Application.loginGui" />
-        <item itemvalue="Application.userList" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -180,14 +210,49 @@
       <option name="project" value="LOCAL" />
       <updated>1621139296416</updated>
     </task>
-    <task id="LOCAL-00003" summary="ignore this">
-      <created>1622178115103</created>
+    <task id="LOCAL-00003" summary="server.props created and implemented, Asset type table fully complete, minor alterations to Organisation table.">
+      <created>1622027557565</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1622178115103</updated>
+      <updated>1622027557565</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="we are now able to add and remove credits and quantity of assets in an organisation">
+      <created>1622034311664</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1622034311664</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update password for user">
+      <created>1622076647306</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1622076647306</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Organisation Server side implemented">
+      <created>1622255613971</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1622255613971</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Hashing finally done">
+      <created>1622455895512</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1622455895512</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Unit Testing for JDBCUserDataSource started just need to test exceptions">
+      <created>1622538572907</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1622538572907</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -208,7 +273,17 @@
     <MESSAGE value="Switched to MariaDB, User table complete, with methods to use with GUI." />
     <MESSAGE value="Organisational unit sql done, created foreign keys." />
     <MESSAGE value="Changed to sqlite, Server create for asset types and client side impimented." />
-    <MESSAGE value="ignore this" />
-    <option name="LAST_COMMIT_MESSAGE" value="ignore this" />
+    <MESSAGE value="server.props created and implemented, Asset type table fully complete, minor alterations to Organisation table." />
+    <MESSAGE value="we are now able to add and remove credits and quantity of assets in an organisation" />
+    <MESSAGE value="update password for user" />
+    <MESSAGE value="Organisation Server side implemented" />
+    <MESSAGE value="Hashing finally done" />
+    <MESSAGE value="Unit Testing for JDBCUserDataSource started just need to test exceptions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Unit Testing for JDBCUserDataSource started just need to test exceptions" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Project$TestJDBCUser.ic" NAME="TestJDBCUser Coverage Results" MODIFIED="1622538349921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.*</FILTER>
+    </SUITE>
   </component>
 </project>

@@ -1,5 +1,7 @@
 package common;
 
+import java.io.Serializable;
+
 /**
  * This class initialises an Organisation and there assets
  *
@@ -7,7 +9,8 @@ package common;
  * @author Laku Jackson
  */
 
-public class Organisation {
+public class Organisation implements Serializable {
+    private static final long serialVersionUID = 20L;
     public String name;
     public int credits = 0;
     public String assets;

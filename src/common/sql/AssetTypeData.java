@@ -29,7 +29,7 @@ public class AssetTypeData {
         listModel = new DefaultListModel();
         assetTypeData = new JDBCAssetTypeDataSource();
 
-        for (String name : assetTypeData.nameSet()) {
+        for (String name : assetTypeData.AssetNameSet()) {
             listModel.addElement(name);
         }
     }
@@ -75,6 +75,6 @@ public class AssetTypeData {
      * @return the number of names in the user table.
      */
     public int getSize() {
-        return assetTypeData.getSize();
+        return assetTypeData.getAssetSize();
     }
 }
