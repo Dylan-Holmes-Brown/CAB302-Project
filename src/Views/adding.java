@@ -1,18 +1,25 @@
 package Views;
 
+import common.User;
+
 import javax.swing.*;
+
 import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
 
-public class adding extends JFrame {
+public class adding extends JFrame implements ActionListener {
     private static JLabel userLabel;
     private static JTextField userText;
     private static JLabel passLabel;
     private static JPasswordField passText;
     private static JButton button;
     private static JLabel success;
+
+    private static Connection con;
 
     public adding() {
         JLabel label = new JLabel();
@@ -50,6 +57,7 @@ public class adding extends JFrame {
 
         JButton button = new JButton("Create User");
         button.setBounds(140,210,150, 20);
+        button.addActionListener(this);
         panel.add(button);
 
         JRadioButton userButton = new JRadioButton("User");
@@ -64,6 +72,8 @@ public class adding extends JFrame {
         panel.add(adminButton);
 
 
+
+
         frame.getContentPane().add(panel);
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -71,9 +81,38 @@ public class adding extends JFrame {
         frame.setVisible(true);
     }
 
+
+
+
+
+//    private void newUser() throws SQLException {
+//        if (firstname.getText() != null ){
+//            User p = new User(firstname.getText(), lastname.getText(), username
+//                    .getText(), team.getText());
+//            System.out.println("new user created " + p.firstName);
+//            firstname.setText("");
+//            lastname.setText("");
+//            username.setText("");
+//            team.setText("");
+//
+//            DBConnect.addUser(connection,p);
+//
+//        }
+//
+//    }
+
     // create one Frame
     public static void main(String[] args) {
         new adding();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        //verify user inputs
+        //get response from server
+        //add new user to database
+        //later on hash the password as well
     }
 }
 

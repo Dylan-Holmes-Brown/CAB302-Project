@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Changed to sqlite, Server create for asset types and client side impemented">
-      <change afterPath="$PROJECT_DIR$/src/Views/addingUserList.java" afterDir="false" />
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="ignore this">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/adding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/adding.java" afterDir="false" />
     </list>
@@ -61,7 +60,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../cab302-enterprisebillboard" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -73,7 +72,7 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main (1)">
+  <component name="RunManager" selected="Application.adding">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="Assignment" />
@@ -150,9 +149,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.adding" />
         <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.adding" />
         <item itemvalue="Application.loginGui" />
         <item itemvalue="Application.userList" />
       </list>
@@ -181,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621139296416</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ignore this">
+      <created>1622178115103</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1622178115103</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -202,6 +208,7 @@
     <MESSAGE value="Switched to MariaDB, User table complete, with methods to use with GUI." />
     <MESSAGE value="Organisational unit sql done, created foreign keys." />
     <MESSAGE value="Changed to sqlite, Server create for asset types and client side impimented." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed to sqlite, Server create for asset types and client side impimented." />
+    <MESSAGE value="ignore this" />
+    <option name="LAST_COMMIT_MESSAGE" value="ignore this" />
   </component>
 </project>
