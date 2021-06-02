@@ -111,7 +111,6 @@ public class adding extends JFrame {
                 .addComponent(passLabel).addComponent(passField));
         layout.setVerticalGroup(vGroup);
         return userPanel;
-
     }
 
     /**

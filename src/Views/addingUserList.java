@@ -1,160 +1,379 @@
 package Views;
 
+import client.NetworkDataSource;
+import common.HashPassword;
+import common.User;
+import common.sql.UserData;
+
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.Serializable;
 
 
 public class addingUserList extends JFrame implements Serializable {
 
     private static final long serialVersionUID = 62L;
+    private JList userList;
+    private JLabel userLabel;
+    private JTextField userField;
+    private JLabel passLabel;
+    private JTextField passField;
 
-    public addingUserList() {
+    private JTable tableArea;
+    DefaultTableModel tableSetup;
 
-        // create JFrame and JTable
-        JFrame frame = new JFrame();
-        JTable tableArea = new JTable();
+    Object[] columns = {"Username","Password", "Account Type","Organisation"};
+    Object[] rows = new Object[4];
 
-        Object[] columns = {"First Name","Last Name", "Organisation","Password"};
-        DefaultTableModel tableSetup = new DefaultTableModel();
-        tableSetup.setColumnIdentifiers(columns);
 
-        // set the model to the table
-        tableArea.setModel(tableSetup);
+    private JRadioButton memberButton;
+    private JRadioButton adminButton;
+    private ButtonGroup radioGroup;
+    private JButton createButton;
+    private JButton deleteButton;
 
-        JLabel userNameLabel = new JLabel("Name");
-        userNameLabel.setBounds(240,250,80,25);
-        frame.add(userNameLabel);
+    UserData data;
 
-        JTextField textFirstName = new JTextField();
-        textFirstName.setBounds(350, 250, 120, 25);
-        frame.add(textFirstName);
+    /**
+     * Constructor sets up UI, adds button listeners and displays
+     *
+     * @param data the user data from the database
+     */
+    public addingUserList(UserData data) {
+        this.data = data;
+        initUI();
+        checkListSize();
 
-        JLabel userLabel = new JLabel("Username");
-        userLabel.setBounds(240,280,80,25);
-        frame.add(userLabel);
+        // Add listeners to components
+        addButtonListeners(new ButtonListener());
+        addNameListListener(new NameListListener());
+        addClosingListener(new ClosingListener());
 
-        JTextField textUserName = new JTextField();
-        textUserName.setBounds(350, 280, 120, 25);
-        frame.add(textUserName);
+//        tableArea.addMouseListener(new MouseAdapter(){
+//
+//        @Override
+//        public void mouseClicked(MouseEvent e){
+//
+//            int i = tableArea.getSelectedRow();
+//
+//            userField.setText(tableSetup.getValueAt(i, 0).toString());
+//            passField.setText(tableSetup.getValueAt(i, 1).toString());
+//            String accountType = tableSetup.getValueAt(i, 2).toString();
+//            if (accountType == "Member") {
+//                System.out.println(accountType);
+//                memberButton.setSelected(true);
+//            }
+//            else if (accountType == "Admin") {
+//                adminButton.setSelected(true);
+//            }
+//            tableSetup.getValueAt(i, 3).toString();
+//        }
+//    });
 
-        JLabel orgLabel = new JLabel("Organisation");
-        orgLabel.setBounds(240,310,80,25);
-        frame.add(orgLabel);
+        // decorate the frame and make it visible
+        setTitle("Create User");
+        setMinimumSize(new Dimension(400, 300));
+        setLocationRelativeTo(null);
+        pack();
+        setVisible(true);
+    }
 
-        JTextField textOrganisation = new JTextField();
-        textOrganisation.setBounds(350, 310, 120, 25);
-        frame.add(textOrganisation);
+    /**
+     * Initialises the UI placing the panels in a box layout with vertical
+     * alignment spacing each panel.
+     */
+    private void initUI() {
+        Container contentPane = this.getContentPane();
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
-        JLabel passLabel = new JLabel("Password");
-        passLabel.setBounds(240,340,80,25);
-        frame.add(passLabel);
+        contentPane.add(Box.createVerticalStrut(20));
+        contentPane.add(makeNameListPane());
+        contentPane.add(Box.createVerticalStrut(20));
+        contentPane.add(makeUserFieldPanel());
+        contentPane.add(Box.createVerticalStrut(5));
+        contentPane.add(makeRadioPanel());
+        contentPane.add(Box.createVerticalStrut(20));
+        contentPane.add(makeButtonsPanel());
+        contentPane.add(Box.createVerticalStrut(20));
+    }
 
-        JTextField textPassword = new JTextField();
-        textPassword.setBounds(350, 340, 120, 25);
-        frame.add(textPassword);
+    private JScrollPane makeNameListPane() {
+        userList = new JList(data.getModel());
+        //ListModel model = data.getModel();
+        userList.setFixedCellWidth(200);
 
-        // create JButtons
-        JButton buttonAdd = new JButton("Add");
-        buttonAdd.setBounds(500, 250, 100, 25);
-        frame.add(buttonAdd);
+        JScrollPane scroller = new JScrollPane(userList);
+        scroller.setViewportView(userList);
+        scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroller.setMinimumSize(new Dimension(200, 150));
+        scroller.setPreferredSize(new Dimension(250, 150));
+        scroller.setMaximumSize(new Dimension(250, 200));
 
-        JButton buttonDelete = new JButton("Delete");
-        buttonDelete.setBounds(500, 310, 100, 25);
-        frame.add(buttonDelete);
 
-        JButton buttonUpdate = new JButton("Update");
-        buttonUpdate.setBounds(500, 280, 100, 25);
-        frame.add(buttonUpdate);
+//        tableArea = new JTable();
+//        tableSetup = new DefaultTableModel();
+//
+//        for (int i = 0; i < data.getSize(); i++)
+//        {
+//            User u = data.get(model.getElementAt(i));
+//
+//            rows[0] = userList;
+//            rows[1] = u.getPassword();
+//            rows[2] = u.getAccountType();
+//            rows[3] = u.getOrganisationalUnit();
+//
+//        }
+//
+//        tableSetup.setColumnIdentifiers(columns);
+//
+//        // set the model to the table
+//        tableArea.setModel(tableSetup);
+//
+//        JScrollPane scroller = new JScrollPane(tableArea);
+//        scroller.setViewportView(tableArea);
+//        scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+//        scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//        scroller.setMinimumSize(new Dimension(400, 150));
+//        scroller.setPreferredSize(new Dimension(400, 150));
+//        scroller.setMaximumSize(new Dimension(880, 200));
+//
+//
+//        tableSetup.addRow(rows);
+        return scroller;
+    }
 
-        // create JScrollPane
-        JScrollPane panel = new JScrollPane(tableArea);
-        panel.setBounds(50, 20, 880, 200);
+    /**
+     * Makes a JPanel containing the username and password fields to be
+     * recorded.
+     *
+     * @return a panel containing the user fields
+     */
+    private JPanel makeUserFieldPanel() {
+        JPanel userPanel = new JPanel();
+        GroupLayout layout = new GroupLayout(userPanel);
+        userPanel.setLayout(layout);
 
-        frame.setLayout(null);
-        frame.add(panel);
+        // Enable auto gaps between each line
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
 
-        Object[] rows = new Object[4];
+        // Label of fields
+        userLabel = new JLabel("Username");
+        passLabel = new JLabel("Password");
 
-        buttonAdd.addActionListener(new ActionListener(){
+        // Text Fields
+        userField = new JTextField(30);
+        userField.setPreferredSize(new Dimension(30, 20));
+        passField = new JTextField(30);
+        passField.setPreferredSize(new Dimension(30, 20));
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                rows[0] = textFirstName.getText();
-                rows[1] = textUserName.getText();
-                rows[2] = textOrganisation.getText();
-                rows[3] = textPassword.getText();
+        // Create a sequential group for the horizontal axis
+        GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
 
-                tableSetup.addRow(rows);
-            }
-        });
+        // Two parallel groups 1. contains labels and the other the fields
+        hGroup.addGroup(layout.createParallelGroup().addComponent(userLabel).addComponent(passLabel));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(userField).addComponent(passField));
+        layout.setHorizontalGroup(hGroup);
 
-        buttonDelete.addActionListener(new ActionListener(){
+        // Create a sequential group for the vertical axis
+        GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(userLabel).addComponent(userField));
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(passLabel).addComponent(passField));
+        layout.setVerticalGroup(vGroup);
+        return userPanel;
+    }
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+    /**
+     * Make the two radio dials for account type fields
+     *
+     * @return a panel containing the account type fields
+     */
+    private Component makeRadioPanel() {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
-                // i = the index of the selected row
-                int i = tableArea.getSelectedRow();
-                if(i >= 0){
-                    // remove a row from jtable
-                    tableSetup.removeRow(i);
-                }
-                else{
-                    System.out.println("Error when deleting");
-                }
-            }
-        });
+        // Label Buttons
+        memberButton = new JRadioButton("Member");
+        adminButton = new JRadioButton("Admin");
+        radioGroup = new ButtonGroup();
 
-        tableArea.addMouseListener(new MouseAdapter(){
+        // Create and space Buttons
+        buttonPanel.add(Box.createHorizontalStrut(30));
+        buttonPanel.add(memberButton);
+        buttonPanel.add(Box.createHorizontalStrut(30));
+        buttonPanel.add(adminButton);
 
-            @Override
-            public void mouseClicked(MouseEvent e){
+        radioGroup.add(memberButton);
+        radioGroup.add(adminButton);
 
-                int i = tableArea.getSelectedRow();
+        return buttonPanel;
+    }
 
-                textFirstName.setText(tableSetup.getValueAt(i, 0).toString());
-                textUserName.setText(tableSetup.getValueAt(i, 1).toString());
-                textOrganisation.setText(tableSetup.getValueAt(i, 2).toString());
-                textPassword.setText(tableSetup.getValueAt(i, 3).toString());
-            }
-        });
+    /**
+     * Adds the buttons to the panel
+     *
+     * @return a panel containing the create user button
+     */
+    private JPanel makeButtonsPanel() {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        createButton = new JButton("Create");
+        deleteButton = new JButton("Delete");
+        buttonPanel.add(Box.createHorizontalStrut(50));
+        buttonPanel.add(createButton);
+        buttonPanel.add(Box.createHorizontalStrut(50));
+        buttonPanel.add(deleteButton);
+        buttonPanel.add(Box.createHorizontalStrut(50));
+        return buttonPanel;
+    }
 
-        buttonUpdate.addActionListener(new ActionListener(){
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                int i = tableArea.getSelectedRow();
-
-                if(i >= 0)
-                {
-                    tableSetup.setValueAt(textFirstName.getText(), i, 0);
-                    tableSetup.setValueAt(textUserName.getText(), i, 1);
-                    tableSetup.setValueAt(textOrganisation.getText(), i, 2);
-                    tableSetup.setValueAt(textPassword.getText(), i, 3);
-                }
-                else{
-                    System.out.println("Error when Updating");
-                }
-            }
-        });
-
-        frame.setSize(1000,450);
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+    private void clearFields() {
+        userField.setText("");
+        passField.setText("");
+        radioGroup.clearSelection();
 
     }
+
+    /**
+     * Checks the size of the user table determining the state of the delete button
+     */
+    private void checkListSize() {
+        deleteButton.setEnabled(data.getSize() != 0);
+    }
+
+    /**
+     * Display the user details in the fields
+     * @param user
+     */
+    private void display(User user) {
+        if (user != null) {
+            //TODO: Set radio button active depending on user
+            userField.setText(user.getUsername());
+            passField.setText(user.getPassword());
+        }
+    }
+
+    private void addButtonListeners(ActionListener listener) {
+        createButton.addActionListener(listener);
+        deleteButton.addActionListener(listener);
+    }
+
+    private void addNameListListener(ListSelectionListener listener) {
+        userList.addListSelectionListener(listener);
+    }
+
+    private void addClosingListener(WindowListener listener) {
+        addWindowListener(listener);
+    }
+
     public static void main(String[] args) {
 
-        new addingUserList();
+        new addingUserList(new UserData(new NetworkDataSource()));
     }
 
+    /**
+     * Handles events for the buttons on the UI
+     *
+     * @author Dylan
+     */
+    private class ButtonListener implements ActionListener {
+        /**
+         * @see ActionListener#actionPerformed(ActionEvent)
+         */
+        public void actionPerformed(ActionEvent e) {
+            JButton source = (JButton) e.getSource();
+            if (source == createButton) {
+                createPressed();
+            }
+            else if (source == deleteButton) {
+                deletePressed();
+            }
+        }
+
+        /**
+         * When the create user button is pressed, add the user information to the database
+         * or display error
+         */
+        private void createPressed() {
+            String accountType = "Member";
+            String org = "Amazon";
+
+            // If all fields are filled in continue
+            if (userField.getText() != null && !userField.getText().equals("")
+                    && !passField.equals("") && (memberButton.isSelected() || adminButton.isSelected())) {
+
+                // Depending on radio button selected choose account type
+                if (memberButton.isSelected()) {
+                    accountType = "Member";
+                }
+                else if (adminButton.isSelected()) {
+                    accountType = "Admin";
+                }
+
+                // Add user to database and clear fields
+                User u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getText())), accountType, org);
+                data.add(u);
+                clearFields();
+                JOptionPane.showMessageDialog(null, String.format("User '%s' successfully added", u.getUsername()));
+            }
+
+            // Not all fields are filled in
+            else {
+                JOptionPane.showMessageDialog(new JFrame(), "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
+            }
+            checkListSize();
+        }
+
+        private void deletePressed() {
+            int index = userList.getSelectedIndex();
+            String username = userField.getText();
+            data.remove(userList.getSelectedValue());
+            clearFields();
+            index--;
+            if (index == -1) {
+                if (data.getSize() != 0) {
+                    index = 0;
+                }
+            }
+            userList.setSelectedIndex(index);
+            checkListSize();
+            JOptionPane.showMessageDialog(null, String.format("User '%s' successfully deleted", username));
+        }
+    }
+
+    private class NameListListener implements ListSelectionListener {
+
+        /**
+         * @see ListSelectionListener#valueChanged(ListSelectionEvent)
+         */
+        public void valueChanged(ListSelectionEvent e) {
+            if (userList.getSelectedValue() != null
+                    && !userList.getSelectedValue().equals("")) {
+                display(data.get(userList.getSelectedValue()));
+            }
+        }
+    }
+
+    /**
+     * Implements the windowClosing method from WindowAdapter to persist the contents of the
+     * user table
+     */
+    private class ClosingListener extends WindowAdapter {
+        /**
+         * @see WindowAdapter#windowClosing(WindowEvent)
+         */
+        public void windowClosing(WindowEvent e) {
+            data.persist();
+            System.exit(0);
+        }
+    }
 }
 
 
