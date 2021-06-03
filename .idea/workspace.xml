@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Minor fixes to TestUserData">
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="adding implemented just needs org unit selection">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/adding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/adding.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/addingUserList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingUserList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/OrganisationData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/OrganisationData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +61,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../prac08-with-threads" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -168,11 +168,11 @@
     </configuration>
     <list>
       <item itemvalue="Application.Project" />
-      <item itemvalue="JUnit.TestJDBCUser" />
-      <item itemvalue="JUnit.TestJDBCUser.TestDeleteUser" />
       <item itemvalue="Application.Main (1)" />
       <item itemvalue="Application.addingUserList" />
       <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.TestJDBCUser" />
+      <item itemvalue="JUnit.TestJDBCUser.TestDeleteUser" />
     </list>
     <recent_temporary>
       <list>
@@ -256,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622539317148</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="adding implemented just needs org unit selection">
+      <created>1622644679059</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1622644679059</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -284,7 +291,8 @@
     <MESSAGE value="Hashing finally done" />
     <MESSAGE value="Unit Testing for JDBCUserDataSource started just need to test exceptions" />
     <MESSAGE value="Minor fixes to TestUserData" />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor fixes to TestUserData" />
+    <MESSAGE value="adding implemented just needs org unit selection" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding implemented just needs org unit selection" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestJDBCUser.ic" NAME="TestJDBCUser Coverage Results" MODIFIED="1622538349921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
