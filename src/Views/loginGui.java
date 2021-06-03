@@ -159,13 +159,11 @@ public class loginGui extends JFrame implements Serializable {
         }
 
         /**
-         * When the create user button is pressed, add the user information to the database
+         * When the login button is pressed, check if the credentials match, if not
          * or display error
          */
         private void createPressed() {
-            String accountType = "Member";
-            String password = "1234";
-            String org = "Amazon";
+            String accountType = "";
 
             // If all fields are filled in continue
             if (userField.getText() != null && !userField.getText().equals("")
@@ -180,9 +178,12 @@ public class loginGui extends JFrame implements Serializable {
                 }
 
                 // ver
-//                User u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getPassword())), accountType, org);
-//                if (u)
-
+                User u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getPassword())), accountType);
+                if (data.equals(u)){
+                    System.out.println("success");
+                } else {
+                    System.out.println("fdh;mvjhv");
+                }
 
             }
 
