@@ -23,12 +23,19 @@ public class User extends Object implements Serializable {
 
     }
 
-    //User Constructor
+    //Member User Constructor
     public User(String username, String password, String accountType, String org){
         this.username = username;
         this.password = password;
         this.accountType = accountType;
         this.org = org;
+    }
+
+    // Admin User Constructor
+    public User(String username, String password, String accountType){
+        this.username = username;
+        this.password = password;
+        this.accountType = accountType;
     }
 
     /**
