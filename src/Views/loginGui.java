@@ -169,7 +169,7 @@ public class loginGui extends JFrame implements Serializable {
             if (userField.getText() != null && !userField.getText().equals("")
                     && !passField.equals("") && (memberButton.isSelected() || adminButton.isSelected())) {
 
-                // Depending on radio button selected choose account type
+//                // Depending on radio button selected choose account type
                 if (memberButton.isSelected()) {
                     accountType = "Member";
                 }
@@ -178,11 +178,13 @@ public class loginGui extends JFrame implements Serializable {
                 }
 
                 // ver
+                User match = data.get(userField.getText());
                 User u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getPassword())), accountType);
-                if (data.equals(u)){
-                    System.out.println("success");
-                } else {
-                    System.out.println("fdh;mvjhv");
+                if (match.getUsername().equals(u.getUsername())){
+                    JOptionPane.showMessageDialog(null, "Success");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Fail");
                 }
 
             }
