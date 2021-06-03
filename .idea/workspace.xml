@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="adding implemented just needs org unit selection">
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="organisation selection added to create user, Chore: make admin not have org">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/addingUserList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingUserList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/loginGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/loginGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/JDBCUserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCUserDataSource.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +75,7 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.loginGui">
+  <component name="RunManager" selected="Application.addingUserList">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.Main" />
       <module name="Assignment" />
@@ -172,10 +175,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.loginGui" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.addingUserList" />
+        <item itemvalue="Application.loginGui" />
+        <item itemvalue="Application.Main (1)" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.TestJDBCUser" />
       </list>
     </recent_temporary>
@@ -259,7 +262,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622644679059</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="organisation selection added to create user, Chore: make admin not have org">
+      <created>1622689849286</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1622689849286</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -288,7 +298,8 @@
     <MESSAGE value="Unit Testing for JDBCUserDataSource started just need to test exceptions" />
     <MESSAGE value="Minor fixes to TestUserData" />
     <MESSAGE value="adding implemented just needs org unit selection" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding implemented just needs org unit selection" />
+    <MESSAGE value="organisation selection added to create user, Chore: make admin not have org" />
+    <option name="LAST_COMMIT_MESSAGE" value="organisation selection added to create user, Chore: make admin not have org" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestJDBCUser.ic" NAME="TestJDBCUser Coverage Results" MODIFIED="1622538349921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

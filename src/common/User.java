@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author Laku Jackson
  */
 
-public class User extends Object implements Comparable<User>, Serializable {
+public class User extends Object implements Serializable {
 
     //may change these to private variables in future
     private static final long serialVersionUID = 10L;
@@ -23,7 +23,7 @@ public class User extends Object implements Comparable<User>, Serializable {
 
     }
 
-    //User Constructor for creation
+    //Member User Constructor
     public User(String username, String password, String accountType, String org){
         this.username = username;
         this.password = password;
@@ -31,7 +31,7 @@ public class User extends Object implements Comparable<User>, Serializable {
         this.org = org;
     }
 
-    //User Constructor for login
+    // Admin User Constructor
     public User(String username, String password, String accountType){
         this.username = username;
         this.password = password;
@@ -58,6 +58,11 @@ public class User extends Object implements Comparable<User>, Serializable {
      */
     public void setPassword(String password) { this.password = password; }
 
+//    /**
+//     * @param password the password is hashed and set
+//     */
+//    public void setHashedPassword(String password) { this.password = HashPassword.toHex(HashPassword.getHashSHA512(password)); }
+
     /**
      * @return the accountType
      */
@@ -82,8 +87,4 @@ public class User extends Object implements Comparable<User>, Serializable {
      * @see Object#toString()
      */
     public String toString() { return username + ", " + password + ", " + accountType + ", " + org; }
-
-    public int compareTo(User other) {
-        return this.username.compareTo(other.username);
-    }
 }

@@ -20,7 +20,7 @@ public class JDBCUserDataSource implements UserDataSource {
                     + "username VARCHAR(30) PRIMARY KEY NOT NULL UNIQUE,"
                     + "password VARCHAR(30) NOT NULL,"
                     + "accountType VARCHAR(20) NOT NULL CHECK(accountType IN ('Admin', 'Member')),"
-                    + "organisationalUnit VARCHAR(10) NOT NULL,"
+                    + "organisationalUnit VARCHAR(10),"
                     + "CONSTRAINT FK_Org FOREIGN KEY (organisationalUnit) REFERENCES organisational_unit(name)"
                     + ");";
 

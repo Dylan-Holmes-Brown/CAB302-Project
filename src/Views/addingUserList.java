@@ -58,6 +58,7 @@ public class addingUserList extends JFrame implements Serializable {
         checkListSize();
 
         // Add listeners to components
+        addRadioListeners(new RadioListener());
         addButtonListeners(new ButtonListener());
         addNameListListener(new NameListListener());
         addClosingListener(new ClosingListener());
@@ -264,6 +265,11 @@ public class addingUserList extends JFrame implements Serializable {
         }
     }
 
+    private void addRadioListeners(ActionListener listener) {
+        memberButton.addActionListener(listener);
+        adminButton.addActionListener(listener);
+    }
+
     private void addButtonListeners(ActionListener listener) {
         createButton.addActionListener(listener);
         deleteButton.addActionListener(listener);
@@ -282,6 +288,21 @@ public class addingUserList extends JFrame implements Serializable {
         new addingUserList(new UserData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
     }
 
+
+    private class RadioListener implements ActionListener {
+        /**
+         * @see ActionListener#actionPerformed(ActionEvent)
+         */
+        public void actionPerformed(ActionEvent e) {
+            JRadioButton source = (JRadioButton) e.getSource();
+            if (source == memberButton) {
+                comboBox.setEnabled(true);
+            }
+            else if (source == adminButton) {
+                comboBox.setEnabled(false);
+            }
+        }
+    }
     /**
      * Handles events for the buttons on the UI
      *
@@ -306,24 +327,24 @@ public class addingUserList extends JFrame implements Serializable {
          * or display error
          */
         private void createPressed() {
+            User u = new User();
             String accountType = "Member";
-            String org = "Amazon";
+            String selectedOrg = String.valueOf(comboBox.getSelectedItem());
 
             // If all fields are filled in continue
             if (userField.getText() != null && !userField.getText().equals("")
                     && !passField.equals("") && (memberButton.isSelected() || adminButton.isSelected())) {
-
                 // Depending on radio button selected choose account type
                 if (memberButton.isSelected()) {
                     accountType = "Member";
+                    u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getText())), accountType, selectedOrg);
                 }
                 else if (adminButton.isSelected()) {
                     accountType = "Admin";
+                    u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getText())), accountType);
                 }
-                String selectedOrg = String.valueOf(comboBox.getSelectedItem());
 
                 // Add user to database and clear fields
-                User u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getText())), accountType, selectedOrg);
                 userData.add(u);
                 clearFields();
                 JOptionPane.showMessageDialog(null, String.format("User '%s' successfully added", u.getUsername()));
