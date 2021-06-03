@@ -21,9 +21,9 @@ public class OrganisationData {
      * application.
      *
      */
-    public OrganisationData() {
+    public OrganisationData(OrganisationDataSource dataSource) {
         listModel = new DefaultListModel();
-        orgData = new JDBCOrganisationDataSource();
+        orgData = dataSource;
 
         for (String name : orgData.OrgNameSet()){
             listModel.addElement(name);

@@ -3,6 +3,7 @@ package Views;
 import client.NetworkDataSource;
 import common.HashPassword;
 import common.User;
+import common.sql.OrganisationData;
 import common.sql.UserData;
 
 import javax.swing.*;
@@ -18,14 +19,18 @@ public class addingUserList extends JFrame implements Serializable {
 
     private static final long serialVersionUID = 62L;
     private JList userList;
+    private JComboBox comboBox;
+
     private JLabel userLabel;
     private JTextField userField;
     private JLabel passLabel;
     private JTextField passField;
+    private JLabel orgLabel;
 
     private JTable tableArea;
     DefaultTableModel tableSetup;
 
+    Object[] array;
     Object[] columns = {"Username","Password", "Account Type","Organisation"};
     Object[] rows = new Object[4];
 
@@ -36,15 +41,19 @@ public class addingUserList extends JFrame implements Serializable {
     private JButton createButton;
     private JButton deleteButton;
 
-    UserData data;
+    UserData userData;
+    OrganisationData orgData;
 
     /**
      * Constructor sets up UI, adds button listeners and displays
      *
-     * @param data the user data from the database
+     * @param userData the user data from the database
      */
-    public addingUserList(UserData data) {
-        this.data = data;
+    public addingUserList(UserData userData, OrganisationData orgData) {
+        this.userData = userData;
+        this.orgData = orgData;
+        array = new String[orgData.getSize()];
+
         initUI();
         checkListSize();
 
@@ -95,6 +104,8 @@ public class addingUserList extends JFrame implements Serializable {
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeUserFieldPanel());
         contentPane.add(Box.createVerticalStrut(5));
+        contentPane.add(makeDropDownPanel());
+        contentPane.add(Box.createVerticalStrut(10));
         contentPane.add(makeRadioPanel());
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeButtonsPanel());
@@ -102,7 +113,7 @@ public class addingUserList extends JFrame implements Serializable {
     }
 
     private JScrollPane makeNameListPane() {
-        userList = new JList(data.getModel());
+        userList = new JList(userData.getModel());
         //ListModel model = data.getModel();
         userList.setFixedCellWidth(200);
 
@@ -114,37 +125,23 @@ public class addingUserList extends JFrame implements Serializable {
         scroller.setPreferredSize(new Dimension(250, 150));
         scroller.setMaximumSize(new Dimension(250, 200));
 
-
-//        tableArea = new JTable();
-//        tableSetup = new DefaultTableModel();
-//
-//        for (int i = 0; i < data.getSize(); i++)
-//        {
-//            User u = data.get(model.getElementAt(i));
-//
-//            rows[0] = userList;
-//            rows[1] = u.getPassword();
-//            rows[2] = u.getAccountType();
-//            rows[3] = u.getOrganisationalUnit();
-//
-//        }
-//
-//        tableSetup.setColumnIdentifiers(columns);
-//
-//        // set the model to the table
-//        tableArea.setModel(tableSetup);
-//
-//        JScrollPane scroller = new JScrollPane(tableArea);
-//        scroller.setViewportView(tableArea);
-//        scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//        scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-//        scroller.setMinimumSize(new Dimension(400, 150));
-//        scroller.setPreferredSize(new Dimension(400, 150));
-//        scroller.setMaximumSize(new Dimension(880, 200));
-//
-//
-//        tableSetup.addRow(rows);
         return scroller;
+    }
+
+    private JPanel makeDropDownPanel() {
+        ListModel model = orgData.getModel();
+        for (int i = 0; i < orgData.getSize(); i++) {
+            array[i] = model.getElementAt(i).toString();
+
+        }
+        comboBox = new JComboBox(array);
+        comboBox.setBackground(Color.white);
+        JPanel panel = new JPanel();
+        orgLabel = new JLabel("Organisation");
+        panel.add(orgLabel);
+        panel.add(comboBox);
+
+        return panel;
     }
 
     /**
@@ -195,7 +192,7 @@ public class addingUserList extends JFrame implements Serializable {
      *
      * @return a panel containing the account type fields
      */
-    private Component makeRadioPanel() {
+    private JPanel makeRadioPanel() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
@@ -245,7 +242,8 @@ public class addingUserList extends JFrame implements Serializable {
      * Checks the size of the user table determining the state of the delete button
      */
     private void checkListSize() {
-        deleteButton.setEnabled(data.getSize() != 0);
+
+        deleteButton.setEnabled(userData.getSize() != 0);
     }
 
     /**
@@ -254,9 +252,15 @@ public class addingUserList extends JFrame implements Serializable {
      */
     private void display(User user) {
         if (user != null) {
-            //TODO: Set radio button active depending on user
             userField.setText(user.getUsername());
             passField.setText(user.getPassword());
+            if (user.getAccountType().contains("Member")) {
+                memberButton.setSelected(true);
+            }
+            else {
+                adminButton.setSelected(true);
+            }
+            comboBox.setSelectedItem(user.getOrganisationalUnit());
         }
     }
 
@@ -275,7 +279,7 @@ public class addingUserList extends JFrame implements Serializable {
 
     public static void main(String[] args) {
 
-        new addingUserList(new UserData(new NetworkDataSource()));
+        new addingUserList(new UserData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
     }
 
     /**
@@ -316,10 +320,11 @@ public class addingUserList extends JFrame implements Serializable {
                 else if (adminButton.isSelected()) {
                     accountType = "Admin";
                 }
+                String selectedOrg = String.valueOf(comboBox.getSelectedItem());
 
                 // Add user to database and clear fields
-                User u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getText())), accountType, org);
-                data.add(u);
+                User u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getText())), accountType, selectedOrg);
+                userData.add(u);
                 clearFields();
                 JOptionPane.showMessageDialog(null, String.format("User '%s' successfully added", u.getUsername()));
             }
@@ -334,11 +339,11 @@ public class addingUserList extends JFrame implements Serializable {
         private void deletePressed() {
             int index = userList.getSelectedIndex();
             String username = userField.getText();
-            data.remove(userList.getSelectedValue());
+            userData.remove(userList.getSelectedValue());
             clearFields();
             index--;
             if (index == -1) {
-                if (data.getSize() != 0) {
+                if (userData.getSize() != 0) {
                     index = 0;
                 }
             }
@@ -356,7 +361,7 @@ public class addingUserList extends JFrame implements Serializable {
         public void valueChanged(ListSelectionEvent e) {
             if (userList.getSelectedValue() != null
                     && !userList.getSelectedValue().equals("")) {
-                display(data.get(userList.getSelectedValue()));
+                display(userData.get(userList.getSelectedValue()));
             }
         }
     }
@@ -370,7 +375,7 @@ public class addingUserList extends JFrame implements Serializable {
          * @see WindowAdapter#windowClosing(WindowEvent)
          */
         public void windowClosing(WindowEvent e) {
-            data.persist();
+            userData.persist();
             System.exit(0);
         }
     }
