@@ -14,6 +14,15 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.Serializable;
 
+/**
+ * Initialises the user interface for the adding UI. Button listeners are included
+ * as sub-classes of this class
+ *
+ * @author Vipin Vijay
+ * @author Dylan Holmes-Brown
+ * @author Laku Jackson
+ */
+
 public class loginGui extends JFrame implements Serializable {
 
     private static final long serialVersionUID = 100L;
@@ -170,7 +179,9 @@ public class loginGui extends JFrame implements Serializable {
                     accountType = "Admin";
                 }
 
-                // verify user exist and fields match
+                // ver
+//                User u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getPassword())), accountType, org);
+//                if (u)
 
 
             }
