@@ -27,12 +27,7 @@ public class addingUserList extends JFrame implements Serializable {
     private JTextField passField;
     private JLabel orgLabel;
 
-    private JTable tableArea;
-    DefaultTableModel tableSetup;
-
     Object[] array;
-    Object[] columns = {"Username","Password", "Account Type","Organisation"};
-    Object[] rows = new Object[4];
 
 
     private JRadioButton memberButton;
@@ -100,16 +95,26 @@ public class addingUserList extends JFrame implements Serializable {
         Container contentPane = this.getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
+        //list of users
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeNameListPane());
+
+        //user inputs
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeUserFieldPanel());
+
+        //dropdown for organisations
         contentPane.add(Box.createVerticalStrut(5));
         contentPane.add(makeDropDownPanel());
+
+        //radio buttons
         contentPane.add(Box.createVerticalStrut(10));
         contentPane.add(makeRadioPanel());
+
+        //buttons
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeButtonsPanel());
+
         contentPane.add(Box.createVerticalStrut(20));
     }
 
@@ -375,7 +380,6 @@ public class addingUserList extends JFrame implements Serializable {
     }
 
     private class NameListListener implements ListSelectionListener {
-
         /**
          * @see ListSelectionListener#valueChanged(ListSelectionEvent)
          */
