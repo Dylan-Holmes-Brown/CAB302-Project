@@ -14,6 +14,15 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.Serializable;
 
+/**
+ * Initialises the user interface for the adding UI. Button listeners are included
+ * as sub-classes of this class
+ *
+ * @author Vipin Vijay
+ * @author Dylan Holmes-Brown
+ * @author Laku Jackson
+ */
+
 public class loginGui extends JFrame implements Serializable {
 
     private static final long serialVersionUID = 100L;
@@ -150,19 +159,17 @@ public class loginGui extends JFrame implements Serializable {
         }
 
         /**
-         * When the create user button is pressed, add the user information to the database
+         * When the login button is pressed, check if the credentials match, if not
          * or display error
          */
         private void createPressed() {
-            String accountType = "Member";
-            String password = "1234";
-            String org = "Amazon";
+            String accountType = "";
 
             // If all fields are filled in continue
             if (userField.getText() != null && !userField.getText().equals("")
                     && !passField.equals("") && (memberButton.isSelected() || adminButton.isSelected())) {
 
-                // Depending on radio button selected choose account type
+//                // Depending on radio button selected choose account type
                 if (memberButton.isSelected()) {
                     accountType = "Member";
                 }
@@ -170,8 +177,15 @@ public class loginGui extends JFrame implements Serializable {
                     accountType = "Admin";
                 }
 
-                // verify user exist and fields match
-
+                // ver
+                User match = data.get(userField.getText());
+                User u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getPassword())), accountType);
+                if (match.getUsername().equals(u.getUsername())){
+                    JOptionPane.showMessageDialog(null, "Success");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Fail");
+                }
 
             }
 

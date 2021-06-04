@@ -1,6 +1,7 @@
 package common.sql;
 
 import common.Organisation;
+import common.User;
 import server.JDBCOrganisationDataSource;
 
 import javax.swing.DefaultListModel;
@@ -21,12 +22,26 @@ public class OrganisationData {
      * application.
      *
      */
-    public OrganisationData() {
+    public OrganisationData(OrganisationDataSource dataSource) {
         listModel = new DefaultListModel();
-        orgData = new JDBCOrganisationDataSource();
+        orgData = dataSource;
 
         for (String name : orgData.OrgNameSet()){
             listModel.addElement(name);
+        }
+    }
+
+    /**
+     * Adds a Organisation to the organisation table
+     *
+     * @param o A Organisation to add to the user table.
+     */
+    public void add(Organisation o) {
+
+        // Check to see if the organisation has already been added
+        if (!listModel.contains(o.getName())) {
+            listModel.addElement(o.getName());
+            orgData.addOrg(o);
         }
     }
 

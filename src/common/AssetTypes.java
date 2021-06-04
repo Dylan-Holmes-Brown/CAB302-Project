@@ -1,5 +1,7 @@
 package common;
 
+import java.io.Serializable;
+
 /**
  * This class initialises Asset Types
  *
@@ -7,7 +9,7 @@ package common;
  */
 
 
-public class AssetTypes {
+public class AssetTypes implements Serializable {
     private static final long serialVersionUID = 30L;
     public String assetType;
     public AssetTypes() {
