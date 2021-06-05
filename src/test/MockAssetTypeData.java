@@ -16,6 +16,9 @@ public class MockAssetTypeData {
         if (!assetList.contains(asset)) {
             assetList.add(asset);
         }
+        else {
+            throw new IllegalArgumentException();
+        }
     }
 
     public AssetType get(Object key) {
