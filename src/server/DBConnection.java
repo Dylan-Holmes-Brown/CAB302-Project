@@ -8,11 +8,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Creates a connection to the database and stores in a singleton instance
+ *
+ * @author Dylan Holmes-Brown
+ */
 public class DBConnection {
 
-   /**
-    * The singleton instance of the database connection.
-    */
+   //The singleton instance of the database connection.
    private static Connection instance = null;
 
    /**
@@ -49,9 +52,11 @@ public class DBConnection {
     * @return a handle to the singleton instance of the UrlSet.
     */
    public static Connection getInstance() {
+      // Set instance to the database connection if it is null
       if (instance == null) {
          new DBConnection();
       }
+      // If instance is not null return the current instance
       return instance;
    }
 }

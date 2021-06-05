@@ -8,14 +8,14 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- *
+ * Class for retrieving data from the user table.
  *
  * @author Dylan Holmes-Brown
  */
 
 public class JDBCUserDataSource implements UserDataSource {
     private Connection connection;
-    public static final String CREATE_TABLE =
+    private static final String CREATE_TABLE =
             "CREATE TABLE IF NOT EXISTS user ("
                     + "username VARCHAR(30) PRIMARY KEY NOT NULL UNIQUE,"
                     + "password VARCHAR(30) NOT NULL,"
@@ -103,7 +103,7 @@ public class JDBCUserDataSource implements UserDataSource {
             getUser.setString(1, username);
             resultSet = getUser.executeQuery();
             resultSet.next();
-            user.setName(resultSet.getString("username"));
+            user.setUsername(resultSet.getString("username"));
             user.setPassword(resultSet.getString("password"));
             user.setAccountType(resultSet.getString("accountType"));
             user.setOrganisationalUnit(resultSet.getString("organisationalUnit"));

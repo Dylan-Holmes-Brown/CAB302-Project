@@ -27,6 +27,4 @@ public class Random {
         java.util.Random random = new java.util.Random();
         return Math.abs(random.nextInt(max));
     }
-
-
 }

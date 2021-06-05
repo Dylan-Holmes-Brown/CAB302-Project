@@ -1,8 +1,4 @@
-package common; /**
- * This class Hash an users password using SHA-256 encryption
- *
- * @author Laku Jackson
- */
+package common;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -11,6 +7,11 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Arrays;
 
+/**
+ * This class Hash an users password using SHA-256 encryption
+ *
+ * @author Laku Jackson
+ */
 public class HashPassword {
 
 

@@ -32,9 +32,9 @@ public class OrganisationData {
     }
 
     /**
-     * Adds a Organisation to the organisation table
+     * Adds an Organisation to the organisational_unit table
      *
-     * @param o A Organisation to add to the user table.
+     * @param o An Organisation to add to the user table.
      */
     public void add(Organisation o) {
 
@@ -49,7 +49,7 @@ public class OrganisationData {
      * Based on the name of the organisation in the organisation table,
      * delete the organisation.
      *
-     * @param key
+     * @param key the name key to delete
      */
     public void remove(Object key) {
         // remove from both list and map
@@ -78,8 +78,9 @@ public class OrganisationData {
     public ListModel getModel() { return listModel; }
 
     /**
+     * Get the number of organisations in the table
      *
-     * @return the number of names in the organisation table.
+     * @return the size of the organisation table.
      */
     public int getSize() { return orgData.getOrgSize(); }
 }

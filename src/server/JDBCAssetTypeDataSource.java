@@ -1,6 +1,6 @@
 package server;
 
-import common.AssetTypes;
+import common.AssetType;
 import common.sql.AssetTypeDataSource;
 
 import java.sql.*;
@@ -55,9 +55,9 @@ public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
     }
 
     /**
-     * @see AssetTypeDataSource#addAssetType(common.AssetTypes)
+     * @see AssetTypeDataSource#addAssetType(AssetType)
      */
-    public void addAssetType(AssetTypes asset) {
+    public void addAssetType(AssetType asset) {
         try {
             addAssetType.setString(1, asset.getAsset());
             addAssetType.execute();
@@ -70,15 +70,15 @@ public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
     /**
      * @see AssetTypeDataSource#getAsset(String)
      */
-    public AssetTypes getAsset(String assetName) {
-        AssetTypes assetTypes = new AssetTypes();
+    public AssetType getAsset(String assetName) {
+        AssetType assetTypes = new AssetType();
         ResultSet resultSet = null;
 
         try {
             getAsset.setString(1, assetName);
             resultSet = getAsset.executeQuery();
             resultSet.next();
-            assetTypes.setName(resultSet.getString("assetType"));
+            assetTypes.setAsset(resultSet.getString("assetType"));
         }
         catch (SQLException sqle) {
             sqle.printStackTrace();
