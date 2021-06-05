@@ -3,7 +3,7 @@ package common;
 import java.io.Serializable;
 
 /**
- * This class initialises an Organisation and there assets
+ * This class initialises an Organisation
  *
  * @author Dylan Holmes-Brown
  * @author Laku Jackson
@@ -34,29 +34,39 @@ public class Organisation implements Serializable {
     }
 
     /**
+     * Get the name of the organisation object.
+     *
      * @return the name
      */
     public String getName() { return name; }
 
     /**
+     * Set the name of the organisation object.
+     *
      * @param name the organisation name to set
      */
     public void setName(String name) { this.name = name; }
 
     /**
+     * Get the credits of the organisation object.
+     *
      * @return the credits
      */
     public int getCredits() { return credits; }
 
     /**
+     *
+     *
      * @param credits the credits to set
      */
     public void setCredits(int credits) { this.credits = credits; }
 
     /**
+     * Get an asset of the organisation object.
+     *
      * @return the assets
      */
-    public String getAssets() { return assets; }
+    public String getAsset() { return assets; }
 
     /**
      * @param assets the assets to set
@@ -64,6 +74,8 @@ public class Organisation implements Serializable {
     public void setAssets(String assets) { this.assets = assets; }
 
     /**
+     * Get the quantity of an asset the organisation object holds.
+     *
      * @return the quantity
      */
     public int getQuantity() { return quantity; }

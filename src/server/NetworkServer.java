@@ -1,6 +1,6 @@
 package server;
 
-import common.AssetTypes;
+import common.AssetType;
 import common.CurrentTrades;
 import common.Organisation;
 import common.User;
@@ -99,7 +99,7 @@ public class NetworkServer {
              */
             case ADD_ASSET: {
                 // Client is sending a new Asset Type
-                final AssetTypes a = (AssetTypes) inputStream.readObject();
+                final AssetType a = (AssetType) inputStream.readObject();
                 synchronized (tableAssetType) {
                     tableAssetType.addAssetType(a);
                 }
@@ -114,7 +114,7 @@ public class NetworkServer {
                 synchronized (tableAssetType) {
                     // Synchronise both the get as well as the send,
                     // therefore half a asset isn't sent
-                    final AssetTypes assetTypes = tableAssetType.getAsset(assetName);
+                    final AssetType assetTypes = tableAssetType.getAsset(assetName);
 
                     // Send the client back the asset type details or null
                     outputStream.writeObject(assetTypes);
@@ -160,7 +160,7 @@ public class NetworkServer {
                     tableOrg.addOrg(org);
                 }
                 System.out.println(String.format("Added Organisation '%s' to database with asset '%s' from the client '%s'.",
-                        org.getName(), org.getAssets(), socket.toString()));
+                        org.getName(), org.getAsset(), socket.toString()));
             }
             break;
 

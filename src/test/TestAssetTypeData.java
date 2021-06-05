@@ -1,9 +1,7 @@
 package test;
 
-import common.AssetTypes;
+import common.AssetType;
 import org.junit.jupiter.api.*;
-
-import javax.swing.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestAssetTypeData {
 
-    private List<AssetTypes> assetList;
+    private List<AssetType> assetList;
     MockAssetTypeData data;
-    AssetTypes asset = new AssetTypes("CPU");
+    AssetType asset = new AssetType("CPU");
 
     @BeforeEach @Test
     public void setupAssetList() {

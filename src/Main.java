@@ -1,7 +1,4 @@
-import common.AssetTypes;
-import common.CurrentTrades;
-import java.sql.Date;
-import common.Organisation;
+import common.AssetType;
 import common.User;
 import server.JDBCCurrentDataSource;
 import server.JDBCUserDataSource;
@@ -22,7 +19,7 @@ public class Main {
         JDBCCurrentDataSource jdbcCurrentDataSource = new JDBCCurrentDataSource();
 
         // Test asset type table
-        AssetTypes asset = new AssetTypes("CPU");
+        AssetType asset = new AssetType("CPU");
         //jdbcAssetTypeDataSource.addAssetType(asset);
         //jdbcAssetTypeDataSource.deleteAssetType("CPU");
 

@@ -1,6 +1,6 @@
 package common.sql;
 
-import common.AssetTypes;
+import common.AssetType;
 
 import java.util.Set;
 
@@ -17,7 +17,7 @@ public interface AssetTypeDataSource {
      *
      * @param asset Asset to add
      */
-    void addAssetType(AssetTypes asset);
+    void addAssetType(AssetType asset);
 
     /**
      * Extracts all the details of a Person from the address book based on the
@@ -26,7 +26,7 @@ public interface AssetTypeDataSource {
      * @param assetName The name as a String to search for.
      * @return all details in a Person object for the name
      */
-    AssetTypes getAsset(String assetName);
+    AssetType getAsset(String assetName);
 
     /**
      * Gets the number of addresses in the address book.

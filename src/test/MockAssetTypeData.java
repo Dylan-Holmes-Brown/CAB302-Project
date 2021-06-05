@@ -1,24 +1,24 @@
 package test;
 
-import common.AssetTypes;
+import common.AssetType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MockAssetTypeData {
-    private List<AssetTypes> assetList;
+    private List<AssetType> assetList;
 
     public MockAssetTypeData() {
         assetList = new ArrayList<>();
     }
 
-    public void add (AssetTypes asset) {
+    public void add (AssetType asset) {
         if (!assetList.contains(asset)) {
             assetList.add(asset);
         }
     }
 
-    public AssetTypes get(Object key) {
+    public AssetType get(Object key) {
         for (int i = 0; i<assetList.size(); i++) {
             if (assetList.get(i).equals(key)) {
                 return assetList.get(i);

@@ -103,7 +103,7 @@ public class JDBCUserDataSource implements UserDataSource {
             getUser.setString(1, username);
             resultSet = getUser.executeQuery();
             resultSet.next();
-            user.setName(resultSet.getString("username"));
+            user.setUsername(resultSet.getString("username"));
             user.setPassword(resultSet.getString("password"));
             user.setAccountType(resultSet.getString("accountType"));
             user.setOrganisationalUnit(resultSet.getString("organisationalUnit"));

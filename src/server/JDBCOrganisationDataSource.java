@@ -80,7 +80,7 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
         try {
             addOrg.setString(1, org.getName());
             addOrg.setInt(2, org.getCredits());
-            addOrg.setString(3, org.getAssets());
+            addOrg.setString(3, org.getAsset());
             addOrg.setInt(4, org.getQuantity());
             addOrg.execute();
         }

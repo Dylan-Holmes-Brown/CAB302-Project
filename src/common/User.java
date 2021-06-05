@@ -54,21 +54,29 @@ public class User extends Object implements Serializable {
     }
 
     /**
+     * Get the username of the user object.
+     *
      * @return the username
      */
     public String getUsername() { return username; }
 
     /**
+     * Set the username of the user object.
+     *
      * @param username the username to set
      */
-    public void setName(String username) { this.username = username; }
+    public void setUsername(String username) { this.username = username; }
 
     /**
+     * Get the password of the user object.
+     *
      * @return the password
      */
     public String getPassword() { return password; }
 
     /**
+     * Set the password of the user object.
+     *
      * @param password the password to set
      */
     public void setPassword(String password) { this.password = password; }
@@ -79,21 +87,29 @@ public class User extends Object implements Serializable {
 //    public void setHashedPassword(String password) { this.password = HashPassword.toHex(HashPassword.getHashSHA512(password)); }
 
     /**
+     * Get the account type of the user object.
+     *
      * @return the accountType
      */
     public String getAccountType() { return accountType; }
 
     /**
+     * Set the account type of the user object.
+     *
      * @param accountType the accountType to set
      */
     public void setAccountType(String accountType) { this.accountType = accountType; }
 
     /**
+     * Get the organisational unit of the user object.
+     *
      * @return the org
      */
     public String getOrganisationalUnit() { return org; }
 
     /**
+     * Set the organisational unit of the user object.
+     *
      * @param org the org to set
      */
     public void setOrganisationalUnit(String org) { this.org = org; }

@@ -1,8 +1,6 @@
 package common.sql;
 
-import common.AssetTypes;
-import common.User;
-import server.JDBCAssetTypeDataSource;
+import common.AssetType;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
@@ -41,7 +39,7 @@ public class AssetTypeData {
      *
      * @param asset A AssetType to add to the user table.
      */
-    public void add(AssetTypes asset) {
+    public void add(AssetType asset) {
 
         // Check to see if the user has already been added
         if (!listModel.contains(asset.getAsset())) {
@@ -74,7 +72,7 @@ public class AssetTypeData {
      * @param key the name to retrieve.
      * @return the User object related to the name.
      */
-    public AssetTypes get(Object key) {
+    public AssetType get(Object key) {
         return assetTypeData.getAsset((String) key);
     }
 

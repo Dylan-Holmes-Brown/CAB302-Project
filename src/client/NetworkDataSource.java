@@ -1,6 +1,6 @@
 package client;
 
-import common.AssetTypes;
+import common.AssetType;
 import common.CurrentTrades;
 import common.Organisation;
 import common.User;
@@ -71,10 +71,10 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
      */
 
     /**
-     * @see AssetTypeDataSource#addAssetType(common.AssetTypes)
+     * @see AssetTypeDataSource#addAssetType(AssetType)
      */
     @Override
-    public void addAssetType(AssetTypes asset) {
+    public void addAssetType(AssetType asset) {
         // asset object is null
         if (asset == null)
             throw new IllegalArgumentException("Asset cannot be null");
@@ -95,7 +95,7 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
      * @see AssetTypeDataSource#getAsset(String)
      */
     @Override
-    public AssetTypes getAsset(String assetName) {
+    public AssetType getAsset(String assetName) {
         try {
             // Tell server - expect asset name, and send the details
             outputStream.writeObject(Commands.GET_ASSET);
@@ -105,7 +105,7 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
             outputStream.flush();
 
             // Read the asset's details back from the server
-            return (AssetTypes)inputStream.readObject();
+            return (AssetType)inputStream.readObject();
         }
         catch (IOException | ClassNotFoundException | ClassCastException e) {
             e.printStackTrace();
