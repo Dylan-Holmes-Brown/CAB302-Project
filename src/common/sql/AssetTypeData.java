@@ -26,9 +26,9 @@ public class AssetTypeData {
      * attempts to read any data saved from previous invocations of the
      * application.
      */
-    public AssetTypeData() {
+    public AssetTypeData(AssetTypeDataSource dataSource) {
         listModel = new DefaultListModel();
-        assetTypeData = new JDBCAssetTypeDataSource();
+        assetTypeData = dataSource;
 
         for (String name : assetTypeData.AssetNameSet()) {
             listModel.addElement(name);

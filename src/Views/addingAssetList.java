@@ -1,5 +1,6 @@
 package Views;
 
+import client.NetworkDataSource;
 import common.AssetType;
 import common.sql.AssetTypeData;
 
@@ -270,6 +271,6 @@ public class addingAssetList extends JFrame implements Serializable{
     }
 
     public static void main(String[] args) {
-        new addingAssetList(new AssetTypeData());
+        new addingAssetList(new AssetTypeData(new NetworkDataSource()));
     }
 }
