@@ -4,30 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="User login almost completed">
-      <change afterPath="$PROJECT_DIR$/src/test/MockAssetTypeData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/TestAssetTypeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Added Documentation, tested AssetTypeData">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/NetworkDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/NetworkDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/AssetTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/AssetTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/AssetTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/AssetType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/CurrentTrades.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/CurrentTrades.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/HashPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/HashPassword.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/Organisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Organisation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/sql/AssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/AssetTypeData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/sql/AssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/AssetTypeDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/OrganisationData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/OrganisationData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/OrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/OrganisationDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/UserData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/UserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/UserDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/current_trade/CurrentData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/CurrentData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/current_trade/CurrentDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/CurrentDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/DBConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/JDBCCurrentDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCCurrentDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/JDBCAssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCAssetTypeDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/JDBCOrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCOrganisationDataSource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/JDBCUserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCUserDataSource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/NetworkServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/NetworkServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/MockAssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/MockAssetTypeData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestAssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestAssetTypeData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -301,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622697355816</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Added Documentation, tested AssetTypeData">
+      <created>1622863638661</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1622863638661</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -332,7 +331,8 @@
     <MESSAGE value="adding implemented just needs org unit selection" />
     <MESSAGE value="organisation selection added to create user, Chore: make admin not have org" />
     <MESSAGE value="User login almost completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="User login almost completed" />
+    <MESSAGE value="Added Documentation, tested AssetTypeData" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Documentation, tested AssetTypeData" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestJDBCUser.ic" NAME="TestJDBCUser Coverage Results" MODIFIED="1622538349921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
