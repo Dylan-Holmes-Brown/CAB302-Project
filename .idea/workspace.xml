@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="organisation creation complete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/addingOrganisationList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingOrganisationList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +71,7 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.addingAssetList">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="Assignment" />
@@ -170,8 +169,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.addingAssetList" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.addingAssetList" />
         <item itemvalue="Application.addingOrganisationList" />
         <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.loginGui" />
