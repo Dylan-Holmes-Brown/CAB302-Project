@@ -233,7 +233,7 @@ public class addingOrganisationList extends JFrame implements Serializable{
     }
 
     public static void main(String[] args) {
-        new addingOrganisationList(new OrganisationData(new NetworkDataSource()), new AssetTypeData());
+        new addingOrganisationList(new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
     }
 
 

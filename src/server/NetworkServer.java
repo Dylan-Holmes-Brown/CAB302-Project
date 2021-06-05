@@ -150,6 +150,20 @@ public class NetworkServer {
             }
             break;
 
+            case GET_ASSET_NAME_SET: {
+                // no parameters sent by client
+
+                // send the client back the name set
+                synchronized (tableAssetType) {
+                    outputStream.writeObject(tableAssetType.AssetNameSet());
+                }
+                outputStream.flush();
+
+                System.out.println(String.format("Sent name set to client %s",
+                        socket.toString()));
+            }
+            break;
+
             /*
             Organisation Commands
              */

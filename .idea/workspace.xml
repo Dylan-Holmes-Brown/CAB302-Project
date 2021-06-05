@@ -72,7 +72,7 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.addingAssetList">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="Assignment" />
@@ -170,9 +170,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.addingOrganisationList" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.addingAssetList" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.addingOrganisationList" />
         <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.loginGui" />
       </list>
