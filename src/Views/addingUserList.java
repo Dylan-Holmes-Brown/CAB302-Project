@@ -25,6 +25,7 @@ public class addingUserList extends JFrame implements Serializable {
     private JTextField userField;
     private JLabel passLabel;
     private JTextField passField;
+
     private JLabel orgLabel;
 
     Object[] array;
@@ -58,26 +59,6 @@ public class addingUserList extends JFrame implements Serializable {
         addNameListListener(new NameListListener());
         addClosingListener(new ClosingListener());
 
-//        tableArea.addMouseListener(new MouseAdapter(){
-//
-//        @Override
-//        public void mouseClicked(MouseEvent e){
-//
-//            int i = tableArea.getSelectedRow();
-//
-//            userField.setText(tableSetup.getValueAt(i, 0).toString());
-//            passField.setText(tableSetup.getValueAt(i, 1).toString());
-//            String accountType = tableSetup.getValueAt(i, 2).toString();
-//            if (accountType == "Member") {
-//                System.out.println(accountType);
-//                memberButton.setSelected(true);
-//            }
-//            else if (accountType == "Admin") {
-//                adminButton.setSelected(true);
-//            }
-//            tableSetup.getValueAt(i, 3).toString();
-//        }
-//    });
 
         // decorate the frame and make it visible
         setTitle("Create User");

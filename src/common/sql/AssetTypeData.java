@@ -1,6 +1,7 @@
 package common.sql;
 
 import common.AssetTypes;
+import common.Organisation;
 import server.JDBCAssetTypeDataSource;
 
 import javax.swing.DefaultListModel;
@@ -31,6 +32,21 @@ public class AssetTypeData {
 
         for (String name : assetTypeData.AssetNameSet()) {
             listModel.addElement(name);
+        }
+    }
+
+
+    /**
+     * Adds a AssetType to the Asset table
+     *
+     * @param a A AssetType to add to the Asset table.
+     */
+    public void add(AssetTypes a) {
+
+        // Check to see if the organisation has already been added
+        if (!listModel.contains(a.getAsset())) {
+            listModel.addElement(a.getAsset());
+            assetTypeData.addAssetType(a);
         }
     }
 

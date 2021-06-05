@@ -1,63 +1,49 @@
 package Views;
 
 import client.NetworkDataSource;
-import common.Organisation;
+import common.AssetTypes;
 import common.sql.AssetTypeData;
-import common.sql.OrganisationData;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
 
-public class addingOrganisationList extends JFrame implements Serializable{
+public class addingAssetList extends JFrame implements Serializable{
 
     private static final long serialVersionUID = 62L;
-    private JList orgList;
-    private JComboBox comboBox;
-
-    private JLabel orgLabel;
-    private JTextField orgField;
-    private JLabel orgCredits;
-    private JTextField orgCreditsField;
-    private JLabel assetQuantity;
-    private JTextField assetQField;
+    private JList assetList;
 
     private JLabel assetLabel;
+    private JTextField assetField;
 
-    Object[] array;
 
     private JButton createButton;
     private JButton deleteButton;
 
-
-    OrganisationData orgData;
     AssetTypeData assetTypeData;
+
 
     /**
      * Constructor sets up UI, adds button listeners and displays
      *
-     * @param orgData the user data from the database
+     * @param assetTypeData the user data from the database
      */
-    public addingOrganisationList(OrganisationData orgData, AssetTypeData assetTypeData) {
-        this.orgData = orgData;
+    public addingAssetList(AssetTypeData assetTypeData) {
         this.assetTypeData = assetTypeData;
-        array = new String[assetTypeData.getSize()];
 
         initUI();
         checkListSize();
 
         // Add listeners to components
-        addButtonListeners(new Views.addingOrganisationList.ButtonListener());
-        addNameListListener(new Views.addingOrganisationList.NameListListener());
-        addClosingListener(new Views.addingOrganisationList.ClosingListener());
-
+        addButtonListeners(new ButtonListener());
+        addNameListListener(new NameListListener());
+        addClosingListener(new ClosingListener());
 
         // decorate the frame and make it visible
-        setTitle("Create Organisation");
+        setTitle("Create Asset");
         setMinimumSize(new Dimension(400, 300));
         setLocationRelativeTo(null);
         pack();
@@ -80,11 +66,6 @@ public class addingOrganisationList extends JFrame implements Serializable{
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeUserFieldPanel());
 
-        //dropdown for assets
-        contentPane.add(Box.createVerticalStrut(5));
-        contentPane.add(makeDropDownPanel());
-
-        //buttons
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeButtonsPanel());
 
@@ -92,12 +73,12 @@ public class addingOrganisationList extends JFrame implements Serializable{
     }
 
     private JScrollPane makeNameListPane() {
-        orgList = new JList(orgData.getModel());
+        assetList = new JList(assetTypeData.getModel());
         //ListModel model = data.getModel();
-        orgList.setFixedCellWidth(200);
+        assetList.setFixedCellWidth(200);
 
-        JScrollPane scroller = new JScrollPane(orgList);
-        scroller.setViewportView(orgList);
+        JScrollPane scroller = new JScrollPane(assetList);
+        scroller.setViewportView(assetList);
         scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroller.setMinimumSize(new Dimension(200, 150));
@@ -105,22 +86,6 @@ public class addingOrganisationList extends JFrame implements Serializable{
         scroller.setMaximumSize(new Dimension(250, 200));
 
         return scroller;
-    }
-
-    private JPanel makeDropDownPanel() {
-        ListModel model = assetTypeData.getModel();
-        for (int i = 0; i < assetTypeData.getSize(); i++) {
-            array[i] = model.getElementAt(i).toString();
-
-        }
-        comboBox = new JComboBox(array);
-        comboBox.setBackground(Color.white);
-        JPanel panel = new JPanel();
-        assetLabel = new JLabel("Asset");
-        panel.add(assetLabel);
-        panel.add(comboBox);
-
-        return panel;
     }
 
 
@@ -131,45 +96,35 @@ public class addingOrganisationList extends JFrame implements Serializable{
      * @return a panel containing the user fields
      */
     private JPanel makeUserFieldPanel() {
-        JPanel orgPanel = new JPanel();
-        GroupLayout layout = new GroupLayout(orgPanel);
-        orgPanel.setLayout(layout);
+        JPanel userPanel = new JPanel();
+        GroupLayout layout = new GroupLayout(userPanel);
+        userPanel.setLayout(layout);
 
         // Enable auto gaps between each line
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
 
         // Label of fields
-        orgLabel = new JLabel("Organisation Name");
-        orgCredits = new JLabel("Organisation Credits");
-        assetQuantity = new JLabel("Asset Quantity");
+        assetLabel = new JLabel("Asset Name");
 
         // Text Fields
-        orgField = new JTextField(30);
-        orgField.setPreferredSize(new Dimension(30, 20));
-        orgCreditsField = new JTextField(30);
-        orgCreditsField.setPreferredSize(new Dimension(30, 20));
-        assetQField = new JTextField(30);
-        assetQField.setPreferredSize(new Dimension(30, 20));
+        assetField = new JTextField(30);
+        assetField.setPreferredSize(new Dimension(30, 20));
 
         // Create a sequential group for the horizontal axis
         GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
 
         // Two parallel groups 1. contains labels and the other the fields
-        hGroup.addGroup(layout.createParallelGroup().addComponent(orgLabel).addComponent(orgCredits).addComponent(assetQuantity));
-        hGroup.addGroup(layout.createParallelGroup().addComponent(orgField).addComponent(orgCreditsField).addComponent(assetQField));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(assetLabel));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(assetField));
         layout.setHorizontalGroup(hGroup);
 
         // Create a sequential group for the vertical axis
         GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(orgLabel).addComponent(orgField));
-        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(orgCredits).addComponent(orgCreditsField));
-        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(assetQuantity).addComponent(assetQField));
+                .addComponent(assetLabel).addComponent(assetField));
         layout.setVerticalGroup(vGroup);
-        return orgPanel;
+        return userPanel;
     }
 
 
@@ -177,7 +132,7 @@ public class addingOrganisationList extends JFrame implements Serializable{
     /**
      * Adds the buttons to the panel
      *
-     * @return a panel containing the create organisation button
+     * @return a panel containing the create user button
      */
     private JPanel makeButtonsPanel() {
         JPanel buttonPanel = new JPanel();
@@ -193,30 +148,25 @@ public class addingOrganisationList extends JFrame implements Serializable{
     }
 
     private void clearFields() {
-        orgField.setText("");
-        orgCreditsField.setText("");
-        assetQField.setText("");
+        assetField.setText("");
     }
 
     /**
-     * Checks the size of the organisation table determining the state of the delete button
+     * Checks the size of the user table determining the state of the delete button
      */
     private void checkListSize() {
-        deleteButton.setEnabled(orgData.getSize() != 0);
+
+        deleteButton.setEnabled(assetTypeData.getSize() != 0);
     }
 
     /**
-     * Display the organisations details in the fields
-     * int i = Integer.parseInt(s.trim());
-     * @param org
+     * Display the Asset details in the fields
+     * @param ass
      */
-    private void display(Organisation org) {
-        if (org != null) {
-            orgField.setText(org.getName());
-            orgCreditsField.setText(String.valueOf(org.getCredits()));
-            assetQField.setText(String.valueOf(org.getQuantity()));
+    private void display(AssetTypes ass) {
+        if (ass != null) {
+            assetField.setText(ass.getAsset());
         }
-        comboBox.setSelectedItem(org.getAssets());
     }
 
     private void addButtonListeners(ActionListener listener) {
@@ -225,17 +175,12 @@ public class addingOrganisationList extends JFrame implements Serializable{
     }
 
     private void addNameListListener(ListSelectionListener listener) {
-        orgList.addListSelectionListener(listener);
+        assetList.addListSelectionListener(listener);
     }
 
     private void addClosingListener(WindowListener listener) {
         addWindowListener(listener);
     }
-
-    public static void main(String[] args) {
-        new addingOrganisationList(new OrganisationData(new NetworkDataSource()), new AssetTypeData());
-    }
-
 
 
     /**
@@ -264,15 +209,15 @@ public class addingOrganisationList extends JFrame implements Serializable{
         private void createPressed() {
 
             // If all fields are filled in continue
-            if (orgField.getText() != null && !orgField.getText().equals("")
-                    && !orgCreditsField.equals("")) {
+            if (assetField.getText() != null && !assetField.getText().equals("")) {
 
-                Organisation o = new Organisation(orgField.getText(), Integer.valueOf(orgCreditsField.getText()));
+                AssetTypes ass = new AssetTypes(assetField.getText());
 
                 // Add user to database and clear fields
-                orgData.add(o);
+                assetTypeData.add(ass);
                 clearFields();
-                JOptionPane.showMessageDialog(null, String.format("Organisation '%s' successfully added", o.getName()));
+
+                JOptionPane.showMessageDialog(null, String.format("Asset '%s' successfully added", ass.getAsset()));
             }
 
             // Not all fields are filled in
@@ -283,19 +228,19 @@ public class addingOrganisationList extends JFrame implements Serializable{
         }
 
         private void deletePressed() {
-            int index = orgList.getSelectedIndex();
-            String orgFieldText = orgField.getText();
-            orgData.remove(orgList.getSelectedValue());
+            int index = assetList.getSelectedIndex();
+            String assetFieldText = assetField.getText();
+            assetTypeData.remove(assetList.getSelectedValue());
             clearFields();
             index--;
             if (index == -1) {
-                if (orgData.getSize() != 0) {
+                if (assetTypeData.getSize() != 0) {
                     index = 0;
                 }
             }
-            orgList.setSelectedIndex(index);
+            assetList.setSelectedIndex(index);
             checkListSize();
-            JOptionPane.showMessageDialog(null, String.format("Organisation '%s' successfully deleted", orgFieldText));
+            JOptionPane.showMessageDialog(null, String.format("Asset '%s' successfully deleted", assetFieldText));
         }
     }
 
@@ -304,9 +249,9 @@ public class addingOrganisationList extends JFrame implements Serializable{
          * @see ListSelectionListener#valueChanged(ListSelectionEvent)
          */
         public void valueChanged(ListSelectionEvent e) {
-            if (orgList.getSelectedValue() != null
-                    && !orgList.getSelectedValue().equals("")) {
-                display(orgData.get(orgList.getSelectedValue()));
+            if (assetList.getSelectedValue() != null
+                    && !assetList.getSelectedValue().equals("")) {
+                display(assetTypeData.get(assetList.getSelectedValue()));
             }
         }
     }
@@ -320,8 +265,12 @@ public class addingOrganisationList extends JFrame implements Serializable{
          * @see WindowAdapter#windowClosing(WindowEvent)
          */
         public void windowClosing(WindowEvent e) {
-            orgData.persist();
+            assetTypeData.persist();
             System.exit(0);
         }
+    }
+
+    public static void main(String[] args) {
+        new addingAssetList(new AssetTypeData());
     }
 }
