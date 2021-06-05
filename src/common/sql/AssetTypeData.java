@@ -1,6 +1,6 @@
 package common.sql;
 
-import common.AssetTypes;
+import common.AssetType;
 import common.Organisation;
 import server.JDBCAssetTypeDataSource;
 
@@ -41,7 +41,7 @@ public class AssetTypeData {
      *
      * @param a A AssetType to add to the Asset table.
      */
-    public void add(AssetTypes a) {
+    public void add(AssetType a) {
 
         // Check to see if the organisation has already been added
         if (!listModel.contains(a.getAsset())) {
@@ -74,7 +74,7 @@ public class AssetTypeData {
      * @param key the name to retrieve.
      * @return the User object related to the name.
      */
-    public AssetTypes get(Object key) {
+    public AssetType get(Object key) {
         return assetTypeData.getAsset((String) key);
     }
 

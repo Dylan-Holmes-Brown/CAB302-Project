@@ -1,7 +1,6 @@
 package Views;
 
-import client.NetworkDataSource;
-import common.AssetTypes;
+import common.AssetType;
 import common.sql.AssetTypeData;
 
 import javax.swing.*;
@@ -163,7 +162,7 @@ public class addingAssetList extends JFrame implements Serializable{
      * Display the Asset details in the fields
      * @param ass
      */
-    private void display(AssetTypes ass) {
+    private void display(AssetType ass) {
         if (ass != null) {
             assetField.setText(ass.getAsset());
         }
@@ -211,7 +210,7 @@ public class addingAssetList extends JFrame implements Serializable{
             // If all fields are filled in continue
             if (assetField.getText() != null && !assetField.getText().equals("")) {
 
-                AssetTypes ass = new AssetTypes(assetField.getText());
+                AssetType ass = new AssetType(assetField.getText());
 
                 // Add user to database and clear fields
                 assetTypeData.add(ass);

@@ -216,7 +216,7 @@ public class addingOrganisationList extends JFrame implements Serializable{
             orgCreditsField.setText(String.valueOf(org.getCredits()));
             assetQField.setText(String.valueOf(org.getQuantity()));
         }
-        comboBox.setSelectedItem(org.getAssets());
+        comboBox.setSelectedItem(org.getAsset());
     }
 
     private void addButtonListeners(ActionListener listener) {
@@ -265,9 +265,9 @@ public class addingOrganisationList extends JFrame implements Serializable{
 
             // If all fields are filled in continue
             if (orgField.getText() != null && !orgField.getText().equals("")
-                    && !orgCreditsField.equals("")) {
+                    && !orgCreditsField.equals("") && !assetQField.equals("")) {
 
-                Organisation o = new Organisation(orgField.getText(), Integer.valueOf(orgCreditsField.getText()));
+                Organisation o = new Organisation(orgField.getText(), Integer.valueOf(orgCreditsField.getText()), String.valueOf(comboBox.getSelectedIndex()), Integer.valueOf(assetQField.getText()));
 
                 // Add user to database and clear fields
                 orgData.add(o);
