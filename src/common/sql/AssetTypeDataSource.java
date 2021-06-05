@@ -5,7 +5,7 @@ import common.AssetTypes;
 import java.util.Set;
 
 /**
- *
+ * Provides functionality needed for a AssetType object to be manipulated
  *
  * @author Adam Buchsbaum
  */

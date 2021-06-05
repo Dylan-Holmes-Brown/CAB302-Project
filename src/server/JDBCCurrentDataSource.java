@@ -1,10 +1,7 @@
 package server;
 
 import common.CurrentTrades;
-import common.User;
-import common.sql.UserDataSource;
-import common.sql.current_trade.CurrentDataSource;
-import server.DBConnection;
+import common.sql.CurrentDataSource;
 
 import java.sql.*;
 import java.util.Set;
@@ -144,9 +141,9 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
     }
 
     /**
-     * @see CurrentDataSource#getSize()
+     * @see CurrentDataSource#getCurrentSize()
      */
-    public int getSize() {
+    public int getCurrentSize() {
         ResultSet resultSet = null;
         int rows = 0;
 

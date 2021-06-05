@@ -8,12 +8,13 @@ import java.sql.Date;
 
 public class CurrentTrades {
     private static final long serialVersionUID = 40L;
-    public String buySell;
-    public String organisation;
-    public String asset;
-    public int quantity;
-    public int price;
-    public Date date;
+    private int id;
+    private String buySell;
+    private String organisation;
+    private String asset;
+    private int quantity;
+    private int price;
+    private Date date;
 
     public CurrentTrades(){}
 
@@ -25,6 +26,8 @@ public class CurrentTrades {
         this.price = price;
         this.date = date;
     }
+
+    public Integer getID() { return id; }
 
     public String getBuySell() { return buySell; }
 

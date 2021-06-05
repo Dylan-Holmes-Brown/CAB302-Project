@@ -11,7 +11,8 @@ import java.io.Serializable;
 
 public class AssetTypes implements Serializable {
     private static final long serialVersionUID = 30L;
-    public String assetType;
+    private String assetType;
+
     public AssetTypes() {
 
     }

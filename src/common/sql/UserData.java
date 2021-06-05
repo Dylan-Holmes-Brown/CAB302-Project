@@ -20,7 +20,6 @@ public class UserData {
      * Constructor initializes the list model that holds names as Strings and
      * attempts to read any data saved from previous invocations of the
      * application.
-     *
      */
     public UserData(UserDataSource dataSource) {
         listModel = new DefaultListModel();
@@ -48,7 +47,7 @@ public class UserData {
     /**
      * Based on the name of the user in the user table, delete the user.
      *
-     * @param key
+     * @param key the username key to delete
      */
     public void remove(Object key) {
         // remove from both list and map
@@ -64,7 +63,7 @@ public class UserData {
     /**
      * Retrieves User details from the model.
      *
-     * @param key the name to retrieve.
+     * @param key the username key to retrieve.
      * @return the User object related to the name.
      */
     public User get(Object key) { return userData.getUser((String) key); }
@@ -72,13 +71,14 @@ public class UserData {
     /**
      * Accessor for the list model.
      *
-     * @return the listModel to display.
+     * @return the listModel of usernames.
      */
     public ListModel getModel() { return listModel; }
 
     /**
+     * Get the number of users in the table
      *
-     * @return the number of names in the user table.
+     * @return the size of the user table.
      */
     public int getSize() { return userData.getUserSize(); }
 }

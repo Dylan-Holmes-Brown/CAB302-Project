@@ -4,16 +4,21 @@ import common.User;
 
 import java.util.Set;
 
+/**
+ * Provides functionality needed for a user object to be manipulated
+ *
+ * @author Dylan Holmes-Brown
+ */
 public interface UserDataSource {
     /**
-     * Adds a User to the table, if they are not already in the table
+     * Adds a User to the table
      *
      * @param user User to add
      */
     void addUser(User user);
 
     /**
-     * Updates the password of a user, given the username.
+     * Updates the password of a user.
      *
      * @param username The name of the user to search for
      * @param password The password to update
@@ -21,8 +26,7 @@ public interface UserDataSource {
     void updatePassword (String username, String password);
 
     /**
-     * Extracts all the details of a User from the table based on the
-     * name passed in.
+     * Extracts all the details of a User from the table
      *
      * @param username The name as a String to search for.
      * @return all details in a User object for the name
@@ -45,7 +49,7 @@ public interface UserDataSource {
 
     /**
      * Finalizes any resources used by the data source and ensures data is
-     * persisited.
+     * persisted.
      */
     void close();
 

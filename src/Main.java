@@ -31,19 +31,19 @@ public class Main {
 
 
         // Test Organisation table
-        Organisation org = new Organisation("amazon", 100, "CPU", 10);
-        //jdbcOrganisationDataSource.addOrg(org);
-        //jdbcOrganisationDataSource.deleteOrg("amazon");
-        //jdbcOrganisationDataSource.addCredits("amazon", 20);
-        //jdbcOrganisationDataSource.removeCredits("amazon", 20);
-        //jdbcOrganisationDataSource.addQuantity("amazon", "CPU", 10);
-        //jdbcOrganisationDataSource.removeQuantity("amazon", "CPU", 10);
-        Organisation orgGet = jdbcOrganisationDataSource.getOrg("amazon");
-        System.out.println("Organisation:\n" +
-                orgGet.name + " " +
-                orgGet.credits + " " +
-                orgGet.assets + " " +
-                orgGet.quantity);
+//        Organisation org = new Organisation("amazon", 100, "CPU", 10);
+//        //jdbcOrganisationDataSource.addOrg(org);
+//        //jdbcOrganisationDataSource.deleteOrg("amazon");
+//        //jdbcOrganisationDataSource.addCredits("amazon", 20);
+//        //jdbcOrganisationDataSource.removeCredits("amazon", 20);
+//        //jdbcOrganisationDataSource.addQuantity("amazon", "CPU", 10);
+//        //jdbcOrganisationDataSource.removeQuantity("amazon", "CPU", 10);
+//        Organisation orgGet = jdbcOrganisationDataSource.getOrg("amazon");
+//        System.out.println("Organisation:\n" +
+//                orgGet.name + " " +
+//                orgGet.credits + " " +
+//                orgGet.assets + " " +
+//                orgGet.quantity);
 
         // Test User table
         User user = new User("Dylan", "1234", "Member", "amazon");
@@ -53,20 +53,20 @@ public class Main {
 
         User userGet = jdbcUserDataSource.getUser("Dylan");
         int size = jdbcUserDataSource.getUserSize();
-        System.out.println(userGet.username + " " + userGet.password + " " + userGet.accountType + " " + userGet.org +" \nTable size: " + size);
+        //System.out.println(userGet.username + " " + userGet.password + " " + userGet.accountType + " " + userGet.org +" \nTable size: " + size);
 
         // Test Current Trades Table
-        long now = System.currentTimeMillis();
-        Date sqlDate = new Date(now);
-        CurrentTrades trades = new CurrentTrades("Buy", "amazon", "CPU", 10, 10, sqlDate);
-        //jdbcCurrentDataSource.addTrade(trades);
-        CurrentTrades thisTrade = jdbcCurrentDataSource.getOrgTrade("amazon");
-        System.out.println("Current Trades\n " +
-                thisTrade.buySell + " " +
-                thisTrade.organisation + " " +
-                thisTrade.asset + " " +
-                thisTrade.quantity + " " +
-                thisTrade.price + " " +
-                thisTrade.date);
+//        long now = System.currentTimeMillis();
+//        Date sqlDate = new Date(now);
+//        CurrentTrades trades = new CurrentTrades("Buy", "amazon", "CPU", 10, 10, sqlDate);
+//        //jdbcCurrentDataSource.addTrade(trades);
+//        CurrentTrades thisTrade = jdbcCurrentDataSource.getOrgTrade("amazon");
+//        System.out.println("Current Trades\n " +
+//                thisTrade.buySell + " " +
+//                thisTrade.organisation + " " +
+//                thisTrade.asset + " " +
+//                thisTrade.quantity + " " +
+//                thisTrade.price + " " +
+//                thisTrade.date);
     }
 }

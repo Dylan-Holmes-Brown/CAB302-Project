@@ -1,11 +1,11 @@
-package common.sql.current_trade;
+package common.sql;
 
 import common.CurrentTrades;
 
 import java.util.Set;
 
 /**
- *
+ * Provides functionality needed for a CurrentTrades object to be manipulated
  *
  * @author Dylan Holmes-Brown
  */
@@ -17,6 +17,13 @@ public interface CurrentDataSource {
      * @param trades CurrentTrade to add
      */
     void addTrade(CurrentTrades trades);
+
+    /**
+     * Deletes a CurrentTrade from the table.
+     *
+     * @param id The id of the trade to delete
+     */
+    void deleteTrade(int id);
 
     /**
      * Get all the current trades given the type
@@ -39,14 +46,7 @@ public interface CurrentDataSource {
      *
      * @return size of organisation table.
      */
-    int getSize();
-
-    /**
-     * Deletes a CurrentTrade from the table.
-     *
-     * @param id The id of the trade to delete
-     */
-    void deleteTrade(int id);
+    int getCurrentSize();
 
     /**
      * Finalizes any resources used by the data source and ensures data is

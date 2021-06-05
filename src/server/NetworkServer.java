@@ -8,7 +8,7 @@ import common.sql.AssetTypeDataSource;
 import common.sql.Commands;
 import common.sql.OrganisationDataSource;
 import common.sql.UserDataSource;
-import common.sql.current_trade.CurrentDataSource;
+import common.sql.CurrentDataSource;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -384,11 +384,11 @@ public class NetworkServer {
 
             case GET_TRADE_SIZE: {
                 synchronized (tableCurrentTrade) {
-                    outputStream.writeInt(tableCurrentTrade.getSize());
+                    outputStream.writeInt(tableCurrentTrade.getCurrentSize());
                 }
                 outputStream.flush();
                 System.out.println(String.format("Sent size of %d to client '%s'.",
-                        tableCurrentTrade.getSize(), socket.toString()));
+                        tableCurrentTrade.getCurrentSize(), socket.toString()));
             }
             break;
 

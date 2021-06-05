@@ -1,15 +1,17 @@
 package common.sql;
 
 import common.AssetTypes;
+import common.User;
 import server.JDBCAssetTypeDataSource;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
 
 /**
- *
+ * This class uses an AssetTypeDataSource and its methods to retrieve data.
  *
  * @author Adam Buchsbaum
+ * @author Dylan Holmes-Brown
  */
 
 /**
@@ -25,12 +27,26 @@ public class AssetTypeData {
      * attempts to read any data saved from previous invocations of the
      * application.
      */
-    public AssetTypeData() {
+    public AssetTypeData(AssetTypeDataSource dataSource) {
         listModel = new DefaultListModel();
-        assetTypeData = new JDBCAssetTypeDataSource();
+        assetTypeData = dataSource;
 
         for (String name : assetTypeData.AssetNameSet()) {
             listModel.addElement(name);
+        }
+    }
+
+    /**
+     * Adds a AssetType to the asset_types table
+     *
+     * @param asset A AssetType to add to the user table.
+     */
+    public void add(AssetTypes asset) {
+
+        // Check to see if the user has already been added
+        if (!listModel.contains(asset.getAsset())) {
+            listModel.addElement(asset.getAsset());
+            assetTypeData.addAssetType(asset);
         }
     }
 
@@ -72,7 +88,9 @@ public class AssetTypeData {
     }
 
     /**
-     * @return the number of names in the user table.
+     * Get the number of assets types in the table
+     *
+     * @return the size of the table.
      */
     public int getSize() {
         return assetTypeData.getAssetSize();

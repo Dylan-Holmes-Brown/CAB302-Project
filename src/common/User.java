@@ -11,19 +11,28 @@ import java.io.Serializable;
 
 public class User extends Object implements Serializable {
 
-    //may change these to private variables in future
+    // User Fields
     private static final long serialVersionUID = 10L;
-    public String username;
-    public String password;
-    public String accountType;
-    public String org;
+    private String username;
+    private String password;
+    private String accountType;
+    private String org;
 
-    //Empty constructor to create User Object
+    /**
+     * Empty constructor to create User Object
+     */
     public User(){
 
     }
 
-    //Member User Constructor
+    /**
+     * Member User Constructor
+     *
+     * @param username
+     * @param password
+     * @param accountType
+     * @param org
+     */
     public User(String username, String password, String accountType, String org){
         this.username = username;
         this.password = password;
@@ -31,7 +40,13 @@ public class User extends Object implements Serializable {
         this.org = org;
     }
 
-    // Admin User Constructor
+    /**
+     * Admin User Constructor
+     *
+     * @param username
+     * @param password
+     * @param accountType
+     */
     public User(String username, String password, String accountType){
         this.username = username;
         this.password = password;

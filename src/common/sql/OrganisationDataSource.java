@@ -5,7 +5,7 @@ import common.Organisation;
 import java.util.Set;
 
 /**
- *
+ * Provides functionality needed for a organisation object to be manipulated
  *
  * @author Dylan Holmes-Brown
  */

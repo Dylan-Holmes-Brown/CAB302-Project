@@ -8,7 +8,7 @@ import common.sql.AssetTypeDataSource;
 import common.sql.Commands;
 import common.sql.OrganisationDataSource;
 import common.sql.UserDataSource;
-import common.sql.current_trade.CurrentDataSource;
+import common.sql.CurrentDataSource;
 
 import java.io.*;
 import java.net.Socket;
@@ -471,7 +471,7 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
     }
 
     @Override
-    public int getSize() {
+    public int getCurrentSize() {
         try {
             outputStream.writeObject(Commands.GET_TRADE_SIZE);
             outputStream.flush();

@@ -11,10 +11,10 @@ import java.io.Serializable;
 
 public class Organisation implements Serializable {
     private static final long serialVersionUID = 20L;
-    public String name;
-    public int credits = 0;
-    public String assets;
-    public int quantity = 0;
+    private String name;
+    private int credits = 0;
+    private String assets;
+    private int quantity = 0;
 
 
     public Organisation() {
