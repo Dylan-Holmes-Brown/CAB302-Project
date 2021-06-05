@@ -263,11 +263,14 @@ public class addingOrganisationList extends JFrame implements Serializable{
          */
         private void createPressed() {
 
+            String selectedValue = comboBox.getSelectedItem().toString();
+            //Integer orgCredits =
+
             // If all fields are filled in continue
             if (orgField.getText() != null && !orgField.getText().equals("")
                     && !orgCreditsField.equals("") && !assetQField.equals("")) {
 
-                Organisation o = new Organisation(orgField.getText(), Integer.valueOf(orgCreditsField.getText()), String.valueOf(comboBox.getSelectedIndex()), Integer.valueOf(assetQField.getText()));
+                Organisation o = new Organisation(orgField.getText(), Integer.valueOf(orgCreditsField.getText()), selectedValue, Integer.valueOf(assetQField.getText()));
 
                 // Add user to database and clear fields
                 orgData.add(o);

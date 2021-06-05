@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="organisation creation complete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/addingAssetList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingAssetList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/addingOrganisationList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingOrganisationList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/AssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/AssetTypeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestAssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestAssetTypeData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,7 +285,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622883783129</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="organisation creation complete">
+      <created>1622885191064</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1622885191064</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
