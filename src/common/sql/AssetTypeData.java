@@ -1,8 +1,6 @@
 package common.sql;
 
 import common.AssetType;
-import common.Organisation;
-import server.JDBCAssetTypeDataSource;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
@@ -42,8 +40,7 @@ public class AssetTypeData {
      * @param a A AssetType to add to the Asset table.
      */
     public void add(AssetType a) {
-
-        // Check to see if the organisation has already been added
+        // Check to see if the Asset has already been added
         if (!listModel.contains(a.getAsset())) {
             listModel.addElement(a.getAsset());
             assetTypeData.addAssetType(a);
@@ -51,7 +48,7 @@ public class AssetTypeData {
     }
 
     /**
-     * Based on the name of the user in the user table, delete the user.
+     * Based on the name of the asset in the asset table, delete the asset.
      *
      * @param key
      */
@@ -69,10 +66,10 @@ public class AssetTypeData {
     }
 
     /**
-     * Retrieves User details from the model.
+     * Retrieves Asset details from the model.
      *
-     * @param key the name to retrieve.
-     * @return the User object related to the name.
+     * @param key the asset to retrieve.
+     * @return the AssetType object related to the name.
      */
     public AssetType get(Object key) {
         return assetTypeData.getAsset((String) key);
@@ -88,7 +85,9 @@ public class AssetTypeData {
     }
 
     /**
-     * @return the number of names in the user table.
+     * Get the number of asset types in the table.
+     *
+     * @return the number of names in the asset table.
      */
     public int getSize() {
         return assetTypeData.getAssetSize();

@@ -1,5 +1,9 @@
 package Views;
 
+import client.NetworkDataSource;
+import common.sql.AssetTypeData;
+import common.sql.OrganisationData;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -32,7 +36,7 @@ public class adminOptions extends JFrame implements Serializable {
         panel.add(button);
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new addingOrganisationList();
+                new addingOrganisationList(new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
                 System.exit(0);
             }
         });
