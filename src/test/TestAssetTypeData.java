@@ -2,6 +2,8 @@ package test;
 
 import common.AssetType;
 import org.junit.jupiter.api.*;
+import test.mocks.MockAssetTypeData;
+
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -134,6 +136,14 @@ public class TestAssetTypeData {
         assetList.add(asset);
         data.add(asset2);
         assetList.add(asset2);
+        assertEquals(assetList, data.getModel());
+    }
+
+    /**
+     * Test getting the asset model with nothing in the list
+     */
+    @Test
+    public void testNoUsersModel() {
         assertEquals(assetList, data.getModel());
     }
 }
