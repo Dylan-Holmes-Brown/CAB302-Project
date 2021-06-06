@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Fixed network server, missing GET_ASSET_NAME_SET, GUI's can now run">
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Added Documentation, tested AssetTypeData">
+      <change afterPath="$PROJECT_DIR$/src/test/MockUserData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/TestUserData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/adminOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/adminOptions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/AssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/AssetTypeData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/MockAssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/MockAssetTypeData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/TestAssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestAssetTypeData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,20 +78,7 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestAssetTypeData">
-    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="client.Main" />
-      <module name="Assignment" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="client.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.TestUserData">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.Main" />
       <module name="Assignment" />
@@ -134,8 +127,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="addingOrganisationList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Views.addingOrganisationList" />
+    <configuration name="userOptions" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Views.userOptions" />
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
@@ -162,21 +155,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestUserData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.TestUserData" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.Project" />
-      <item itemvalue="Application.addingOrganisationList" />
       <item itemvalue="Application.Main" />
-      <item itemvalue="Application.Main (1)" />
       <item itemvalue="Application.addingAssetList" />
       <item itemvalue="JUnit.TestAssetTypeData" />
+      <item itemvalue="Application.userOptions" />
+      <item itemvalue="JUnit.TestUserData" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestUserData" />
         <item itemvalue="JUnit.TestAssetTypeData" />
+        <item itemvalue="Application.userOptions" />
         <item itemvalue="Application.addingAssetList" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.addingOrganisationList" />
-        <item itemvalue="Application.Main (1)" />
       </list>
     </recent_temporary>
   </component>

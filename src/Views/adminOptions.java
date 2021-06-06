@@ -1,7 +1,13 @@
 package Views;
 
+import client.NetworkDataSource;
+import common.sql.AssetTypeData;
+import common.sql.OrganisationData;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 
 public class adminOptions extends JFrame implements Serializable {
@@ -26,23 +32,29 @@ public class adminOptions extends JFrame implements Serializable {
         panel.add(userNameLabel);
 
         JButton button = new JButton("Create Organisational Units");
-        button.setBounds(100,120,150, 20);
+        button.setBounds(100,120,190, 20);
         panel.add(button);
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new addingOrganisationList(new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
+                System.exit(0);
+            }
+        });
 
         JButton buttonUser = new JButton("Edit Organisational Credits");
-        buttonUser.setBounds(100,150,150, 20);
+        buttonUser.setBounds(100,150,190, 20);
         panel.add(buttonUser);
 
         JButton buttonOptions = new JButton("Edit Assest");
-        buttonOptions.setBounds(100,180,150, 20);
+        buttonOptions.setBounds(100,180,190, 20);
         panel.add(buttonOptions);
 
         JButton buttonAnother = new JButton("Add New User");
-        buttonAnother.setBounds(100,210,150, 20);
+        buttonAnother.setBounds(100,210,190, 20);
         panel.add(buttonAnother);
 
         JButton buttonLogOut = new JButton("Log Out");
-        buttonLogOut.setBounds(100,240,150, 20);
+        buttonLogOut.setBounds(100,240,190, 20);
         panel.add(buttonLogOut);
 
         frame.getContentPane().add(panel);
