@@ -51,9 +51,7 @@ public class TestCurrentTradeData {
     @Test
     public void testAddDuplicateTrade() {
         data.add(trade);
-        assertThrows(IllegalArgumentException.class, () -> {
-            data.add(trade);
-        });
+        assertThrows(IllegalArgumentException.class, () -> data.add(trade));
     }
 
     /**
@@ -71,9 +69,7 @@ public class TestCurrentTradeData {
      */
     @Test
     public void testRemoveNoUser() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            data.remove(trade);
-        });
+        assertThrows(IllegalArgumentException.class, () -> data.remove(trade));
     }
 
     /**

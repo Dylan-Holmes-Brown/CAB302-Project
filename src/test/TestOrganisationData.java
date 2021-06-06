@@ -44,9 +44,7 @@ public class TestOrganisationData {
     @Test
     public void testAddDuplicateUser() {
         data.add(org);
-        assertThrows(IllegalArgumentException.class, () -> {
-            data.add(org);
-        });
+        assertThrows(IllegalArgumentException.class, () -> data.add(org));
     }
 
     /**
@@ -64,9 +62,7 @@ public class TestOrganisationData {
      */
     @Test
     public void testRemoveNoOrganisation() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            data.remove(org);
-        });
+        assertThrows(IllegalArgumentException.class, () -> data.remove(org));
     }
 
     /**
@@ -84,9 +80,7 @@ public class TestOrganisationData {
      */
     @Test
     public void testAddCreditsWrongOrganisation() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            data.addCredits(org, 20);
-        });
+        assertThrows(IllegalArgumentException.class, () -> data.addCredits(org, 20));
     }
 
     /**
@@ -104,9 +98,7 @@ public class TestOrganisationData {
      */
     @Test
     public void testRemoveCreditsWrongOrganisation() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            data.removeCredits(org, 20);
-        });
+        assertThrows(IllegalArgumentException.class, () -> data.removeCredits(org, 20));
     }
 
     /**
@@ -124,9 +116,7 @@ public class TestOrganisationData {
      */
     @Test
     public void testAddQuantityWrongOrganisation() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            data.addQuantity(org, 20);
-        });
+        assertThrows(IllegalArgumentException.class, () -> data.addQuantity(org, 20));
     }
 
     /**
@@ -144,9 +134,7 @@ public class TestOrganisationData {
      */
     @Test
     public void testRemoveQuantityWrongOrganisation() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            data.removeQuantity(org, 5);
-        });
+        assertThrows(IllegalArgumentException.class, () -> data.removeQuantity(org, 5));
     }
 
     /**
