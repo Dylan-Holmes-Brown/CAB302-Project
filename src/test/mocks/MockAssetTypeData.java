@@ -1,4 +1,4 @@
-package test;
+package test.mocks;
 
 import common.AssetType;
 

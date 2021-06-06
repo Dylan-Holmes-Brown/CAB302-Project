@@ -2,6 +2,7 @@ package test;
 
 import common.User;
 import org.junit.jupiter.api.*;
+import test.mocks.MockUserData;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +120,23 @@ public class TestUserData {
     }
 
     /**
+     * Test getting the size of the list
+     */
+    @Test
+    public void testGetSize() {
+        data.add(user);
+        assertEquals(1, data.getSize());
+    }
+
+    /**
+     * Test getting the size of the user list when nothing has been added
+     */
+    @Test
+    public void testGetZero() {
+        assertEquals(0, data.getSize());
+    }
+
+    /**
      * Test getting the user model
      */
     @Test
@@ -132,11 +150,19 @@ public class TestUserData {
      * Test getting the user model with multiple user's in it
      */
     @Test
-    public void testGetMultipleAssetsModel() {
+    public void testGetMultipleUserModel() {
         data.add(user);
         userList.add(user);
         data.add(user2);
         userList.add(user2);
+        assertEquals(userList, data.getModel());
+    }
+
+    /**
+     * Test getting the user model with nothing in the list
+     */
+    @Test
+    public void testNoUsersModel() {
         assertEquals(userList, data.getModel());
     }
 }

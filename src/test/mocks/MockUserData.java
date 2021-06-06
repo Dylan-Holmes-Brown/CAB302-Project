@@ -1,4 +1,4 @@
-package test;
+package test.mocks;
 
 import common.User;
 
@@ -23,7 +23,7 @@ public class MockUserData {
     /**
      * Adds a User to the user list
      *
-     * @param user A AssetType to add
+     * @param user A User to add
      */
     public void add(User user) {
         // Check to see if the user has already been added

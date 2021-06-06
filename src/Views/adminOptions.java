@@ -3,6 +3,7 @@ package Views;
 import client.NetworkDataSource;
 import common.sql.AssetTypeData;
 import common.sql.OrganisationData;
+import common.sql.UserData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,7 +38,6 @@ public class adminOptions extends JFrame implements Serializable {
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new addingOrganisationList(new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
-                System.exit(0);
             }
         });
 
@@ -48,14 +48,29 @@ public class adminOptions extends JFrame implements Serializable {
         JButton buttonOptions = new JButton("Edit Assest");
         buttonOptions.setBounds(100,180,190, 20);
         panel.add(buttonOptions);
+        buttonOptions.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new addingAssetList(new AssetTypeData(new NetworkDataSource()));
+            }
+        });
 
         JButton buttonAnother = new JButton("Add New User");
         buttonAnother.setBounds(100,210,190, 20);
         panel.add(buttonAnother);
+        buttonAnother.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new addingUserList(new UserData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
+            }
+        });
 
         JButton buttonLogOut = new JButton("Log Out");
         buttonLogOut.setBounds(100,240,190, 20);
         panel.add(buttonLogOut);
+        buttonLogOut.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               System.exit(0);
+            }
+        });
 
         frame.getContentPane().add(panel);
         frame.pack();
