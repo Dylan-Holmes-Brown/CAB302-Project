@@ -1,67 +1,70 @@
 package Views;
 
+import javax.swing.*;
+import java.io.Serializable;
 import client.NetworkDataSource;
+import common.CurrentTrades;
 import common.HashPassword;
+import common.Organisation;
 import common.User;
-import common.sql.OrganisationData;
+import common.sql.AssetTypeData;
+import common.sql.CurrentData;
 import common.sql.UserData;
 
-import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.Serializable;
 
-
-public class addingUserList extends JFrame implements Serializable {
+public class addingtrade extends JFrame implements Serializable {
 
     private static final long serialVersionUID = 62L;
-    private JList userList;
-    private JComboBox comboBox;
+    private JList tradeList;
+    private JComboBox dropDownBox;
 
-    private JLabel userLabel;
-    private JTextField userField;
-    private JLabel passLabel;
-    private JTextField passField;
+    private JLabel traPrice;
+    private JTextField traPriceField;
+    private JLabel assetQuantity;
+    private JTextField assetQField;
 
-    private JLabel orgLabel;
+    private JLabel assetLabel;
 
     Object[] array;
 
-
-    private JRadioButton memberButton;
-    private JRadioButton adminButton;
+    private JRadioButton buyButton;
+    private JRadioButton sellButton;
     private ButtonGroup radioGroup;
+
     private JButton createButton;
     private JButton deleteButton;
 
-    UserData userData;
-    OrganisationData orgData;
+    UserData data;
+    CurrentData trades;
+    AssetTypeData assetTypeData;
 
     /**
      * Constructor sets up UI, adds button listeners and displays
      *
-     * @param userData the user data from the database
+     * @param data the user data from the database
      */
-    public addingUserList(UserData userData, OrganisationData orgData) {
-        this.userData = userData;
-        this.orgData = orgData;
-        array = new String[orgData.getSize()];
+    public addingtrade(UserData data, AssetTypeData assetTypeData, CurrentData trades) {
+        this.data = data;
+        this.assetTypeData = assetTypeData;
+        this.trades = trades;
+        array = new String[assetTypeData.getSize()];
 
         initUI();
         checkListSize();
 
         // Add listeners to components
-        addRadioListeners(new RadioListener());
-        addButtonListeners(new ButtonListener());
-        addNameListListener(new NameListListener());
-        addClosingListener(new ClosingListener());
+        addRadioListeners(new Views.addingtrade.RadioListener());
+        addButtonListeners(new Views.addingtrade.ButtonListener());
+        addNameListListener(new Views.addingtrade.NameListListener());
+        addClosingListener(new Views.addingtrade.ClosingListener());
 
 
         // decorate the frame and make it visible
-        setTitle("Create User");
+        setTitle("Create Trade");
         setMinimumSize(new Dimension(400, 300));
         setLocationRelativeTo(null);
         pack();
@@ -76,15 +79,15 @@ public class addingUserList extends JFrame implements Serializable {
         Container contentPane = this.getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
-        //list of users
+        //List of Organisation trades
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeNameListPane());
 
-        //user inputs
+        //Input area
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeUserFieldPanel());
 
-        //dropdown for organisations
+        //dropdown for assets
         contentPane.add(Box.createVerticalStrut(5));
         contentPane.add(makeDropDownPanel());
 
@@ -100,11 +103,11 @@ public class addingUserList extends JFrame implements Serializable {
     }
 
     private JScrollPane makeNameListPane() {
-        userList = new JList(userData.getModel());
-        userList.setFixedCellWidth(200);
+        tradeList = new JList(data.getModel());
+        tradeList.setFixedCellWidth(200);
 
-        JScrollPane scroller = new JScrollPane(userList);
-        scroller.setViewportView(userList);
+        JScrollPane scroller = new JScrollPane(tradeList);
+        scroller.setViewportView(tradeList);
         scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroller.setMinimumSize(new Dimension(200, 150));
@@ -115,62 +118,63 @@ public class addingUserList extends JFrame implements Serializable {
     }
 
     private JPanel makeDropDownPanel() {
-        ListModel model = orgData.getModel();
-        for (int i = 0; i < orgData.getSize(); i++) {
+        ListModel model = assetTypeData.getModel();
+        for (int i = 0; i < assetTypeData.getSize(); i++) {
             array[i] = model.getElementAt(i).toString();
 
         }
-        comboBox = new JComboBox(array);
-        comboBox.setBackground(Color.white);
+        dropDownBox = new JComboBox(array);
+        dropDownBox.setBackground(Color.white);
         JPanel panel = new JPanel();
-        orgLabel = new JLabel("Organisation");
-        panel.add(orgLabel);
-        panel.add(comboBox);
+        assetLabel = new JLabel("Asset");
+        panel.add(assetLabel);
+        panel.add(dropDownBox);
 
         return panel;
     }
 
+
     /**
-     * Makes a JPanel containing the username and password fields to be
+     * Makes a JPanel containing the Organization name, credits, asset and quantity fields to be
      * recorded.
      *
      * @return a panel containing the user fields
      */
     private JPanel makeUserFieldPanel() {
-        JPanel userPanel = new JPanel();
-        GroupLayout layout = new GroupLayout(userPanel);
-        userPanel.setLayout(layout);
+        JPanel traPanel = new JPanel();
+        GroupLayout layout = new GroupLayout(traPanel);
+        traPanel.setLayout(layout);
 
         // Enable auto gaps between each line
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
 
         // Label of fields
-        userLabel = new JLabel("Username");
-        passLabel = new JLabel("Password");
+        traPrice = new JLabel("Price");
+        assetQuantity = new JLabel("Quantity");
 
         // Text Fields
-        userField = new JTextField(30);
-        userField.setPreferredSize(new Dimension(30, 20));
-        passField = new JTextField(30);
-        passField.setPreferredSize(new Dimension(30, 20));
+        traPriceField = new JTextField(30);
+        traPriceField.setPreferredSize(new Dimension(30, 20));
+        assetQField = new JTextField(30);
+        assetQField.setPreferredSize(new Dimension(30, 20));
 
         // Create a sequential group for the horizontal axis
         GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
 
         // Two parallel groups 1. contains labels and the other the fields
-        hGroup.addGroup(layout.createParallelGroup().addComponent(userLabel).addComponent(passLabel));
-        hGroup.addGroup(layout.createParallelGroup().addComponent(userField).addComponent(passField));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(traPrice).addComponent(assetQuantity));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(traPriceField).addComponent(assetQField));
         layout.setHorizontalGroup(hGroup);
 
         // Create a sequential group for the vertical axis
         GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(userLabel).addComponent(userField));
+                .addComponent(traPrice).addComponent(traPriceField));
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(passLabel).addComponent(passField));
+                .addComponent(assetQuantity).addComponent(assetQField));
         layout.setVerticalGroup(vGroup);
-        return userPanel;
+        return traPanel;
     }
 
     /**
@@ -183,26 +187,28 @@ public class addingUserList extends JFrame implements Serializable {
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
         // Label Buttons
-        memberButton = new JRadioButton("Member");
-        adminButton = new JRadioButton("Admin");
+        buyButton = new JRadioButton("Buy");
+        sellButton = new JRadioButton("Sell");
         radioGroup = new ButtonGroup();
 
         // Create and space Buttons
         buttonPanel.add(Box.createHorizontalStrut(30));
-        buttonPanel.add(memberButton);
+        buttonPanel.add(buyButton);
         buttonPanel.add(Box.createHorizontalStrut(30));
-        buttonPanel.add(adminButton);
+        buttonPanel.add(sellButton);
 
-        radioGroup.add(memberButton);
-        radioGroup.add(adminButton);
+        radioGroup.add(buyButton);
+        radioGroup.add(sellButton);
 
         return buttonPanel;
     }
 
+
+
     /**
      * Adds the buttons to the panel
      *
-     * @return a panel containing the create user button
+     * @return a panel containing the create organisation button
      */
     private JPanel makeButtonsPanel() {
         JPanel buttonPanel = new JPanel();
@@ -218,41 +224,40 @@ public class addingUserList extends JFrame implements Serializable {
     }
 
     private void clearFields() {
-        userField.setText("");
-        passField.setText("");
+        traPriceField.setText("");
+        assetQField.setText("");
         radioGroup.clearSelection();
-
     }
 
     /**
-     * Checks the size of the user table determining the state of the delete button
+     * Checks the size of the organisation table determining the state of the delete button
      */
     private void checkListSize() {
-
-        deleteButton.setEnabled(userData.getSize() != 0);
+        deleteButton.setEnabled(data.getSize() != 0);
     }
 
     /**
-     * Display the user details in the fields
-     * @param user
+     * Display the organisations details in the fields
+     * int i = Integer.parseInt(s.trim());
+     * @param tra
      */
-    private void display(User user) {
-        if (user != null) {
-            userField.setText(user.getUsername());
-            passField.setText(user.getPassword());
-            if (user.getAccountType().contains("Member")) {
-                memberButton.setSelected(true);
+    private void display(CurrentTrades tra) {
+        if (tra != null) {
+            traPriceField.setText(String.valueOf(tra.getPrice()));
+            assetQField.setText(String.valueOf(tra.getQuantity()));
+            if (tra.getBuySell().contains("Buy")) {
+                buyButton.setSelected(true);
             }
             else {
-                adminButton.setSelected(true);
+                sellButton.setSelected(true);
             }
-            comboBox.setSelectedItem(user.getOrganisationalUnit());
         }
+        dropDownBox.setSelectedItem(tra.getAsset());
     }
 
     private void addRadioListeners(ActionListener listener) {
-        memberButton.addActionListener(listener);
-        adminButton.addActionListener(listener);
+        buyButton.addActionListener(listener);
+        sellButton.addActionListener(listener);
     }
 
     private void addButtonListeners(ActionListener listener) {
@@ -261,7 +266,7 @@ public class addingUserList extends JFrame implements Serializable {
     }
 
     private void addNameListListener(ListSelectionListener listener) {
-        userList.addListSelectionListener(listener);
+        tradeList.addListSelectionListener(listener);
     }
 
     private void addClosingListener(WindowListener listener) {
@@ -269,8 +274,7 @@ public class addingUserList extends JFrame implements Serializable {
     }
 
     public static void main(String[] args) {
-
-        new addingUserList(new UserData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
+        new addingtrade(new UserData (new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()), new CurrentData(new NetworkDataSource()));
     }
 
 
@@ -280,14 +284,15 @@ public class addingUserList extends JFrame implements Serializable {
          */
         public void actionPerformed(ActionEvent e) {
             JRadioButton source = (JRadioButton) e.getSource();
-            if (source == memberButton) {
-                comboBox.setEnabled(true);
+            if (source == buyButton) {
+                dropDownBox.setEnabled(true);
             }
-            else if (source == adminButton) {
-                comboBox.setEnabled(false);
+            else if (source == sellButton) {
+                dropDownBox.setEnabled(false);
             }
         }
     }
+
     /**
      * Handles events for the buttons on the UI
      *
@@ -312,27 +317,25 @@ public class addingUserList extends JFrame implements Serializable {
          * or display error
          */
         private void createPressed() {
-            User u = new User();
-            String accountType = "Member";
-            String selectedOrg = String.valueOf(comboBox.getSelectedItem());
+            CurrentTrades t = new CurrentTrades();
+            String selectedValue = dropDownBox.getSelectedItem().toString();
 
             // If all fields are filled in continue
-            if (userField.getText() != null && !userField.getText().equals("")
-                    && !passField.equals("") && (memberButton.isSelected() || adminButton.isSelected())) {
-                // Depending on radio button selected choose account type
-                if (memberButton.isSelected()) {
-                    accountType = "Member";
-                    u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getText())), accountType, selectedOrg);
+            if (traPriceField.getText() != null && !traPriceField.getText().equals("")
+                    && !traPriceField.equals("") && !assetQField.equals("")&& (buyButton.isSelected() || sellButton.isSelected())) {
+
+                if (buyButton.isSelected()) {
+                    t = new CurrentTrades();
                 }
-                else if (adminButton.isSelected()) {
-                    accountType = "Admin";
-                    u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getText())), accountType);
+                else if (sellButton.isSelected()) {
+                    t = new CurrentTrades();
                 }
 
+
                 // Add user to database and clear fields
-                userData.add(u);
+                trades.add(t);
                 clearFields();
-                JOptionPane.showMessageDialog(null, String.format("User '%s' successfully added", u.getUsername()));
+                JOptionPane.showMessageDialog(null, String.format("Trade '%s' successfully added", t.getAsset()));
             }
 
             // Not all fields are filled in
@@ -343,19 +346,19 @@ public class addingUserList extends JFrame implements Serializable {
         }
 
         private void deletePressed() {
-            int index = userList.getSelectedIndex();
-            String username = userField.getText();
-            userData.remove(userList.getSelectedValue());
+            int index = tradeList.getSelectedIndex();
+            String traFieldText = traPriceField.getText();
+            trades.remove(tradeList.getSelectedValue());
             clearFields();
             index--;
             if (index == -1) {
-                if (userData.getSize() != 0) {
+                if (trades.getSize() != 0) {
                     index = 0;
                 }
             }
-            userList.setSelectedIndex(index);
+            tradeList.setSelectedIndex(index);
             checkListSize();
-            JOptionPane.showMessageDialog(null, String.format("User '%s' successfully deleted", username));
+            JOptionPane.showMessageDialog(null, String.format("Trade '%s' successfully deleted", traFieldText));
         }
     }
 
@@ -364,9 +367,9 @@ public class addingUserList extends JFrame implements Serializable {
          * @see ListSelectionListener#valueChanged(ListSelectionEvent)
          */
         public void valueChanged(ListSelectionEvent e) {
-            if (userList.getSelectedValue() != null
-                    && !userList.getSelectedValue().equals("")) {
-                display(userData.get(userList.getSelectedValue()));
+            if (tradeList.getSelectedValue() != null
+                    && !tradeList.getSelectedValue().equals("")) {
+                //display(trades..get(tradeList.getSelectedValue()));
             }
         }
     }
@@ -380,11 +383,9 @@ public class addingUserList extends JFrame implements Serializable {
          * @see WindowAdapter#windowClosing(WindowEvent)
          */
         public void windowClosing(WindowEvent e) {
-            userData.persist();
+            data.persist();
             System.exit(0);
         }
     }
+
 }
-
-
-
