@@ -45,9 +45,7 @@ public class TestUserData {
     @Test
     public void testAddDuplicateUser() {
         data.add(user);
-        assertThrows(IllegalArgumentException.class, () -> {
-            data.add(user);
-        });
+        assertThrows(IllegalArgumentException.class, () -> data.add(user));
     }
 
     /**
@@ -66,9 +64,7 @@ public class TestUserData {
     @Test
     public void testUpdateWrongUser() {
         data.add(user2);
-        assertThrows(IllegalArgumentException.class, () -> {
-            data.update(user, "4321");
-        });
+        assertThrows(IllegalArgumentException.class, () -> data.update(user, "4321"));
     }
 
     /**
@@ -114,9 +110,7 @@ public class TestUserData {
      */
     @Test
     public void testRemoveNoUser() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            data.remove(user);
-        });
+        assertThrows(IllegalArgumentException.class, () -> data.remove(user));
     }
 
     /**

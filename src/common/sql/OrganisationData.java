@@ -58,6 +58,56 @@ public class OrganisationData {
     }
 
     /**
+     * Add credits to an organisation
+     *
+     * @param key the organisation to search for
+     * @param credits the credits amount to add
+     */
+    public void addCredits(Object key, int credits) {
+        if (listModel.contains(key)) {
+            orgData.addCredits((String) key, credits);
+        }
+    }
+
+    /**
+     * Remove credits from an organisation
+     *
+     * @param key the organisation to search for
+     * @param credits the credits amount to remove
+     */
+    public void removeCredits(Object key, int credits) {
+        if (listModel.contains(key)) {
+            orgData.removeCredits((String) key, credits);
+        }
+    }
+
+    /**
+     * Add quantity to an organisation
+     *
+     * @param key the organisation to search for
+     * @param asset the asset to add the quantity to
+     * @param quantity the quantity amount to add
+     */
+    public void addQuantity(Object key, String asset, int quantity) {
+        if (listModel.contains(key)) {
+            orgData.addQuantity((String) key, asset, quantity);
+        }
+    }
+
+    /**
+     * Remove quantity from an organisation
+     *
+     * @param key the organisation to search for
+     * @param asset the asset to remove the quantity from
+     * @param quantity the quantity amount to remove
+     */
+    public void removeCredits(Object key, String asset, int quantity) {
+        if (listModel.contains(key)) {
+            orgData.removeQuantity((String) key, asset, quantity);
+        }
+    }
+
+    /**
      * Saves the data in the organisation table using the persistence mechanism.
      */
     public void persist() { orgData.close(); }

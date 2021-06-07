@@ -36,11 +36,23 @@ public class UserData {
      * @param u A User to add to the user table.
      */
     public void add(User u) {
-
         // Check to see if the user has already been added
         if (!listModel.contains(u.getUsername())) {
             listModel.addElement(u.getUsername());
             userData.addUser(u);
+        }
+    }
+
+    /**
+     * Updates a User’s password from the user table.
+     *
+     * @param key the username key to update
+     * @param password the password to update to
+     */
+    public void update(Object key, String password) {
+        // If the key is in the table update the password
+        if (listModel.contains(key)) {
+            userData.updatePassword((String) key, password);
         }
     }
 

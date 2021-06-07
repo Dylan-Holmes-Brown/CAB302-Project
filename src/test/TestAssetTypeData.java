@@ -47,9 +47,7 @@ public class TestAssetTypeData {
     @Test
     public void testAddDuplicate() {
         data.add(asset);
-        assertThrows(IllegalArgumentException.class, () -> {
-            data.add(asset);
-        });
+        assertThrows(IllegalArgumentException.class, () -> data.add(asset));
     }
 
     /**
@@ -112,9 +110,7 @@ public class TestAssetTypeData {
      */
     @Test
     public void testRemoveNoAsset() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            data.remove(asset);
-        });
+        assertThrows(IllegalArgumentException.class, () -> data.remove(asset));
     }
 
     /**
