@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Added linkage to other pages">
-      <change afterPath="$PROJECT_DIR$/src/test/TestCurrentTradeData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/TestOrganisationData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/mocks/MockCurrentTradeData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/mocks/MockOrganisationData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/MockAssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/mocks/MockAssetTypeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/MockUserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/mocks/MockUserData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestAssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestAssetTypeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestUserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestUserData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -346,19 +337,19 @@
     <option name="LAST_COMMIT_MESSAGE" value="Added linkage to other pages" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Project$TestJDBCUser.ic" NAME="TestJDBCUser Coverage Results" MODIFIED="1622538349921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>test.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/Project$TestCurrentTradeData.ic" NAME="TestCurrentTradeData Coverage Results" MODIFIED="1622963443358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Project$TestOrganisationData.ic" NAME="TestOrganisationData Coverage Results" MODIFIED="1622963451173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Project$TestAssetTypeData.ic" NAME="TestAssetTypeData Coverage Results" MODIFIED="1622963420027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Project$TestUserData.ic" NAME="TestUserData Coverage Results" MODIFIED="1622963461956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Project$TestUserData.ic" NAME="TestUserData Coverage Results" MODIFIED="1622963461956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Project$TestAssetTypeData.ic" NAME="TestAssetTypeData Coverage Results" MODIFIED="1622894484900" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Project$TestJDBCUser.ic" NAME="TestJDBCUser Coverage Results" MODIFIED="1622538349921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
   </component>
