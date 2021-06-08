@@ -25,6 +25,8 @@ public class buyArena extends JFrame implements Serializable {
     private JTextField userField;
     private JLabel itemquality;
     private JTextField passField;
+    private JLabel itemPrice;
+    private JTextField textPrice;
 
     private JLabel orgLabel;
 
@@ -32,6 +34,7 @@ public class buyArena extends JFrame implements Serializable {
 
     private JButton createButton;
     private JButton deleteButton;
+    private JButton buyButton;
 
     UserData userData;
     OrganisationData orgData;
@@ -115,12 +118,14 @@ public class buyArena extends JFrame implements Serializable {
         // Label of fields
         itemName = new JLabel("Item Name ");
         itemquality = new JLabel("Quantity");
-
+        itemPrice= new JLabel("Price");
         // Text Fields
         userField = new JTextField(30);
         userField.setPreferredSize(new Dimension(30, 20));
         passField = new JTextField(30);
         passField.setPreferredSize(new Dimension(30, 20));
+        textPrice = new JTextField(30);
+        textPrice.setPreferredSize(new Dimension(30, 20));
 
         // Create a sequential group for the horizontal axis
         GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
@@ -128,6 +133,7 @@ public class buyArena extends JFrame implements Serializable {
         // Two parallel groups 1. contains labels and the other the fields
         hGroup.addGroup(layout.createParallelGroup().addComponent(itemName).addComponent(itemquality));
         hGroup.addGroup(layout.createParallelGroup().addComponent(userField).addComponent(passField));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(itemPrice).addComponent(textPrice));
         layout.setHorizontalGroup(hGroup);
 
         // Create a sequential group for the vertical axis
@@ -136,6 +142,8 @@ public class buyArena extends JFrame implements Serializable {
                 .addComponent(itemName).addComponent(userField));
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(itemquality).addComponent(passField));
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(itemPrice).addComponent(textPrice));
         layout.setVerticalGroup(vGroup);
         return userPanel;
     }
@@ -145,10 +153,13 @@ public class buyArena extends JFrame implements Serializable {
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         createButton = new JButton("Create");
         deleteButton = new JButton("Delete");
+        buyButton = new JButton("buy");
         buttonPanel.add(Box.createHorizontalStrut(50));
         buttonPanel.add(createButton);
         buttonPanel.add(Box.createHorizontalStrut(50));
         buttonPanel.add(deleteButton);
+        buttonPanel.add(Box.createHorizontalStrut(50));
+        buttonPanel.add(buyButton);
         buttonPanel.add(Box.createHorizontalStrut(50));
         return buttonPanel;
     }
@@ -159,13 +170,13 @@ public class buyArena extends JFrame implements Serializable {
     }
 
     private void checkListSize() {
-
         deleteButton.setEnabled(userData.getSize() != 0);
     }
 
     private void addButtonListeners(ActionListener listener) {
         createButton.addActionListener(listener);
         deleteButton.addActionListener(listener);
+        buyButton.addActionListener(listener);
     }
 
     private class ButtonListener implements ActionListener {
@@ -179,6 +190,9 @@ public class buyArena extends JFrame implements Serializable {
             }
             else if (source == deleteButton) {
                 deletePressed();
+            }
+            else if (source == buyButton) {
+                buyPressed();
             }
         }
         /**
@@ -208,7 +222,7 @@ public class buyArena extends JFrame implements Serializable {
 
         private void deletePressed() {
             int index = userList.getSelectedIndex();
-            String username = userField.getText();
+            String itemName = userField.getText();
             userData.remove(userList.getSelectedValue());
             clearFields();
             index--;
@@ -219,7 +233,23 @@ public class buyArena extends JFrame implements Serializable {
             }
             userList.setSelectedIndex(index);
             checkListSize();
-            JOptionPane.showMessageDialog(null, String.format("User '%s' successfully deleted", username));
+            JOptionPane.showMessageDialog(null, String.format("User '%s' successfully deleted", itemName));
+        }
+
+        private void buyPressed() {
+            int index = userList.getSelectedIndex();
+            String itemName = userField.getText();
+            userData.remove(userList.getSelectedValue());
+            clearFields();
+            index--;
+            if (index == -1) {
+                if (userData.getSize() != 0) {
+                    index = 0;
+                }
+            }
+            userList.setSelectedIndex(index);
+            checkListSize();
+            JOptionPane.showMessageDialog(null, String.format("You have bough the '%s', itemName"));
         }
     }
 
