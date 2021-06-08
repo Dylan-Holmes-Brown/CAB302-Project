@@ -21,7 +21,7 @@ public class Main {
         Trade trade = new Trade("Buy", "Apple", "CPU", 4, 20, date);
         //data.addTrade(trade);
         System.out.println(data.getCurrentSize());
-        List <Trade> list = new ArrayList<>(data.getBuySell("Buy"));
+        //List <Trade> list = new ArrayList<>(data.getBuySell("Buy"));
 //        List <Trade> list2 = new ArrayList<>();
 //        for (int i = 0; i < list.size(); i++) {
 //            list2.add(list.get(i));
