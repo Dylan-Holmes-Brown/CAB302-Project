@@ -14,6 +14,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -281,7 +282,7 @@ public class NetworkServer {
                 synchronized (tableUser) {
                     tableUser.addUser(user);
                 }
-                System.out.println(String.format("Added person '%s' to database from client %s",
+                System.out.println(String.format("Added user '%s' to database from client '%s'",
                         user.getUsername(), socket.toString()));
             }
             break;
@@ -351,7 +352,7 @@ public class NetworkServer {
                 synchronized (tableCurrentTrade) {
                     tableCurrentTrade.addTrade(a);
                 }
-                System.out.println(String.format("Added trade '%s' to ??? from ??? '%s'.",
+                System.out.println(String.format("Added trade '%s' to database from client '%s'.",
                         a.getBuySell(), socket.toString()));
             }
             break;
@@ -363,8 +364,8 @@ public class NetworkServer {
 
                     outputStream.writeObject(currentTrades);
                     if (currentTrades != null) {
-                        System.out.println(String.format("Sent ??? '%s' to ??? '%x'.",
-                                currentTrades.getBuySell(), socket.toString()));
+                        System.out.println(String.format("Sent type trade list to client '%x'.",
+                                socket.toString()));
                     }
                     outputStream.flush();
                 }
@@ -374,11 +375,11 @@ public class NetworkServer {
             case GET_ORGTRADE: {
                 final String organisation = (String) inputStream.readObject();
                 synchronized (tableCurrentTrade) {
-                    final Trade currentTrades = tableCurrentTrade.getBuySell(organisation);
+                    final Trade currentTrades = tableCurrentTrade.getOrgTrade(organisation);
 
                     outputStream.writeObject(currentTrades);
                     if (currentTrades != null) {
-                        System.out.println(String.format("Sent ??? '%s' to ??? '%x'.",
+                        System.out.println(String.format("Sent organisation trade list from database to client '%x'.",
                                 currentTrades.getBuySell(), socket.toString()));
                     }
                     outputStream.flush();
@@ -391,7 +392,7 @@ public class NetworkServer {
                 synchronized (tableCurrentTrade) {
                     tableCurrentTrade.deleteTrade(id);
                 }
-                System.out.println(String.format("Deleted ??? '%s' '%s'.",
+                System.out.println(String.format("Deleted trade '%s' on behalf of client '%s'.",
                         id, socket.toString()));
             }
             break;
@@ -401,7 +402,7 @@ public class NetworkServer {
                     outputStream.writeInt(tableCurrentTrade.getCurrentSize());
                 }
                 outputStream.flush();
-                System.out.println(String.format("Sent size of %d to client '%s'.",
+                System.out.println(String.format("Sent size of '%d' to client '%s'.",
                         tableCurrentTrade.getCurrentSize(), socket.toString()));
             }
             break;
@@ -412,7 +413,7 @@ public class NetworkServer {
                 }
                 outputStream.flush();
 
-                System.out.println(String.format("Sent id set to client %s",
+                System.out.println(String.format("Sent id set to client '%s'.",
                         socket.toString()));
             }
             break;
@@ -430,6 +431,7 @@ public class NetworkServer {
         tableAssetType = new JDBCAssetTypeDataSource();
         tableOrg = new JDBCOrganisationDataSource();
         tableUser = new JDBCUserDataSource();
+        tableCurrentTrade = new JDBCCurrentDataSource();
 
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             serverSocket.setSoTimeout(SOCKET_ACCEPT_TIMEOUT);
