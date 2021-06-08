@@ -374,7 +374,7 @@ public class NetworkServer {
             case GET_ORGTRADE: {
                 final String organisation = (String) inputStream.readObject();
                 synchronized (tableCurrentTrade) {
-                    final Trade currentTrades = tableCurrentTrade.getBuySell(organisation);
+                    final Trade currentTrades = tableCurrentTrade.getOrgTrade(organisation);
 
                     outputStream.writeObject(currentTrades);
                     if (currentTrades != null) {
