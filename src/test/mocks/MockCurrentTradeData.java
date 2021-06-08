@@ -1,22 +1,22 @@
 package test.mocks;
 
-import common.CurrentTrades;
+import common.Trade;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Mock class to mock the functionality of UserData to use without a database
+ * Mock class to mock the functionality of CurrentTradeData to use without a database
  *
  * @author Dylan Holmes-Brown
  */
 public class MockCurrentTradeData {
-    private List<CurrentTrades> tradeList;
-    private List<CurrentTrades> getList;
+    private List<Trade> tradeList;
+    private List<Trade> getList;
 
     /**
-     * Constructor initialises the user list
+     * Constructor initialises the current trade list
      */
     public MockCurrentTradeData() {
         tradeList = new ArrayList<>();
@@ -28,12 +28,12 @@ public class MockCurrentTradeData {
      *
      * @param trade A currentTrade to add
      */
-    public void add(CurrentTrades trade) {
+    public void add(Trade trade) {
         // Check to see if the trade has already been added
         if (!tradeList.contains(trade)) {
             tradeList.add(trade);
         }
-        // List already contains the user
+        // List already contains the current trade
         else {
             throw new IllegalArgumentException();
         }
@@ -45,7 +45,7 @@ public class MockCurrentTradeData {
      * @param key the key to delete
      */
     public void remove (Object key) {
-        // If the key is in the list remove the user
+        // If the key is in the list remove the current trade
         if (tradeList.contains(key)) {
             tradeList.remove(key);
         }
@@ -61,7 +61,7 @@ public class MockCurrentTradeData {
      * @param key the trade to retrieve
      * @return the CurrentTrade object related to the name.
      */
-    public CurrentTrades get(Object key) {
+    public Trade get(Object key) {
         // Loop through the entire list
         for (int i = 0; i< tradeList.size(); i++) {
             // Check if the key is in the list

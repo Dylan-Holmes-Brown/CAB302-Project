@@ -1,6 +1,6 @@
 package common.sql;
 
-import common.CurrentTrades;
+import common.Trade;
 
 import javax.swing.*;
 
@@ -33,7 +33,7 @@ public class CurrentData {
      *
      * @param trade A trade to add to the current_trades table.
      */
-    public void add(CurrentTrades trade) {
+    public void add(Trade trade) {
 
         // Check to see if the user has already been added
         if (!listModel.contains(trade)) {
@@ -64,7 +64,7 @@ public class CurrentData {
      * @param key the type of trade to retrieve.
      * @return the CurrentTrades object related to the id.
      */
-    public CurrentTrades getType(Object key) { return currentData.getBuySell((String) key); }
+    public Trade getType(Object key) { return currentData.getBuySell((String) key); }
 
     /**
      * Retrieves trade details from the model.
@@ -72,7 +72,7 @@ public class CurrentData {
      * @param key the org to retrieve.
      * @return the CurrentTrades object related to the id.
      */
-    public CurrentTrades getOrg(Object key) { return currentData.getOrgTrade((String) key); }
+    public Trade getOrg(Object key) { return currentData.getOrgTrade((String) key); }
 
     /**
      * Accessor for the list model.

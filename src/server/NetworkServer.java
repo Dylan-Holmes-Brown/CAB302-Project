@@ -1,7 +1,7 @@
 package server;
 
 import common.AssetType;
-import common.CurrentTrades;
+import common.Trade;
 import common.Organisation;
 import common.User;
 import common.sql.AssetTypeDataSource;
@@ -347,7 +347,7 @@ public class NetworkServer {
             CurrentTrade Commands
              */
             case ADD_TRADE: {
-                final CurrentTrades a = (CurrentTrades) inputStream.readObject();
+                final Trade a = (Trade) inputStream.readObject();
                 synchronized (tableCurrentTrade) {
                     tableCurrentTrade.addTrade(a);
                 }
@@ -359,7 +359,7 @@ public class NetworkServer {
             case GET_BUY_SELL: {
                 final String type = (String) inputStream.readObject();
                 synchronized (tableCurrentTrade) {
-                    final CurrentTrades currentTrades = tableCurrentTrade.getBuySell(type);
+                    final Trade currentTrades = tableCurrentTrade.getBuySell(type);
 
                     outputStream.writeObject(currentTrades);
                     if (currentTrades != null) {
@@ -374,7 +374,7 @@ public class NetworkServer {
             case GET_ORGTRADE: {
                 final String organisation = (String) inputStream.readObject();
                 synchronized (tableCurrentTrade) {
-                    final CurrentTrades currentTrades = tableCurrentTrade.getBuySell(organisation);
+                    final Trade currentTrades = tableCurrentTrade.getBuySell(organisation);
 
                     outputStream.writeObject(currentTrades);
                     if (currentTrades != null) {

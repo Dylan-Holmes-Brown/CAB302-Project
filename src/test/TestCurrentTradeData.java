@@ -1,6 +1,6 @@
 package test;
 
-import common.CurrentTrades;
+import common.Trade;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import test.mocks.MockCurrentTradeData;
@@ -10,19 +10,22 @@ import java.util.List;
 
 public class TestCurrentTradeData {
 
-    private List<CurrentTrades> tradeList;
+    private List<Trade> tradeList;
     private MockCurrentTradeData data;
-    private CurrentTrades trade;
-    private CurrentTrades trade2;
-    private CurrentTrades trade3;
+    private Trade trade;
+    private Trade trade2;
+    private Trade trade3;
 
+    /**
+     * Before each test initialise any current trade data for the tests
+     */
     @BeforeEach @Test
     public void setupTradeList() {
         tradeList = new ArrayList<>();
         data = new MockCurrentTradeData();
-        trade = new CurrentTrades("Buy", "org1", "CPU", 10, 40, new Date(2021, 06, 06));
-        trade2 = new CurrentTrades("Sell", "org1", "CPU", 10, 40, new Date(2021, 06, 06));
-        trade3 = new CurrentTrades("Buy", "org3", "CPU", 10, 40, new Date(2021, 06, 06));
+        trade = new Trade("Buy", "org1", "CPU", 10, 40, new Date(2021, 06, 06));
+        trade2 = new Trade("Sell", "org1", "CPU", 10, 40, new Date(2021, 06, 06));
+        trade3 = new Trade("Buy", "org3", "CPU", 10, 40, new Date(2021, 06, 06));
     }
 
     /**
