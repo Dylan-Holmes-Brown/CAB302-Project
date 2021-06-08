@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="test server information, and fixed bug in network server.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestAssetType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestAssetType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestOrganisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestOrganisation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/TestTrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestTrade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/TestUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestUser.java" afterDir="false" />
     </list>
@@ -73,7 +75,7 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestTrade">
+  <component name="RunManager" selected="JUnit.TestOrganisation">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.Main" />
       <module name="Assignment" />
@@ -111,7 +113,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestNetworkServerInfo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestOrganisation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
@@ -120,7 +122,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.TestNetworkServerInfo" />
+      <option name="MAIN_CLASS_NAME" value="test.TestOrganisation" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -159,18 +161,18 @@
     <list>
       <item itemvalue="Application.Project" />
       <item itemvalue="Application.Main" />
-      <item itemvalue="JUnit.TestNetworkServerInfo" />
       <item itemvalue="JUnit.TestAssetType" />
       <item itemvalue="JUnit.TestTrade" />
       <item itemvalue="JUnit.TestUser" />
+      <item itemvalue="JUnit.TestOrganisation" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestOrganisation" />
         <item itemvalue="JUnit.TestTrade" />
         <item itemvalue="JUnit.TestUser" />
         <item itemvalue="JUnit.TestAssetType" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.TestNetworkServerInfo" />
       </list>
     </recent_temporary>
   </component>
@@ -344,7 +346,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623142386784</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="TestTrade implemented.">
+      <created>1623144475376</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1623144475376</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -384,7 +393,8 @@
     <MESSAGE value="test server information, and fixed bug in network server." />
     <MESSAGE value="TestAssetType implemented." />
     <MESSAGE value="TestUser implemented." />
-    <option name="LAST_COMMIT_MESSAGE" value="TestUser implemented." />
+    <MESSAGE value="TestTrade implemented." />
+    <option name="LAST_COMMIT_MESSAGE" value="TestTrade implemented." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestUserData.ic" NAME="TestUserData Coverage Results" MODIFIED="1622968537128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

@@ -8,6 +8,7 @@ import common.User;
 public class TestUser {
     User user;
     User user2;
+
     @BeforeEach @Test
     public void setupUser()
     {

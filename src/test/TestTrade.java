@@ -8,6 +8,7 @@ import java.sql.Date;
 public class TestTrade {
     Trade trade;
     Date date;
+
     @BeforeEach @Test
     public void setupTrade()
     {

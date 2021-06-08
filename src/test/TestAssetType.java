@@ -6,6 +6,7 @@ import common.AssetType;
 
 public class TestAssetType {
     AssetType asset;
+
     @BeforeEach @Test
     public void setupAssetType()
     {
