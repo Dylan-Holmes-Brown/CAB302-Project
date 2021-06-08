@@ -3,10 +3,7 @@ package Views;
 import javax.swing.*;
 import java.io.Serializable;
 import client.NetworkDataSource;
-import common.CurrentTrades;
-import common.HashPassword;
-import common.Organisation;
-import common.User;
+import common.Trade;
 import common.sql.AssetTypeData;
 import common.sql.CurrentData;
 import common.sql.UserData;
@@ -241,7 +238,7 @@ public class addingtrade extends JFrame implements Serializable {
      * int i = Integer.parseInt(s.trim());
      * @param tra
      */
-    private void display(CurrentTrades tra) {
+    private void display(Trade tra) {
         if (tra != null) {
             traPriceField.setText(String.valueOf(tra.getPrice()));
             assetQField.setText(String.valueOf(tra.getQuantity()));
@@ -317,7 +314,7 @@ public class addingtrade extends JFrame implements Serializable {
          * or display error
          */
         private void createPressed() {
-            CurrentTrades t = new CurrentTrades();
+            Trade t = new Trade();
             String selectedValue = dropDownBox.getSelectedItem().toString();
 
             // If all fields are filled in continue
@@ -325,10 +322,10 @@ public class addingtrade extends JFrame implements Serializable {
                     && !traPriceField.equals("") && !assetQField.equals("")&& (buyButton.isSelected() || sellButton.isSelected())) {
 
                 if (buyButton.isSelected()) {
-                    t = new CurrentTrades();
+                    t = new Trade();
                 }
                 else if (sellButton.isSelected()) {
-                    t = new CurrentTrades();
+                    t = new Trade();
                 }
 
 

@@ -6,7 +6,7 @@ import java.sql.Date;
  * @author Dylan Holmes-Brown
  */
 
-public class CurrentTrades {
+public class Trade {
     private static final long serialVersionUID = 40L;
     private int id;
     private String buySell;
@@ -16,9 +16,9 @@ public class CurrentTrades {
     private int price;
     private Date date;
 
-    public CurrentTrades(){}
+    public Trade(){}
 
-    public CurrentTrades(String buySell, String org, String asset, int quantity, int price, Date date) {
+    public Trade(String buySell, String org, String asset, int quantity, int price, Date date) {
         this.buySell = buySell;
         this.organisation = org;
         this.asset = asset;

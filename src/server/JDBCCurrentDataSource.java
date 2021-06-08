@@ -1,6 +1,6 @@
 package server;
 
-import common.CurrentTrades;
+import common.Trade;
 import common.sql.CurrentDataSource;
 
 import java.sql.*;
@@ -62,9 +62,9 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
     }
 
     /**
-     * @see CurrentDataSource#addTrade(CurrentTrades)
+     * @see CurrentDataSource#addTrade(Trade)
      */
-    public void addTrade(CurrentTrades trades) {
+    public void addTrade(Trade trades) {
         try {
             addTrade.setString(1, trades.getBuySell());
             addTrade.setString(2, trades.getOrganisation());
@@ -82,8 +82,8 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
     /**
      * @see CurrentDataSource#getBuySell(String)
      */
-    public CurrentTrades getBuySell(String type) {
-        CurrentTrades trades = new CurrentTrades();
+    public Trade getBuySell(String type) {
+        Trade trades = new Trade();
         ResultSet resultSet = null;
 
         try {
@@ -106,8 +106,8 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
     /**
      * @see CurrentDataSource#getOrgTrade(String)
      */
-    public CurrentTrades getOrgTrade(String organisation) {
-        CurrentTrades trades = new CurrentTrades();
+    public Trade getOrgTrade(String organisation) {
+        Trade trades = new Trade();
         ResultSet resultSet = null;
 
         try {
