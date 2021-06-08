@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="test server information, and fixed bug in network server.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestTrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestTrade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/TestUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestUser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +73,7 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestAssetType">
+  <component name="RunManager" selected="JUnit.TestTrade">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.Main" />
       <module name="Assignment" />
@@ -109,21 +111,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestHashPassword" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Assignment" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.TestHashPassword" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TestNetworkServerInfo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Assignment" />
       <extension name="coverage">
@@ -139,7 +126,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestTradeHistory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestTrade" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
@@ -148,7 +135,22 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.TestTradeHistory" />
+      <option name="MAIN_CLASS_NAME" value="test.TestTrade" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.TestUser" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -157,18 +159,18 @@
     <list>
       <item itemvalue="Application.Project" />
       <item itemvalue="Application.Main" />
-      <item itemvalue="JUnit.TestTradeHistory" />
-      <item itemvalue="JUnit.TestHashPassword" />
       <item itemvalue="JUnit.TestNetworkServerInfo" />
       <item itemvalue="JUnit.TestAssetType" />
+      <item itemvalue="JUnit.TestTrade" />
+      <item itemvalue="JUnit.TestUser" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestTrade" />
+        <item itemvalue="JUnit.TestUser" />
         <item itemvalue="JUnit.TestAssetType" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.TestNetworkServerInfo" />
-        <item itemvalue="JUnit.TestHashPassword" />
-        <item itemvalue="JUnit.TestTradeHistory" />
       </list>
     </recent_temporary>
   </component>
@@ -335,7 +337,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623141108778</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="TestUser implemented.">
+      <created>1623142386784</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1623142386784</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -374,7 +383,8 @@
     <MESSAGE value="minor refactor of currentTrades to Trade, and testing for trade history and hashpassword" />
     <MESSAGE value="test server information, and fixed bug in network server." />
     <MESSAGE value="TestAssetType implemented." />
-    <option name="LAST_COMMIT_MESSAGE" value="TestAssetType implemented." />
+    <MESSAGE value="TestUser implemented." />
+    <option name="LAST_COMMIT_MESSAGE" value="TestUser implemented." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestUserData.ic" NAME="TestUserData Coverage Results" MODIFIED="1622968537128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

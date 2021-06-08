@@ -28,7 +28,7 @@ public class TestUser {
         user.setUsername("Dale");
         assertEquals("Dale", user.getUsername());
         user2.setUsername("Calvin");
-        assertEquals("Calvin", user.getUsername());
+        assertEquals("Calvin", user2.getUsername());
     }
 
     @Test
@@ -42,9 +42,9 @@ public class TestUser {
     public void testSetPassword()
     {
         user.setPassword("abcd");
-        assertEquals("adbc", user.getPassword());
+        assertEquals("abcd", user.getPassword());
         user2.setPassword("dcba");
-        assertEquals("dcba", user.getPassword());
+        assertEquals("dcba", user2.getPassword());
     }
 
     @Test
