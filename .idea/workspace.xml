@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="minor refactor of currentTrades to Trade, and testing for trade history and hashpassword">
-      <change afterPath="$PROJECT_DIR$/src/test/TestNetworkServerInfo.java" afterDir="false" />
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="test server information, and fixed bug in network server.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/NetworkDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/NetworkDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Trade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/CurrentData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/CurrentData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/sql/CurrentDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/CurrentDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/JDBCCurrentDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCCurrentDataSource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/NetworkServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/NetworkServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,25 +78,25 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestNetworkServerInfo">
+  <component name="RunManager" selected="Application.Project">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="server.Main" />
+      <module name="Assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Project" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="15" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Assignment" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestAssetTypeData and 3 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Assignment" />
-      <option name="TEST_OBJECT" value="pattern" />
-      <patterns>
-        <pattern testClass="test.TestAssetTypeData" />
-        <pattern testClass="test.TestCurrentTradeData" />
-        <pattern testClass="test.TestOrganisationData" />
-        <pattern testClass="test.TestUserData" />
-      </patterns>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -158,19 +163,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Project" />
-      <item itemvalue="JUnit.TestAssetTypeData and 3 more" />
       <item itemvalue="JUnit.TestUserData" />
       <item itemvalue="JUnit.TestTradeHistory" />
       <item itemvalue="JUnit.TestHashPassword" />
       <item itemvalue="JUnit.TestNetworkServerInfo" />
+      <item itemvalue="Application.Main" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.TestNetworkServerInfo" />
         <item itemvalue="JUnit.TestHashPassword" />
         <item itemvalue="JUnit.TestTradeHistory" />
         <item itemvalue="JUnit.TestUserData" />
-        <item itemvalue="JUnit.TestAssetTypeData and 3 more" />
       </list>
     </recent_temporary>
   </component>
@@ -323,7 +328,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623116465664</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="test server information, and fixed bug in network server.">
+      <created>1623134542232</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1623134542232</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -360,7 +372,8 @@
     <MESSAGE value="Test for all data completed" />
     <MESSAGE value="fixed minor issue with test line coverage" />
     <MESSAGE value="minor refactor of currentTrades to Trade, and testing for trade history and hashpassword" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor refactor of currentTrades to Trade, and testing for trade history and hashpassword" />
+    <MESSAGE value="test server information, and fixed bug in network server." />
+    <option name="LAST_COMMIT_MESSAGE" value="test server information, and fixed bug in network server." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestJDBCUser.ic" NAME="TestJDBCUser Coverage Results" MODIFIED="1622538349921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

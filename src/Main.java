@@ -1,9 +1,12 @@
-import common.AssetType;
-import common.User;
+import client.NetworkDataSource;
+import common.Trade;
+import common.sql.CurrentData;
 import server.JDBCCurrentDataSource;
 import server.JDBCUserDataSource;
-import server.JDBCAssetTypeDataSource;
-import server.JDBCOrganisationDataSource;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -13,57 +16,16 @@ import server.JDBCOrganisationDataSource;
  */
 public class Main {
     public static void main(String[] args) throws Exception {
-        JDBCAssetTypeDataSource jdbcAssetTypeDataSource = new JDBCAssetTypeDataSource();
-        JDBCOrganisationDataSource jdbcOrganisationDataSource = new JDBCOrganisationDataSource();
-        JDBCUserDataSource jdbcUserDataSource = new JDBCUserDataSource();
-        JDBCCurrentDataSource jdbcCurrentDataSource = new JDBCCurrentDataSource();
-
-        // Test asset type table
-        AssetType asset = new AssetType("CPU");
-        //jdbcAssetTypeDataSource.addAssetType(asset);
-        //jdbcAssetTypeDataSource.deleteAssetType("CPU");
-
-        //AssetTypes assetGet = jdbcAssetTypeDataSource.getAsset("CPU");
-        //System.out.println(assetGet.assetType);
-
-
-        // Test Organisation table
-//        Organisation org = new Organisation("amazon", 100, "CPU", 10);
-//        //jdbcOrganisationDataSource.addOrg(org);
-//        //jdbcOrganisationDataSource.deleteOrg("amazon");
-//        //jdbcOrganisationDataSource.addCredits("amazon", 20);
-//        //jdbcOrganisationDataSource.removeCredits("amazon", 20);
-//        //jdbcOrganisationDataSource.addQuantity("amazon", "CPU", 10);
-//        //jdbcOrganisationDataSource.removeQuantity("amazon", "CPU", 10);
-//        Organisation orgGet = jdbcOrganisationDataSource.getOrg("amazon");
-//        System.out.println("Organisation:\n" +
-//                orgGet.name + " " +
-//                orgGet.credits + " " +
-//                orgGet.assets + " " +
-//                orgGet.quantity);
-
-        // Test User table
-        User user = new User("Dylan", "1234", "Member", "amazon");
-        //jdbcUserDataSource.addUser(user);
-        //jdbcUserDataSource.deleteUser("Dylan");
-        //jdbcUserDataSource.updatePassword("Dylan", "4321");
-
-        User userGet = jdbcUserDataSource.getUser("Dylan");
-        int size = jdbcUserDataSource.getUserSize();
-        //System.out.println(userGet.username + " " + userGet.password + " " + userGet.accountType + " " + userGet.org +" \nTable size: " + size);
-
-        // Test Current Trades Table
-//        long now = System.currentTimeMillis();
-//        Date sqlDate = new Date(now);
-//        CurrentTrades trades = new CurrentTrades("Buy", "amazon", "CPU", 10, 10, sqlDate);
-//        //jdbcCurrentDataSource.addTrade(trades);
-//        CurrentTrades thisTrade = jdbcCurrentDataSource.getOrgTrade("amazon");
-//        System.out.println("Current Trades\n " +
-//                thisTrade.buySell + " " +
-//                thisTrade.organisation + " " +
-//                thisTrade.asset + " " +
-//                thisTrade.quantity + " " +
-//                thisTrade.price + " " +
-//                thisTrade.date);
+        JDBCCurrentDataSource data = new JDBCCurrentDataSource();
+        Date date = Date.valueOf("2021-06-08");
+        Trade trade = new Trade("Buy", "Apple", "CPU", 4, 20, date);
+        //data.addTrade(trade);
+        System.out.println(data.getCurrentSize());
+        List <Trade> list = new ArrayList<>(data.getBuySell("Buy"));
+//        List <Trade> list2 = new ArrayList<>();
+//        for (int i = 0; i < list.size(); i++) {
+//            list2.add(list.get(i));
+//        }
+//        System.out.println(list2.get(0).getBuySell() + " " + list2.get(1).getBuySell());
     }
 }
