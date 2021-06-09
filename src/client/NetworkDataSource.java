@@ -1,7 +1,7 @@
 package client;
 
 import common.AssetType;
-import common.CurrentTrades;
+import common.Trade;
 import common.Organisation;
 import common.User;
 import common.sql.AssetTypeDataSource;
@@ -13,6 +13,7 @@ import common.sql.CurrentDataSource;
 import java.io.*;
 import java.net.Socket;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
@@ -427,7 +428,7 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
     Current Trade
      */
     @Override
-    public void addTrade(CurrentTrades trades) {
+    public void addTrade(Trade trades) {
         if (trades == null) {
             throw new IllegalArgumentException("Trade cannot be null");
         }
@@ -443,13 +444,13 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
     }
 
     @Override
-    public CurrentTrades getBuySell(String type) {
+    public Trade getBuySell(String type) {
         try {
             outputStream.writeObject(Commands.GET_BUY_SELL);
             outputStream.writeObject(type);
             outputStream.flush();
 
-            return (CurrentTrades) inputStream.readObject();
+            return (Trade) inputStream.readObject();
         } catch (IOException | ClassNotFoundException | ClassCastException e) {
             e.printStackTrace();
             return null;
@@ -457,13 +458,13 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
     }
 
     @Override
-    public CurrentTrades getOrgTrade(String organisation) {
+    public Trade getOrgTrade(String organisation) {
         try {
             outputStream.writeObject(Commands.GET_USER);
             outputStream.writeObject(organisation);
             outputStream.flush();
 
-            return (CurrentTrades) inputStream.readObject();
+            return (Trade) inputStream.readObject();
         } catch (IOException | ClassNotFoundException | ClassCastException e) {
             e.printStackTrace();
             return null;

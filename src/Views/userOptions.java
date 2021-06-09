@@ -10,7 +10,14 @@ public class userOptions extends JFrame implements Serializable {
     private static JLabel success;
     private static final long serialVersionUID = 68L;
 
-    public userOptions() {
+    Object user;
+
+//    public userOptions(Object user){
+//        this.user = user;
+//    }
+
+    public userOptions(Object user) {
+        this.user = user;
         JLabel label = new JLabel();
         JFrame frame = new JFrame();
         JPanel panel = new JPanel();
@@ -51,9 +58,9 @@ public class userOptions extends JFrame implements Serializable {
 
         frame.setVisible(true);
     }
-
-    public static void main(String[] args){
-
-        new userOptions();
-    }
+//
+//    public static void main(String[] args){
+//
+//        new userOptions();
+//    }
 }

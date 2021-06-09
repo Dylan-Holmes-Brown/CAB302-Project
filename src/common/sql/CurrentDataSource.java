@@ -1,6 +1,6 @@
 package common.sql;
 
-import common.CurrentTrades;
+import common.Trade;
 
 import java.util.Set;
 
@@ -16,7 +16,7 @@ public interface CurrentDataSource {
      *
      * @param trades CurrentTrade to add
      */
-    void addTrade(CurrentTrades trades);
+    void addTrade(Trade trades);
 
     /**
      * Deletes a CurrentTrade from the table.
@@ -31,7 +31,7 @@ public interface CurrentDataSource {
      * @param type The type of trade
      * @return all details of CurrentTrades given the trades
      */
-    CurrentTrades getBuySell(String type);
+    Trade getBuySell(String type);
 
     /**
      * Get all current trades given the organisation
@@ -39,7 +39,7 @@ public interface CurrentDataSource {
      * @param organisation the name of the organisation to search for
      * @return all details in CurrentTrades object
      */
-    CurrentTrades getOrgTrade(String organisation);
+    Trade getOrgTrade(String organisation);
 
     /**
      * Gets the number of organisations in the table.

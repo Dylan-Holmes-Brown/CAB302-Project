@@ -9,11 +9,17 @@ import common.sql.UserData;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
 
+/**
+ * Initialises the admin interface for the addingUserList UI. Button listeners are included
+ * as sub-classes of this class
+ *
+ * @author Dylan Holmes-Brown
+ * @author Laku Jackson
+ */
 
 public class addingUserList extends JFrame implements Serializable {
 
@@ -292,6 +298,7 @@ public class addingUserList extends JFrame implements Serializable {
      * Handles events for the buttons on the UI
      *
      * @author Dylan
+     * @author Laku
      */
     private class ButtonListener implements ActionListener {
         /**

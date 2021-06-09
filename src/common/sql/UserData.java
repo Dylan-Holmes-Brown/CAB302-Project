@@ -18,7 +18,8 @@ public class UserData {
 
     /**
      * Constructor initializes the list model that holds names as Strings and
-     * attempts to read any data saved from previous invocations of the
+     * attempts to read any data saved
+     * from previous invocations of the
      * application.
      */
     public UserData(UserDataSource dataSource) {

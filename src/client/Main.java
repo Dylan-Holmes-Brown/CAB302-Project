@@ -1,9 +1,7 @@
 package client;
 
 import javax.swing.*;
-import common.sql.AssetTypeData;
 import Views.*;
-import common.sql.OrganisationData;
 import common.sql.UserData;
 
 /**

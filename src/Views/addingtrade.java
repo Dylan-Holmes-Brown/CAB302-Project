@@ -3,7 +3,7 @@ package Views;
 import javax.swing.*;
 import java.io.Serializable;
 import client.NetworkDataSource;
-import common.*;
+import common.Trade;
 import common.sql.AssetTypeData;
 import common.sql.CurrentData;
 import common.sql.UserData;
@@ -238,7 +238,7 @@ public class addingtrade extends JFrame implements Serializable {
      * int i = Integer.parseInt(s.trim());
      * @param tra
      */
-    private void display(CurrentTrades tra) {
+    private void display(Trade tra) {
         if (tra != null) {
             traPriceField.setText(String.valueOf(tra.getPrice()));
             assetQField.setText(String.valueOf(tra.getQuantity()));
@@ -314,8 +314,7 @@ public class addingtrade extends JFrame implements Serializable {
          * or display error
          */
         private void createPressed() {
-            CurrentTrades t = new CurrentTrades();
-            //User
+            Trade t = new Trade();
             String selectedValue = dropDownBox.getSelectedItem().toString();
 
             // If all fields are filled in continue
@@ -323,10 +322,10 @@ public class addingtrade extends JFrame implements Serializable {
                     && !traPriceField.equals("") && !assetQField.equals("")&& (buyButton.isSelected() || sellButton.isSelected())) {
 
                 if (buyButton.isSelected()) {
-                    t = new CurrentTrades();
+                    t = new Trade();
                 }
                 else if (sellButton.isSelected()) {
-                    t = new CurrentTrades();
+                    t = new Trade();
                 }
 
 
@@ -367,7 +366,7 @@ public class addingtrade extends JFrame implements Serializable {
         public void valueChanged(ListSelectionEvent e) {
             if (tradeList.getSelectedValue() != null
                     && !tradeList.getSelectedValue().equals("")) {
-                display(trades.getType(tradeList.getSelectedValue()));
+                //display(trades..get(tradeList.getSelectedValue()));
             }
         }
     }
