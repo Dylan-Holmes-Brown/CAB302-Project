@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="ignore">
-      <change afterPath="$PROJECT_DIR$/src/common/sql/TradeHistoryData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/sql/TradeHistoryDataSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/JDBCTradeHistoryDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/NetworkDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/NetworkDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/sql/Commands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/JDBCCurrentDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/JDBCCurrentDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/NetworkServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/NetworkServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestAssetType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestAssetType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestOrganisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestOrganisation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestTrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestTrade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestUser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -335,7 +332,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623199090332</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Created and implemented trade history database and server.">
+      <created>1623225667752</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1623225667752</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -374,7 +378,8 @@
     <MESSAGE value="ignore" />
     <MESSAGE value="user object can now be passed to other classes" />
     <MESSAGE value="ran into an nullPointerException with passing user object" />
-    <option name="LAST_COMMIT_MESSAGE" value="ran into an nullPointerException with passing user object" />
+    <MESSAGE value="Created and implemented trade history database and server." />
+    <option name="LAST_COMMIT_MESSAGE" value="Created and implemented trade history database and server." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestUserData.ic" NAME="TestUserData Coverage Results" MODIFIED="1622968537128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
