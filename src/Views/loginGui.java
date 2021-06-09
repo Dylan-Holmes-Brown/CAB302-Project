@@ -33,6 +33,7 @@ public class loginGui extends JFrame implements Serializable {
 
     //user Object
     private User self = new User();
+    private loginGui uObj;
 
     JRadioButton memberButton;
     JRadioButton adminButton;
@@ -181,6 +182,8 @@ public class loginGui extends JFrame implements Serializable {
                 self = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getPassword())), accountType);
                 if (match.getUsername().equals(self.getUsername())){
                     JOptionPane.showMessageDialog(null, "Success");
+                    dispose();
+                    new userOptions(uObj.getSelf().getUsername());
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "Fail");

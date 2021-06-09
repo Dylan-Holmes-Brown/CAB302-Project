@@ -10,6 +10,12 @@ public class userOptions extends JFrame implements Serializable {
     private static JLabel success;
     private static final long serialVersionUID = 68L;
 
+    Object user;
+
+    public userOptions(Object user){
+        this.user = user;
+    }
+
     public userOptions() {
         JLabel label = new JLabel();
         JFrame frame = new JFrame();
