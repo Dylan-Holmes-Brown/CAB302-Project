@@ -33,5 +33,11 @@ public enum Commands {
     GET_ORGTRADE,
     DELETE_TRADE,
     GET_TRADE_SIZE,
-    GET_TRADE_NAME_SET
+    GET_TRADE_NAME_SET,
+
+    // Trade History Commands
+    ADD_TRADE_HISTORY,
+    GET_TRADE_ASSETS,
+    GET_TRADE_HISTORY_SIZE,
+    GET_TRADE_HISTORY_ID_SET
 }
