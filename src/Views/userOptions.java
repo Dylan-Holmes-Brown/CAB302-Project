@@ -12,11 +12,12 @@ public class userOptions extends JFrame implements Serializable {
 
     Object user;
 
-    public userOptions(Object user){
-        this.user = user;
-    }
+//    public userOptions(Object user){
+//        this.user = user;
+//    }
 
-    public userOptions() {
+    public userOptions(Object user) {
+        this.user = user;
         JLabel label = new JLabel();
         JFrame frame = new JFrame();
         JPanel panel = new JPanel();
@@ -57,9 +58,9 @@ public class userOptions extends JFrame implements Serializable {
 
         frame.setVisible(true);
     }
-
-    public static void main(String[] args){
-
-        new userOptions();
-    }
+//
+//    public static void main(String[] args){
+//
+//        new userOptions();
+//    }
 }

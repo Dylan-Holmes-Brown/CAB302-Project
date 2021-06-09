@@ -183,7 +183,7 @@ public class loginGui extends JFrame implements Serializable {
                 if (match.getUsername().equals(self.getUsername())){
                     JOptionPane.showMessageDialog(null, "Success");
                     dispose();
-                    new userOptions(uObj.getSelf().getUsername());
+                    new userOptions(match);
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "Fail");

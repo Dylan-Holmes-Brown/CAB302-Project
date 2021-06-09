@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="user object can now be passed to other classes">
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="ran into an nullPointerException with passing user object">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/loginGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/loginGui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/userOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/userOptions.java" afterDir="false" />
@@ -322,7 +322,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623197217875</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="ran into an nullPointerException with passing user object">
+      <created>1623199090332</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1623199090332</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -360,7 +367,8 @@
     <MESSAGE value="fixed minor issue with test line coverage" />
     <MESSAGE value="ignore" />
     <MESSAGE value="user object can now be passed to other classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="user object can now be passed to other classes" />
+    <MESSAGE value="ran into an nullPointerException with passing user object" />
+    <option name="LAST_COMMIT_MESSAGE" value="ran into an nullPointerException with passing user object" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestCurrentTradeData.ic" NAME="TestCurrentTradeData Coverage Results" MODIFIED="1622963443358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
