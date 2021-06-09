@@ -39,15 +39,18 @@ public class addingtrade extends JFrame implements Serializable {
     CurrentData trades;
     AssetTypeData assetTypeData;
 
+    Object uObj;
+
     /**
      * Constructor sets up UI, adds button listeners and displays
      *
      * @param data the user data from the database
      */
-    public addingtrade(UserData data, AssetTypeData assetTypeData, CurrentData trades) {
+    public addingtrade(Object uObj, UserData data, AssetTypeData assetTypeData, CurrentData trades) {
         this.data = data;
         this.assetTypeData = assetTypeData;
         this.trades = trades;
+        this.uObj = uObj;
         array = new String[assetTypeData.getSize()];
 
         initUI();
@@ -270,8 +273,8 @@ public class addingtrade extends JFrame implements Serializable {
         addWindowListener(listener);
     }
 
-    public static void main(String[] args) {
-        new addingtrade(new UserData (new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()), new CurrentData(new NetworkDataSource()));
+    public void main(String[] args) {
+        new addingtrade(uObj, new UserData (new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()), new CurrentData(new NetworkDataSource()));
     }
 
 

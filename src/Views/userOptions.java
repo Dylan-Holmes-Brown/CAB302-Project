@@ -1,7 +1,14 @@
 package Views;
 
+import client.NetworkDataSource;
+import common.sql.AssetTypeData;
+import common.sql.CurrentData;
+import common.sql.UserData;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 
 public class userOptions extends JFrame implements Serializable {
@@ -10,14 +17,16 @@ public class userOptions extends JFrame implements Serializable {
     private static JLabel success;
     private static final long serialVersionUID = 68L;
 
-    Object user;
+
+    Object uObj;
 
 //    public userOptions(Object user){
 //        this.user = user;
 //    }
 
-    public userOptions(Object user) {
-        this.user = user;
+    public userOptions(Object uObj) {
+        this.uObj = uObj;
+
         JLabel label = new JLabel();
         JFrame frame = new JFrame();
         JPanel panel = new JPanel();
@@ -39,16 +48,27 @@ public class userOptions extends JFrame implements Serializable {
         buttonUser.setBounds(100,150,150, 20);
         panel.add(buttonUser);
 
+        JButton tradeBtn = new JButton("Create Trade");
+        tradeBtn.setBounds(100,180,150, 20);
+        tradeBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new addingtrade(uObj, new UserData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()), new CurrentData(new NetworkDataSource()));
+
+            }
+        });
+        panel.add(tradeBtn);
+
         JButton buttonAnother = new JButton("Asset Graph");
-        buttonAnother.setBounds(100,180,150, 20);
+        buttonAnother.setBounds(100,210,150, 20);
         panel.add(buttonAnother);
 
         JButton buttonother = new JButton("Change Password");
-        buttonother.setBounds(100,210,150, 20);
+        buttonother.setBounds(100,240,150, 20);
         panel.add(buttonother);
 
         JButton buttonLogOut = new JButton("Log Out");
-        buttonLogOut.setBounds(100,240,150, 20);
+        buttonLogOut.setBounds(100,270,150, 20);
         panel.add(buttonLogOut);
 
 
