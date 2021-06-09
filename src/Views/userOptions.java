@@ -39,16 +39,20 @@ public class userOptions extends JFrame implements Serializable {
         buttonUser.setBounds(100,150,150, 20);
         panel.add(buttonUser);
 
+        JButton tradeBtn = new JButton("Create Trade");
+        tradeBtn.setBounds(100,180,150, 20);
+        panel.add(tradeBtn);
+
         JButton buttonAnother = new JButton("Asset Graph");
-        buttonAnother.setBounds(100,180,150, 20);
+        buttonAnother.setBounds(100,210,150, 20);
         panel.add(buttonAnother);
 
-        JButton buttonother = new JButton("Change Password");
-        buttonother.setBounds(100,210,150, 20);
-        panel.add(buttonother);
+        JButton btnOther = new JButton("Change Password");
+        btnOther.setBounds(100,240,150, 20);
+        panel.add(btnOther);
 
         JButton buttonLogOut = new JButton("Log Out");
-        buttonLogOut.setBounds(100,240,150, 20);
+        buttonLogOut.setBounds(100,270,150, 20);
         panel.add(buttonLogOut);
 
 
