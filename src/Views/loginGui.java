@@ -31,6 +31,9 @@ public class loginGui extends JFrame implements Serializable {
     private static JLabel passLabel;
     private static JPasswordField passField;
 
+    //user Object
+    private User self = new User();
+
     JRadioButton memberButton;
     JRadioButton adminButton;
     JButton login;
@@ -175,8 +178,8 @@ public class loginGui extends JFrame implements Serializable {
 
                 // ver
                 User match = data.get(userField.getText());
-                User u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getPassword())), accountType);
-                if (match.getUsername().equals(u.getUsername())){
+                self = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getPassword())), accountType);
+                if (match.getUsername().equals(self.getUsername())){
                     JOptionPane.showMessageDialog(null, "Success");
                 }
                 else {
@@ -206,5 +209,8 @@ public class loginGui extends JFrame implements Serializable {
         }
     }
 
+    public User getSelf() {
+        return self;
+    }
 
 }
