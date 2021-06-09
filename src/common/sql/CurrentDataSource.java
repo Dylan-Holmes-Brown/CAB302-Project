@@ -31,7 +31,7 @@ public interface CurrentDataSource {
      * @param type The type of trade
      * @return all details of CurrentTrades given the trades
      */
-    Trade getBuySell(String type);
+    Set<Integer> typeSet(String type);
 
     /**
      * Get all current trades given the organisation
@@ -39,7 +39,7 @@ public interface CurrentDataSource {
      * @param organisation the name of the organisation to search for
      * @return all details in CurrentTrades object
      */
-    Trade getOrgTrade(String organisation);
+    Set<Integer> orgSet(String organisation);
 
     /**
      * Gets the number of organisations in the table.

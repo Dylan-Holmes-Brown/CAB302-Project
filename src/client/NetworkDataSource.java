@@ -444,30 +444,28 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
     }
 
     @Override
-    public Trade getBuySell(String type) {
+    public Set<Integer> typeSet(String type) {
         try {
             outputStream.writeObject(Commands.GET_BUY_SELL);
             outputStream.writeObject(type);
             outputStream.flush();
-
-            return (Trade) inputStream.readObject();
+            return (Set<Integer>) inputStream.readObject();
         } catch (IOException | ClassNotFoundException | ClassCastException e) {
             e.printStackTrace();
-            return null;
+            return new HashSet<>();
         }
     }
 
     @Override
-    public Trade getOrgTrade(String organisation) {
+    public Set<Integer> orgSet(String org) {
         try {
-            outputStream.writeObject(Commands.GET_USER);
-            outputStream.writeObject(organisation);
+            outputStream.writeObject(Commands.GET_ORGTRADE);
+            outputStream.writeObject(org);
             outputStream.flush();
-
-            return (Trade) inputStream.readObject();
+            return (Set<Integer>) inputStream.readObject();
         } catch (IOException | ClassNotFoundException | ClassCastException e) {
             e.printStackTrace();
-            return null;
+            return new HashSet<>();
         }
     }
 

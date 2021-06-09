@@ -360,30 +360,24 @@ public class NetworkServer {
             case GET_BUY_SELL: {
                 final String type = (String) inputStream.readObject();
                 synchronized (tableCurrentTrade) {
-                    final Trade currentTrades = tableCurrentTrade.getBuySell(type);
-
-                    outputStream.writeObject(currentTrades);
-                    if (currentTrades != null) {
-                        System.out.println(String.format("Sent type trade list to client '%x'.",
-                                socket.toString()));
-                    }
-                    outputStream.flush();
+                    outputStream.writeObject((tableCurrentTrade.typeSet(type)));
                 }
+                outputStream.flush();
+
+                System.out.println(String.format("Sent id of trades with type '%s' to client '%s'.",
+                        type, socket.toString()));
             }
             break;
 
             case GET_ORGTRADE: {
                 final String organisation = (String) inputStream.readObject();
                 synchronized (tableCurrentTrade) {
-                    final Trade currentTrades = tableCurrentTrade.getOrgTrade(organisation);
-
-                    outputStream.writeObject(currentTrades);
-                    if (currentTrades != null) {
-                        System.out.println(String.format("Sent organisation trade list from database to client '%x'.",
-                                currentTrades.getBuySell(), socket.toString()));
-                    }
-                    outputStream.flush();
+                    outputStream.writeObject((tableCurrentTrade.orgSet(organisation)));
                 }
+                outputStream.flush();
+
+                System.out.println(String.format("Sent id of trades from organisation '%s' to client '%s'.",
+                        organisation, socket.toString()));
             }
             break;
 
