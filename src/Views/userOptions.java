@@ -1,7 +1,15 @@
 package Views;
 
+import client.NetworkDataSource;
+import common.User;
+import common.sql.AssetTypeData;
+import common.sql.CurrentData;
+import common.sql.UserData;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 
 public class userOptions extends JFrame implements Serializable {
@@ -10,14 +18,14 @@ public class userOptions extends JFrame implements Serializable {
     private static JLabel success;
     private static final long serialVersionUID = 68L;
 
-    Object user;
 
-//    public userOptions(Object user){
-//        this.user = user;
-//    }
+    User uObj;
 
-    public userOptions(Object user) {
-        this.user = user;
+    public userOptions(User uObj) {
+
+        this.uObj = uObj;
+
+
         JLabel label = new JLabel();
         JFrame frame = new JFrame();
         JPanel panel = new JPanel();
@@ -41,15 +49,21 @@ public class userOptions extends JFrame implements Serializable {
 
         JButton tradeBtn = new JButton("Create Trade");
         tradeBtn.setBounds(100,180,150, 20);
+        tradeBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new addingtrade(uObj, new CurrentData(new NetworkDataSource()));
+            }
+        });
         panel.add(tradeBtn);
 
         JButton buttonAnother = new JButton("Asset Graph");
         buttonAnother.setBounds(100,210,150, 20);
         panel.add(buttonAnother);
 
-        JButton btnOther = new JButton("Change Password");
-        btnOther.setBounds(100,240,150, 20);
-        panel.add(btnOther);
+        JButton buttonother = new JButton("Change Password");
+        buttonother.setBounds(100,240,150, 20);
+        panel.add(buttonother);
 
         JButton buttonLogOut = new JButton("Log Out");
         buttonLogOut.setBounds(100,270,150, 20);

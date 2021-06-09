@@ -2,15 +2,17 @@ package server;
 
 import common.Trade;
 import common.sql.CurrentDataSource;
+import common.sql.TradeHistoryDataSource;
 
 import java.sql.*;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class JDBCCurrentDataSource implements CurrentDataSource {
+public class JDBCTradeHistoryDataSource implements TradeHistoryDataSource {
+
     private Connection connection;
     public static final String CREATE_TABLE =
-            "CREATE TABLE IF NOT EXISTS currentTrades ("
+            "CREATE TABLE IF NOT EXISTS tradeHistory ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + "buySell VARCHAR(4) NOT NULL CHECK(buySell IN ('Buy', 'Sell')),"
                     + "organisation VARCHAR(10) NOT NULL,"
@@ -22,25 +24,19 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
                     + "FOREIGN KEY (asset) REFERENCES asset_types(assetType)"
                     + ");";
 
-    private static final String INSERT_TRADE = "INSERT INTO currentTrades (buySell, organisation, asset, quantity, price, date) VALUES (?, ?, ?, ?, ?, ?);";
+    private static final String INSERT_TRADE = "INSERT INTO tradeHistory (buySell, organisation, asset, quantity, price, date) VALUES (?, ?, ?, ?, ?, ?);";
     private PreparedStatement addTrade;
 
-    private static final String GET_BUYSELL = "SELECT * FROM currentTrades WHERE buySell=?;";
-    private PreparedStatement getBuySell;
+    private static final String GET_ASSETS = "SELECT * FROM tradeHistory WHERE asset=?;";
+    private PreparedStatement getAssets;
 
-    private static final String GET_ORG_TRADES = "SELECT * FROM currentTrades WHERE organisation=?;";
-    private PreparedStatement getOrgTrade;
-
-    private static final String GET_TRADE_ID = "SELECT id FROM currentTrades";
+    private static final String GET_TRADE_ID = "SELECT id FROM tradeHistory";
     private PreparedStatement getTradeID;
-
-    private static final String DELETE_TRADE = "DELETE FROM currentTrades WHERE id=?;";
-    private PreparedStatement deleteTrade;
 
     private static final String COUNT_ROWS = "SELECT COUNT(*) FROM user;";
     private PreparedStatement rowCount;
 
-    public JDBCCurrentDataSource() {
+    public JDBCTradeHistoryDataSource() {
         try {
             connection = DBConnection.getInstance();
 
@@ -49,11 +45,8 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
 
             // Initialise prepared statements for table
             addTrade = connection.prepareStatement(INSERT_TRADE);
-            getBuySell = connection.prepareStatement(GET_BUYSELL);
-            getOrgTrade = connection.prepareStatement(GET_ORG_TRADES);
-            getOrgTrade = connection.prepareStatement(GET_ORG_TRADES);
+            getAssets = connection.prepareStatement(GET_ASSETS);
             getTradeID = connection.prepareStatement(GET_TRADE_ID);
-            deleteTrade = connection.prepareStatement(DELETE_TRADE);
             rowCount = connection.prepareStatement(COUNT_ROWS);
         }
         catch (SQLException sqle) {
@@ -62,9 +55,9 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
     }
 
     /**
-     * @see CurrentDataSource#addTrade(Trade)
+     * @see TradeHistoryDataSource#addTradeHistory(Trade)
      */
-    public void addTrade(Trade trades) {
+    public void addTradeHistory(Trade trades) {
         try {
             addTrade.setString(1, trades.getBuySell());
             addTrade.setString(2, trades.getOrganisation());
@@ -80,60 +73,9 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
     }
 
     /**
-     * @see CurrentDataSource#typeSet(String)
+     * @see TradeHistoryDataSource#getHistorySize()
      */
-    public Set<Integer> typeSet(String type) {
-        Set<Integer> id = new TreeSet<Integer>();
-        ResultSet resultSet = null;
-
-        try {
-            getBuySell.setString(1, type);
-            resultSet = getBuySell.executeQuery();
-            while (resultSet.next()) {
-                id.add(resultSet.getInt("id"));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return id;
-    }
-
-    /**
-     * @see CurrentDataSource#orgSet(String)
-     */
-    public Set<Integer> orgSet(String org) {
-        Set<Integer> id = new TreeSet<Integer>();
-        ResultSet resultSet = null;
-
-        try {
-            getBuySell.setString(1, org);
-            resultSet = getBuySell.executeQuery();
-            while (resultSet.next()) {
-                id.add(resultSet.getInt("id"));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return id;
-    }
-
-    /**
-     * @see CurrentDataSource#deleteTrade(int)
-     */
-    public void deleteTrade(int id) {
-        try {
-            deleteTrade.setInt(1, id);
-            deleteTrade.executeUpdate();
-        }
-        catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-    }
-
-    /**
-     * @see CurrentDataSource#getCurrentSize()
-     */
-    public int getCurrentSize() {
+    public int getHistorySize() {
         ResultSet resultSet = null;
         int rows = 0;
 
@@ -149,7 +91,7 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
     }
 
     /**
-     * @see CurrentDataSource#close()
+     * @see TradeHistoryDataSource#close()
      */
     public void close() {
         try {
@@ -161,9 +103,9 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
     }
 
     /**
-     * @see CurrentDataSource#idSet()
+     * @see TradeHistoryDataSource#historySet()
      */
-    public Set<Integer> idSet() {
+    public Set<Integer> historySet() {
         Set<Integer> name = new TreeSet<Integer>();
         ResultSet resultSet = null;
 
@@ -177,4 +119,25 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
         }
         return name;
     }
+
+    /**
+     * @see TradeHistoryDataSource#assetSet(String)
+     */
+    public Set<Integer> assetSet(String asset) {
+        Set<Integer> id = new TreeSet<Integer>();
+        ResultSet resultSet = null;
+
+        try {
+            getAssets.setString(1, asset);
+            resultSet = getAssets.executeQuery();
+            while (resultSet.next()) {
+                id.add(resultSet.getInt("id"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return id;
+    }
+
+
 }

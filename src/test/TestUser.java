@@ -5,10 +5,19 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import common.User;
 
+/**
+ * Test class for testing all the functionality of the trade object
+ *
+ * @author Adam Buchsbaum
+ */
+
 public class TestUser {
     User user;
     User user2;
 
+    /**
+     * Before each test initialise any used data for the tests
+     */
     @BeforeEach @Test
     public void setupUser()
     {
@@ -16,6 +25,9 @@ public class TestUser {
         user2 = new User("Mitch", "4321", "Admin");
     }
 
+    /**
+     * Test getting an user's username
+     */
     @Test
     public void testGetUsername()
     {
@@ -23,6 +35,9 @@ public class TestUser {
         assertEquals("Mitch", user2.getUsername());
     }
 
+    /**
+     * Test setting an user's username
+     */
     @Test
     public void testSetUsername()
     {
@@ -32,6 +47,9 @@ public class TestUser {
         assertEquals("Calvin", user2.getUsername());
     }
 
+    /**
+     * Test getting an user's password
+     */
     @Test
     public void testGetPassword()
     {
@@ -39,6 +57,9 @@ public class TestUser {
         assertEquals("4321", user2.getPassword());
     }
 
+    /**
+     * Test setting an user's password
+     */
     @Test
     public void testSetPassword()
     {
@@ -48,6 +69,9 @@ public class TestUser {
         assertEquals("dcba", user2.getPassword());
     }
 
+    /**
+     * Test getting an user's account type
+     */
     @Test
     public void testGetAccountType()
     {
@@ -55,6 +79,9 @@ public class TestUser {
         assertEquals("Admin", user2.getAccountType());
     }
 
+    /**
+     * Test setting an user's account type
+     */
     @Test
     public void testSetAccountType()
     {
@@ -64,12 +91,18 @@ public class TestUser {
         assertEquals("Test Admin", user2.getAccountType());
     }
 
+    /**
+     * Test getting an user's organisation
+     */
     @Test
     public void testGetOrganisation()
     {
         assertEquals("Woolies", user.getOrganisationalUnit());
     }
 
+    /**
+     * Test setting an user's organisation
+     */
     @Test
     public void testSetOrganisation()
     {

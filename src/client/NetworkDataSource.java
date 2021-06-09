@@ -4,11 +4,7 @@ import common.AssetType;
 import common.Trade;
 import common.Organisation;
 import common.User;
-import common.sql.AssetTypeDataSource;
-import common.sql.Commands;
-import common.sql.OrganisationDataSource;
-import common.sql.UserDataSource;
-import common.sql.CurrentDataSource;
+import common.sql.*;
 
 import java.io.*;
 import java.net.Socket;
@@ -22,7 +18,7 @@ import java.util.Set;
  *
  * @author Dylan Holmes-Brown
  */
-public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataSource, UserDataSource, CurrentDataSource {
+public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataSource, UserDataSource, CurrentDataSource, TradeHistoryDataSource {
     private static String HOSTNAME;
     private static int PORT;
 
@@ -444,30 +440,28 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
     }
 
     @Override
-    public Trade getBuySell(String type) {
+    public Set<Integer> typeSet(String type) {
         try {
             outputStream.writeObject(Commands.GET_BUY_SELL);
             outputStream.writeObject(type);
             outputStream.flush();
-
-            return (Trade) inputStream.readObject();
+            return (Set<Integer>) inputStream.readObject();
         } catch (IOException | ClassNotFoundException | ClassCastException e) {
             e.printStackTrace();
-            return null;
+            return new HashSet<>();
         }
     }
 
     @Override
-    public Trade getOrgTrade(String organisation) {
+    public Set<Integer> orgSet(String org) {
         try {
-            outputStream.writeObject(Commands.GET_USER);
-            outputStream.writeObject(organisation);
+            outputStream.writeObject(Commands.GET_ORGTRADE);
+            outputStream.writeObject(org);
             outputStream.flush();
-
-            return (Trade) inputStream.readObject();
+            return (Set<Integer>) inputStream.readObject();
         } catch (IOException | ClassNotFoundException | ClassCastException e) {
             e.printStackTrace();
-            return null;
+            return new HashSet<>();
         }
     }
 
@@ -499,6 +493,63 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
     public Set<Integer> idSet() {
         try {
             outputStream.writeObject(Commands.GET_TRADE_NAME_SET);
+            outputStream.flush();
+            return (Set<Integer>) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException | ClassCastException e) {
+            e.printStackTrace();
+            return new HashSet<>();
+        }
+    }
+
+    /*
+    Trade History
+     */
+    @Override
+    public void addTradeHistory(Trade trades) {
+        if (trades == null) {
+            throw new IllegalArgumentException("Trade cannot be null");
+        }
+
+        try {
+            outputStream.writeObject(Commands.ADD_TRADE_HISTORY);
+
+            outputStream.writeObject(trades);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public int getHistorySize() {
+        try {
+            outputStream.writeObject(Commands.GET_TRADE_HISTORY_SIZE);
+            outputStream.flush();
+
+            return inputStream.readInt();
+        } catch (IOException | ClassCastException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    @Override
+    public Set<Integer> historySet() {
+        try {
+            outputStream.writeObject(Commands.GET_TRADE_HISTORY_ID_SET);
+            outputStream.flush();
+            return (Set<Integer>) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException | ClassCastException e) {
+            e.printStackTrace();
+            return new HashSet<>();
+        }
+    }
+
+    @Override
+    public Set<Integer> assetSet(String asset) {
+        try {
+            outputStream.writeObject(Commands.GET_TRADE_ASSETS);
+            outputStream.writeObject(asset);
             outputStream.flush();
             return (Set<Integer>) inputStream.readObject();
         } catch (IOException | ClassNotFoundException | ClassCastException e) {

@@ -15,15 +15,13 @@ import java.awt.event.*;
 import java.io.Serializable;
 
 /**
- * Initialises the admin interface for adding Organisations to the database.
+ * Initialises the admin interface for adding assets to an Organisations.
  * Listeners are included as sub-classes of this class
  *
- * @author Vipin Vijay
  * @author Dylan Holmes-Brown
- * @author Laku Jackson
  */
-public class addingOrganisationList extends JFrame implements Serializable{
-    private static final long serialVersionUID = 62L;
+public class addingOrgAssets extends JFrame implements Serializable{
+    private static final long serialVersionUID = 78L;
 
     private OrganisationData orgData;
     private AssetTypeData assetTypeData;
@@ -45,16 +43,21 @@ public class addingOrganisationList extends JFrame implements Serializable{
     private JButton createButton;
     private JButton backButton;
 
+    private String[] columnNames = { "Asset", "Quantity" };
+    private Object[][] orgArray;
+
     /**
      * Constructor sets up UI, adds button listeners and displays
      *
      * @param orgData the user data from the database
      */
-    public addingOrganisationList(User user, OrganisationData orgData, AssetTypeData assetTypeData) {
+    public addingOrgAssets(User user, OrganisationData orgData, AssetTypeData assetTypeData) {
         this.orgData = orgData;
         this.assetTypeData = assetTypeData;
         this.user = user;
         array = new String[assetTypeData.getSize()];
+        orgArray = new Object[orgData.getSize()][2];
+
 
         // Initialise the UI and listeners
         initUI();
@@ -62,19 +65,6 @@ public class addingOrganisationList extends JFrame implements Serializable{
         addOrganisationListListener(new OrganisationListListener());
         addClosingListener(new ClosingListener());
 
-        // credits field listener to to make sure key pressed is number or backspace
-        orgCreditsField.addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent ke) {
-                // Check the key pressed and set the field to editable
-                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyCode() == 8) {
-                    orgCreditsField.setEditable(true);
-                }
-                // Set the field to uneditable if the key pressed is outside the range
-                else {
-                    orgCreditsField.setEditable(false);
-                }
-            }
-        });
         // asset quantity field listener to to make sure key pressed is number or backspace
         assetQField.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent ke) {
@@ -89,7 +79,7 @@ public class addingOrganisationList extends JFrame implements Serializable{
             }
         });
         // Decorate the frame and make it visible
-        setTitle("Asset Trading System - Create Organisation");
+        setTitle("Asset Trading System - Add Assets to Organisation");
         setMinimumSize(new Dimension(400, 300));
         setLocationRelativeTo(null);
         pack();
@@ -112,11 +102,11 @@ public class addingOrganisationList extends JFrame implements Serializable{
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeOrgListPane());
 
-        contentPane.add(Box.createVerticalStrut(20));
-        contentPane.add(makeOrgFieldPanel());
-
         contentPane.add(Box.createVerticalStrut(5));
         contentPane.add(makeDropDownPanel());
+
+        contentPane.add(Box.createVerticalStrut(20));
+        contentPane.add(makeOrgFieldPanel());
 
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeButtonsPanel());
@@ -140,7 +130,7 @@ public class addingOrganisationList extends JFrame implements Serializable{
     }
 
     /**
-     * Makes a JScrollPane that holds a JList for the list of organisations in the
+     * Makes a JScrollPane that holds a JList for the list of organisation in the
      * organisation types table.
      *
      * @return the scrolling organisation list panel
@@ -174,6 +164,7 @@ public class addingOrganisationList extends JFrame implements Serializable{
         for (int i = 0; i < assetTypeData.getSize(); i++) {
             array[i] = model.getElementAt(i).toString();
         }
+
         // Initialise the Drop down box and panel
         comboBox = new JComboBox(array);
         comboBox.setBackground(Color.white);

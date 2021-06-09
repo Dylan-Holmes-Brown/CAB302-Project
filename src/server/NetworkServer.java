@@ -4,11 +4,7 @@ import common.AssetType;
 import common.Trade;
 import common.Organisation;
 import common.User;
-import common.sql.AssetTypeDataSource;
-import common.sql.Commands;
-import common.sql.OrganisationDataSource;
-import common.sql.UserDataSource;
-import common.sql.CurrentDataSource;
+import common.sql.*;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -39,6 +35,7 @@ public class NetworkServer {
     private OrganisationDataSource tableOrg;
     private UserDataSource tableUser;
     private CurrentDataSource tableCurrentTrade;
+    private TradeHistoryDataSource tableTradeHistory;
 
     public NetworkServer(){
         Properties properties = new Properties();
@@ -360,30 +357,24 @@ public class NetworkServer {
             case GET_BUY_SELL: {
                 final String type = (String) inputStream.readObject();
                 synchronized (tableCurrentTrade) {
-                    final Trade currentTrades = tableCurrentTrade.getBuySell(type);
-
-                    outputStream.writeObject(currentTrades);
-                    if (currentTrades != null) {
-                        System.out.println(String.format("Sent type trade list to client '%x'.",
-                                socket.toString()));
-                    }
-                    outputStream.flush();
+                    outputStream.writeObject((tableCurrentTrade.typeSet(type)));
                 }
+                outputStream.flush();
+
+                System.out.println(String.format("Sent id of trades with type '%s' to client '%s'.",
+                        type, socket.toString()));
             }
             break;
 
             case GET_ORGTRADE: {
                 final String organisation = (String) inputStream.readObject();
                 synchronized (tableCurrentTrade) {
-                    final Trade currentTrades = tableCurrentTrade.getOrgTrade(organisation);
-
-                    outputStream.writeObject(currentTrades);
-                    if (currentTrades != null) {
-                        System.out.println(String.format("Sent organisation trade list from database to client '%x'.",
-                                currentTrades.getBuySell(), socket.toString()));
-                    }
-                    outputStream.flush();
+                    outputStream.writeObject((tableCurrentTrade.orgSet(organisation)));
                 }
+                outputStream.flush();
+
+                System.out.println(String.format("Sent id of trades from organisation '%s' to client '%s'.",
+                        organisation, socket.toString()));
             }
             break;
 
@@ -410,6 +401,52 @@ public class NetworkServer {
             case GET_TRADE_NAME_SET: {
                 synchronized (tableCurrentTrade) {
                     outputStream.writeObject((tableCurrentTrade.idSet()));
+                }
+                outputStream.flush();
+
+                System.out.println(String.format("Sent id set to client '%s'.",
+                        socket.toString()));
+            }
+            break;
+
+            /*
+            Trade History Commands
+             */
+            case ADD_TRADE_HISTORY: {
+                final Trade trade = (Trade) inputStream.readObject();
+                synchronized (tableTradeHistory) {
+                    tableTradeHistory.addTradeHistory(trade);
+                }
+                System.out.println(String.format("Added trade history '%s' to database from client '%s'.",
+                        trade.getID(), socket.toString()));
+            }
+            break;
+
+            case GET_TRADE_ASSETS: {
+                final String asset = (String) inputStream.readObject();
+                synchronized (tableTradeHistory) {
+                    outputStream.writeObject((tableTradeHistory.assetSet(asset)));
+                }
+                outputStream.flush();
+
+                System.out.println(String.format("Sent id of trade history with asset '%s' to client '%s'.",
+                        asset, socket.toString()));
+            }
+            break;
+
+            case GET_TRADE_HISTORY_SIZE: {
+                synchronized (tableTradeHistory) {
+                    outputStream.writeInt(tableTradeHistory.getHistorySize());
+                }
+                outputStream.flush();
+                System.out.println(String.format("Sent size of '%d' to client '%s'.",
+                        tableTradeHistory.getHistorySize(), socket.toString()));
+            }
+            break;
+
+            case GET_TRADE_HISTORY_ID_SET: {
+                synchronized (tableTradeHistory) {
+                    outputStream.writeObject((tableTradeHistory.historySet()));
                 }
                 outputStream.flush();
 

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.io.Serializable;
 import client.NetworkDataSource;
 import common.Trade;
+import common.User;
 import common.sql.AssetTypeData;
 import common.sql.CurrentData;
 import common.sql.UserData;
@@ -35,20 +36,20 @@ public class addingtrade extends JFrame implements Serializable {
     private JButton createButton;
     private JButton deleteButton;
 
-    UserData data;
+    //UserData data;
+
     CurrentData trades;
-    AssetTypeData assetTypeData;
+    User uObj;
 
     /**
      * Constructor sets up UI, adds button listeners and displays
      *
-     * @param data the user data from the database
+     * @param uObj the user data from the database
      */
-    public addingtrade(UserData data, AssetTypeData assetTypeData, CurrentData trades) {
-        this.data = data;
-        this.assetTypeData = assetTypeData;
+    public addingtrade(User uObj, CurrentData trades) {
         this.trades = trades;
-        array = new String[assetTypeData.getSize()];
+        this.uObj = uObj;
+        array = new String[trades.getSize()];
 
         initUI();
         checkListSize();
@@ -100,7 +101,7 @@ public class addingtrade extends JFrame implements Serializable {
     }
 
     private JScrollPane makeNameListPane() {
-        tradeList = new JList(data.getModel());
+        tradeList = new JList(trades.getModel());
         tradeList.setFixedCellWidth(200);
 
         JScrollPane scroller = new JScrollPane(tradeList);
@@ -115,8 +116,8 @@ public class addingtrade extends JFrame implements Serializable {
     }
 
     private JPanel makeDropDownPanel() {
-        ListModel model = assetTypeData.getModel();
-        for (int i = 0; i < assetTypeData.getSize(); i++) {
+        ListModel model = trades.getModel();
+        for (int i = 0; i < trades.getSize(); i++) {
             array[i] = model.getElementAt(i).toString();
 
         }
@@ -230,7 +231,7 @@ public class addingtrade extends JFrame implements Serializable {
      * Checks the size of the organisation table determining the state of the delete button
      */
     private void checkListSize() {
-        deleteButton.setEnabled(data.getSize() != 0);
+        deleteButton.setEnabled(trades.getSize() != 0);
     }
 
     /**
@@ -270,8 +271,8 @@ public class addingtrade extends JFrame implements Serializable {
         addWindowListener(listener);
     }
 
-    public static void main(String[] args) {
-        new addingtrade(new UserData (new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()), new CurrentData(new NetworkDataSource()));
+    public void main(String[] args) {
+        new addingtrade(uObj, new CurrentData(new NetworkDataSource()));
     }
 
 
@@ -380,7 +381,7 @@ public class addingtrade extends JFrame implements Serializable {
          * @see WindowAdapter#windowClosing(WindowEvent)
          */
         public void windowClosing(WindowEvent e) {
-            data.persist();
+            trades.persist();
             System.exit(0);
         }
     }
