@@ -10,10 +10,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.Serializable;
 
 /**
@@ -27,6 +24,7 @@ import java.io.Serializable;
 
 public class adminOptions extends JFrame implements Serializable {
     private static final long serialVersionUID = 63L;
+    private User user;
 
     // JSwing Variables
     private JButton createAsset;
@@ -34,10 +32,6 @@ public class adminOptions extends JFrame implements Serializable {
     private JButton editOrg;
     private JButton createUser;
     private JButton logout;
-
-    // User Object to pass through
-    private User user;
-
 
     /**
      * Constructor sets up UI frame and adds listeners
@@ -49,7 +43,7 @@ public class adminOptions extends JFrame implements Serializable {
         // Initialise the UI and listen for a Button press or window close
         initUI();
         addButtonListeners(new ButtonListener());
-        addWindowListener(new ClosingListener());
+        addClosingListener(new ClosingListener());
 
         // Set up the frame
         setTitle("Asset Trading System - Admin Options");
@@ -95,7 +89,7 @@ public class adminOptions extends JFrame implements Serializable {
         createOrg = new JButton("Create Organisation");
         editOrg = new JButton("Edit Organisation");
         createUser = new JButton("Create User");
-        logout = new JButton("Create Logout");
+        logout = new JButton("Logout");
 
         // Add buttons to the panel
         buttonPanel.add(createAsset);
@@ -121,6 +115,15 @@ public class adminOptions extends JFrame implements Serializable {
         editOrg.addActionListener(listener);
         createUser.addActionListener(listener);
         logout.addActionListener(listener);
+    }
+
+    /**
+     * Adds a listener to the JFrame
+     *
+     * @param listener the listener for the JFrame to use
+     */
+    private void addClosingListener(WindowListener listener) {
+        addWindowListener(listener);
     }
 
     /**
@@ -163,7 +166,7 @@ public class adminOptions extends JFrame implements Serializable {
          * @see WindowAdapter#windowClosing(WindowEvent)
          */
         public void windowClosing(WindowEvent e) {
-            // stop the application
+            // Stop the application
             System.exit(0);
         }
     }
