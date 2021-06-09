@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="addingAssetList fully complete with documentation.">
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="addingOrganisationList fully complete with documentation.">
+      <change afterPath="$PROJECT_DIR$/src/Views/addingOrgAssets.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/addingAssetList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingAssetList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/addingOrganisationList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingOrganisationList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/addingUserList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingUserList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/adminOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/adminOptions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -364,7 +366,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623240530113</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="addingOrganisationList fully complete with documentation.">
+      <created>1623246064058</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1623246064058</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -380,7 +389,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Organisational unit sql done, created foreign keys." />
     <MESSAGE value="Changed to sqlite, Server create for asset types and client side impimented." />
     <MESSAGE value="server.props created and implemented, Asset type table fully complete, minor alterations to Organisation table." />
     <MESSAGE value="we are now able to add and remove credits and quantity of assets in an organisation" />
@@ -405,7 +413,8 @@
     <MESSAGE value="user login documentation completed" />
     <MESSAGE value="Admin option GUI complete with documentation" />
     <MESSAGE value="addingAssetList fully complete with documentation." />
-    <option name="LAST_COMMIT_MESSAGE" value="addingAssetList fully complete with documentation." />
+    <MESSAGE value="addingOrganisationList fully complete with documentation." />
+    <option name="LAST_COMMIT_MESSAGE" value="addingOrganisationList fully complete with documentation." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestJDBCUser.ic" NAME="TestJDBCUser Coverage Results" MODIFIED="1622538349921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

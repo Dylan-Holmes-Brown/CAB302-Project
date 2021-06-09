@@ -29,7 +29,7 @@ public class adminOptions extends JFrame implements Serializable {
     // JSwing Variables
     private JButton createAsset;
     private JButton createOrg;
-    private JButton editOrg;
+    private JButton addOrgAsset;
     private JButton createUser;
     private JButton logout;
 
@@ -87,14 +87,14 @@ public class adminOptions extends JFrame implements Serializable {
         // Initialise Buttons
         createAsset = new JButton("Create Asset");
         createOrg = new JButton("Create Organisation");
-        editOrg = new JButton("Edit Organisation");
+        addOrgAsset = new JButton("Add Assets to Organisation");
         createUser = new JButton("Create User");
         logout = new JButton("Logout");
 
         // Add buttons to the panel
         buttonPanel.add(createAsset);
         buttonPanel.add(createOrg);
-        buttonPanel.add(editOrg);
+        buttonPanel.add(addOrgAsset);
         buttonPanel.add(createUser);
         buttonPanel.add(logout);
 
@@ -112,7 +112,7 @@ public class adminOptions extends JFrame implements Serializable {
     private void addButtonListeners(ActionListener listener) {
         createAsset.addActionListener(listener);
         createOrg.addActionListener(listener);
-        editOrg.addActionListener(listener);
+        addOrgAsset.addActionListener(listener);
         createUser.addActionListener(listener);
         logout.addActionListener(listener);
     }
@@ -144,9 +144,9 @@ public class adminOptions extends JFrame implements Serializable {
             } else if (source == createOrg) {
                 dispose();
                 new addingOrganisationList(user, new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
-            } else if (source == editOrg) {
+            } else if (source == addOrgAsset) {
                 dispose();
-                new addingOrganisationList(user, new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
+                new addingOrgAssets(user, new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
             } else if (source == createUser) {
                 dispose();
                 new addingUserList(user, new UserData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));

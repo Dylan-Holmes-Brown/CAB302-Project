@@ -34,7 +34,7 @@ public class addingUserList extends JFrame implements Serializable {
 
     private JLabel orgLabel;
 
-    Object[] array;
+    private Object[] array;
 
 
     private JRadioButton memberButton;
@@ -42,9 +42,11 @@ public class addingUserList extends JFrame implements Serializable {
     private ButtonGroup radioGroup;
     private JButton createButton;
     private JButton deleteButton;
+    private JButton backButton;
 
     UserData userData;
     OrganisationData orgData;
+    User user;
 
     /**
      * Constructor sets up UI, adds button listeners and displays
@@ -54,6 +56,7 @@ public class addingUserList extends JFrame implements Serializable {
     public addingUserList(User user, UserData userData, OrganisationData orgData) {
         this.userData = userData;
         this.orgData = orgData;
+        this.user = user;
         array = new String[orgData.getSize()];
 
         initUI();
@@ -82,6 +85,8 @@ public class addingUserList extends JFrame implements Serializable {
         Container contentPane = this.getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
+        contentPane.add(Box.createVerticalStrut(20));
+        contentPane.add(makeReturnPane());
         //list of users
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeNameListPane());
@@ -103,6 +108,22 @@ public class addingUserList extends JFrame implements Serializable {
         contentPane.add(makeButtonsPanel());
 
         contentPane.add(Box.createVerticalStrut(20));
+    }
+
+    /**
+     * Create a JPanel with return button in the top right corner
+     *
+     * @return the created JPanel
+     */
+    private JPanel makeReturnPane() {
+        // Initialise the JPanel
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+        // Initialise the button and add to the panel
+        backButton = new JButton("Return to Menu");
+        buttonPanel.add(backButton);
+        return buttonPanel;
     }
 
     private JScrollPane makeNameListPane() {
@@ -264,6 +285,7 @@ public class addingUserList extends JFrame implements Serializable {
     private void addButtonListeners(ActionListener listener) {
         createButton.addActionListener(listener);
         deleteButton.addActionListener(listener);
+        backButton.addActionListener(listener);
     }
 
     private void addNameListListener(ListSelectionListener listener) {
@@ -312,6 +334,12 @@ public class addingUserList extends JFrame implements Serializable {
             else if (source == deleteButton) {
                 deletePressed();
             }
+            else if (source == backButton) {
+                userData.persist();
+                orgData.persist();
+                dispose();
+                new adminOptions(user);
+            }
         }
 
         /**
@@ -344,7 +372,7 @@ public class addingUserList extends JFrame implements Serializable {
 
             // Not all fields are filled in
             else {
-                JOptionPane.showMessageDialog(new JFrame(), "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
             }
             checkListSize();
         }
@@ -352,17 +380,22 @@ public class addingUserList extends JFrame implements Serializable {
         private void deletePressed() {
             int index = userList.getSelectedIndex();
             String username = userField.getText();
-            userData.remove(userList.getSelectedValue());
-            clearFields();
-            index--;
-            if (index == -1) {
-                if (userData.getSize() != 0) {
-                    index = 0;
-                }
+            if (user.getUsername().equals(username)) {
+                JOptionPane.showMessageDialog(null, "Signed in user cannot be removed");
             }
-            userList.setSelectedIndex(index);
-            checkListSize();
-            JOptionPane.showMessageDialog(null, String.format("User '%s' successfully deleted", username));
+            else {
+                userData.remove(userList.getSelectedValue());
+                clearFields();
+                index--;
+                if (index == -1) {
+                    if (userData.getSize() != 0) {
+                        index = 0;
+                    }
+                }
+                userList.setSelectedIndex(index);
+                checkListSize();
+                JOptionPane.showMessageDialog(null, String.format("User '%s' successfully deleted", username));
+            }
         }
     }
 
