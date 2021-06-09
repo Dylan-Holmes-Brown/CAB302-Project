@@ -1,7 +1,5 @@
 package Views;
 
-import client.Main;
-import client.NetworkDataSource;
 import common.HashPassword;
 import common.User;
 import common.sql.UserData;
@@ -31,14 +29,11 @@ public class loginGui extends JFrame implements Serializable {
     private static JLabel passLabel;
     private static JPasswordField passField;
 
-    //user Object
-    private User self = new User();
-
-    JRadioButton memberButton;
-    JRadioButton adminButton;
-    JButton login;
-
-    UserData data;
+    private JRadioButton memberButton;
+    private JRadioButton adminButton;
+    private ButtonGroup radioGroup;
+    private JButton login;
+    private UserData data;
 
     /**
      * Constructor sets up UI, adds button listeners and displays
@@ -49,13 +44,19 @@ public class loginGui extends JFrame implements Serializable {
         // Connect to Database
         this.data = data;
 
+        // Create admin user if it doesn't exist
+        if (data.getSize() == 0) {
+            User admin = new User("admin", HashPassword.hashPassword("1234"), "Admin");
+            data.add(admin);
+        }
+
         // Initialise the UI and listen for a button click
         initUI();
         login.addActionListener(new loginGui.ButtonListener());
         addWindowListener(new loginGui.ClosingListener());
 
         // Set up the frame
-        setTitle("User Login");
+        setTitle("Asset Trading System - User Login");
         setMinimumSize(new Dimension(200, 200));
         pack();
         setLocationRelativeTo(null);
@@ -124,12 +125,16 @@ public class loginGui extends JFrame implements Serializable {
         // Label Buttons
         memberButton = new JRadioButton("Member");
         adminButton = new JRadioButton("Admin");
+        radioGroup = new ButtonGroup();
 
         // Create and space Buttons
         buttonPanel.add(Box.createHorizontalStrut(30));
         buttonPanel.add(memberButton);
         buttonPanel.add(Box.createHorizontalStrut(30));
         buttonPanel.add(adminButton);
+
+        radioGroup.add(memberButton);
+        radioGroup.add(adminButton);
 
         return buttonPanel;
     }
@@ -178,21 +183,33 @@ public class loginGui extends JFrame implements Serializable {
 
                 // ver
                 User match = data.get(userField.getText());
-                self = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getPassword())), accountType);
-                if (match.getUsername().equals(self.getUsername())){
-                    JOptionPane.showMessageDialog(null, "Success");
-                    dispose();
-                    new userOptions(match);
+                User input = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getPassword())), accountType);
+                if (match != null) {
+                    if (match.getUsername().equals(input.getUsername()) && match.getPassword().equals(input.getPassword()) &&
+                            match.getAccountType().equals(input.getAccountType())) {
+                        if (match.getAccountType().equals("Admin")) {
+                            data.persist();
+                            dispose();
+                            new adminOptions(match);
+                        }
+                        else if (match.getAccountType().equals("Member")) {
+                            data.persist();
+                            dispose();
+                            new userOptions(match);
+                        }
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Incorrect Credentials, Please Try Again", "Credentials Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 else {
-                    JOptionPane.showMessageDialog(null, "Fail");
+                    JOptionPane.showMessageDialog(null, String.format("User '%s' cannot be found, Please Try Again", userField.getText()), "Credentials Error", JOptionPane.ERROR_MESSAGE);
                 }
-
             }
 
             // Not all fields are filled in
             else {
-                JOptionPane.showMessageDialog(new JFrame(), "Incorrect credentials!", "Field Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Please Complete all Fields", "Field Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -210,9 +227,4 @@ public class loginGui extends JFrame implements Serializable {
             System.exit(0);
         }
     }
-
-    public User getSelf() {
-        return self;
-    }
-
 }

@@ -1,6 +1,7 @@
 package Views;
 
 import client.NetworkDataSource;
+import common.User;
 import common.sql.AssetTypeData;
 import common.sql.OrganisationData;
 import common.sql.UserData;
@@ -18,7 +19,7 @@ public class adminOptions extends JFrame implements Serializable {
     private static JLabel success;
     private static final long serialVersionUID = 63L;
 
-    public adminOptions() {
+    public adminOptions(User user) {
         JLabel label = new JLabel();
         JFrame frame = new JFrame();
         JPanel panel = new JPanel();
@@ -77,10 +78,5 @@ public class adminOptions extends JFrame implements Serializable {
         frame.setLocationRelativeTo(null);
 
         frame.setVisible(true);
-    }
-
-    public static void main(String[] args){
-
-        new adminOptions();
     }
 }
