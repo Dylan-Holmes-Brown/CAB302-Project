@@ -3,10 +3,7 @@ package Views;
 import javax.swing.*;
 import java.io.Serializable;
 import client.NetworkDataSource;
-import common.CurrentTrades;
-import common.HashPassword;
-import common.Organisation;
-import common.User;
+import common.*;
 import common.sql.AssetTypeData;
 import common.sql.CurrentData;
 import common.sql.UserData;
@@ -318,6 +315,7 @@ public class addingtrade extends JFrame implements Serializable {
          */
         private void createPressed() {
             CurrentTrades t = new CurrentTrades();
+            //User
             String selectedValue = dropDownBox.getSelectedItem().toString();
 
             // If all fields are filled in continue
@@ -369,7 +367,7 @@ public class addingtrade extends JFrame implements Serializable {
         public void valueChanged(ListSelectionEvent e) {
             if (tradeList.getSelectedValue() != null
                     && !tradeList.getSelectedValue().equals("")) {
-                //display(trades..get(tradeList.getSelectedValue()));
+                display(trades.getType(tradeList.getSelectedValue()));
             }
         }
     }
