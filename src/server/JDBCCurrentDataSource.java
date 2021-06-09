@@ -80,51 +80,41 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
     }
 
     /**
-     * @see CurrentDataSource#getBuySell(String)
+     * @see CurrentDataSource#typeSet(String)
      */
-    public Trade getBuySell(String type) {
-        Trade trades = new Trade();
+    public Set<Integer> typeSet(String type) {
+        Set<Integer> id = new TreeSet<Integer>();
         ResultSet resultSet = null;
 
         try {
             getBuySell.setString(1, type);
             resultSet = getBuySell.executeQuery();
-            resultSet.next();
-            trades.setBuySell(resultSet.getString("buySell"));
-            trades.setOrganisation(resultSet.getString("organisation"));
-            trades.setAsset(resultSet.getString("asset"));
-            trades.setQuantity(resultSet.getInt("quantity"));
-            trades.setPrice(resultSet.getInt("price"));
-            trades.setDate(resultSet.getDate("date"));
+            while (resultSet.next()) {
+                id.add(resultSet.getInt("id"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-        catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-        return trades;
+        return id;
     }
 
     /**
-     * @see CurrentDataSource#getOrgTrade(String)
+     * @see CurrentDataSource#orgSet(String)
      */
-    public Trade getOrgTrade(String organisation) {
-        Trade trades = new Trade();
+    public Set<Integer> orgSet(String org) {
+        Set<Integer> id = new TreeSet<Integer>();
         ResultSet resultSet = null;
 
         try {
-            getOrgTrade.setString(1, organisation);
-            resultSet = getOrgTrade.executeQuery();
-            resultSet.next();
-            trades.setBuySell(resultSet.getString("buySell"));
-            trades.setOrganisation(resultSet.getString("organisation"));
-            trades.setAsset(resultSet.getString("asset"));
-            trades.setQuantity(resultSet.getInt("quantity"));
-            trades.setPrice(resultSet.getInt("price"));
-            trades.setDate(resultSet.getDate("date"));
+            getBuySell.setString(1, org);
+            resultSet = getBuySell.executeQuery();
+            while (resultSet.next()) {
+                id.add(resultSet.getInt("id"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-        catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-        return trades;
+        return id;
     }
 
     /**

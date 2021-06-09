@@ -12,6 +12,8 @@ import javax.swing.*;
 public class CurrentData {
     DefaultListModel listModel;
     CurrentDataSource currentData;
+    DefaultListModel typeModel;
+    DefaultListModel orgModel;
 
     /**
      * Constructor initializes the list model that holds names as Strings and
@@ -24,7 +26,6 @@ public class CurrentData {
 
         for (Integer id : currentData.idSet()){
             listModel.addElement(id);
-            System.out.println(id);
         }
     }
 
@@ -61,18 +62,32 @@ public class CurrentData {
     /**
      * Retrieves trade details from the model.
      *
-     * @param key the type of trade to retrieve.
+     * @param type the type of trade to retrieve.
      * @return the CurrentTrades object related to the id.
      */
-    public Trade getType(Object key) { return currentData.getBuySell((String) key); }
+    public ListModel getType(String type)
+    {
+        typeModel = new DefaultListModel();
+        for (Integer id : currentData.typeSet(type)){
+            typeModel.addElement(id);
+        }
+        return typeModel;
+    }
 
     /**
      * Retrieves trade details from the model.
      *
-     * @param key the org to retrieve.
+     * @param org the org to retrieve.
      * @return the CurrentTrades object related to the id.
      */
-    public Trade getOrg(Object key) { return currentData.getOrgTrade((String) key); }
+    public ListModel getOrg(String org)
+    {
+        orgModel = new DefaultListModel();
+        for (Integer id : currentData.orgSet(org)){
+            orgModel.addElement(id);
+        }
+        return orgModel;
+    }
 
     /**
      * Accessor for the list model.

@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="extracting the userObject info">
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="ignore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/addingtrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingtrade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/loginGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/loginGui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/userOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/userOptions.java" afterDir="false" />
@@ -74,7 +75,7 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.addingUserList">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="Assignment" />
@@ -110,8 +111,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="addingOrganisationList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Views.addingOrganisationList" />
+    <configuration name="addingAssetList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Views.addingAssetList" />
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
@@ -123,8 +124,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="addingUserList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Views.addingUserList" />
+    <configuration name="addingOrganisationList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Views.addingOrganisationList" />
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
@@ -153,17 +154,17 @@
       <item itemvalue="Application.Project" />
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.addingtrade" />
+      <item itemvalue="Application.addingAssetList" />
       <item itemvalue="Application.addingOrganisationList" />
       <item itemvalue="Application.Main (1)" />
-      <item itemvalue="Application.addingUserList" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.addingUserList" />
+        <item itemvalue="Application.addingtrade" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main (1)" />
-        <item itemvalue="Application.addingtrade" />
         <item itemvalue="Application.addingOrganisationList" />
+        <item itemvalue="Application.addingAssetList" />
       </list>
     </recent_temporary>
   </component>
@@ -330,14 +331,7 @@
       <option name="project" value="LOCAL" />
       <updated>1623199090332</updated>
     </task>
-    <task id="LOCAL-00023" summary="extracting the userObject info">
-      <created>1623217325292</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1623217325292</updated>
-    </task>
-    <option name="localTasksCounter" value="24" />
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -376,8 +370,7 @@
     <MESSAGE value="ignore" />
     <MESSAGE value="user object can now be passed to other classes" />
     <MESSAGE value="ran into an nullPointerException with passing user object" />
-    <MESSAGE value="extracting the userObject info" />
-    <option name="LAST_COMMIT_MESSAGE" value="extracting the userObject info" />
+    <option name="LAST_COMMIT_MESSAGE" value="ran into an nullPointerException with passing user object" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestUserData_testRemoveNoUser.ic" NAME="TestUserData.testRemoveNoUser Coverage Results" MODIFIED="1622968185439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
