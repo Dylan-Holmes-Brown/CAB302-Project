@@ -1,6 +1,7 @@
 package Views;
 
 import client.NetworkDataSource;
+import common.User;
 import common.sql.AssetTypeData;
 import common.sql.CurrentData;
 import common.sql.UserData;
@@ -18,14 +19,12 @@ public class userOptions extends JFrame implements Serializable {
     private static final long serialVersionUID = 68L;
 
 
-    Object uObj;
+    User uObj;
 
-//    public userOptions(Object user){
-//        this.user = user;
-//    }
+    public userOptions(User uObj) {
 
-    public userOptions(Object uObj) {
         this.uObj = uObj;
+
 
         JLabel label = new JLabel();
         JFrame frame = new JFrame();
@@ -53,8 +52,7 @@ public class userOptions extends JFrame implements Serializable {
         tradeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new addingtrade(uObj, new UserData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()), new CurrentData(new NetworkDataSource()));
-
+                new addingtrade(uObj, new CurrentData(new NetworkDataSource()));
             }
         });
         panel.add(tradeBtn);

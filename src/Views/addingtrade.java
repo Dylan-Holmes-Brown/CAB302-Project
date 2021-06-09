@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.io.Serializable;
 import client.NetworkDataSource;
 import common.Trade;
+import common.User;
 import common.sql.AssetTypeData;
 import common.sql.CurrentData;
 import common.sql.UserData;
@@ -39,16 +40,14 @@ public class addingtrade extends JFrame implements Serializable {
     CurrentData trades;
     AssetTypeData assetTypeData;
 
-    Object uObj;
+    User uObj;
 
     /**
      * Constructor sets up UI, adds button listeners and displays
      *
-     * @param data the user data from the database
+     * @param uObj the user data from the database
      */
-    public addingtrade(Object uObj, UserData data, AssetTypeData assetTypeData, CurrentData trades) {
-        this.data = data;
-        this.assetTypeData = assetTypeData;
+    public addingtrade(User uObj, CurrentData trades) {
         this.trades = trades;
         this.uObj = uObj;
         array = new String[assetTypeData.getSize()];
@@ -274,7 +273,7 @@ public class addingtrade extends JFrame implements Serializable {
     }
 
     public void main(String[] args) {
-        new addingtrade(uObj, new UserData (new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()), new CurrentData(new NetworkDataSource()));
+        new addingtrade(uObj, new CurrentData(new NetworkDataSource()));
     }
 
 

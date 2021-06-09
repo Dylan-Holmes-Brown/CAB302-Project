@@ -33,7 +33,6 @@ public class loginGui extends JFrame implements Serializable {
 
     //user Object
     private User self = new User();
-    //private loginGui uObj;
 
     JRadioButton memberButton;
     JRadioButton adminButton;
