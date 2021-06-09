@@ -2,6 +2,7 @@ package Views;
 
 import client.NetworkDataSource;
 import common.AssetType;
+import common.User;
 import common.sql.AssetTypeData;
 
 import javax.swing.*;
@@ -31,7 +32,7 @@ public class addingAssetList extends JFrame implements Serializable{
      *
      * @param assetTypeData the user data from the database
      */
-    public addingAssetList(AssetTypeData assetTypeData) {
+    public addingAssetList(User user, AssetTypeData assetTypeData) {
         this.assetTypeData = assetTypeData;
 
         initUI();
@@ -270,7 +271,7 @@ public class addingAssetList extends JFrame implements Serializable{
         }
     }
 
-    public static void main(String[] args) {
-        new addingAssetList(new AssetTypeData(new NetworkDataSource()));
-    }
+//    public static void main(String[] args) {
+//        new addingAssetList(new AssetTypeData(new NetworkDataSource()));
+//    }
 }

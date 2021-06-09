@@ -2,6 +2,7 @@ package Views;
 
 import client.NetworkDataSource;
 import common.Organisation;
+import common.User;
 import common.sql.AssetTypeData;
 import common.sql.OrganisationData;
 
@@ -28,7 +29,7 @@ public class addingOrganisationList extends JFrame implements Serializable{
 
     private JLabel assetLabel;
 
-    Object[] array;
+    private Object[] array;
 
     private JButton createButton;
     private JButton deleteButton;
@@ -42,7 +43,7 @@ public class addingOrganisationList extends JFrame implements Serializable{
      *
      * @param orgData the user data from the database
      */
-    public addingOrganisationList(OrganisationData orgData, AssetTypeData assetTypeData) {
+    public addingOrganisationList(User user, OrganisationData orgData, AssetTypeData assetTypeData) {
         this.orgData = orgData;
         this.assetTypeData = assetTypeData;
         array = new String[assetTypeData.getSize()];
@@ -232,9 +233,9 @@ public class addingOrganisationList extends JFrame implements Serializable{
         addWindowListener(listener);
     }
 
-    public static void main(String[] args) {
-        new addingOrganisationList(new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
-    }
+//    public static void main(String[] args) {
+//        new addingOrganisationList(new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
+//    }
 
 
 

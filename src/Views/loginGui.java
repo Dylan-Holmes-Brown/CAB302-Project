@@ -24,7 +24,8 @@ import java.io.Serializable;
 public class loginGui extends JFrame implements Serializable {
 
     private static final long serialVersionUID = 100L;
-    // Jswing Variables
+
+    // JSwing Variables
     private static JLabel userLabel;
     private static JTextField userField;
     private static JLabel passLabel;
@@ -38,7 +39,7 @@ public class loginGui extends JFrame implements Serializable {
     private UserData data;
 
     /**
-     * Constructor sets up UI, adds button listeners and displays
+     * Constructor sets up UI frame and adds button listeners
      *
      * @param data the user data from the database
      */

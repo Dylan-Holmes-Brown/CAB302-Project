@@ -51,7 +51,7 @@ public class addingUserList extends JFrame implements Serializable {
      *
      * @param userData the user data from the database
      */
-    public addingUserList(UserData userData, OrganisationData orgData) {
+    public addingUserList(User user, UserData userData, OrganisationData orgData) {
         this.userData = userData;
         this.orgData = orgData;
         array = new String[orgData.getSize()];
@@ -274,10 +274,10 @@ public class addingUserList extends JFrame implements Serializable {
         addWindowListener(listener);
     }
 
-    public static void main(String[] args) {
-
-        new addingUserList(new UserData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
-    }
+//    public static void main(String[] args) {
+//
+//        new addingUserList(new UserData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
+//    }
 
 
     private class RadioListener implements ActionListener {

@@ -7,76 +7,164 @@ import common.sql.OrganisationData;
 import common.sql.UserData;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.Serializable;
 
-public class adminOptions extends JFrame implements Serializable {
+/**
+ * Displays all admin options, all listeners are included
+ * as sub-classes of this class
+ *
+ * @author Vipin Vijay
+ * @author Dylan Holmes-Brown
+ * @author Laku Jackson
+ */
 
-    private static JLabel userLabel;
-    private static JButton button;
-    private static JLabel success;
+public class adminOptions extends JFrame implements Serializable {
     private static final long serialVersionUID = 63L;
 
+    // JSwing Variables
+    private JButton createAsset;
+    private JButton createOrg;
+    private JButton editOrg;
+    private JButton createUser;
+    private JButton logout;
+
+    // User Object to pass through
+    private User user;
+
+
+    /**
+     * Constructor sets up UI frame and adds listeners
+     *
+     * @param user the user object passed through the menus
+     */
     public adminOptions(User user) {
-        JLabel label = new JLabel();
-        JFrame frame = new JFrame();
-        JPanel panel = new JPanel();
-        panel.setLayout(null);
+        this.user = user;
+        // Initialise the UI and listen for a Button press or window close
+        initUI();
+        addButtonListeners(new ButtonListener());
+        addWindowListener(new ClosingListener());
 
-        frame.setTitle("Admin Options");
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(400,400));
+        // Set up the frame
+        setTitle("Asset Trading System - Admin Options");
+        setMinimumSize(new Dimension(400, 400));
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
 
-        JLabel userNameLabel = new JLabel("Select An Option:");
-        userNameLabel.setBounds(80,80,180,25);
-        panel.add(userNameLabel);
+    /**
+     * Initialises the UI placing the panels in a container with Y Axis
+     * alignment spacing each panel.
+     */
+    private void initUI() {
+        // Create a container for the panels and set the layout
+        Container contentPane = this.getContentPane();
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
-        JButton button = new JButton("Create Organisational Units");
-        button.setBounds(100,120,190, 20);
-        panel.add(button);
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new addingOrganisationList(new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
+        // Add panels to container with padding
+        contentPane.add(Box.createVerticalStrut(20));
+        contentPane.add(makeOptionsPanel());
+        contentPane.add(Box.createVerticalStrut(20));
+    }
+
+    /**
+     * Create a JPanel with all button options
+     *
+     * @return the created JPanel
+     */
+    private JPanel makeOptionsPanel() {
+        // Initialise Border
+        Border empty = BorderFactory.createEmptyBorder();
+        Border border = BorderFactory.createTitledBorder(empty, "Select an Option:");
+
+        // Initialise the JPanel
+        JPanel layout = new JPanel(new GridBagLayout());
+        JPanel buttonPanel = new JPanel();
+        GridLayout buttonLayout = new GridLayout(5, 1, 0, 20);
+        buttonPanel.setLayout(buttonLayout);
+
+        // Initialise Buttons
+        createAsset = new JButton("Create Asset");
+        createOrg = new JButton("Create Organisation");
+        editOrg = new JButton("Edit Organisation");
+        createUser = new JButton("Create User");
+        logout = new JButton("Create Logout");
+
+        // Add buttons to the panel
+        buttonPanel.add(createAsset);
+        buttonPanel.add(createOrg);
+        buttonPanel.add(editOrg);
+        buttonPanel.add(createUser);
+        buttonPanel.add(logout);
+
+        // Add button panel and border to layout panel
+        layout.add(buttonPanel);
+        layout.setBorder(border);
+        return layout;
+    }
+
+    /**
+     * Adds a listener to the buttons
+     *
+     * @param listener the listener for the buttons to use
+     */
+    private void addButtonListeners(ActionListener listener) {
+        createAsset.addActionListener(listener);
+        createOrg.addActionListener(listener);
+        editOrg.addActionListener(listener);
+        createUser.addActionListener(listener);
+        logout.addActionListener(listener);
+    }
+
+    /**
+     * Handles events for the buttons on the UI.
+     *
+     * @author Dylan Holmes-Brown
+     */
+    private class ButtonListener implements ActionListener {
+        /**
+         * @see ActionListener#actionPerformed(ActionEvent)
+         */
+        public void actionPerformed(ActionEvent e) {
+            // Get the button pressed and go to corresponding method
+            JButton source = (JButton) e.getSource();
+            if (source == createAsset) {
+                dispose();
+                new addingAssetList(user, new AssetTypeData(new NetworkDataSource()));
+            } else if (source == createOrg) {
+                dispose();
+                new addingOrganisationList(user, new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
+            } else if (source == editOrg) {
+                dispose();
+                new addingOrganisationList(user, new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
+            } else if (source == createUser) {
+                dispose();
+                new addingUserList(user, new UserData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
+            } else if (source == logout) {
+                dispose();
+                new loginGui(new UserData(new NetworkDataSource()));
             }
-        });
+        }
+    }
 
-        JButton buttonUser = new JButton("Edit Organisational Credits");
-        buttonUser.setBounds(100,150,190, 20);
-        panel.add(buttonUser);
-
-        JButton buttonOptions = new JButton("Edit Assest");
-        buttonOptions.setBounds(100,180,190, 20);
-        panel.add(buttonOptions);
-        buttonOptions.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new addingAssetList(new AssetTypeData(new NetworkDataSource()));
-            }
-        });
-
-        JButton buttonAnother = new JButton("Add New User");
-        buttonAnother.setBounds(100,210,190, 20);
-        panel.add(buttonAnother);
-        buttonAnother.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new addingUserList(new UserData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
-            }
-        });
-
-        JButton buttonLogOut = new JButton("Log Out");
-        buttonLogOut.setBounds(100,240,190, 20);
-        panel.add(buttonLogOut);
-        buttonLogOut.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-               System.exit(0);
-            }
-        });
-
-        frame.getContentPane().add(panel);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-
-        frame.setVisible(true);
+    /**
+     * Implements the windowClosing method from WindowAdapter to persist the contents of the
+     * user table
+     */
+    private class ClosingListener extends WindowAdapter {
+        /**
+         * @see WindowAdapter#windowClosing(WindowEvent)
+         */
+        public void windowClosing(WindowEvent e) {
+            // stop the application
+            System.exit(0);
+        }
     }
 }
