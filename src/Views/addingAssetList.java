@@ -12,6 +12,14 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
 
+/**
+ * Initialises the admin interface for adding Assets to the database.
+ * Listeners are included as sub-classes of this class
+ *
+ * @author Vipin Vijay
+ * @author Dylan Holmes-Brown
+ * @author Laku Jackson
+ */
 public class addingAssetList extends JFrame implements Serializable{
     private static final long serialVersionUID = 62L;
     private AssetTypeData assetTypeData;
@@ -59,10 +67,13 @@ public class addingAssetList extends JFrame implements Serializable{
         // Add panels to container with padding
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeReturnPane());
+
         contentPane.add(Box.createVerticalStrut(15));
         contentPane.add(makeNameListPane());
+
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeUserFieldPanel());
+
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeButtonsPanel());
         contentPane.add(Box.createVerticalStrut(20));
@@ -91,7 +102,7 @@ public class addingAssetList extends JFrame implements Serializable{
      * @return the scrolling name list panel
      */
     private JScrollPane makeNameListPane() {
-        // Initialise the JList and JScrolerPane
+        // Initialise the JList and JScrollerPane
         assetList = new JList(assetTypeData.getModel());
         assetList.setFixedCellWidth(200);
         JScrollPane scroller = new JScrollPane(assetList);
@@ -172,6 +183,7 @@ public class addingAssetList extends JFrame implements Serializable{
 
     /**
      * Display the Asset details in the field
+     *
      * @param asset the asset to display
      */
     private void display(AssetType asset) {
@@ -223,7 +235,8 @@ public class addingAssetList extends JFrame implements Serializable{
             JButton source = (JButton) e.getSource();
             if (source == createButton) {
                 createPressed();
-            } else if (source == backButton) {
+            }
+            else if (source == backButton) {
                 assetTypeData.persist();
                 dispose();
                 new adminOptions(user);
@@ -231,7 +244,7 @@ public class addingAssetList extends JFrame implements Serializable{
         }
 
         /**
-         * When the create user button is pressed, add the user information to the database
+         * When the create user button is pressed, add the asset information to the database
          * or display error
          */
         private void createPressed() {
@@ -269,7 +282,7 @@ public class addingAssetList extends JFrame implements Serializable{
             // and does not have an empty string
             if (assetList.getSelectedValue() != null
                     && !assetList.getSelectedValue().equals("")) {
-                // Display the asset in the asset field
+                // Display the asset
                 display(assetTypeData.get(assetList.getSelectedValue()));
             }
         }
