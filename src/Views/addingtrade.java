@@ -36,10 +36,9 @@ public class addingtrade extends JFrame implements Serializable {
     private JButton createButton;
     private JButton deleteButton;
 
-    UserData data;
-    CurrentData trades;
-    AssetTypeData assetTypeData;
+    //UserData data;
 
+    CurrentData trades;
     User uObj;
 
     /**
@@ -50,7 +49,7 @@ public class addingtrade extends JFrame implements Serializable {
     public addingtrade(User uObj, CurrentData trades) {
         this.trades = trades;
         this.uObj = uObj;
-        array = new String[assetTypeData.getSize()];
+        array = new String[trades.getSize()];
 
         initUI();
         checkListSize();
@@ -102,7 +101,7 @@ public class addingtrade extends JFrame implements Serializable {
     }
 
     private JScrollPane makeNameListPane() {
-        tradeList = new JList(data.getModel());
+        tradeList = new JList(trades.getModel());
         tradeList.setFixedCellWidth(200);
 
         JScrollPane scroller = new JScrollPane(tradeList);
@@ -117,8 +116,8 @@ public class addingtrade extends JFrame implements Serializable {
     }
 
     private JPanel makeDropDownPanel() {
-        ListModel model = assetTypeData.getModel();
-        for (int i = 0; i < assetTypeData.getSize(); i++) {
+        ListModel model = trades.getModel();
+        for (int i = 0; i < trades.getSize(); i++) {
             array[i] = model.getElementAt(i).toString();
 
         }
@@ -232,7 +231,7 @@ public class addingtrade extends JFrame implements Serializable {
      * Checks the size of the organisation table determining the state of the delete button
      */
     private void checkListSize() {
-        deleteButton.setEnabled(data.getSize() != 0);
+        deleteButton.setEnabled(trades.getSize() != 0);
     }
 
     /**
@@ -382,7 +381,7 @@ public class addingtrade extends JFrame implements Serializable {
          * @see WindowAdapter#windowClosing(WindowEvent)
          */
         public void windowClosing(WindowEvent e) {
-            data.persist();
+            trades.persist();
             System.exit(0);
         }
     }
