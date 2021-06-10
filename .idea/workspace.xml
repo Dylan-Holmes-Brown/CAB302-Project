@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="hopefully we can now create a trade">
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="bid arena removed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/addingTrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingTrade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/updatePassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/updatePassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Trade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/buyArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/buyArena.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -393,7 +391,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623300808955</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="bid arena removed">
+      <created>1623301783779</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1623301783779</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -409,7 +414,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update password for user" />
     <MESSAGE value="Organisation Server side implemented" />
     <MESSAGE value="Hashing finally done" />
     <MESSAGE value="Unit Testing for JDBCUserDataSource started just need to test exceptions" />
@@ -434,7 +438,8 @@
     <MESSAGE value="addingUserList fully complete, need documentation, addingOrgAssets needs work." />
     <MESSAGE value="updatePassword fully complete, documentation for this and addingUserList complete" />
     <MESSAGE value="hopefully we can now create a trade" />
-    <option name="LAST_COMMIT_MESSAGE" value="hopefully we can now create a trade" />
+    <MESSAGE value="bid arena removed" />
+    <option name="LAST_COMMIT_MESSAGE" value="bid arena removed" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestCurrentTradeData.ic" NAME="TestCurrentTradeData Coverage Results" MODIFIED="1622963443358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
