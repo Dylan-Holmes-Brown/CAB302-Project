@@ -390,13 +390,13 @@ public class addingOrgAssets extends JFrame implements Serializable{
                     if (assetQField != null && !assetQField.getText().equals("")
                             && selectedValue != null) {
                         if (addQuantity.isSelected()) {
-                            input = orgCreditsField.getText();
+                            input = assetQField.getText();
                             inputInt = Integer.parseInt(input);
                             orgData.addQuantity(orgBox.getSelectedItem(), assetBox.getSelectedItem().toString(), inputInt);
                             JOptionPane.showMessageDialog(null, String.format("'%s' quantity added to asset '%s' for Organisation '%s' successfully", inputInt, assetBox.getSelectedItem().toString(), orgBox.getSelectedItem().toString()));
                         }
                         else if (removeQuantity.isSelected()) {
-                            input = orgCreditsField.getText();
+                            input = assetQField.getText();
                             inputInt = Integer.parseInt(input);
                             orgData.removeQuantity(orgBox.getSelectedItem(), assetBox.getSelectedItem().toString(), inputInt);
                             JOptionPane.showMessageDialog(null, String.format("'%s' quantity removed from asset '%s' for Organisation '%s' successfully", inputInt, assetBox.getSelectedItem().toString(), orgBox.getSelectedItem().toString()));
