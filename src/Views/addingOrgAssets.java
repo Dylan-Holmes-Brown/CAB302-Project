@@ -1,18 +1,17 @@
 package Views;
 
-import client.NetworkDataSource;
 import common.Organisation;
 import common.User;
 import common.sql.AssetTypeData;
 import common.sql.OrganisationData;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Initialises the admin interface for adding assets to an Organisations.
@@ -26,11 +25,13 @@ public class addingOrgAssets extends JFrame implements Serializable{
     private OrganisationData orgData;
     private AssetTypeData assetTypeData;
     private User user;
-    private Object[] array;
+    private List<String> assetList;
+    private List<String> orgList;
 
     // JSwing Variables
-    private JList orgList;
-    private JComboBox comboBox;
+//    private JList orgList;
+    private JComboBox assetBox;
+    private JComboBox orgBox;
 
     private JLabel orgLabel;
     private JTextField orgField;
@@ -39,12 +40,15 @@ public class addingOrgAssets extends JFrame implements Serializable{
     private JLabel assetQuantity;
     private JTextField assetQField;
     private JLabel assetLabel;
+    private JLabel orgBoxLabel;
 
-    private JButton createButton;
+    private JRadioButton addCredits;
+    private JRadioButton removeCredits;
+    private JRadioButton addQuantity;
+    private JRadioButton removeQuantity;
+    private ButtonGroup radioGroup;
+    private JButton applyButton;
     private JButton backButton;
-
-    private String[] columnNames = { "Asset", "Quantity" };
-    private Object[][] orgArray;
 
     /**
      * Constructor sets up UI, adds button listeners and displays
@@ -55,14 +59,16 @@ public class addingOrgAssets extends JFrame implements Serializable{
         this.orgData = orgData;
         this.assetTypeData = assetTypeData;
         this.user = user;
-        array = new String[assetTypeData.getSize()];
-        orgArray = new Object[orgData.getSize()][2];
+//        array = new String[assetTypeData.getSize()];
+//        orgArray = new Object[orgData.getSize()][2];
+        assetList = new ArrayList<>();
+        orgList = new ArrayList<>();
 
 
         // Initialise the UI and listeners
         initUI();
         addButtonListeners(new ButtonListener());
-        addOrganisationListListener(new OrganisationListListener());
+        addRadioListeners(new RadioListener());
         addClosingListener(new ClosingListener());
 
         // asset quantity field listener to to make sure key pressed is number or backspace
@@ -78,9 +84,22 @@ public class addingOrgAssets extends JFrame implements Serializable{
                 }
             }
         });
+
+        orgCreditsField.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                // Check the key pressed and set the field to editable
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyCode() == 8) {
+                    orgCreditsField.setEditable(true);
+                }
+                // Set the field to uneditable if the key pressed is outside the range
+                else {
+                    orgCreditsField.setEditable(false);
+                }
+            }
+        });
         // Decorate the frame and make it visible
         setTitle("Asset Trading System - Add Assets to Organisation");
-        setMinimumSize(new Dimension(400, 300));
+        setMinimumSize(new Dimension(650, 300));
         setLocationRelativeTo(null);
         pack();
         setVisible(true);
@@ -99,14 +118,11 @@ public class addingOrgAssets extends JFrame implements Serializable{
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeReturnPane());
 
-        contentPane.add(Box.createVerticalStrut(20));
-        contentPane.add(makeOrgListPane());
+        contentPane.add(Box.createVerticalStrut(5));
+        contentPane.add(makeRadioPanel());
 
         contentPane.add(Box.createVerticalStrut(5));
         contentPane.add(makeDropDownPanel());
-
-        contentPane.add(Box.createVerticalStrut(20));
-        contentPane.add(makeOrgFieldPanel());
 
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeButtonsPanel());
@@ -130,27 +146,38 @@ public class addingOrgAssets extends JFrame implements Serializable{
     }
 
     /**
-     * Makes a JScrollPane that holds a JList for the list of organisation in the
-     * organisation types table.
+     * Create a JPanel of radio buttons for the Member and Admin account types
      *
-     * @return the scrolling organisation list panel
+     * @return the button panel created
      */
-    private JScrollPane makeOrgListPane() {
-        // Initialise the JList and JScrollerPane
-        orgList = new JList(orgData.getModel());
-        orgList.setFixedCellWidth(200);
-        JScrollPane scroller = new JScrollPane(orgList);
+    private JPanel makeRadioPanel() {
+        // Initialise the JPanel
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
-        // Set the scroller to display the orgList, initialise the scroll bars
-        scroller.setViewportView(orgList);
-        scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        // Initialise the radio buttons
+        addCredits = new JRadioButton("Add Credits");
+        removeCredits = new JRadioButton("Remove Credits");
+        addQuantity = new JRadioButton("Add Quantity");
+        removeQuantity = new JRadioButton("Remove Quantity");
+        radioGroup = new ButtonGroup();
 
-        // Set Dimensions
-        scroller.setMinimumSize(new Dimension(200, 150));
-        scroller.setPreferredSize(new Dimension(250, 150));
-        scroller.setMaximumSize(new Dimension(250, 200));
-        return scroller;
+        // Add buttons to the panel with padding
+        buttonPanel.add(Box.createHorizontalStrut(30));
+        buttonPanel.add(addCredits);
+        buttonPanel.add(Box.createHorizontalStrut(30));
+        buttonPanel.add(removeCredits);
+        buttonPanel.add(Box.createHorizontalStrut(30));
+        buttonPanel.add(addQuantity);
+        buttonPanel.add(Box.createHorizontalStrut(30));
+        buttonPanel.add(removeQuantity);
+
+        // Add buttons to a button group
+        radioGroup.add(addCredits);
+        radioGroup.add(removeCredits);
+        radioGroup.add(addQuantity);
+        radioGroup.add(removeQuantity);
+        return buttonPanel;
     }
 
     /**
@@ -159,47 +186,40 @@ public class addingOrgAssets extends JFrame implements Serializable{
      * @return the drop down box with all assets
      */
     private JPanel makeDropDownPanel() {
+        // Initialise the JPanel
+        JPanel panel = new JPanel();
+        GroupLayout layout = new GroupLayout(panel);
+        panel.setLayout(layout);
+
         // Initialise the ListModel and array of all elements of the asset table
-        ListModel model = assetTypeData.getModel();
+        ListModel assetModel = assetTypeData.getModel();
         for (int i = 0; i < assetTypeData.getSize(); i++) {
-            array[i] = model.getElementAt(i).toString();
+            assetList.add(assetModel.getElementAt(i).toString());
+        }
+
+        ListModel orgModel = orgData.getModel();
+        for (int i = 0; i < orgData.getSize(); i++) {
+            orgList.add(orgModel.getElementAt(i).toString());
         }
 
         // Initialise the Drop down box and panel
-        comboBox = new JComboBox(array);
-        comboBox.setBackground(Color.white);
-        comboBox.setPrototypeDisplayValue("Text Size");
-        JPanel panel = new JPanel();
-        assetLabel = new JLabel("Asset");
+        assetBox = new JComboBox(assetList.toArray());
+        assetBox.setBackground(Color.white);
+        assetBox.setPrototypeDisplayValue("Text Size");
 
-        // Add the label and drop down box to the panel
-        panel.add(assetLabel);
-        panel.add(comboBox);
-        return panel;
-    }
-
-    /**
-     * Makes a JPanel containing the Organisation name, credits, asset and quantity fields to be
-     * recorded.
-     *
-     * @return a panel containing the organisation fields
-     */
-    private JPanel makeOrgFieldPanel() {
-        // Initialise the JPanel
-        JPanel orgPanel = new JPanel();
-        GroupLayout layout = new GroupLayout(orgPanel);
-        orgPanel.setLayout(layout);
+        orgBox = new JComboBox(orgList.toArray());
+        orgBox.setBackground(Color.white);
+        orgBox.setPrototypeDisplayValue("Text Size");
 
         // Enable auto gaps between each line
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
+        assetLabel = new JLabel("Asset");
+        orgLabel = new JLabel("Organisation");
 
         // Initialise Labels and Fields
-        orgLabel = new JLabel("Organisation Name");
-        orgCredits = new JLabel("Organisation Credits");
-        assetQuantity = new JLabel("Asset Quantity");
-        orgField = new JTextField(30);
-        orgField.setPreferredSize(new Dimension(30, 20));
+        orgCredits = new JLabel("Credits");
+        assetQuantity = new JLabel("Quantity");
         orgCreditsField = new JTextField(30);
         orgCreditsField.setPreferredSize(new Dimension(30, 20));
         assetQField = new JTextField(30);
@@ -209,20 +229,27 @@ public class addingOrgAssets extends JFrame implements Serializable{
         GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
 
         // Two parallel groups 1. contains labels and the other the fields
-        hGroup.addGroup(layout.createParallelGroup().addComponent(orgLabel).addComponent(orgCredits).addComponent(assetQuantity));
-        hGroup.addGroup(layout.createParallelGroup().addComponent(orgField).addComponent(orgCreditsField).addComponent(assetQField));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(orgLabel).addComponent(orgCredits).addComponent(assetLabel).addComponent(assetQuantity));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(orgBox).addComponent(orgCreditsField).addComponent(assetBox).addComponent(assetQField));
         layout.setHorizontalGroup(hGroup);
 
         // Create a sequential group for the vertical axis
         GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(orgLabel).addComponent(orgField));
+                .addComponent(orgLabel).addComponent(orgBox));
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(orgCredits).addComponent(orgCreditsField));
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(assetLabel).addComponent(assetBox));
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(assetQuantity).addComponent(assetQField));
         layout.setVerticalGroup(vGroup);
-        return orgPanel;
+
+        // Set Dimensions
+        panel.setMinimumSize(new Dimension(250, 150));
+        panel.setPreferredSize(new Dimension(300, 150));
+        panel.setMaximumSize(new Dimension(300, 200));
+        return panel;
     }
 
     /**
@@ -234,11 +261,11 @@ public class addingOrgAssets extends JFrame implements Serializable{
         // Initialise the JPanel and create button
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        createButton = new JButton("Create");
+        applyButton = new JButton("Apply");
 
         // Add Create button to panel
         buttonPanel.add(Box.createHorizontalStrut(50));
-        buttonPanel.add(createButton);
+        buttonPanel.add(applyButton);
         buttonPanel.add(Box.createHorizontalStrut(50));
         return buttonPanel;
     }
@@ -253,18 +280,15 @@ public class addingOrgAssets extends JFrame implements Serializable{
     }
 
     /**
-     * Display the Organisation details in the field
+     * Adds a listener to the radio buttons
      *
-     * @param org the organisation to display
+     * @param listener the listener for the radio buttons to use
      */
-    private void display(Organisation org) {
-        // Check that org is not null and set fields to org details
-        if (org != null) {
-            orgField.setText(org.getName());
-            orgCreditsField.setText(String.valueOf(org.getCredits()));
-            assetQField.setText(String.valueOf(org.getQuantity()));
-            comboBox.setSelectedItem(org.getAsset());
-        }
+    private void addRadioListeners(ActionListener listener) {
+        addCredits.addActionListener(listener);
+        removeCredits.addActionListener(listener);
+        addQuantity.addActionListener(listener);
+        removeQuantity.addActionListener(listener);
     }
 
     /**
@@ -273,17 +297,8 @@ public class addingOrgAssets extends JFrame implements Serializable{
      * @param listener the listener for the buttons to use
      */
     private void addButtonListeners(ActionListener listener) {
-        createButton.addActionListener(listener);
+        applyButton.addActionListener(listener);
         backButton.addActionListener(listener);
-    }
-
-    /**
-     * Adds a listener to the organisation list
-     *
-     * @param listener the listener for the list to use
-     */
-    private void addOrganisationListListener(ListSelectionListener listener) {
-        orgList.addListSelectionListener(listener);
     }
 
     /**
@@ -293,6 +308,27 @@ public class addingOrgAssets extends JFrame implements Serializable{
      */
     private void addClosingListener(WindowListener listener) {
         addWindowListener(listener);
+    }
+
+    private class RadioListener implements ActionListener {
+        /**
+         * @see ActionListener#actionPerformed(ActionEvent)
+         */
+        public void actionPerformed(ActionEvent e) {
+            JRadioButton source = (JRadioButton) e.getSource();
+            if (source == addCredits || source == removeCredits) {
+                orgBox.setEnabled(true);
+                orgCreditsField.setEditable(true);
+                assetBox.setEnabled(false);
+                assetQField.setEditable(false);
+            }
+            else if (source == addQuantity || source == removeQuantity) {
+                orgBox.setEnabled(true);
+                orgCreditsField.setEditable(false);
+                assetBox.setEnabled(true);
+                assetQField.setEditable(true);
+            }
+        }
     }
 
     /**
@@ -307,8 +343,8 @@ public class addingOrgAssets extends JFrame implements Serializable{
         public void actionPerformed(ActionEvent e) {
             // Get the button source and check which method to goto according to the source
             JButton source = (JButton) e.getSource();
-            if (source == createButton) {
-                createPressed();
+            if (source == applyButton) {
+                applyPressed();
             }
             else if (source == backButton) {
                 orgData.persist();
@@ -322,43 +358,57 @@ public class addingOrgAssets extends JFrame implements Serializable{
          * When the create user button is pressed, add the organisation information
          * to the database or display error
          */
-        private void createPressed() {
-            // Get drop box value
-            String selectedValue = comboBox.getSelectedItem().toString();
-
-            // If all fields are filled in continue
-            if (orgField.getText() != null && !orgField.getText().equals("")
-                    && !orgCreditsField.equals("") && selectedValue != null && !assetQField.equals("")) {
-                // Add organisation to database and clear fields
-                Organisation o = new Organisation(orgField.getText(), Integer.valueOf(orgCreditsField.getText()), selectedValue, Integer.valueOf(assetQField.getText()));
-                orgData.add(o);
-                clearFields();
-                JOptionPane.showMessageDialog(null, String.format("Organisation '%s' successfully added", o.getName()));
+        private void applyPressed() {
+            String input;
+            int inputInt;
+            if (addCredits.isSelected() || removeCredits.isSelected() || addQuantity.isSelected() || removeQuantity.isSelected()) {
+                if (addCredits.isSelected() || removeCredits.isSelected()) {
+                    // Get drop box value
+                    String selectedValue = orgBox.getSelectedItem().toString();
+                    if (orgCreditsField != null && !orgCreditsField.getText().equals("")
+                            && selectedValue != null) {
+                        if (addCredits.isSelected()) {
+                            input = orgCreditsField.getText();
+                            inputInt = Integer.parseInt(input);
+                            orgData.addCredits(orgBox.getSelectedItem(), inputInt);
+                            JOptionPane.showMessageDialog(null, String.format("'%s' credits added to Organisation '%s' successfully", inputInt, orgBox.getSelectedItem().toString()));
+                        }
+                        else if (removeCredits.isSelected()) {
+                            input = orgCreditsField.getText();
+                            inputInt = Integer.parseInt(input);
+                            orgData.removeCredits(orgBox.getSelectedItem(), inputInt);
+                            JOptionPane.showMessageDialog(null, String.format("'%s' credits removed from Organisation '%s' successfully", inputInt, orgBox.getSelectedItem().toString()));
+                        }
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                else if (addQuantity.isSelected() || removeQuantity.isSelected()) {
+                    // Get drop box value
+                    String selectedValue = assetBox.getSelectedItem().toString();
+                    if (assetQField != null && !assetQField.getText().equals("")
+                            && selectedValue != null) {
+                        if (addQuantity.isSelected()) {
+                            input = orgCreditsField.getText();
+                            inputInt = Integer.parseInt(input);
+                            orgData.addQuantity(orgBox.getSelectedItem(), assetBox.getSelectedItem().toString(), inputInt);
+                            JOptionPane.showMessageDialog(null, String.format("'%s' quantity added to asset '%s' for Organisation '%s' successfully", inputInt, assetBox.getSelectedItem().toString(), orgBox.getSelectedItem().toString()));
+                        }
+                        else if (removeQuantity.isSelected()) {
+                            input = orgCreditsField.getText();
+                            inputInt = Integer.parseInt(input);
+                            orgData.removeQuantity(orgBox.getSelectedItem(), assetBox.getSelectedItem().toString(), inputInt);
+                            JOptionPane.showMessageDialog(null, String.format("'%s' quantity removed from asset '%s' for Organisation '%s' successfully", inputInt, assetBox.getSelectedItem().toString(), orgBox.getSelectedItem().toString()));
+                        }
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
-            // Not all fields are filled in
             else {
                 JOptionPane.showMessageDialog(null, "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
-
-    /**
-     * Implements a ListSelectionListener for making the UI respond when a
-     * different organisation is selected from the list.
-     *
-     * @author Dylan Holmes-Brown
-     */
-    private class OrganisationListListener implements ListSelectionListener {
-        /**
-         * @see ListSelectionListener#valueChanged(ListSelectionEvent)
-         */
-        public void valueChanged(ListSelectionEvent e) {
-            // Check to see that the selected item is not null,
-            // and does not have an empty string
-            if (orgList.getSelectedValue() != null
-                    && !orgList.getSelectedValue().equals("")) {
-                // Display the organisation
-                display(orgData.get(orgList.getSelectedValue()));
             }
         }
     }

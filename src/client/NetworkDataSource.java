@@ -456,6 +456,22 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
     }
 
     @Override
+    public Trade getCurrentTrade(Integer id) {
+        try {
+            // Tell the server to expect the current trades id, and send the details
+            outputStream.writeObject(Commands.GET_CURRENT_TRADE);
+            outputStream.writeObject(id);
+            outputStream.flush();
+
+            // Read the users details from the server
+            return (Trade) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException | ClassCastException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
     public Set<Integer> typeSet(String type) {
         try {
             outputStream.writeObject(Commands.GET_BUY_SELL);

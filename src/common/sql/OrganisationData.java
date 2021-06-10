@@ -102,7 +102,7 @@ public class OrganisationData {
      * @param asset the asset to remove the quantity from
      * @param quantity the quantity amount to remove
      */
-    public void removeCredits(Object key, String asset, int quantity) {
+    public void removeQuantity(Object key, String asset, int quantity) {
         if (listModel.contains(key)) {
             orgData.removeQuantity((String) key, asset, quantity);
         }

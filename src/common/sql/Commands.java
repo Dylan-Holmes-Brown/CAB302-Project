@@ -30,6 +30,7 @@ public enum Commands {
 
     // Current Trade Commands
     ADD_TRADE,
+    GET_CURRENT_TRADE,
     GET_BUY_SELL,
     GET_ORGTRADE,
     DELETE_TRADE,

@@ -1,6 +1,7 @@
 package Views;
 
 import client.NetworkDataSource;
+import common.Organisation;
 import common.User;
 import common.sql.AssetTypeData;
 import common.sql.OrganisationData;
@@ -8,6 +9,7 @@ import common.sql.UserData;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
@@ -24,6 +26,7 @@ import java.io.Serializable;
 public class adminOptions extends JFrame implements Serializable {
     private static final long serialVersionUID = 63L;
     private User user;
+    private OrganisationData orgData;
 
     // JSwing Variables
     private JButton createAsset;
@@ -39,6 +42,7 @@ public class adminOptions extends JFrame implements Serializable {
      */
     public adminOptions(User user) {
         this.user = user;
+        this.orgData = orgData;
         // Initialise the UI and listen for a Button press or window close
         initUI();
         addButtonListeners(new ButtonListener());
