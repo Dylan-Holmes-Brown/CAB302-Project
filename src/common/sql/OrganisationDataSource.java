@@ -61,6 +61,15 @@ public interface OrganisationDataSource {
     Organisation getOrg(String name);
 
     /**
+     * Retrieves a set of assets from the data source that are used in
+     * the name list.
+     *
+     * @param organisation the organisation to get all assets from
+     * @return set of assets.
+     */
+    Set<String> orgAssetSet(String organisation);
+
+    /**
      * Gets the number of organisations in the table.
      *
      * @return size of organisation table.

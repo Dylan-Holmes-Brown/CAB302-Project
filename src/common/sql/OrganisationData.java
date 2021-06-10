@@ -14,6 +14,7 @@ import javax.swing.ListModel;
  */
 public class OrganisationData {
     DefaultListModel listModel;
+    DefaultListModel assetModel;
     OrganisationDataSource orgData;
 
     /**
@@ -119,6 +120,20 @@ public class OrganisationData {
      * @return the Organisation object related to the name.
      */
     public Organisation get(Object key) { return orgData.getOrg((String) key); }
+
+    /**
+     * Retrieves asset details from the model.
+     *
+     * @param organisation the organisation to search through
+     * @return the model of assets
+     */
+    public ListModel getAssets(String organisation) {
+        assetModel = new DefaultListModel();
+        for (String name : orgData.orgAssetSet(organisation)){
+            assetModel.addElement(name);
+        }
+        return assetModel;
+    }
 
     /**
      * Accessor for the list model.

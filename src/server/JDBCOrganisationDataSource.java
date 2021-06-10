@@ -45,6 +45,9 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
     private static final String GET_ORG = "SELECT * FROM organisational_unit WHERE name=?";
     private PreparedStatement getOrg;
 
+    private static final String GET_ASSETS = "SELECT assets FROM organisational_unit WHERE name=?";
+    private PreparedStatement getAssets;
+
     private static final String DELETE_ORG = "DELETE FROM organisational_unit WHERE name=?";
     private PreparedStatement deleteOrg;
 
@@ -66,6 +69,7 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
             removeQuantity = connection.prepareStatement(REMOVE_QUANTITY);
             getOrgNameList = connection.prepareStatement(GET_ORGNAME);
             getOrg = connection.prepareStatement(GET_ORG);
+            getAssets = connection.prepareStatement(GET_ASSETS);
             deleteOrg = connection.prepareStatement(DELETE_ORG);
             rowCount = connection.prepareStatement(COUNT_ROWS);
         }
@@ -167,6 +171,26 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
             sqle.printStackTrace();
         }
         return org;
+    }
+
+    /**
+     * @see OrganisationDataSource#orgAssetSet(String)
+     */
+    public Set<String> orgAssetSet(String organisation) {
+        Set<String> names = new TreeSet<String>();
+        ResultSet resultSet = null;
+
+        try {
+            getAssets.setString(1, organisation);
+            resultSet = getOrgNameList.executeQuery();
+            while (resultSet.next()) {
+                names.add(resultSet.getString("assets"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return names;
     }
 
     /**

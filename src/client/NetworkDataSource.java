@@ -281,6 +281,22 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
     }
 
     /**
+     * @see OrganisationDataSource#orgAssetSet(String)
+     */
+    @Override
+    public Set<String> orgAssetSet(String organisation) {
+        try {
+            outputStream.writeObject(Commands.GET_ASSET_NAME_SET);
+            outputStream.writeObject(organisation);
+            outputStream.flush();
+            return (Set<String>) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException | ClassCastException e) {
+            e.printStackTrace();
+            return new HashSet<>();
+        }
+    }
+
+    /**
      * @see OrganisationDataSource#getOrgSize()
      */
     @Override

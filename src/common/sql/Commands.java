@@ -15,6 +15,7 @@ public enum Commands {
     ADD_QUANTITY,
     REMOVE_QUANTITY,
     GET_ORG,
+    GET_ORG_ASSET_SET,
     DELETE_ORG,
     GET_ORG_SIZE,
     GET_ORG_NAME_SET,
