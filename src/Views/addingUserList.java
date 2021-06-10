@@ -1,6 +1,5 @@
 package Views;
 
-import client.NetworkDataSource;
 import common.HashPassword;
 import common.User;
 import common.sql.OrganisationData;
@@ -24,18 +23,19 @@ import java.io.Serializable;
 public class addingUserList extends JFrame implements Serializable {
 
     private static final long serialVersionUID = 62L;
+    private Object[] array;
+    private UserData userData;
+    private OrganisationData orgData;
+    private User user;
+
+    // JSwing Variables
     private JList userList;
     private JComboBox comboBox;
-
     private JLabel userLabel;
     private JTextField userField;
     private JLabel passLabel;
     private JTextField passField;
-
     private JLabel orgLabel;
-
-    private Object[] array;
-
 
     private JRadioButton memberButton;
     private JRadioButton adminButton;
@@ -44,14 +44,12 @@ public class addingUserList extends JFrame implements Serializable {
     private JButton deleteButton;
     private JButton backButton;
 
-    UserData userData;
-    OrganisationData orgData;
-    User user;
-
     /**
-     * Constructor sets up UI, adds button listeners and displays
+     * Constructor sets up UI, adds listeners and displays
      *
-     * @param userData the user data from the database
+     * @param user the user signed into the system
+     * @param userData the user data accessor to the database
+     * @param orgData the organisation data accessor to the database
      */
     public addingUserList(User user, UserData userData, OrganisationData orgData) {
         this.userData = userData;
@@ -59,18 +57,17 @@ public class addingUserList extends JFrame implements Serializable {
         this.user = user;
         array = new String[orgData.getSize()];
 
+        // Initialise the UI and listeners
         initUI();
-        checkListSize();
 
-        // Add listeners to components
+        checkListSize();
         addRadioListeners(new RadioListener());
         addButtonListeners(new ButtonListener());
         addNameListListener(new NameListListener());
-        addClosingListener(new ClosingListener());
+        addWindowListener(new ClosingListener());
 
-
-        // decorate the frame and make it visible
-        setTitle("Create User");
+        // Decorate the frame and make it visible
+        setTitle("Asset Trading System - Create User");
         setMinimumSize(new Dimension(400, 300));
         setLocationRelativeTo(null);
         pack();
@@ -82,31 +79,28 @@ public class addingUserList extends JFrame implements Serializable {
      * alignment spacing each panel.
      */
     private void initUI() {
+        // Create a container for the panels and set the layout
         Container contentPane = this.getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
+        // Add panels to container with padding
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeReturnPane());
-        //list of users
+
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeNameListPane());
 
-        //user inputs
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeUserFieldPanel());
 
-        //dropdown for organisations
         contentPane.add(Box.createVerticalStrut(5));
         contentPane.add(makeDropDownPanel());
 
-        //radio buttons
         contentPane.add(Box.createVerticalStrut(10));
         contentPane.add(makeRadioPanel());
 
-        //buttons
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeButtonsPanel());
-
         contentPane.add(Box.createVerticalStrut(20));
     }
 
@@ -126,34 +120,51 @@ public class addingUserList extends JFrame implements Serializable {
         return buttonPanel;
     }
 
+    /**
+     * Makes a JScrollPane that holds a JList for the list of names in the
+     * user table.
+     *
+     * @return the scrolling name list panel
+     */
     private JScrollPane makeNameListPane() {
+        // Initialise the JList and JScrollerPane
         userList = new JList(userData.getModel());
         userList.setFixedCellWidth(200);
-
         JScrollPane scroller = new JScrollPane(userList);
+
+        // Set the scroller to display the user list, initialise the scrollbars
         scroller.setViewportView(userList);
         scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        // Set Dimensions
         scroller.setMinimumSize(new Dimension(200, 150));
         scroller.setPreferredSize(new Dimension(250, 150));
         scroller.setMaximumSize(new Dimension(250, 200));
-
         return scroller;
     }
 
+    /**
+     * Create a JPanel holding the drop down box with all available organisations
+     *
+     * @return the drop down box with all organisations
+     */
     private JPanel makeDropDownPanel() {
+        // Initialise the ListModel and array of all elements of the organisation table
         ListModel model = orgData.getModel();
         for (int i = 0; i < orgData.getSize(); i++) {
             array[i] = model.getElementAt(i).toString();
-
         }
+        // Initialise the Drop down box and panel
         comboBox = new JComboBox(array);
         comboBox.setBackground(Color.white);
+        comboBox.setPrototypeDisplayValue("Text Size");
         JPanel panel = new JPanel();
         orgLabel = new JLabel("Organisation");
+
+        // Add the label and drop down box to the panel
         panel.add(orgLabel);
         panel.add(comboBox);
-
         return panel;
     }
 
@@ -164,6 +175,7 @@ public class addingUserList extends JFrame implements Serializable {
      * @return a panel containing the user fields
      */
     private JPanel makeUserFieldPanel() {
+        // Initialise the JPanel
         JPanel userPanel = new JPanel();
         GroupLayout layout = new GroupLayout(userPanel);
         userPanel.setLayout(layout);
@@ -172,11 +184,9 @@ public class addingUserList extends JFrame implements Serializable {
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
 
-        // Label of fields
+        // Initialise Labels and Fields
         userLabel = new JLabel("Username");
         passLabel = new JLabel("Password");
-
-        // Text Fields
         userField = new JTextField(30);
         userField.setPreferredSize(new Dimension(30, 20));
         passField = new JTextField(30);
@@ -201,28 +211,29 @@ public class addingUserList extends JFrame implements Serializable {
     }
 
     /**
-     * Make the two radio dials for account type fields
+     * Create a JPanel of radio buttons for the Member and Admin account types
      *
-     * @return a panel containing the account type fields
+     * @return the button panel created
      */
     private JPanel makeRadioPanel() {
+        // Initialise the JPanel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
-        // Label Buttons
+        // Initialise the radio buttons
         memberButton = new JRadioButton("Member");
         adminButton = new JRadioButton("Admin");
         radioGroup = new ButtonGroup();
 
-        // Create and space Buttons
+        // Add buttons to the panel with padding
         buttonPanel.add(Box.createHorizontalStrut(30));
         buttonPanel.add(memberButton);
         buttonPanel.add(Box.createHorizontalStrut(30));
         buttonPanel.add(adminButton);
 
+        // Add buttons to a button group
         radioGroup.add(memberButton);
         radioGroup.add(adminButton);
-
         return buttonPanel;
     }
 
@@ -232,8 +243,11 @@ public class addingUserList extends JFrame implements Serializable {
      * @return a panel containing the create user button
      */
     private JPanel makeButtonsPanel() {
+        // Initialise the JPanel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+
+        // Initialise the buttons and add them to the panel
         createButton = new JButton("Create");
         deleteButton = new JButton("Delete");
         buttonPanel.add(Box.createHorizontalStrut(50));
@@ -244,26 +258,28 @@ public class addingUserList extends JFrame implements Serializable {
         return buttonPanel;
     }
 
+    /**
+     * Clear all input fields and radio buttons
+     */
     private void clearFields() {
         userField.setText("");
         passField.setText("");
         radioGroup.clearSelection();
-
     }
 
     /**
      * Checks the size of the user table determining the state of the delete button
      */
     private void checkListSize() {
-
         deleteButton.setEnabled(userData.getSize() != 0);
     }
 
     /**
      * Display the user details in the fields
-     * @param user
+     * @param user the selected user to display
      */
     private void display(User user) {
+        // Check that org is not null and set fields to org details
         if (user != null) {
             userField.setText(user.getUsername());
             passField.setText(user.getPassword());
@@ -277,30 +293,35 @@ public class addingUserList extends JFrame implements Serializable {
         }
     }
 
+    /**
+     * Adds a listener to the radio buttons
+     *
+     * @param listener the listener for the radio buttons to use
+     */
     private void addRadioListeners(ActionListener listener) {
         memberButton.addActionListener(listener);
         adminButton.addActionListener(listener);
     }
 
+    /**
+     * Adds a listener to the buttons
+     *
+     * @param listener the listener for the buttons to use
+     */
     private void addButtonListeners(ActionListener listener) {
         createButton.addActionListener(listener);
         deleteButton.addActionListener(listener);
         backButton.addActionListener(listener);
     }
 
+    /**
+     * Adds a listener to the name list
+     *
+     * @param listener the listener for the name list
+     */
     private void addNameListListener(ListSelectionListener listener) {
         userList.addListSelectionListener(listener);
     }
-
-    private void addClosingListener(WindowListener listener) {
-        addWindowListener(listener);
-    }
-
-//    public static void main(String[] args) {
-//
-//        new addingUserList(new UserData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
-//    }
-
 
     private class RadioListener implements ActionListener {
         /**
@@ -317,16 +338,18 @@ public class addingUserList extends JFrame implements Serializable {
         }
     }
     /**
-     * Handles events for the buttons on the UI
+     * Handles events for the login button on the UI.
      *
-     * @author Dylan
-     * @author Laku
+     * @author Vipin Vijay
+     * @author Dylan Holmes-Brown
+     * @author Laku Jackson
      */
     private class ButtonListener implements ActionListener {
         /**
          * @see ActionListener#actionPerformed(ActionEvent)
          */
         public void actionPerformed(ActionEvent e) {
+            // Get the button pressed and go to corresponding method
             JButton source = (JButton) e.getSource();
             if (source == createButton) {
                 createPressed();
@@ -377,13 +400,22 @@ public class addingUserList extends JFrame implements Serializable {
             checkListSize();
         }
 
+        /**
+         * When the delete button is pressed, delete the user information from the database
+         * or display error
+         */
         private void deletePressed() {
+            // Get selected user
             int index = userList.getSelectedIndex();
             String username = userField.getText();
+
+            // Check that the user to be deleted isn't the signed in user
             if (user.getUsername().equals(username)) {
                 JOptionPane.showMessageDialog(null, "Signed in user cannot be removed");
             }
+            // The user is not the user signed in
             else {
+                // Remove user from the database and clear input fields
                 userData.remove(userList.getSelectedValue());
                 clearFields();
                 index--;
@@ -399,13 +431,22 @@ public class addingUserList extends JFrame implements Serializable {
         }
     }
 
+    /**
+     * Implements a ListSelectionListener for making the UI respond when a
+     * different name is selected from the list.
+     *
+     * @author Dylan Holmes-Brown
+     */
     private class NameListListener implements ListSelectionListener {
         /**
          * @see ListSelectionListener#valueChanged(ListSelectionEvent)
          */
         public void valueChanged(ListSelectionEvent e) {
+            // Check to see that the selected item is not null,
+            // and does not have an empty string
             if (userList.getSelectedValue() != null
                     && !userList.getSelectedValue().equals("")) {
+                // Display the user
                 display(userData.get(userList.getSelectedValue()));
             }
         }
@@ -420,6 +461,7 @@ public class addingUserList extends JFrame implements Serializable {
          * @see WindowAdapter#windowClosing(WindowEvent)
          */
         public void windowClosing(WindowEvent e) {
+            // Persist the data and stop the application
             userData.persist();
             System.exit(0);
         }

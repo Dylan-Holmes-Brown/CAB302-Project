@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="addingOrganisationList fully complete with documentation.">
-      <change afterPath="$PROJECT_DIR$/src/Views/addingOrgAssets.java" afterDir="false" />
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="addingUserList fully complete, need documentation, addingOrgAssets needs work.">
+      <change afterPath="$PROJECT_DIR$/src/Views/updatePassword.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/addingOrganisationList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingOrganisationList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/addingUserList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingUserList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/adminOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/adminOptions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/loginGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/loginGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/userOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/userOptions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +64,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../prac08-with-threads" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -111,19 +112,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="addingAssetList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Views.addingAssetList" />
-      <module name="Assignment" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Views.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="addingOrganisationList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Views.addingOrganisationList" />
       <module name="Assignment" />
@@ -150,21 +138,34 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="liveUpdate" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Views.liveUpdate" />
+      <module name="Assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Views.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.Project" />
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.addingtrade" />
-      <item itemvalue="Application.addingAssetList" />
       <item itemvalue="Application.addingOrganisationList" />
       <item itemvalue="Application.Main (1)" />
+      <item itemvalue="Application.liveUpdate" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main (1)" />
+        <item itemvalue="Application.liveUpdate" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.addingtrade" />
         <item itemvalue="Application.addingOrganisationList" />
-        <item itemvalue="Application.addingAssetList" />
       </list>
     </recent_temporary>
   </component>
@@ -373,7 +374,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623246064058</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="addingUserList fully complete, need documentation, addingOrgAssets needs work.">
+      <created>1623249859232</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1623249859232</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -389,7 +397,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Changed to sqlite, Server create for asset types and client side impimented." />
     <MESSAGE value="server.props created and implemented, Asset type table fully complete, minor alterations to Organisation table." />
     <MESSAGE value="we are now able to add and remove credits and quantity of assets in an organisation" />
     <MESSAGE value="update password for user" />
@@ -414,7 +421,8 @@
     <MESSAGE value="Admin option GUI complete with documentation" />
     <MESSAGE value="addingAssetList fully complete with documentation." />
     <MESSAGE value="addingOrganisationList fully complete with documentation." />
-    <option name="LAST_COMMIT_MESSAGE" value="addingOrganisationList fully complete with documentation." />
+    <MESSAGE value="addingUserList fully complete, need documentation, addingOrgAssets needs work." />
+    <option name="LAST_COMMIT_MESSAGE" value="addingUserList fully complete, need documentation, addingOrgAssets needs work." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestJDBCUser.ic" NAME="TestJDBCUser Coverage Results" MODIFIED="1622538349921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

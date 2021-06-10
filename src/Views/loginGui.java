@@ -153,7 +153,6 @@ public class loginGui extends JFrame implements Serializable {
         // Add buttons to a button group
         radioGroup.add(memberButton);
         radioGroup.add(adminButton);
-
         return buttonPanel;
     }
 
@@ -214,7 +213,7 @@ public class loginGui extends JFrame implements Serializable {
             if (userField.getText() != null && !userField.getText().equals("")
                     && !passField.equals("") && (memberButton.isSelected() || adminButton.isSelected())) {
 
-//                // Depending on radio button selected, choose account type
+                // Depending on radio button selected, choose account type
                 if (memberButton.isSelected()) {
                     accountType = "Member";
                 }
