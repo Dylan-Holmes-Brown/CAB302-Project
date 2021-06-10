@@ -28,6 +28,7 @@ public class Trade {
         this.date = date;
     }
 
+
     /**
      * Get the id of the current trade object.
      *

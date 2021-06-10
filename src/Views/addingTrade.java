@@ -12,6 +12,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class addingTrade extends JFrame implements Serializable {
 
@@ -108,7 +111,7 @@ public class addingTrade extends JFrame implements Serializable {
     }
 
     private JPanel makeDropDownPanel() {
-        ListModel model = orgData.getAssets("Apple");
+        ListModel model = orgData.getAssets(user.getOrganisationalUnit());
         for (int i = 0; i < 1; i++) {
             array[i] = model.getElementAt(i).toString();
         }
@@ -296,6 +299,13 @@ public class addingTrade extends JFrame implements Serializable {
             }
         }
 
+        public Date currDate(){
+            DateFormat df = new SimpleDateFormat("dd/MM/yy");
+            Date dateobj = new Date();
+            System.out.println(df.format(dateobj));
+            return dateobj;
+        }
+
         /**
          * When the create user button is pressed, add the user information to the database
          * or display error
@@ -303,18 +313,26 @@ public class addingTrade extends JFrame implements Serializable {
         private void createPressed() {
             Trade t = new Trade();
             String selectedValue = dropDownBox.getSelectedItem().toString();
+            String orderType = "Buy";
+
+            //text field attributes
+            int assetPrice = Integer.valueOf(assetQField.getText());
+            int tradePrice = Integer.valueOf(traPriceField.getText());
+
 
             // If all fields are filled in continue
             if (traPriceField.getText() != null && !traPriceField.getText().equals("")
                     && !traPriceField.equals("") && !assetQField.equals("")&& (buyButton.isSelected() || sellButton.isSelected())) {
 
                 if (buyButton.isSelected()) {
-                    t = new Trade();
+                    orderType = "Buy";
+                    t = new Trade(orderType, user.getOrganisationalUnit(), selectedValue, assetPrice, tradePrice, (java.sql.Date) currDate());
+                    //  public Trade(String buySell, String org, String asset, int quantity, int price, Date date)
                 }
                 else if (sellButton.isSelected()) {
-                    t = new Trade();
+                    orderType = "Sell";
+                    t = new Trade(orderType, user.getOrganisationalUnit(), selectedValue, assetPrice, tradePrice, (java.sql.Date) currDate());
                 }
-
 
                 // Add user to database and clear fields
                 tradeData.add(t);

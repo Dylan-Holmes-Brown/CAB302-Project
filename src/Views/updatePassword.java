@@ -1,13 +1,10 @@
 package Views;
 
-import client.NetworkDataSource;
+
 import common.HashPassword;
 import common.User;
-import common.sql.AssetTypeData;
 import common.sql.UserData;
-
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
