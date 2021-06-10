@@ -4,81 +4,169 @@ import client.NetworkDataSource;
 import common.User;
 import common.sql.AssetTypeData;
 import common.sql.CurrentData;
+import common.sql.OrganisationData;
 import common.sql.UserData;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.Serializable;
 
+/**
+ * Displays all member options, all listeners are included
+ * as sub-classes of this class
+ *
+ * @author Vipin Vijay
+ * @author Dylan Holmes-Brown
+ * @author Laku Jackson
+ */
 public class userOptions extends JFrame implements Serializable {
-    private static JLabel userLabel;
-    private static JButton button;
-    private static JLabel success;
     private static final long serialVersionUID = 68L;
+    private User user;
 
+    // JSwing Variables
+    private JButton createTrade;
+    private JButton viewTrades;
+    private JButton assetHistory;
+    private JButton updatePassword;
+    private JButton logout;
 
-    User uObj;
+    /**
+     * Constructor sets up UI frame and adds listeners
+     *
+     * @param user the user object passed through the menus
+     */
+    public userOptions(User user) {
+        this.user = user;
+        // Initialise the UI and listen for a Button press or window close
+        initUI();
+        addButtonListeners(new ButtonListener());
+        addClosingListener(new ClosingListener());
 
-    public userOptions(User uObj) {
-
-        this.uObj = uObj;
-
-
-        JLabel label = new JLabel();
-        JFrame frame = new JFrame();
-        JPanel panel = new JPanel();
-        panel.setLayout(null);
-
-        frame.setTitle("User Options");
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(400,400));
-
-        JLabel userNameLabel = new JLabel("Select An Option:");
-        userNameLabel.setBounds(80,80,180,25);
-        panel.add(userNameLabel);
-
-        JButton button = new JButton("Buy/Sell");
-        button.setBounds(100,120,150, 20);
-        panel.add(button);
-
-        JButton buttonUser = new JButton("Updates");
-        buttonUser.setBounds(100,150,150, 20);
-        panel.add(buttonUser);
-
-        JButton tradeBtn = new JButton("Create Trade");
-        tradeBtn.setBounds(100,180,150, 20);
-        tradeBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new addingtrade(uObj, new CurrentData(new NetworkDataSource()));
-            }
-        });
-        panel.add(tradeBtn);
-
-        JButton buttonAnother = new JButton("Asset Graph");
-        buttonAnother.setBounds(100,210,150, 20);
-        panel.add(buttonAnother);
-
-        JButton buttonother = new JButton("Change Password");
-        buttonother.setBounds(100,240,150, 20);
-        panel.add(buttonother);
-
-        JButton buttonLogOut = new JButton("Log Out");
-        buttonLogOut.setBounds(100,270,150, 20);
-        panel.add(buttonLogOut);
-
-
-        frame.getContentPane().add(panel);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-
-        frame.setVisible(true);
+        // Set up the frame
+        setTitle("Asset Trading System - Member Options");
+        setMinimumSize(new Dimension(400, 400));
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
-//
-//    public static void main(String[] args){
-//
-//        new userOptions();
-//    }
+
+    /**
+     * Initialises the UI placing the panels in a container with Y Axis
+     * alignment spacing each panel.
+     */
+    private void initUI() {
+        // Create a container for the panels and set the layout
+        Container contentPane = this.getContentPane();
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+
+        // Add panels to container with padding
+        contentPane.add(Box.createVerticalStrut(20));
+        contentPane.add(makeOptionsPanel());
+        contentPane.add(Box.createVerticalStrut(20));
+    }
+
+    /**
+     * Create a JPanel with all button options
+     *
+     * @return the created JPanel
+     */
+    private JPanel makeOptionsPanel() {
+        // Initialise Border
+        Border empty = BorderFactory.createEmptyBorder();
+        Border border = BorderFactory.createTitledBorder(empty, "Select an Option:");
+
+        // Initialise the JPanel
+        JPanel layout = new JPanel(new GridBagLayout());
+        JPanel buttonPanel = new JPanel();
+        GridLayout buttonLayout = new GridLayout(5, 1, 0, 20);
+        buttonPanel.setLayout(buttonLayout);
+
+        // Initialise Buttons
+        createTrade = new JButton("Create Trade");
+        viewTrades = new JButton("View Trades");
+        assetHistory = new JButton("View Asset History");
+        updatePassword = new JButton("Update Password");
+        logout = new JButton("Logout");
+
+        // Add buttons to the panel
+        buttonPanel.add(createTrade);
+        buttonPanel.add(viewTrades);
+        buttonPanel.add(assetHistory);
+        buttonPanel.add(updatePassword);
+        buttonPanel.add(logout);
+
+        // Add button panel and border to layout panel
+        layout.add(buttonPanel);
+        layout.setBorder(border);
+        return layout;
+    }
+
+    /**
+     * Adds a listener to the buttons
+     *
+     * @param listener the listener for the buttons to use
+     */
+    private void addButtonListeners(ActionListener listener) {
+        createTrade.addActionListener(listener);
+        viewTrades.addActionListener(listener);
+        assetHistory.addActionListener(listener);
+        updatePassword.addActionListener(listener);
+        logout.addActionListener(listener);
+    }
+
+    /**
+     * Adds a listener to the JFrame
+     *
+     * @param listener the listener for the JFrame to use
+     */
+    private void addClosingListener(WindowListener listener) {
+        addWindowListener(listener);
+    }
+
+    /**
+     * Handles events for the buttons on the UI.
+     *
+     * @author Dylan Holmes-Brown
+     */
+    private class ButtonListener implements ActionListener {
+        /**
+         * @see ActionListener#actionPerformed(ActionEvent)
+         */
+        public void actionPerformed(ActionEvent e) {
+            // Get the button pressed and go to corresponding method
+            JButton source = (JButton) e.getSource();
+            if (source == createTrade) {
+                dispose();
+                new addingTrade(user, new CurrentData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
+            } else if (source == viewTrades) {
+                dispose();
+                //new addingOrganisationList(user, new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
+            } else if (source == assetHistory) {
+                dispose();
+                //new addingOrgAssets(user, new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
+            } else if (source == updatePassword) {
+                dispose();
+                new updatePassword(user, new UserData(new NetworkDataSource()));
+            } else if (source == logout) {
+                dispose();
+                new loginGui(new UserData(new NetworkDataSource()));
+            }
+        }
+    }
+
+    /**
+     * Implements the windowClosing method from WindowAdapter to persist the contents of the
+     * user table
+     */
+    private class ClosingListener extends WindowAdapter {
+        /**
+         * @see WindowAdapter#windowClosing(WindowEvent)
+         */
+        public void windowClosing(WindowEvent e) {
+            // Stop the application
+            System.exit(0);
+        }
+    }
 }

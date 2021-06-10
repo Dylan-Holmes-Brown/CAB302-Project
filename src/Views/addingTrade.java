@@ -2,21 +2,25 @@ package Views;
 
 import javax.swing.*;
 import java.io.Serializable;
-import client.NetworkDataSource;
+
 import common.Trade;
 import common.User;
-import common.sql.AssetTypeData;
 import common.sql.CurrentData;
-import common.sql.UserData;
+import common.sql.OrganisationData;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 
-public class addingtrade extends JFrame implements Serializable {
+public class addingTrade extends JFrame implements Serializable {
 
-    private static final long serialVersionUID = 62L;
+    private static final long serialVersionUID = 222L;
+    private CurrentData tradeData;
+    private OrganisationData orgData;
+    private User user;
+    private Object[] array;
+
     private JList tradeList;
     private JComboBox dropDownBox;
 
@@ -27,8 +31,6 @@ public class addingtrade extends JFrame implements Serializable {
 
     private JLabel assetLabel;
 
-    Object[] array;
-
     private JRadioButton buyButton;
     private JRadioButton sellButton;
     private ButtonGroup radioGroup;
@@ -36,33 +38,27 @@ public class addingtrade extends JFrame implements Serializable {
     private JButton createButton;
     private JButton deleteButton;
 
-    //UserData data;
-
-    CurrentData trades;
-    User uObj;
-
     /**
      * Constructor sets up UI, adds button listeners and displays
      *
-     * @param uObj the user data from the database
+     * @param user the user data from the database
      */
-    public addingtrade(User uObj, CurrentData trades) {
-        this.trades = trades;
-        this.uObj = uObj;
-        array = new String[trades.getSize()];
+    public addingTrade(User user, CurrentData tradeData, OrganisationData orgData) {
+        this.tradeData = tradeData;
+        this.orgData = orgData;
+        this.user = user;
+        array = new String[tradeData.getSize()];
 
+        // Initialise the UI and listen for a Button press or window close
         initUI();
         checkListSize();
+        addRadioListeners(new addingTrade.RadioListener());
+        addButtonListeners(new addingTrade.ButtonListener());
+        addNameListListener(new addingTrade.NameListListener());
+        addClosingListener(new addingTrade.ClosingListener());
 
-        // Add listeners to components
-        addRadioListeners(new Views.addingtrade.RadioListener());
-        addButtonListeners(new Views.addingtrade.ButtonListener());
-        addNameListListener(new Views.addingtrade.NameListListener());
-        addClosingListener(new Views.addingtrade.ClosingListener());
-
-
-        // decorate the frame and make it visible
-        setTitle("Create Trade");
+        // Decorate the frame and make it visible
+        setTitle("Asset Trading System - Create Trade");
         setMinimumSize(new Dimension(400, 300));
         setLocationRelativeTo(null);
         pack();
@@ -74,34 +70,30 @@ public class addingtrade extends JFrame implements Serializable {
      * alignment spacing each panel.
      */
     private void initUI() {
+        // Create a container for the panels and set the layout
         Container contentPane = this.getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
-        //List of Organisation trades
+        // Add panels to container with padding
         contentPane.add(Box.createVerticalStrut(20));
-        contentPane.add(makeNameListPane());
+        contentPane.add(makeTradeListPane());
 
-        //Input area
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeUserFieldPanel());
 
-        //dropdown for assets
         contentPane.add(Box.createVerticalStrut(5));
         contentPane.add(makeDropDownPanel());
 
-        //radio buttons
         contentPane.add(Box.createVerticalStrut(10));
         contentPane.add(makeRadioPanel());
 
-        //buttons
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeButtonsPanel());
-
         contentPane.add(Box.createVerticalStrut(20));
     }
 
-    private JScrollPane makeNameListPane() {
-        tradeList = new JList(trades.getModel());
+    private JScrollPane makeTradeListPane() {
+        tradeList = new JList(tradeData.getModel());
         tradeList.setFixedCellWidth(200);
 
         JScrollPane scroller = new JScrollPane(tradeList);
@@ -116,10 +108,9 @@ public class addingtrade extends JFrame implements Serializable {
     }
 
     private JPanel makeDropDownPanel() {
-        ListModel model = trades.getModel();
-        for (int i = 0; i < trades.getSize(); i++) {
+        ListModel model = orgData.getAssets("Apple");
+        for (int i = 0; i < 1; i++) {
             array[i] = model.getElementAt(i).toString();
-
         }
         dropDownBox = new JComboBox(array);
         dropDownBox.setBackground(Color.white);
@@ -231,7 +222,7 @@ public class addingtrade extends JFrame implements Serializable {
      * Checks the size of the organisation table determining the state of the delete button
      */
     private void checkListSize() {
-        deleteButton.setEnabled(trades.getSize() != 0);
+        deleteButton.setEnabled(tradeData.getSize() != 0);
     }
 
     /**
@@ -270,11 +261,6 @@ public class addingtrade extends JFrame implements Serializable {
     private void addClosingListener(WindowListener listener) {
         addWindowListener(listener);
     }
-
-    public void main(String[] args) {
-        new addingtrade(uObj, new CurrentData(new NetworkDataSource()));
-    }
-
 
     private class RadioListener implements ActionListener {
         /**
@@ -331,7 +317,7 @@ public class addingtrade extends JFrame implements Serializable {
 
 
                 // Add user to database and clear fields
-                trades.add(t);
+                tradeData.add(t);
                 clearFields();
                 JOptionPane.showMessageDialog(null, String.format("Trade '%s' successfully added", t.getAsset()));
             }
@@ -346,11 +332,11 @@ public class addingtrade extends JFrame implements Serializable {
         private void deletePressed() {
             int index = tradeList.getSelectedIndex();
             String traFieldText = traPriceField.getText();
-            trades.remove(tradeList.getSelectedValue());
+            tradeData.remove(tradeList.getSelectedValue());
             clearFields();
             index--;
             if (index == -1) {
-                if (trades.getSize() != 0) {
+                if (tradeData.getSize() != 0) {
                     index = 0;
                 }
             }
@@ -381,7 +367,7 @@ public class addingtrade extends JFrame implements Serializable {
          * @see WindowAdapter#windowClosing(WindowEvent)
          */
         public void windowClosing(WindowEvent e) {
-            trades.persist();
+            tradeData.persist();
             System.exit(0);
         }
     }

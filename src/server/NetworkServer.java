@@ -232,6 +232,17 @@ public class NetworkServer {
             }
             break;
 
+            case GET_ORG_ASSET_SET: {
+                final String organisation = (String) inputStream.readObject();
+                synchronized (tableOrg) {
+                    outputStream.writeObject((tableOrg.orgAssetSet(organisation)));
+                }
+                outputStream.flush();
+
+                System.out.println(String.format("Sent assets of organisation '%s' to client '%s'.",
+                        organisation, socket.toString()));
+            }
+
             case DELETE_ORG: {
                 final String name = (String) inputStream.readObject();
                 synchronized (tableOrg) {
