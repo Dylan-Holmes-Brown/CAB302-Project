@@ -10,8 +10,7 @@ import server.JDBCOrganisationDataSource;
 import server.JDBCUserDataSource;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 /**
@@ -30,10 +29,10 @@ public class Main {
         User user = new User("Adam", "1234", "Member", "Apple");
         Organisation organisation = new Organisation("Apple", 20, "CPU", 10);
         Trade trade = new Trade("Buy", "Apple", "CPU", 4, 20, date);
-        //assetData.addAssetType(asset);
-        //organisationData.addOrg(organisation);
-        //userData.addUser(user);
-        //data.addTrade(trade);
-        //System.out.println(data.getCurrentSize());
+//        assetData.addAssetType(asset);
+//        organisationData.addOrg(organisation);
+//        userData.addUser(user);
+//        data.addTrade(trade);
+//        System.out.println(data.getCurrentSize());
     }
 }

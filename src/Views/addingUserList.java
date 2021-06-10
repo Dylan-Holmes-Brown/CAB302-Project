@@ -1,6 +1,5 @@
 package Views;
 
-import client.NetworkDataSource;
 import common.HashPassword;
 import common.User;
 import common.sql.OrganisationData;
@@ -19,6 +18,10 @@ import java.io.Serializable;
  *
  * @author Dylan Holmes-Brown
  * @author Laku Jackson
+ *
+ * admin
+ * 1234
+ * admin
  */
 
 public class addingUserList extends JFrame implements Serializable {
