@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="dsbsdbsd">
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="rgttrt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/buyArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/buyArena.java" afterDir="false" />
     </list>
@@ -158,8 +158,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.buyArena" />
-        <item itemvalue="Application.bidList" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.bidList" />
         <item itemvalue="Application.liveUpdate" />
         <item itemvalue="Application.Main (1)" />
       </list>
@@ -405,7 +405,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623302611530</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="rgttrt">
+      <created>1623306488130</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1623306488130</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -421,7 +428,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Hashing finally done" />
     <MESSAGE value="Unit Testing for JDBCUserDataSource started just need to test exceptions" />
     <MESSAGE value="Minor fixes to TestUserData" />
     <MESSAGE value="adding implemented just needs org unit selection" />
@@ -446,7 +452,8 @@
     <MESSAGE value="hopefully we can now create a trade" />
     <MESSAGE value="bid arena removed" />
     <MESSAGE value="dsbsdbsd" />
-    <option name="LAST_COMMIT_MESSAGE" value="dsbsdbsd" />
+    <MESSAGE value="rgttrt" />
+    <option name="LAST_COMMIT_MESSAGE" value="rgttrt" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestCurrentTradeData.ic" NAME="TestCurrentTradeData Coverage Results" MODIFIED="1622963443358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

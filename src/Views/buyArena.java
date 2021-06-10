@@ -52,7 +52,7 @@ public class buyArena extends JFrame implements Serializable {
 
         // decorate the frame and make it visible
         setTitle("Buy/Sell");
-        setMinimumSize(new Dimension(900, 800));
+        setMinimumSize(new Dimension(900, 700));
         setLocationRelativeTo(null);
         pack();
         setVisible(true);
@@ -159,10 +159,9 @@ public class buyArena extends JFrame implements Serializable {
         // Create a sequential group for the horizontal axis
         GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
 
-        // Three parallel groups 1. contains labels and the other the fields
-        hGroup.addGroup(layout.createParallelGroup().addComponent(itemPrice).addComponent(priceField));
-        hGroup.addGroup(layout.createParallelGroup().addComponent(itemName).addComponent(itemquality));
-        hGroup.addGroup(layout.createParallelGroup().addComponent(itemField).addComponent(qualityField));
+        // Three parallel groups 1. contains labels and the other the fields\
+        hGroup.addGroup(layout.createParallelGroup().addComponent(itemName).addComponent(itemquality).addComponent(itemPrice));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(itemField).addComponent(qualityField).addComponent(priceField));
         layout.setHorizontalGroup(hGroup);
 
         // Create a sequential group for the vertical axis
