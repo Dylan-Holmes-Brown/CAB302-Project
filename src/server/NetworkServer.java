@@ -223,12 +223,21 @@ public class NetworkServer {
             break;
 
             case GET_ORG: {
+                // Client sends the name of the organiation to retrieve
                 final String name = (String) inputStream.readObject();
                 synchronized (tableOrg) {
-                    tableOrg.getOrg(name);
+                    // Synchronise both the get as well as the send,
+                    // therefore half a organisation isn't sent
+                    final Organisation org = tableOrg.getOrg(name);
+
+                    // Send the client back the asset type details or null
+                    outputStream.writeObject(org);
+                    if (org != null) {
+                        System.out.println(String.format("Sent organisation '%s' to client '%s'.",
+                                org.getName(), socket.toString()));
+                    }
+                    outputStream.flush();
                 }
-                System.out.println(String.format("Sent organisation '%s' to client %s",
-                        name, socket.toString()));
             }
             break;
 

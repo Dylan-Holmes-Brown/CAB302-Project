@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="rgttrt">
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Create Trade works, needs to check values against organisation.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/buyArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/buyArena.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/addingTrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingTrade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/NetworkServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/NetworkServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +73,7 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.buyArena">
+  <component name="RunManager" selected="Application.Main (1)">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="Assignment" />
@@ -148,20 +149,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Main (1)" />
-      <item itemvalue="Application.Main" />
       <item itemvalue="Application.Project" />
-      <item itemvalue="Application.bidList" />
-      <item itemvalue="Application.buyArena" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Main (1)" />
       <item itemvalue="Application.liveUpdate" />
+      <item itemvalue="Application.buyArena" />
+      <item itemvalue="Application.bidList" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.buyArena" />
+        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.buyArena" />
         <item itemvalue="Application.bidList" />
         <item itemvalue="Application.liveUpdate" />
-        <item itemvalue="Application.Main (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -412,7 +413,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623306488130</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Create Trade works, needs to check values against organisation.">
+      <created>1623308677627</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1623308677627</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -428,7 +436,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Unit Testing for JDBCUserDataSource started just need to test exceptions" />
     <MESSAGE value="Minor fixes to TestUserData" />
     <MESSAGE value="adding implemented just needs org unit selection" />
     <MESSAGE value="organisation selection added to create user, Chore: make admin not have org" />
@@ -453,30 +460,31 @@
     <MESSAGE value="bid arena removed" />
     <MESSAGE value="dsbsdbsd" />
     <MESSAGE value="rgttrt" />
-    <option name="LAST_COMMIT_MESSAGE" value="rgttrt" />
+    <MESSAGE value="Create Trade works, needs to check values against organisation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Create Trade works, needs to check values against organisation." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Project$TestJDBCUser.ic" NAME="TestJDBCUser Coverage Results" MODIFIED="1622538349921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/Project$TestCurrentTradeData.ic" NAME="TestCurrentTradeData Coverage Results" MODIFIED="1622963443358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Project$TestOrganisationData.ic" NAME="TestOrganisationData Coverage Results" MODIFIED="1622963451173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Project$TestUserData.ic" NAME="TestUserData Coverage Results" MODIFIED="1622963461956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>test.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/Project$TestCurrentTradeData_testRemoveNoUser.ic" NAME="TestCurrentTradeData.testRemoveNoUser Coverage Results" MODIFIED="1622968037755" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>test.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Project$TestUserData_testRemoveNoUser.ic" NAME="TestUserData.testRemoveNoUser Coverage Results" MODIFIED="1622968185439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Project$TestAssetTypeData.ic" NAME="TestAssetTypeData Coverage Results" MODIFIED="1622894484900" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Project$TestJDBCUser.ic" NAME="TestJDBCUser Coverage Results" MODIFIED="1622538349921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Project$TestUserData.ic" NAME="TestUserData Coverage Results" MODIFIED="1622963461956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Project$TestAssetTypeData_and_3_more.ic" NAME="TestAssetTypeData and 3 more Coverage Results" MODIFIED="1623053887653" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Project$TestUserData_testRemoveNoUser.ic" NAME="TestUserData.testRemoveNoUser Coverage Results" MODIFIED="1622968185439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.*</FILTER>
+    </SUITE>
   </component>
 </project>
