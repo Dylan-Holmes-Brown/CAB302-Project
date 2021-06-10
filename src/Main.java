@@ -3,7 +3,6 @@ import common.AssetType;
 import common.Organisation;
 import common.Trade;
 import common.User;
-import common.sql.CurrentData;
 import server.JDBCAssetTypeDataSource;
 import server.JDBCCurrentDataSource;
 import server.JDBCOrganisationDataSource;
