@@ -1,5 +1,6 @@
 package common;
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -27,6 +28,7 @@ public class Trade {
         this.price = price;
         this.date = date;
     }
+
 
     /**
      * Get the id of the current trade object.
