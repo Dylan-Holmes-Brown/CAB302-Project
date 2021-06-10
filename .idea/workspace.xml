@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="updatePassword fully complete, documentation for this and addingUserList complete">
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="hopefully we can now create a trade">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/addingTrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingTrade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/addingUserList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingUserList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/updatePassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/updatePassword.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Trade.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +74,7 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main (1)">
+  <component name="RunManager" selected="Application.buyArena">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="Assignment" />
@@ -110,8 +110,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="addingTrade" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Views.addingTrade" />
+    <configuration name="buyArena" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Views.buyArena" />
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
@@ -155,15 +155,15 @@
       <item itemvalue="Application.Main (1)" />
       <item itemvalue="Application.liveUpdate" />
       <item itemvalue="Application.userList" />
-      <item itemvalue="Application.addingTrade" />
+      <item itemvalue="Application.buyArena" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main (1)" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.buyArena" />
         <item itemvalue="Application.liveUpdate" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.userList" />
-        <item itemvalue="Application.addingTrade" />
       </list>
     </recent_temporary>
   </component>
@@ -386,7 +386,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623288575035</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="hopefully we can now create a trade">
+      <created>1623300808951</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1623300808955</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -402,7 +409,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="we are now able to add and remove credits and quantity of assets in an organisation" />
     <MESSAGE value="update password for user" />
     <MESSAGE value="Organisation Server side implemented" />
     <MESSAGE value="Hashing finally done" />
@@ -427,7 +433,8 @@
     <MESSAGE value="addingOrganisationList fully complete with documentation." />
     <MESSAGE value="addingUserList fully complete, need documentation, addingOrgAssets needs work." />
     <MESSAGE value="updatePassword fully complete, documentation for this and addingUserList complete" />
-    <option name="LAST_COMMIT_MESSAGE" value="updatePassword fully complete, documentation for this and addingUserList complete" />
+    <MESSAGE value="hopefully we can now create a trade" />
+    <option name="LAST_COMMIT_MESSAGE" value="hopefully we can now create a trade" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestCurrentTradeData.ic" NAME="TestCurrentTradeData Coverage Results" MODIFIED="1622963443358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
