@@ -374,8 +374,6 @@ public class addingUserList extends JFrame implements Serializable {
             User u = new User();
             String accountType = "Member";
             String selectedOrg = String.valueOf(comboBox.getSelectedItem());
-            orgData.get(selectedOrg);
-            JOptionPane.showMessageDialog(null, String.format("User '%s' successfully added", selectedOrg));
 
             // If all fields are filled in continue
             if (userField.getText() != null && !userField.getText().equals("")
@@ -471,6 +469,3 @@ public class addingUserList extends JFrame implements Serializable {
     }
 
 }
-
-
-

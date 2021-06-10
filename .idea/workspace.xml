@@ -145,12 +145,12 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Project" />
-      <item itemvalue="Application.Main" />
       <item itemvalue="Application.Main (1)" />
-      <item itemvalue="Application.liveUpdate" />
-      <item itemvalue="Application.buyArena" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Project" />
       <item itemvalue="Application.bidList" />
+      <item itemvalue="Application.buyArena" />
+      <item itemvalue="Application.liveUpdate" />
     </list>
     <recent_temporary>
       <list>

@@ -1,4 +1,5 @@
 package common;
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.sql.Date;
  * @author Dylan Holmes-Brown
  */
 
-public class Trade {
+public class Trade implements Serializable {
     private static final long serialVersionUID = 40L;
     private int id;
     private String buySell;

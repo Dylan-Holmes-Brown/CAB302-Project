@@ -2,19 +2,18 @@ package Views;
 
 import javax.swing.*;
 import java.io.Serializable;
-
 import common.Trade;
 import common.User;
 import common.sql.CurrentData;
 import common.sql.OrganisationData;
-
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 
 public class addingTrade extends JFrame implements Serializable {
 
@@ -40,6 +39,7 @@ public class addingTrade extends JFrame implements Serializable {
 
     private JButton createButton;
     private JButton deleteButton;
+    private JButton backButton;
 
     /**
      * Constructor sets up UI, adds button listeners and displays
@@ -79,10 +79,13 @@ public class addingTrade extends JFrame implements Serializable {
 
         // Add panels to container with padding
         contentPane.add(Box.createVerticalStrut(20));
+        contentPane.add(makeReturnPane());
+
+        contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeTradeListPane());
 
         contentPane.add(Box.createVerticalStrut(20));
-        contentPane.add(makeUserFieldPanel());
+        contentPane.add(makeTradeFieldPanel());
 
         contentPane.add(Box.createVerticalStrut(5));
         contentPane.add(makeDropDownPanel());
@@ -93,6 +96,22 @@ public class addingTrade extends JFrame implements Serializable {
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeButtonsPanel());
         contentPane.add(Box.createVerticalStrut(20));
+    }
+
+    /**
+     * Create a JPanel with return button in the top right corner
+     *
+     * @return the created JPanel
+     */
+    private JPanel makeReturnPane() {
+        // Initialise the JPanel
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+        // Initialise the button and add to the panel
+        backButton = new JButton("Return to Menu");
+        buttonPanel.add(backButton);
+        return buttonPanel;
     }
 
     private JScrollPane makeTradeListPane() {
@@ -132,7 +151,7 @@ public class addingTrade extends JFrame implements Serializable {
      *
      * @return a panel containing the user fields
      */
-    private JPanel makeUserFieldPanel() {
+    private JPanel makeTradeFieldPanel() {
         JPanel traPanel = new JPanel();
         GroupLayout layout = new GroupLayout(traPanel);
         traPanel.setLayout(layout);
@@ -255,6 +274,7 @@ public class addingTrade extends JFrame implements Serializable {
     private void addButtonListeners(ActionListener listener) {
         createButton.addActionListener(listener);
         deleteButton.addActionListener(listener);
+        backButton.addActionListener(listener);
     }
 
     private void addNameListListener(ListSelectionListener listener) {
@@ -297,12 +317,17 @@ public class addingTrade extends JFrame implements Serializable {
             else if (source == deleteButton) {
                 deletePressed();
             }
+            else if (source == backButton) {
+                tradeData.persist();
+                orgData.persist();
+                dispose();
+                new userOptions(user);
+            }
         }
 
         public Date currDate(){
-            DateFormat df = new SimpleDateFormat("dd/MM/yy");
-            Date dateobj = new Date();
-            System.out.println(df.format(dateobj));
+            long now = System.currentTimeMillis();
+            Date dateobj = new Date(now );
             return dateobj;
         }
 
@@ -326,12 +351,12 @@ public class addingTrade extends JFrame implements Serializable {
 
                 if (buyButton.isSelected()) {
                     orderType = "Buy";
-                    t = new Trade(orderType, user.getOrganisationalUnit(), selectedValue, assetPrice, tradePrice, (java.sql.Date) currDate());
+                    t = new Trade(orderType, user.getOrganisationalUnit(), selectedValue, assetPrice, tradePrice, currDate());
                     //  public Trade(String buySell, String org, String asset, int quantity, int price, Date date)
                 }
                 else if (sellButton.isSelected()) {
                     orderType = "Sell";
-                    t = new Trade(orderType, user.getOrganisationalUnit(), selectedValue, assetPrice, tradePrice, (java.sql.Date) currDate());
+                    t = new Trade(orderType, user.getOrganisationalUnit(), selectedValue, assetPrice, tradePrice, currDate());
                 }
 
                 // Add user to database and clear fields
