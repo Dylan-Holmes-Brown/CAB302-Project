@@ -2,14 +2,10 @@ package Views;
 
 
 import client.NetworkDataSource;
-import common.HashPassword;
-import common.User;
 import common.sql.OrganisationData;
 import common.sql.UserData;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
@@ -22,11 +18,11 @@ public class buyArena extends JFrame implements Serializable {
     private JComboBox comboBox;
 
     private JLabel itemName;
-    private JTextField userField;
+    private JTextField itemField;
     private JLabel itemquality;
-    private JTextField passField;
+    private JTextField qualityField;
     private JLabel itemPrice;
-    private JTextField textPrice;
+    private JTextField priceField;
 
     private JLabel orgLabel;
 
@@ -56,32 +52,45 @@ public class buyArena extends JFrame implements Serializable {
 
         // decorate the frame and make it visible
         setTitle("Buy/Sell");
-        setMinimumSize(new Dimension(900, 700));
+        setMinimumSize(new Dimension(900, 800));
         setLocationRelativeTo(null);
         pack();
         setVisible(true);
     }
 
+    /**
+     * Initialises the UI placing the panels in a box layout with vertical
+     * alignment spacing each panel.
+     */
     private void initUI() {
         Container contentPane = this.getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
-        //list of users
+        //list of buy items
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(buyListPane());
 
+        //list of sell items
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(sellListPane());
+
         //user inputs
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeUserFieldPanel());
 
+        //buttons
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeButtonsPanel());
 
         contentPane.add(Box.createVerticalStrut(20));
     }
 
+    /**
+     * Makes a JScrollPane that holds a JList for the list of names in the
+     * user table.
+     *
+     * @return the scrolling name list panel
+     */
     private JScrollPane buyListPane() {
         userList = new JList(userData.getModel());
         userList.setFixedCellWidth(200);
@@ -97,7 +106,12 @@ public class buyArena extends JFrame implements Serializable {
         return scroller;
     }
 
-
+    /**
+     * Makes a JScrollPane that holds a JList for the list of names in the
+     * user table.
+     *
+     * @return the scrolling name list panel
+     */
     private JScrollPane sellListPane() {
         userList = new JList(userData.getModel());
         userList.setFixedCellWidth(200);
@@ -112,6 +126,12 @@ public class buyArena extends JFrame implements Serializable {
         return scroller;
     }
 
+    /**
+     * Makes a JPanel containing the username and password fields to be
+     * recorded.
+     *
+     * @return a panel containing the user fields
+     */
     private JPanel makeUserFieldPanel() {
         JPanel userPanel = new JPanel();
         GroupLayout layout = new GroupLayout(userPanel);
@@ -125,35 +145,43 @@ public class buyArena extends JFrame implements Serializable {
         itemName = new JLabel("Item Name ");
         itemquality = new JLabel("Quantity");
         itemPrice= new JLabel("Price");
+
         // Text Fields
-        userField = new JTextField(30);
-        userField.setPreferredSize(new Dimension(30, 20));
-        passField = new JTextField(30);
-        passField.setPreferredSize(new Dimension(30, 20));
-        textPrice = new JTextField(30);
-        textPrice.setPreferredSize(new Dimension(30, 20));
+        itemField = new JTextField(30);
+        itemField.setPreferredSize(new Dimension(30, 20));
+
+        qualityField = new JTextField(30);
+        qualityField.setPreferredSize(new Dimension(30, 20));
+
+        priceField = new JTextField(30);
+        priceField.setPreferredSize(new Dimension(30, 20));
 
         // Create a sequential group for the horizontal axis
         GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
 
-        // Two parallel groups 1. contains labels and the other the fields
+        // Three parallel groups 1. contains labels and the other the fields
+        hGroup.addGroup(layout.createParallelGroup().addComponent(itemPrice).addComponent(priceField));
         hGroup.addGroup(layout.createParallelGroup().addComponent(itemName).addComponent(itemquality));
-        hGroup.addGroup(layout.createParallelGroup().addComponent(userField).addComponent(passField));
-        hGroup.addGroup(layout.createParallelGroup().addComponent(itemPrice).addComponent(textPrice));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(itemField).addComponent(qualityField));
         layout.setHorizontalGroup(hGroup);
 
         // Create a sequential group for the vertical axis
         GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(itemName).addComponent(userField));
+                .addComponent(itemName).addComponent(itemField));
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(itemquality).addComponent(passField));
+                .addComponent(itemquality).addComponent(qualityField));
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(itemPrice).addComponent(textPrice));
+                .addComponent(itemPrice).addComponent(priceField));
         layout.setVerticalGroup(vGroup);
         return userPanel;
     }
 
+    /**
+     * Adds the buttons to the panel
+     *
+     * @return a panel containing the create user button
+     */
     private JPanel makeButtonsPanel() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
@@ -169,22 +197,40 @@ public class buyArena extends JFrame implements Serializable {
         buttonPanel.add(Box.createHorizontalStrut(50));
         return buttonPanel;
     }
+
+    /**
+     * Clear all input fields and radio buttons
+     */
     private void clearFields() {
-        userField.setText("");
-        passField.setText("");
+        itemField.setText("");
+        qualityField.setText("");
 
     }
 
+    /**
+     * Checks the size of the user table determining the state of the delete button
+     */
     private void checkListSize() {
         deleteButton.setEnabled(userData.getSize() != 0);
     }
 
+    /**
+     * Adds a listener to the buttons
+     *
+     * @param listener the listener for the buttons to use
+     */
     private void addButtonListeners(ActionListener listener) {
         createButton.addActionListener(listener);
         deleteButton.addActionListener(listener);
         buyButton.addActionListener(listener);
     }
 
+    /**
+     * Handles events for the buttons on the UI.
+     *
+     * @author Dylan Holmes-Brown
+     * @author Laku Jackson
+     */
     private class ButtonListener implements ActionListener {
         /**
          * @see ActionListener#actionPerformed(ActionEvent)
@@ -226,9 +272,14 @@ public class buyArena extends JFrame implements Serializable {
 //            checkListSize();
         }
 
+
+        /**
+         * When the delete button is pressed, delete the trade information from the database
+         * or display error
+         */
         private void deletePressed() {
             int index = userList.getSelectedIndex();
-            String itemName = userField.getText();
+            String itemName = itemField.getText();
             userData.remove(userList.getSelectedValue());
             clearFields();
             index--;
@@ -242,9 +293,13 @@ public class buyArena extends JFrame implements Serializable {
             JOptionPane.showMessageDialog(null, String.format("User '%s' successfully deleted", itemName));
         }
 
+        /**
+         * When the Buy button is pressed, item is sent to the users oragnisation database
+         * or display error
+         */
         private void buyPressed() {
             int index = userList.getSelectedIndex();
-            String itemName = userField.getText();
+            String itemName = itemField.getText();
             userData.remove(userList.getSelectedValue());
             clearFields();
             index--;
@@ -255,7 +310,7 @@ public class buyArena extends JFrame implements Serializable {
             }
             userList.setSelectedIndex(index);
             checkListSize();
-            JOptionPane.showMessageDialog(null, String.format("You have bough the '%s', itemName"));
+            JOptionPane.showMessageDialog(null, String.format("You have bough the '%s' ", itemName));
         }
     }
 
