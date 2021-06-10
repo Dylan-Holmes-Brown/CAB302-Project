@@ -365,6 +365,20 @@ public class NetworkServer {
             }
             break;
 
+            case GET_CURRENT_TRADE: {
+                final Integer id = (Integer) inputStream.readObject();
+                synchronized (tableCurrentTrade) {
+                    final Trade trade = tableCurrentTrade.getCurrentTrade(id);
+
+                    outputStream.writeObject(trade);
+                    if (trade != null)
+                        System.out.println(String.format("Sent current trade '%s' to client %s",
+                                trade.getID(), socket.toString()));
+                }
+                outputStream.flush();
+            }
+            break;
+
             case GET_BUY_SELL: {
                 final String type = (String) inputStream.readObject();
                 synchronized (tableCurrentTrade) {

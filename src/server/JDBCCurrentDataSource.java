@@ -1,7 +1,9 @@
 package server;
 
+import common.Organisation;
 import common.Trade;
 import common.sql.CurrentDataSource;
+import common.sql.OrganisationDataSource;
 
 import java.sql.*;
 import java.util.Set;
@@ -24,6 +26,9 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
 
     private static final String INSERT_TRADE = "INSERT INTO currentTrades (buySell, organisation, asset, quantity, price, date) VALUES (?, ?, ?, ?, ?, ?);";
     private PreparedStatement addTrade;
+
+    private static final String GET_TRADE = "SELECT * FROM currentTrades WHERE id=?";
+    private PreparedStatement getTrade;
 
     private static final String GET_BUYSELL = "SELECT * FROM currentTrades WHERE buySell=?;";
     private PreparedStatement getBuySell;
@@ -49,6 +54,7 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
 
             // Initialise prepared statements for table
             addTrade = connection.prepareStatement(INSERT_TRADE);
+            getTrade = connection.prepareStatement(GET_TRADE);
             getBuySell = connection.prepareStatement(GET_BUYSELL);
             getOrgTrade = connection.prepareStatement(GET_ORG_TRADES);
             getOrgTrade = connection.prepareStatement(GET_ORG_TRADES);
@@ -77,6 +83,31 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
         catch (SQLException sqle) {
             sqle.printStackTrace();
         }
+    }
+
+    /**
+     * @see CurrentDataSource#getCurrentTrade(Integer)
+     */
+    public Trade getCurrentTrade(Integer id) {
+        Trade trade = new Trade();
+        ResultSet resultSet = null;
+
+        try {
+            getTrade.setInt(1, id);
+            resultSet = getTrade.executeQuery();
+            resultSet.next();
+            trade.setID(resultSet.getInt("id"));
+            trade.setBuySell(resultSet.getString("buySell"));
+            trade.setBuySell(resultSet.getString("organisation"));
+            trade.setAsset(resultSet.getString("asset"));
+            trade.setQuantity(resultSet.getInt("quantity"));
+            trade.setPrice(resultSet.getInt("price"));
+            trade.setDate(resultSet.getDate("date"));
+        }
+        catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+        return trade;
     }
 
     /**

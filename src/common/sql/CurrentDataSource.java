@@ -1,5 +1,6 @@
 package common.sql;
 
+import common.Organisation;
 import common.Trade;
 
 import java.util.Set;
@@ -17,6 +18,15 @@ public interface CurrentDataSource {
      * @param trades CurrentTrade to add
      */
     void addTrade(Trade trades);
+
+    /**
+     * Extracts all the details of a Current Trade from the table based on the
+     * id passed in.
+     *
+     * @param id The id as a Integer to search for.
+     * @return all details in a Trade object for the given id
+     */
+    Trade getCurrentTrade(Integer id);
 
     /**
      * Deletes a CurrentTrade from the table.

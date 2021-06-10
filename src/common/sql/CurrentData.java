@@ -1,5 +1,6 @@
 package common.sql;
 
+import common.Organisation;
 import common.Trade;
 
 import javax.swing.*;
@@ -42,6 +43,14 @@ public class CurrentData {
             currentData.addTrade(trade);
         }
     }
+
+    /**
+     * Retrieves trade details from the model.
+     *
+     * @param key the trade to retrieve.
+     * @return the Trade object related to the id.
+     */
+    public Trade get(Object key) { return currentData.getCurrentTrade((Integer) key); }
 
     /**
      * Based on the id of the current trade in the current_trades table, delete the trade.
