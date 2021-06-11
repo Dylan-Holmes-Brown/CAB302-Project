@@ -2,6 +2,7 @@ package Views;
 
 
 import client.NetworkDataSource;
+import common.sql.CurrentData;
 import common.sql.OrganisationData;
 import common.sql.UserData;
 
@@ -10,11 +11,16 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
 
+/**
+ * @author Vipin Vijay
+ * @author Dylan Holmes-Brown
+ * @author Laku Jackson
+ */
 
 public class buyArena extends JFrame implements Serializable {
 
     private static final long serialVersionUID = 62L;
-    private JList userList;
+    private JList tradeList;
     private JComboBox comboBox;
 
     private JLabel itemName;
@@ -32,17 +38,18 @@ public class buyArena extends JFrame implements Serializable {
     private JButton deleteButton;
     private JButton buyButton;
 
-    UserData userData;
+    //UserData userData;
     OrganisationData orgData;
+    CurrentData tradeData;
 
     /**
      * Constructor sets up UI frame and adds listeners
      *
-     * @param userData the user data accessor to the database
+     * @param tradeData the user data accessor to the database
      * @param orgData the organisation data accessor to the database
      */
-    public buyArena(UserData userData, OrganisationData orgData) {
-        this.userData = userData;
+    public buyArena(CurrentData tradeData, OrganisationData orgData) {
+        this.tradeData = tradeData;
         this.orgData = orgData;
         array = new String[orgData.getSize()];
 
@@ -92,11 +99,12 @@ public class buyArena extends JFrame implements Serializable {
      * @return the scrolling name list panel
      */
     private JScrollPane buyListPane() {
-        userList = new JList(userData.getModel());
-        userList.setFixedCellWidth(200);
+        String type = "Buy";
+        tradeList = new JList(tradeData.getType(type));
+        tradeList.setFixedCellWidth(200);
 
-        JScrollPane scroller = new JScrollPane(userList);
-        scroller.setViewportView(userList);
+        JScrollPane scroller = new JScrollPane(tradeList);
+        scroller.setViewportView(tradeList);
         scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroller.setMinimumSize(new Dimension(200, 150));
@@ -113,12 +121,13 @@ public class buyArena extends JFrame implements Serializable {
      * @return the scrolling name list panel
      */
     private JScrollPane sellListPane() {
-        userList = new JList(userData.getModel());
-        userList.setFixedCellWidth(200);
+        String type = "Sell";
+        tradeList = new JList(tradeData.getType(type));
+        tradeList.setFixedCellWidth(200);
 
-        JScrollPane scroller = new JScrollPane(userList);
+        JScrollPane scroller = new JScrollPane(tradeList);
 
-        scroller.setViewportView(userList);
+        scroller.setViewportView(tradeList);
         scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroller.setMaximumSize(new Dimension(250, 250));
@@ -210,7 +219,7 @@ public class buyArena extends JFrame implements Serializable {
      * Checks the size of the user table determining the state of the delete button
      */
     private void checkListSize() {
-        deleteButton.setEnabled(userData.getSize() != 0);
+        deleteButton.setEnabled(tradeData.getSize() != 0);
     }
 
     /**
@@ -277,17 +286,17 @@ public class buyArena extends JFrame implements Serializable {
          * or display error
          */
         private void deletePressed() {
-            int index = userList.getSelectedIndex();
+            int index = tradeList.getSelectedIndex();
             String itemName = itemField.getText();
-            userData.remove(userList.getSelectedValue());
+            tradeData.remove(tradeList.getSelectedValue());
             clearFields();
             index--;
             if (index == -1) {
-                if (userData.getSize() != 0) {
+                if (tradeData.getSize() != 0) {
                     index = 0;
                 }
             }
-            userList.setSelectedIndex(index);
+            tradeList.setSelectedIndex(index);
             checkListSize();
             JOptionPane.showMessageDialog(null, String.format("User '%s' successfully deleted", itemName));
         }
@@ -297,17 +306,17 @@ public class buyArena extends JFrame implements Serializable {
          * or display error
          */
         private void buyPressed() {
-            int index = userList.getSelectedIndex();
+            int index = tradeList.getSelectedIndex();
             String itemName = itemField.getText();
-            userData.remove(userList.getSelectedValue());
+            tradeData.remove(tradeList.getSelectedValue());
             clearFields();
             index--;
             if (index == -1) {
-                if (userData.getSize() != 0) {
+                if (tradeData.getSize() != 0) {
                     index = 0;
                 }
             }
-            userList.setSelectedIndex(index);
+            tradeList.setSelectedIndex(index);
             checkListSize();
             JOptionPane.showMessageDialog(null, String.format("You have bough the '%s' ", itemName));
         }
@@ -316,7 +325,7 @@ public class buyArena extends JFrame implements Serializable {
 
     public static void main(String[] args) {
 
-        new buyArena(new UserData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
+        new buyArena(new CurrentData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
     }
 
 }
