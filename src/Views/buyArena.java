@@ -271,7 +271,7 @@ public class buyArena extends JFrame implements Serializable {
             String index = tradeList.getSelectedValue().toString();
             int quant = Integer.parseInt(qualityField.getText());
             int price = Integer.parseInt(priceField.getText());
-            //variables
+
             if(itemField.getText() != null && !itemField.getText().equals("") &&
                     qualityField.getText() != null && !qualityField.getText().equals("") &&
                     priceField.getText() != null && !priceField.getText().equals("")){
@@ -283,13 +283,15 @@ public class buyArena extends JFrame implements Serializable {
                 }
                 for (int i = 0; i < organisationList.size(); i++) {
                     if (organisationList.get(i).getName().equals(user.getOrganisationalUnit())) {
-                        orgList.add();
+                        orgList.add(orgData.get(user.getOrganisationalUnit()));
                     }
                 }
-//                if(orgList.equals(index)){
-//                    if (quant <= )
-//
-//                }
+                if(orgList.contains(index)){
+                    if (quant <= orgList.get(1).getQuantity()){
+                        orgData.removeQuantity(organisationList.contains(user.getOrganisationalUnit()), String.valueOf(orgList.contains(index)), quant);
+                    }
+
+                }
 
                 //organisationList = list of organisations
                 //orgList  = list of assets from that organisation
@@ -297,6 +299,7 @@ public class buyArena extends JFrame implements Serializable {
 
 
                 //compare the org quantity to the quantity of a trade?
+                //so the first loop gets all organisations to a list, and the second gets all the assets of a given organisation.
 
 
             }
