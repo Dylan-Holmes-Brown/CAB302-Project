@@ -22,25 +22,25 @@ import java.util.List;
 public class addingOrgAssets extends JFrame implements Serializable{
     private static final long serialVersionUID = 78L;
 
+    // Global Variables
     private OrganisationData orgData;
     private AssetTypeData assetTypeData;
     private User user;
     private List<String> assetList;
     private List<String> orgList;
+    private List<String> orgAssetList;
+    private List<Organisation> organisationList;
 
     // JSwing Variables
-//    private JList orgList;
     private JComboBox assetBox;
     private JComboBox orgBox;
 
     private JLabel orgLabel;
-    private JTextField orgField;
     private JLabel orgCredits;
     private JTextField orgCreditsField;
     private JLabel assetQuantity;
     private JTextField assetQField;
     private JLabel assetLabel;
-    private JLabel orgBoxLabel;
 
     private JRadioButton addCredits;
     private JRadioButton removeCredits;
@@ -57,14 +57,14 @@ public class addingOrgAssets extends JFrame implements Serializable{
      * @param assetTypeData the user data from the database
      */
     public addingOrgAssets(User user, OrganisationData orgData, AssetTypeData assetTypeData) {
+        // Initialise Data
         this.orgData = orgData;
         this.assetTypeData = assetTypeData;
         this.user = user;
-//        array = new String[assetTypeData.getSize()];
-//        orgArray = new Object[orgData.getSize()][2];
         assetList = new ArrayList<>();
         orgList = new ArrayList<>();
-
+        organisationList = new ArrayList<>();
+        orgAssetList = new ArrayList<>();
 
         // Initialise the UI and listeners
         initUI();
@@ -72,7 +72,7 @@ public class addingOrgAssets extends JFrame implements Serializable{
         addRadioListeners(new RadioListener());
         addClosingListener(new ClosingListener());
 
-        // asset quantity field listener to to make sure key pressed is number or backspace
+        // Quantity field listener to to make sure key pressed is number or backspace
         assetQField.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent ke) {
                 // Check the key pressed and set the field to editable
@@ -85,7 +85,7 @@ public class addingOrgAssets extends JFrame implements Serializable{
                 }
             }
         });
-
+        // Credits field listener to to make sure key pressed is number or backspace
         orgCreditsField.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent ke) {
                 // Check the key pressed and set the field to editable
@@ -99,7 +99,7 @@ public class addingOrgAssets extends JFrame implements Serializable{
             }
         });
         // Decorate the frame and make it visible
-        setTitle("Asset Trading System - Add Assets to Organisation");
+        setTitle("Asset Trading System - Add Credits and Quantity of Assets to Organisation");
         setMinimumSize(new Dimension(650, 300));
         setLocationRelativeTo(null);
         pack();
@@ -120,10 +120,10 @@ public class addingOrgAssets extends JFrame implements Serializable{
         contentPane.add(makeReturnPane());
 
         contentPane.add(Box.createVerticalStrut(5));
-        contentPane.add(makeRadioPanel());
+        contentPane.add(makeDataPanel());
 
         contentPane.add(Box.createVerticalStrut(5));
-        contentPane.add(makeDropDownPanel());
+        contentPane.add(makeRadioPanel());
 
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeButtonsPanel());
@@ -186,24 +186,28 @@ public class addingOrgAssets extends JFrame implements Serializable{
      *
      * @return the drop down box with all assets
      */
-    private JPanel makeDropDownPanel() {
+    private JPanel makeDataPanel() {
         // Initialise the JPanel
         JPanel panel = new JPanel();
         GroupLayout layout = new GroupLayout(panel);
         panel.setLayout(layout);
 
-        // Initialise the ListModel and array of all elements of the asset table
+        // Initialise the asset ListModel and add to an asset name list
         ListModel assetModel = assetTypeData.getModel();
         for (int i = 0; i < assetTypeData.getSize(); i++) {
             assetList.add(assetModel.getElementAt(i).toString());
         }
 
+        // Initialise the organisation model, add the organisation name to a list
+        // and organisation object to a separate list
         ListModel orgModel = orgData.getModel();
         for (int i = 0; i < orgData.getSize(); i++) {
-            orgList.add(orgModel.getElementAt(i).toString());
+            Organisation org = orgData.get(orgModel.getElementAt(i).toString());
+            organisationList.add(org);
+            orgList.add(org.getName());
         }
 
-        // Initialise the Drop down box and panel
+        // Initialise the Drop down boxes and panel
         assetBox = new JComboBox(assetList.toArray());
         assetBox.setBackground(Color.white);
         assetBox.setPrototypeDisplayValue("Text Size");
@@ -275,7 +279,6 @@ public class addingOrgAssets extends JFrame implements Serializable{
      * Sets the text of all fields to be an empty string
      */
     private void clearFields() {
-        orgField.setText("");
         orgCreditsField.setText("");
         assetQField.setText("");
     }
@@ -311,11 +314,17 @@ public class addingOrgAssets extends JFrame implements Serializable{
         addWindowListener(listener);
     }
 
+    /**
+     * Handles events for the radio buttons on the UI
+     *
+     * @author Dylan Holmes-Brown
+     */
     private class RadioListener implements ActionListener {
         /**
          * @see ActionListener#actionPerformed(ActionEvent)
          */
         public void actionPerformed(ActionEvent e) {
+            // Get the button pressed and set fields to editable or not
             JRadioButton source = (JRadioButton) e.getSource();
             if (source == addCredits || source == removeCredits) {
                 orgBox.setEnabled(true);
@@ -346,6 +355,7 @@ public class addingOrgAssets extends JFrame implements Serializable{
             JButton source = (JButton) e.getSource();
             if (source == applyButton) {
                 applyPressed();
+                clearFields();
             }
             else if (source == backButton) {
                 orgData.persist();
@@ -360,54 +370,93 @@ public class addingOrgAssets extends JFrame implements Serializable{
          * to the database or display error
          */
         private void applyPressed() {
+            // Initialise Variables
             String input;
             int inputInt;
+            String selectedOrg = orgBox.getSelectedItem().toString();
+
+            // Get all assets of an organisation
+            for (int i = 0; i < organisationList.size(); i++) {
+                if (organisationList.get(i).getName().equals(selectedOrg)) {
+                    orgAssetList.add(organisationList.get(i).getAsset());
+                }
+            }
+
+            // Check if a radio button is selected
             if (addCredits.isSelected() || removeCredits.isSelected() || addQuantity.isSelected() || removeQuantity.isSelected()) {
+                // Check if a credits related button is selected
                 if (addCredits.isSelected() || removeCredits.isSelected()) {
-                    // Get drop box value
-                    String selectedValue = orgBox.getSelectedItem().toString();
+                    // Check that credits has input
                     if (orgCreditsField != null && !orgCreditsField.getText().equals("")
-                            && selectedValue != null) {
+                            && selectedOrg != null) {
+                        // Check if add credits is selected
                         if (addCredits.isSelected()) {
+                            // Get the inputs and add credits to the org
                             input = orgCreditsField.getText();
                             inputInt = Integer.parseInt(input);
                             orgData.addCredits(orgBox.getSelectedItem(), inputInt);
                             JOptionPane.showMessageDialog(null, String.format("'%s' credits added to Organisation '%s' successfully", inputInt, orgBox.getSelectedItem().toString()));
                         }
+                        // Check if remove credits is selected
                         else if (removeCredits.isSelected()) {
+                            // Get the inputs and remove credits from the org
                             input = orgCreditsField.getText();
                             inputInt = Integer.parseInt(input);
                             orgData.removeCredits(orgBox.getSelectedItem(), inputInt);
                             JOptionPane.showMessageDialog(null, String.format("'%s' credits removed from Organisation '%s' successfully", inputInt, orgBox.getSelectedItem().toString()));
                         }
                     }
+                    // Fields not filled in
                     else {
                         JOptionPane.showMessageDialog(null, "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
+                // Check if quantity related button is selected
                 else if (addQuantity.isSelected() || removeQuantity.isSelected()) {
                     // Get drop box value
-                    String selectedValue = assetBox.getSelectedItem().toString();
+                    String selectedAsset = assetBox.getSelectedItem().toString();
+
+                    // Check that quantity has input
                     if (assetQField != null && !assetQField.getText().equals("")
-                            && selectedValue != null) {
+                            && selectedAsset != null) {
+                        // Check if add quantity is selected
                         if (addQuantity.isSelected()) {
-                            input = assetQField.getText();
-                            inputInt = Integer.parseInt(input);
-                            orgData.addQuantity(orgBox.getSelectedItem(), assetBox.getSelectedItem().toString(), inputInt);
-                            JOptionPane.showMessageDialog(null, String.format("'%s' quantity added to asset '%s' for Organisation '%s' successfully", inputInt, assetBox.getSelectedItem().toString(), orgBox.getSelectedItem().toString()));
+                            // Check if organisation contains the selected asset
+                            if (orgAssetList.contains(selectedAsset)) {
+                                // Get inputs and add quantity to an asset for an organisation
+                                input = assetQField.getText();
+                                inputInt = Integer.parseInt(input);
+                                orgData.addQuantity(orgBox.getSelectedItem(), assetBox.getSelectedItem().toString(), inputInt);
+                                JOptionPane.showMessageDialog(null, String.format("'%s' quantity added to asset '%s' for Organisation '%s' successfully", inputInt, assetBox.getSelectedItem().toString(), orgBox.getSelectedItem().toString()));
+                            }
+                            // Organisation does not hold the asset
+                            else{
+                                JOptionPane.showMessageDialog(null, String.format("Organisation does not hold the asset '%s'", selectedAsset), "Asset Error", JOptionPane.ERROR_MESSAGE);
+                            }
                         }
+                        // Check if remove quantity is selected
                         else if (removeQuantity.isSelected()) {
-                            input = assetQField.getText();
-                            inputInt = Integer.parseInt(input);
-                            orgData.removeQuantity(orgBox.getSelectedItem(), assetBox.getSelectedItem().toString(), inputInt);
-                            JOptionPane.showMessageDialog(null, String.format("'%s' quantity removed from asset '%s' for Organisation '%s' successfully", inputInt, assetBox.getSelectedItem().toString(), orgBox.getSelectedItem().toString()));
+                            // Check if organisation contains the selected asset
+                            if (orgAssetList.contains(selectedAsset)) {
+                                // Get inputs and add quantity to an asset for an organisation
+                                input = assetQField.getText();
+                                inputInt = Integer.parseInt(input);
+                                orgData.removeQuantity(orgBox.getSelectedItem(), assetBox.getSelectedItem().toString(), inputInt);
+                                JOptionPane.showMessageDialog(null, String.format("'%s' quantity removed from asset '%s' for Organisation '%s' successfully", inputInt, assetBox.getSelectedItem().toString(), orgBox.getSelectedItem().toString()));
+                            }
+                            // Organisation does not hold the asset
+                            else {
+                                JOptionPane.showMessageDialog(null, String.format("Organisation does not hold the asset '%s'", selectedAsset), "Asset Error", JOptionPane.ERROR_MESSAGE);
+                            }
                         }
                     }
+                    // All fields not filled in
                     else {
                         JOptionPane.showMessageDialog(null, "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
+            // No radio button was selected
             else {
                 JOptionPane.showMessageDialog(null, "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
             }

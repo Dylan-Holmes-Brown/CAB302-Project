@@ -286,7 +286,7 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
     @Override
     public Set<String> orgAssetSet(String organisation) {
         try {
-            outputStream.writeObject(Commands.GET_ASSET_NAME_SET);
+            outputStream.writeObject(Commands.GET_ORG_ASSET_SET);
             outputStream.writeObject(organisation);
             outputStream.flush();
             return (Set<String>) inputStream.readObject();

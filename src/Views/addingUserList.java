@@ -44,6 +44,7 @@ public class addingUserList extends JFrame implements Serializable {
     private ButtonGroup radioGroup;
     private JButton createButton;
     private JButton deleteButton;
+    private JButton clearButton;
     private JButton backButton;
 
     /**
@@ -61,8 +62,9 @@ public class addingUserList extends JFrame implements Serializable {
 
         // Initialise the UI and listeners
         initUI();
-
         checkListSize();
+        checkOrgSize();
+
         addRadioListeners(new RadioListener());
         addButtonListeners(new ButtonListener());
         addNameListListener(new NameListListener());
@@ -95,8 +97,8 @@ public class addingUserList extends JFrame implements Serializable {
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeUserFieldPanel());
 
-        contentPane.add(Box.createVerticalStrut(5));
-        contentPane.add(makeDropDownPanel());
+//        contentPane.add(Box.createVerticalStrut(5));
+//        contentPane.add(makeDropDownPanel());
 
         contentPane.add(Box.createVerticalStrut(10));
         contentPane.add(makeRadioPanel());
@@ -147,30 +149,6 @@ public class addingUserList extends JFrame implements Serializable {
     }
 
     /**
-     * Create a JPanel holding the drop down box with all available organisations
-     *
-     * @return the drop down box with all organisations
-     */
-    private JPanel makeDropDownPanel() {
-        // Initialise the ListModel and array of all elements of the organisation table
-        ListModel model = orgData.getModel();
-        for (int i = 0; i < orgData.getSize(); i++) {
-            array[i] = model.getElementAt(i).toString();
-        }
-        // Initialise the Drop down box and panel
-        comboBox = new JComboBox(array);
-        comboBox.setBackground(Color.white);
-        comboBox.setPrototypeDisplayValue("Text Size");
-        JPanel panel = new JPanel();
-        orgLabel = new JLabel("Organisation");
-
-        // Add the label and drop down box to the panel
-        panel.add(orgLabel);
-        panel.add(comboBox);
-        return panel;
-    }
-
-    /**
      * Makes a JPanel containing the username and password fields to be
      * recorded.
      *
@@ -181,6 +159,17 @@ public class addingUserList extends JFrame implements Serializable {
         JPanel userPanel = new JPanel();
         GroupLayout layout = new GroupLayout(userPanel);
         userPanel.setLayout(layout);
+
+        // Initialise the ListModel and array of all elements of the organisation table
+        ListModel model = orgData.getModel();
+        for (int i = 0; i < orgData.getSize(); i++) {
+            array[i] = model.getElementAt(i).toString();
+        }
+        // Initialise the Drop down box
+        comboBox = new JComboBox(array);
+        comboBox.setBackground(Color.white);
+        comboBox.setPrototypeDisplayValue("Text Size");
+        orgLabel = new JLabel("Organisation");
 
         // Enable auto gaps between each line
         layout.setAutoCreateGaps(true);
@@ -198,8 +187,8 @@ public class addingUserList extends JFrame implements Serializable {
         GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
 
         // Two parallel groups 1. contains labels and the other the fields
-        hGroup.addGroup(layout.createParallelGroup().addComponent(userLabel).addComponent(passLabel));
-        hGroup.addGroup(layout.createParallelGroup().addComponent(userField).addComponent(passField));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(userLabel).addComponent(passLabel).addComponent(orgLabel));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(userField).addComponent(passField).addComponent(comboBox));
         layout.setHorizontalGroup(hGroup);
 
         // Create a sequential group for the vertical axis
@@ -208,7 +197,14 @@ public class addingUserList extends JFrame implements Serializable {
                 .addComponent(userLabel).addComponent(userField));
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(passLabel).addComponent(passField));
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(orgLabel).addComponent(comboBox));
         layout.setVerticalGroup(vGroup);
+
+        // Set Dimensions
+        userPanel.setMinimumSize(new Dimension(250, 90));
+        userPanel.setPreferredSize(new Dimension(275, 90));
+        userPanel.setMaximumSize(new Dimension(275, 90));
         return userPanel;
     }
 
@@ -252,10 +248,13 @@ public class addingUserList extends JFrame implements Serializable {
         // Initialise the buttons and add them to the panel
         createButton = new JButton("Create");
         deleteButton = new JButton("Delete");
+        clearButton = new JButton("Clear");
         buttonPanel.add(Box.createHorizontalStrut(50));
         buttonPanel.add(createButton);
         buttonPanel.add(Box.createHorizontalStrut(50));
         buttonPanel.add(deleteButton);
+        buttonPanel.add(Box.createHorizontalStrut(50));
+        buttonPanel.add(clearButton);
         buttonPanel.add(Box.createHorizontalStrut(50));
         return buttonPanel;
     }
@@ -273,7 +272,15 @@ public class addingUserList extends JFrame implements Serializable {
      * Checks the size of the user table determining the state of the delete button
      */
     private void checkListSize() {
-        deleteButton.setEnabled(userData.getSize() != 0);
+        deleteButton.setEnabled(userData.getSize() != 1);
+    }
+
+    /**
+     * Checks the size of the organisation table determining the state of the combobox and member radiobutton
+     */
+    private void checkOrgSize() {
+        comboBox.setEnabled(orgData.getSize() != 0);
+        memberButton.setEnabled(orgData.getSize() != 0);
     }
 
     /**
@@ -313,6 +320,7 @@ public class addingUserList extends JFrame implements Serializable {
     private void addButtonListeners(ActionListener listener) {
         createButton.addActionListener(listener);
         deleteButton.addActionListener(listener);
+        clearButton.addActionListener(listener);
         backButton.addActionListener(listener);
     }
 
@@ -325,16 +333,24 @@ public class addingUserList extends JFrame implements Serializable {
         userList.addListSelectionListener(listener);
     }
 
+    /**
+     * Handles events for the radio buttons on the UI
+     *
+     * @author Dylan Holmes-Brown
+     */
     private class RadioListener implements ActionListener {
         /**
          * @see ActionListener#actionPerformed(ActionEvent)
          */
         public void actionPerformed(ActionEvent e) {
+            // Get the radio button selected
             JRadioButton source = (JRadioButton) e.getSource();
             if (source == memberButton) {
+                // Enable the organisation box
                 comboBox.setEnabled(true);
             }
             else if (source == adminButton) {
+                // Disable the organisation box
                 comboBox.setEnabled(false);
             }
         }
@@ -359,7 +375,11 @@ public class addingUserList extends JFrame implements Serializable {
             else if (source == deleteButton) {
                 deletePressed();
             }
+            else if (source == clearButton) {
+                clearFields();
+            }
             else if (source == backButton) {
+                // Persist the data, close the frame and return to the adminOptions frame
                 userData.persist();
                 orgData.persist();
                 dispose();
@@ -372,14 +392,15 @@ public class addingUserList extends JFrame implements Serializable {
          * or display error
          */
         private void createPressed() {
+            // Initialise variables
             User u = new User();
             String accountType = "Member";
             String selectedOrg = String.valueOf(comboBox.getSelectedItem());
 
             // If all fields are filled in continue
             if (userField.getText() != null && !userField.getText().equals("")
-                    && !passField.equals("") && (memberButton.isSelected() || adminButton.isSelected())) {
-                // Depending on radio button selected choose account type
+                    && !passField.equals("") && selectedOrg.equals("") && (memberButton.isSelected() || adminButton.isSelected())) {
+                // Depending on radio button selected choose account type and initialise the user object
                 if (memberButton.isSelected()) {
                     accountType = "Member";
                     u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getText())), accountType, selectedOrg);
@@ -388,7 +409,6 @@ public class addingUserList extends JFrame implements Serializable {
                     accountType = "Admin";
                     u = new User(userField.getText(), HashPassword.hashPassword(String.valueOf(passField.getText())), accountType);
                 }
-
                 // Add user to database and clear fields
                 userData.add(u);
                 clearFields();
@@ -399,6 +419,7 @@ public class addingUserList extends JFrame implements Serializable {
             else {
                 JOptionPane.showMessageDialog(null, "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
             }
+            // Check the number of items in the list
             checkListSize();
         }
 
@@ -468,5 +489,4 @@ public class addingUserList extends JFrame implements Serializable {
             System.exit(0);
         }
     }
-
 }
