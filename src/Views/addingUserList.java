@@ -399,7 +399,7 @@ public class addingUserList extends JFrame implements Serializable {
 
             // If all fields are filled in continue
             if (userField.getText() != null && !userField.getText().equals("")
-                    && !passField.equals("") && selectedOrg.equals("") && (memberButton.isSelected() || adminButton.isSelected())) {
+                    && !passField.equals("") && !selectedOrg.equals("") && (memberButton.isSelected() || adminButton.isSelected())) {
                 // Depending on radio button selected choose account type and initialise the user object
                 if (memberButton.isSelected()) {
                     accountType = "Member";

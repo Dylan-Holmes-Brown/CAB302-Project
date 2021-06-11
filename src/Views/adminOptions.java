@@ -20,7 +20,6 @@ import java.io.Serializable;
  * @author Dylan Holmes-Brown
  * @author Laku Jackson
  */
-
 public class adminOptions extends JFrame implements Serializable {
     private static final long serialVersionUID = 63L;
     private User user;
