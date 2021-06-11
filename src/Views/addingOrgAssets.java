@@ -1,6 +1,5 @@
 package Views;
 
-import client.NetworkDataSource;
 import common.Organisation;
 import common.User;
 import common.sql.AssetTypeData;
@@ -13,7 +12,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Initialises the admin interface for adding assets to an Organisation to the database.
+ * Listeners are included as sub-classes of this class
+ *
+ * @author Dylan Holmes-Brown
+ */
 public class addingOrgAssets extends JFrame implements Serializable {
+    // Global variables
     private static final long serialVersionUID = 333L;
     private OrganisationData orgData;
     private AssetTypeData assetTypeData;
@@ -23,7 +29,7 @@ public class addingOrgAssets extends JFrame implements Serializable {
     private List<String> orgList;
     private List<Organisation> organisationList;
 
-
+    // JSwing variables
     private JTextField assetQField;
     private JLabel assetQuantity;
     private JList list;
@@ -33,7 +39,14 @@ public class addingOrgAssets extends JFrame implements Serializable {
     private JButton applyButton;
     private JButton backButton;
 
+    /**
+     * Initialises the admin interface for adding assets to an Organisations from the database.
+     * Listeners are included as sub-classes of this class
+     *
+     * @author Dylan Holmes-Brown
+     */
     public addingOrgAssets(User user, Organisation org, OrganisationData orgData, AssetTypeData assetTypeData) {
+        // Initialise data
         this.user = user;
         this.org = org;
         this.orgData = orgData;
@@ -41,6 +54,8 @@ public class addingOrgAssets extends JFrame implements Serializable {
         assetList = new ArrayList<>();
         orgList = new ArrayList<>();
         organisationList = new ArrayList<>();
+
+        // Initialise the UI and listeners
         initUI();
         addButtonListeners(new ButtonListener());
         addClosingListener(new ClosingListener());
@@ -53,6 +68,10 @@ public class addingOrgAssets extends JFrame implements Serializable {
         setVisible(true);
     }
 
+    /**
+     * Initialises the UI placing the panels in a box layout with vertical
+     * alignment spacing each panel.
+     */
     private void initUI() {
         // Create a container for the panels and set the layout
         Container contentPane = this.getContentPane();
@@ -61,10 +80,13 @@ public class addingOrgAssets extends JFrame implements Serializable {
         // Add panels to container with padding
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeReturnPane());
+
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeAssetListPane());
+
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeAssetFieldPane());
+
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeButtonPane());
         contentPane.add(Box.createVerticalStrut(20));
@@ -93,8 +115,8 @@ public class addingOrgAssets extends JFrame implements Serializable {
      * @return the scrolling organisation list panel
      */
     private JScrollPane makeAssetListPane() {
-        // Initialise the organisation model, add the organisation name to a list
-        // and organisation object to a separate list
+        // Initialise the organisation model, add the organisation object to a list
+        // and organisation assets to a separate list
         ListModel orgModel = orgData.getModel();
         for (int i = 0; i < orgData.getSize(); i++) {
             Organisation orgGet = orgData.get(orgModel.getElementAt(i).toString());
@@ -120,6 +142,12 @@ public class addingOrgAssets extends JFrame implements Serializable {
         return scroller;
     }
 
+    /**
+     * Makes a JPanel containing the asset and quantity fields to be
+     * recorded.
+     *
+     * @return a panel containing the organisation fields
+     */
     private JPanel makeAssetFieldPane() {
         // Initialise the JPanel
         JPanel orgPanel = new JPanel();
@@ -173,7 +201,7 @@ public class addingOrgAssets extends JFrame implements Serializable {
     }
 
     /**
-     * Adds the create button to the Frame
+     * Adds the addAsset button to the Frame
      *
      * @return a panel containing the create organisation button
      */
@@ -181,7 +209,7 @@ public class addingOrgAssets extends JFrame implements Serializable {
         // Initialise the JPanel and create button
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        applyButton = new JButton("Apply");
+        applyButton = new JButton("Add Asset");
 
         // Add Create button to panel
         buttonPanel.add(Box.createHorizontalStrut(50));
@@ -237,6 +265,7 @@ public class addingOrgAssets extends JFrame implements Serializable {
             // Check that quantity has input
             if (assetQField != null && !assetQField.getText().equals("")
                     && selectedAsset != null) {
+                // Check the org doesn't already have the asset
                 if (!orgList.contains(selectedAsset)) {
                     // Get inputs and add quantity to an asset for an organisation
                     String input = assetQField.getText();
@@ -245,10 +274,12 @@ public class addingOrgAssets extends JFrame implements Serializable {
                     orgData.add(o);
                     JOptionPane.showMessageDialog(null, String.format("Asset '%s' successfully added to Organisation '%s'", o.getAsset(), o.getName()));
                 }
+                // Organisation already owns the asset
                 else {
                     JOptionPane.showMessageDialog(null, String.format("Asset '%s' already owned by Organisation '%s'", selectedAsset, org.getName()), "Asset Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
+            // All fields not complete
             else {
                 JOptionPane.showMessageDialog(null, "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
             }

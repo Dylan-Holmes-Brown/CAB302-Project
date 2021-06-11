@@ -13,21 +13,38 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Initialises the admin interface for selecting an Organisations from the database.
+ * Listeners are included as sub-classes of this class
+ *
+ * @author Dylan Holmes-Brown
+ */
 public class selectOrg extends JFrame implements Serializable {
+    // Global Variables
     private static final long serialVersionUID = 555L;
     private OrganisationData orgData;
     private User user;
     private List<String> orgList;
 
+    // JSwing Variables
     private JComboBox orgBox;
     private JLabel orgLabel;
     private JButton applyButton;
     private JButton backButton;
 
+    /**
+     * Constructor sets up UI, adds button listeners and displays
+     *
+     * @param user the signed in user
+     * @param orgData the organisation data from the database
+     */
     public selectOrg(User user, OrganisationData orgData) {
+        // Initialise Data
         this.user = user;
         this.orgData = orgData;
         orgList = new ArrayList<>();
+
+        // Initialise the UI and listeners
         initUI();
         addButtonListeners(new ButtonListener());
         addClosingListener(new ClosingListener());
@@ -40,6 +57,10 @@ public class selectOrg extends JFrame implements Serializable {
         setVisible(true);
     }
 
+    /**
+     * Initialises the UI placing the panels in a box layout with vertical
+     * alignment spacing each panel.
+     */
     private void initUI() {
         // Create a container for the panels and set the layout
         Container contentPane = this.getContentPane();
@@ -48,8 +69,10 @@ public class selectOrg extends JFrame implements Serializable {
         // Add panels to container with padding
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeReturnPane());
+
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeGetOrgPane());
+
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeButtonPane());
         contentPane.add(Box.createVerticalStrut(20));
@@ -71,11 +94,19 @@ public class selectOrg extends JFrame implements Serializable {
         return buttonPanel;
     }
 
+    /**
+     * Makes a JPanel containing the drop down box holding all organisations
+     *
+     * @return a panel containing the organisation drop box
+     */
     private JPanel makeGetOrgPane() {
+        // Get the org data model and add all elements to the org list
         ListModel model = orgData.getModel();
         for (int i = 0; i < orgData.getSize(); i++) {
             orgList.add(model.getElementAt(i).toString());
         }
+
+        // Initialise the Drop down box and panel
         orgBox = new JComboBox(orgList.toArray());
         orgBox.setBackground(Color.white);
         JPanel panel = new JPanel();
@@ -86,7 +117,7 @@ public class selectOrg extends JFrame implements Serializable {
     }
 
     /**
-     * Adds the create button to the Frame
+     * Adds the apply button to the Frame
      *
      * @return a panel containing the create organisation button
      */
