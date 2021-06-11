@@ -341,8 +341,8 @@ public class addingTrade extends JFrame implements Serializable {
             String orderType = "Buy";
 
             //text field attributes
-            int assetPrice = Integer.valueOf(assetQField.getText());
-            int tradePrice = Integer.valueOf(traPriceField.getText());
+            int assetPrice = Integer.parseInt(assetQField.getText());
+            int tradePrice = Integer.parseInt(traPriceField.getText());
 
 
             // If all fields are filled in continue

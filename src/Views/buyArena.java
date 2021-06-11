@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * @author Vipin Vijay
@@ -30,8 +31,11 @@ public class buyArena extends JFrame implements Serializable {
     private JLabel itemPrice;
     private JTextField priceField;
 
-    private JLabel orgLabel;
+
     private static User user;
+
+    ArrayList<Organisation> organisationList = new ArrayList<Organisation>();
+    ArrayList<Organisation> orgList = new ArrayList<Organisation>();
 
     Object[] array;
 
@@ -265,32 +269,42 @@ public class buyArena extends JFrame implements Serializable {
          */
         private void sellPressed() {
             String index = tradeList.getSelectedValue().toString();
-            int quant = Integer.valueOf(qualityField.getText());
-            int price = Integer.valueOf(priceField.getText());
+            int quant = Integer.parseInt(qualityField.getText());
+            int price = Integer.parseInt(priceField.getText());
             //variables
             if(itemField.getText() != null && !itemField.getText().equals("") &&
                     qualityField.getText() != null && !qualityField.getText().equals("") &&
                     priceField.getText() != null && !priceField.getText().equals("")){
-                if (index == itemField.getText()){
 
-
+                ListModel orgModel = orgData.getModel();
+                for (int i = 0; i < orgData.getSize(); i++) {
+                    Organisation org = orgData.get(orgModel.getElementAt(i).toString());
+                    organisationList.add(org);
                 }
+                for (int i = 0; i < organisationList.size(); i++) {
+                    if (organisationList.get(i).getName().equals(user.getOrganisationalUnit())) {
+                        orgList.add();
+                    }
+                }
+//                if(orgList.equals(index)){
+//                    if (quant <= )
+//
+//                }
+
+                //organisationList = list of organisations
+                //orgList  = list of assets from that organisation
+
+
 
                 //compare the org quantity to the quantity of a trade?
 
 
             }
+            else{
+                JOptionPane.showMessageDialog(new JFrame(), "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
+            }
 
-//            ListModel orgModel = orgData.getModel();
-//            for (int i = 0; i < orgData.getSize(); i++) {
-//                Organisation org = orgData.get(orgModel.getElementAt(i).toString());
-//                organisationList.add(org);
-//            }
-//            for (int i = 0; i < organisationList.size(); i++) {
-//                if (organisationList.get(i).getName().equals(selectedOrg)) {
-//                    orgList.add(organisationList.get(i).getAsset());
-//                }
-//            }
+
 
         }
 
