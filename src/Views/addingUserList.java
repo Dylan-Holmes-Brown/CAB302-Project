@@ -1,5 +1,6 @@
 package Views;
 
+import client.NetworkDataSource;
 import common.HashPassword;
 import common.User;
 import common.sql.OrganisationData;
@@ -15,13 +16,10 @@ import java.io.Serializable;
 /**
  * Initialises the admin interface for the addingUserList UI. Button listeners are included
  * as sub-classes of this class
- *
+ * @author Vipin Vijay - priminary edition
  * @author Dylan Holmes-Brown
  * @author Laku Jackson
  *
- * admin
- * 1234
- * admin
  */
 
 public class addingUserList extends JFrame implements Serializable {

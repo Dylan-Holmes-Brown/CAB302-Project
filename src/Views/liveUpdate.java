@@ -15,6 +15,10 @@ import java.awt.event.*;
 import java.io.Serializable;
 
 
+/**
+ * @author Vipin Vijay
+ */
+
 public class liveUpdate extends JFrame implements Serializable {
 
     private static final long serialVersionUID = 62L;
