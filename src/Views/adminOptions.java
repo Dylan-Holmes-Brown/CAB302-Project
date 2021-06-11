@@ -1,7 +1,6 @@
 package Views;
 
 import client.NetworkDataSource;
-import common.Organisation;
 import common.User;
 import common.sql.AssetTypeData;
 import common.sql.OrganisationData;
@@ -9,7 +8,6 @@ import common.sql.UserData;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
@@ -22,7 +20,6 @@ import java.io.Serializable;
  * @author Dylan Holmes-Brown
  * @author Laku Jackson
  */
-
 public class adminOptions extends JFrame implements Serializable {
     private static final long serialVersionUID = 63L;
     private User user;
@@ -31,7 +28,8 @@ public class adminOptions extends JFrame implements Serializable {
     // JSwing Variables
     private JButton createAsset;
     private JButton createOrg;
-    private JButton addOrgAsset;
+    private JButton addOrgAssets;
+    private JButton creditsQuantity;
     private JButton createUser;
     private JButton logout;
 
@@ -84,20 +82,22 @@ public class adminOptions extends JFrame implements Serializable {
         // Initialise the JPanel
         JPanel layout = new JPanel(new GridBagLayout());
         JPanel buttonPanel = new JPanel();
-        GridLayout buttonLayout = new GridLayout(5, 1, 0, 20);
+        GridLayout buttonLayout = new GridLayout(6, 1, 0, 20);
         buttonPanel.setLayout(buttonLayout);
 
         // Initialise Buttons
         createAsset = new JButton("Create Asset");
         createOrg = new JButton("Create Organisation");
-        addOrgAsset = new JButton("Add Assets to Organisation");
+        addOrgAssets = new JButton("Add Assets to Organisation");
+        creditsQuantity = new JButton("Organisation Credits / Quantity Actions");
         createUser = new JButton("Create User");
         logout = new JButton("Logout");
 
         // Add buttons to the panel
         buttonPanel.add(createAsset);
         buttonPanel.add(createOrg);
-        buttonPanel.add(addOrgAsset);
+        buttonPanel.add(addOrgAssets);
+        buttonPanel.add(creditsQuantity);
         buttonPanel.add(createUser);
         buttonPanel.add(logout);
 
@@ -115,7 +115,8 @@ public class adminOptions extends JFrame implements Serializable {
     private void addButtonListeners(ActionListener listener) {
         createAsset.addActionListener(listener);
         createOrg.addActionListener(listener);
-        addOrgAsset.addActionListener(listener);
+        addOrgAssets.addActionListener(listener);
+        creditsQuantity.addActionListener(listener);
         createUser.addActionListener(listener);
         logout.addActionListener(listener);
     }
@@ -147,9 +148,12 @@ public class adminOptions extends JFrame implements Serializable {
             } else if (source == createOrg) {
                 dispose();
                 new addingOrganisationList(user, new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
-            } else if (source == addOrgAsset) {
+            } else if (source == addOrgAssets) {
                 dispose();
-                new addingOrgAssets(user, new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
+                new selectOrg(user, new OrganisationData(new NetworkDataSource()));
+            } else if (source == creditsQuantity) {
+                dispose();
+                new orgCreditsQuantity(user, new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
             } else if (source == createUser) {
                 dispose();
                 new addingUserList(user, new UserData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));

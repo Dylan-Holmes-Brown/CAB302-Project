@@ -2,6 +2,8 @@ package Views;
 
 import javax.swing.*;
 import java.io.Serializable;
+
+import common.Organisation;
 import common.Trade;
 import common.User;
 import common.sql.CurrentData;
@@ -14,6 +16,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class addingTrade extends JFrame implements Serializable {
 
@@ -21,7 +25,8 @@ public class addingTrade extends JFrame implements Serializable {
     private CurrentData tradeData;
     private OrganisationData orgData;
     private User user;
-    private Object[] array;
+    private List<Organisation> organisationList;
+    private List<String> orgList;
 
     private JList tradeList;
     private JComboBox dropDownBox;
@@ -50,7 +55,8 @@ public class addingTrade extends JFrame implements Serializable {
         this.tradeData = tradeData;
         this.orgData = orgData;
         this.user = user;
-        array = new String[tradeData.getSize()];
+        organisationList = new ArrayList<>();
+        orgList = new ArrayList<>();
 
         // Initialise the UI and listen for a Button press or window close
         initUI();
@@ -130,11 +136,17 @@ public class addingTrade extends JFrame implements Serializable {
     }
 
     private JPanel makeDropDownPanel() {
-        ListModel model = orgData.getAssets(user.getOrganisationalUnit());
-        for (int i = 0; i < 1; i++) {
-            array[i] = model.getElementAt(i).toString();
+        // Initialise the organisation model, add the organisation object to a list
+        // and organisation assets to a separate list
+        ListModel orgModel = orgData.getModel();
+        for (int i = 0; i < orgData.getSize(); i++) {
+            Organisation orgGet = orgData.get(orgModel.getElementAt(i).toString());
+            organisationList.add(orgGet);
+            if (organisationList.get(i).getName().equals(user.getOrganisationalUnit())) {
+                orgList.add(organisationList.get(i).getAsset());
+            }
         }
-        dropDownBox = new JComboBox(array);
+        dropDownBox = new JComboBox(orgList.toArray());
         dropDownBox.setBackground(Color.white);
         JPanel panel = new JPanel();
         assetLabel = new JLabel("Asset");

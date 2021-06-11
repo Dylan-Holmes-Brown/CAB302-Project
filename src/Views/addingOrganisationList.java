@@ -48,9 +48,12 @@ public class addingOrganisationList extends JFrame implements Serializable{
     /**
      * Constructor sets up UI, adds button listeners and displays
      *
-     * @param orgData the user data from the database
+     * @param user the signed in user
+     * @param orgData the organisation data from the database
+     * @param assetTypeData the asset type data from the database
      */
     public addingOrganisationList(User user, OrganisationData orgData, AssetTypeData assetTypeData) {
+        // Initialise data
         this.orgData = orgData;
         this.assetTypeData = assetTypeData;
         this.user = user;
