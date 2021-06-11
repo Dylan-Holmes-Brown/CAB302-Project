@@ -38,6 +38,7 @@ public class addingAssetList extends JFrame implements Serializable{
      * @param assetTypeData the user data from the database
      */
     public addingAssetList(User user, AssetTypeData assetTypeData) {
+        // Initialise data
         this.assetTypeData = assetTypeData;
         this.user = user;
 
@@ -153,6 +154,11 @@ public class addingAssetList extends JFrame implements Serializable{
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(assetLabel).addComponent(assetField));
         layout.setVerticalGroup(vGroup);
+
+        // Set Dimensions
+        userPanel.setMinimumSize(new Dimension(250, 31));
+        userPanel.setPreferredSize(new Dimension(275, 31));
+        userPanel.setMaximumSize(new Dimension(275, 31));
         return userPanel;
     }
 
@@ -237,6 +243,7 @@ public class addingAssetList extends JFrame implements Serializable{
                 createPressed();
             }
             else if (source == backButton) {
+                // Persist the data, close the frame and return to the admin options
                 assetTypeData.persist();
                 dispose();
                 new adminOptions(user);

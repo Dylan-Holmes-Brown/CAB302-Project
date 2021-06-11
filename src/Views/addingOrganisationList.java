@@ -58,6 +58,7 @@ public class addingOrganisationList extends JFrame implements Serializable{
 
         // Initialise the UI and listeners
         initUI();
+        checkAssetSize();
         addButtonListeners(new ButtonListener());
         addOrganisationListListener(new OrganisationListListener());
         addClosingListener(new ClosingListener());
@@ -115,9 +116,6 @@ public class addingOrganisationList extends JFrame implements Serializable{
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeOrgFieldPanel());
 
-        contentPane.add(Box.createVerticalStrut(5));
-        contentPane.add(makeDropDownPanel());
-
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeButtonsPanel());
         contentPane.add(Box.createVerticalStrut(20));
@@ -164,30 +162,6 @@ public class addingOrganisationList extends JFrame implements Serializable{
     }
 
     /**
-     * Create a JPanel holding the drop down box with all available assets
-     *
-     * @return the drop down box with all assets
-     */
-    private JPanel makeDropDownPanel() {
-        // Initialise the ListModel and array of all elements of the asset table
-        ListModel model = assetTypeData.getModel();
-        for (int i = 0; i < assetTypeData.getSize(); i++) {
-            array[i] = model.getElementAt(i).toString();
-        }
-        // Initialise the Drop down box and panel
-        comboBox = new JComboBox(array);
-        comboBox.setBackground(Color.white);
-        comboBox.setPrototypeDisplayValue("Text Size");
-        JPanel panel = new JPanel();
-        assetLabel = new JLabel("Asset");
-
-        // Add the label and drop down box to the panel
-        panel.add(assetLabel);
-        panel.add(comboBox);
-        return panel;
-    }
-
-    /**
      * Makes a JPanel containing the Organisation name, credits, asset and quantity fields to be
      * recorded.
      *
@@ -198,6 +172,17 @@ public class addingOrganisationList extends JFrame implements Serializable{
         JPanel orgPanel = new JPanel();
         GroupLayout layout = new GroupLayout(orgPanel);
         orgPanel.setLayout(layout);
+
+        // Initialise the ListModel and array of all elements of the asset table
+        ListModel model = assetTypeData.getModel();
+        for (int i = 0; i < assetTypeData.getSize(); i++) {
+            array[i] = model.getElementAt(i).toString();
+        }
+        // Initialise the Drop down box
+        comboBox = new JComboBox(array);
+        comboBox.setBackground(Color.white);
+        comboBox.setPrototypeDisplayValue("Text Size");
+        assetLabel = new JLabel("Asset");
 
         // Enable auto gaps between each line
         layout.setAutoCreateGaps(true);
@@ -218,8 +203,8 @@ public class addingOrganisationList extends JFrame implements Serializable{
         GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
 
         // Two parallel groups 1. contains labels and the other the fields
-        hGroup.addGroup(layout.createParallelGroup().addComponent(orgLabel).addComponent(orgCredits).addComponent(assetQuantity));
-        hGroup.addGroup(layout.createParallelGroup().addComponent(orgField).addComponent(orgCreditsField).addComponent(assetQField));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(orgLabel).addComponent(orgCredits).addComponent(assetLabel).addComponent(assetQuantity));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(orgField).addComponent(orgCreditsField).addComponent(comboBox).addComponent(assetQField));
         layout.setHorizontalGroup(hGroup);
 
         // Create a sequential group for the vertical axis
@@ -229,8 +214,16 @@ public class addingOrganisationList extends JFrame implements Serializable{
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(orgCredits).addComponent(orgCreditsField));
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(assetLabel).addComponent(comboBox));
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(assetQuantity).addComponent(assetQField));
         layout.setVerticalGroup(vGroup);
+
+        // Set Dimensions
+        orgPanel.setMinimumSize(new Dimension(250, 120));
+        orgPanel.setPreferredSize(new Dimension(275, 120));
+        orgPanel.setMaximumSize(new Dimension(275, 120));
+
         return orgPanel;
     }
 
@@ -274,6 +267,13 @@ public class addingOrganisationList extends JFrame implements Serializable{
             assetQField.setText(String.valueOf(org.getQuantity()));
             comboBox.setSelectedItem(org.getAsset());
         }
+    }
+
+    /**
+     * Checks the size of the organisation table determining the state of the combobox and member radiobutton
+     */
+    private void checkAssetSize() {
+        comboBox.setEnabled(assetTypeData.getSize() != 0);
     }
 
     /**
@@ -337,9 +337,11 @@ public class addingOrganisationList extends JFrame implements Serializable{
 
             // If all fields are filled in continue
             if (orgField.getText() != null && !orgField.getText().equals("")
-                    && !orgCreditsField.equals("") && selectedValue != null && !assetQField.equals("")) {
+                    && !orgCreditsField.getText().equals("") && selectedValue != null && !assetQField.getText().equals("")) {
                 // Add organisation to database and clear fields
-                Organisation o = new Organisation(orgField.getText(), Integer.valueOf(orgCreditsField.getText()), selectedValue, Integer.valueOf(assetQField.getText()));
+                int credits = Integer.valueOf(orgCreditsField.getText());
+                int quantity = Integer.valueOf(assetQField.getText());
+                Organisation o = new Organisation(orgField.getText(), credits, selectedValue, quantity);
                 orgData.add(o);
                 clearFields();
                 JOptionPane.showMessageDialog(null, String.format("Organisation '%s' successfully added", o.getName()));
