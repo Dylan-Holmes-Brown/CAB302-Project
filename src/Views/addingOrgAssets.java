@@ -54,6 +54,7 @@ public class addingOrgAssets extends JFrame implements Serializable{
      * Constructor sets up UI, adds button listeners and displays
      *
      * @param orgData the user data from the database
+     * @param assetTypeData the user data from the database
      */
     public addingOrgAssets(User user, OrganisationData orgData, AssetTypeData assetTypeData) {
         this.orgData = orgData;

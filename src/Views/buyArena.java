@@ -1,9 +1,9 @@
 package Views;
 
 import client.NetworkDataSource;
+import common.User;
 import common.sql.CurrentData;
 import common.sql.OrganisationData;
-import common.sql.UserData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,10 +30,11 @@ public class buyArena extends JFrame implements Serializable {
     private JTextField priceField;
 
     private JLabel orgLabel;
+    private static User user;
 
     Object[] array;
 
-    private JButton createButton;
+    private JButton sellButton;
     private JButton deleteButton;
     private JButton buyButton;
 
@@ -41,13 +42,16 @@ public class buyArena extends JFrame implements Serializable {
     OrganisationData orgData;
     CurrentData tradeData;
 
+
+
     /**
      * Constructor sets up UI frame and adds listeners
      *
      * @param tradeData the user data accessor to the database
      * @param orgData the organisation data accessor to the database
      */
-    public buyArena(CurrentData tradeData, OrganisationData orgData) {
+    public buyArena(User user, CurrentData tradeData, OrganisationData orgData) {
+        this.user = user;
         this.tradeData = tradeData;
         this.orgData = orgData;
         array = new String[orgData.getSize()];
@@ -192,11 +196,11 @@ public class buyArena extends JFrame implements Serializable {
     private JPanel makeButtonsPanel() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        createButton = new JButton("Create");
+        sellButton = new JButton("Create");
         deleteButton = new JButton("Delete");
         buyButton = new JButton("buy");
         buttonPanel.add(Box.createHorizontalStrut(50));
-        buttonPanel.add(createButton);
+        buttonPanel.add(sellButton);
         buttonPanel.add(Box.createHorizontalStrut(50));
         buttonPanel.add(deleteButton);
         buttonPanel.add(Box.createHorizontalStrut(50));
@@ -227,7 +231,7 @@ public class buyArena extends JFrame implements Serializable {
      * @param listener the listener for the buttons to use
      */
     private void addButtonListeners(ActionListener listener) {
-        createButton.addActionListener(listener);
+        sellButton.addActionListener(listener);
         deleteButton.addActionListener(listener);
         buyButton.addActionListener(listener);
     }
@@ -244,8 +248,8 @@ public class buyArena extends JFrame implements Serializable {
          */
         public void actionPerformed(ActionEvent e) {
             JButton source = (JButton) e.getSource();
-            if (source == createButton) {
-                createPressed();
+            if (source == sellButton) {
+                sellPressed();
             }
             else if (source == deleteButton) {
                 deletePressed();
@@ -258,25 +262,25 @@ public class buyArena extends JFrame implements Serializable {
          * When the create user button is pressed, add the user information to the database
          * or display error
          */
-        private void createPressed() {
-//               User u = new User();
-//            String selectedOrg = String.valueOf(comboBox.getSelectedItem());
-//
-//            // If all fields are filled in continue
-////            if (userField.getText() != null && !userField.getText().equals("")
-////                    && !passField.equals("")) {
-//
-//                // Add user to database and clear fields
-//                userData.add(u);
-//                clearFields();
-                JOptionPane.showMessageDialog(null, String.format("User successfully added"));
-            //}
+        private void sellPressed() {
+            String index = tradeList.getSelectedValue().toString();
+            int quant = Integer.valueOf(qualityField.getText());
+            int price = Integer.valueOf(priceField.getText());
+            //variables
+            if(itemField.getText() != null && !itemField.getText().equals("") &&
+                    qualityField.getText() != null && !qualityField.getText().equals("") &&
+                    priceField.getText() != null && !priceField.getText().equals("")){
+                if (index == itemField.getText()){
+                    if ()
 
-            // Not all fields are filled in
-//            else {
-//                JOptionPane.showMessageDialog(new JFrame(), "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
-////            }
-//            checkListSize();
+
+                }
+
+                //compare the org quantity to the quantity of a trade?
+
+
+            }
+
         }
 
 
@@ -305,17 +309,22 @@ public class buyArena extends JFrame implements Serializable {
          * or display error
          */
         private void buyPressed() {
-            int index = tradeList.getSelectedIndex();
-            String itemName = itemField.getText();
-            tradeData.remove(tradeList.getSelectedValue());
-            clearFields();
-            index--;
-            if (index == -1) {
-                if (tradeData.getSize() != 0) {
-                    index = 0;
-                }
-            }
-            tradeList.setSelectedIndex(index);
+//            String index = tradeList.getSelectedValue().toString();
+//            int quant = Integer.valueOf(qualityField.getText());
+//            int price = Integer.valueOf(priceField.getText());
+//            //variables
+//            if(itemField.getText() != null && !itemField.getText().equals("") &&
+//                    qualityField.getText() != null && !qualityField.getText().equals("") &&
+//                    priceField.getText() != null && !priceField.getText().equals("")){
+//                if (index == itemField.getText() && quant <= user.getOrganisationalUnit(tradeData)){
+//
+//
+//                }
+//
+//
+//            }
+
+
             checkListSize();
             JOptionPane.showMessageDialog(null, String.format("You have bough the '%s' ", itemName));
         }
@@ -324,7 +333,7 @@ public class buyArena extends JFrame implements Serializable {
 
     public static void main(String[] args) {
 
-        new buyArena(new CurrentData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
+        new buyArena(user, new CurrentData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
     }
 
 }
