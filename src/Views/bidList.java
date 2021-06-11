@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.Serializable;
 
+/**
+ * @author Vipin Vijay
+ */
+
 public class bidList extends JFrame implements Serializable {
 
     private static JButton button;

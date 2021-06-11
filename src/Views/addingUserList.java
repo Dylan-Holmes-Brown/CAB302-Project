@@ -16,9 +16,10 @@ import java.io.Serializable;
 /**
  * Initialises the admin interface for the addingUserList UI. Button listeners are included
  * as sub-classes of this class
- *
+ * @author Vipin Vijay - priminary edition
  * @author Dylan Holmes-Brown
  * @author Laku Jackson
+ *
  */
 
 public class addingUserList extends JFrame implements Serializable {

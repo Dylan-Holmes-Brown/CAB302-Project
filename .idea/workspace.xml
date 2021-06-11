@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="hopefully we can now create a trade">
-      <change afterPath="$PROJECT_DIR$/src/Views/buyTableArena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Created a tableFormated for the buySell Page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/addingUserList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/addingUserList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/bidList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/bidList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/buyArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/buyArena.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/buyTableArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/buyTableArena.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/liveUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/liveUpdate.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -392,7 +395,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623300808955</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Created a tableFormated for the buySell Page">
+      <created>1623383711634</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1623383711634</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -408,7 +418,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update password for user" />
     <MESSAGE value="Organisation Server side implemented" />
     <MESSAGE value="Hashing finally done" />
     <MESSAGE value="Unit Testing for JDBCUserDataSource started just need to test exceptions" />
@@ -433,7 +442,8 @@
     <MESSAGE value="addingUserList fully complete, need documentation, addingOrgAssets needs work." />
     <MESSAGE value="updatePassword fully complete, documentation for this and addingUserList complete" />
     <MESSAGE value="hopefully we can now create a trade" />
-    <option name="LAST_COMMIT_MESSAGE" value="hopefully we can now create a trade" />
+    <MESSAGE value="Created a tableFormated for the buySell Page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created a tableFormated for the buySell Page" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestAssetTypeData.ic" NAME="TestAssetTypeData Coverage Results" MODIFIED="1622894484900" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

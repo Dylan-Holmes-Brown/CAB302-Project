@@ -9,6 +9,11 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ *
+ * @author Vipin Vijay
+ */
+
 public class buyTableArena extends JFrame{
 
     public buyTableArena() {

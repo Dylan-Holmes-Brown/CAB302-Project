@@ -1,6 +1,5 @@
 package Views;
 
-
 import client.NetworkDataSource;
 import common.sql.OrganisationData;
 import common.sql.UserData;
