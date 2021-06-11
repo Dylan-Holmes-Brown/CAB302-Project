@@ -52,8 +52,8 @@ public class addingOrgAssets extends JFrame implements Serializable {
         this.orgData = orgData;
         this.assetTypeData = assetTypeData;
         assetList = new ArrayList<>();
-        orgList = new ArrayList<>();
         organisationList = new ArrayList<>();
+        orgList = new ArrayList<>();
 
         // Initialise the UI and listeners
         initUI();
@@ -61,7 +61,7 @@ public class addingOrgAssets extends JFrame implements Serializable {
         addClosingListener(new ClosingListener());
 
         // Decorate the frame and make it visible
-        setTitle("Asset Trading System - Select Organisation");
+        setTitle("Asset Trading System - Add Assets to Organisation");
         setMinimumSize(new Dimension(650, 300));
         setLocationRelativeTo(null);
         pack();
@@ -117,12 +117,11 @@ public class addingOrgAssets extends JFrame implements Serializable {
     private JScrollPane makeAssetListPane() {
         // Initialise the organisation model, add the organisation object to a list
         // and organisation assets to a separate list
-        ListModel orgModel = orgData.getModel();
+        ListModel model = orgData.getModel();
         for (int i = 0; i < orgData.getSize(); i++) {
-            Organisation orgGet = orgData.get(orgModel.getElementAt(i).toString());
-            organisationList.add(orgGet);
-            if (organisationList.get(i).getName().equals(org.getName())) {
-                orgList.add(organisationList.get(i).getAsset());
+            Organisation orgGet = orgData.get(model.getElementAt(i));
+            if (orgGet.getName().equals(org.getName())) {
+                orgList.add(orgGet.getAsset());
             }
         }
         // Initialise the JList and JScrollerPane

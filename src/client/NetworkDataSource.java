@@ -262,14 +262,14 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
     }
 
     /**
-     * @see OrganisationDataSource#getOrg(String)
+     * @see OrganisationDataSource#getOrg(Integer)
      */
     @Override
-    public Organisation getOrg(String name) {
+    public Organisation getOrg(Integer id) {
         try {
             // Tell server to expect a organisations name, and send the details
             outputStream.writeObject(Commands.GET_ORG);
-            outputStream.writeObject(name);
+            outputStream.writeObject(id);
             outputStream.flush();
 
             // Read the organisation's details from the server
@@ -318,11 +318,11 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
      * @see OrganisationDataSource#OrgNameSet()
      */
     @Override
-    public Set<String> OrgNameSet() {
+    public Set<Integer> OrgNameSet() {
         try {
             outputStream.writeObject(Commands.GET_ORG_NAME_SET);
             outputStream.flush();
-            return (Set<String>) inputStream.readObject();
+            return (Set<Integer>) inputStream.readObject();
         } catch (IOException | ClassNotFoundException | ClassCastException e) {
             e.printStackTrace();
             return new HashSet<>();

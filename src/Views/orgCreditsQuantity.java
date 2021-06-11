@@ -201,7 +201,7 @@ public class orgCreditsQuantity extends JFrame implements Serializable{
         // and organisation object to a separate list
         ListModel orgModel = orgData.getModel();
         for (int i = 0; i < orgData.getSize(); i++) {
-            Organisation org = orgData.get(orgModel.getElementAt(i).toString());
+            Organisation org = orgData.get(orgModel.getElementAt(i));
             organisationList.add(org);
             orgList.add(org.getName());
         }

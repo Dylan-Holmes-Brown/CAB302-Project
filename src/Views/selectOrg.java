@@ -103,7 +103,10 @@ public class selectOrg extends JFrame implements Serializable {
         // Get the org data model and add all elements to the org list
         ListModel model = orgData.getModel();
         for (int i = 0; i < orgData.getSize(); i++) {
-            orgList.add(model.getElementAt(i).toString());
+            Organisation org = orgData.get(model.getElementAt(i));
+            if (!orgList.contains(org.getName())) {
+                orgList.add(org.getName());
+            }
         }
 
         // Initialise the Drop down box and panel
@@ -166,7 +169,7 @@ public class selectOrg extends JFrame implements Serializable {
             // Get the button source and check which method to goto according to the source
             JButton source = (JButton) e.getSource();
             if (source == applyButton) {
-                String selectedOrg = orgBox.getSelectedItem().toString();
+                Integer selectedOrg = orgBox.getSelectedIndex() + 1;
                 Organisation org = orgData.get(selectedOrg);
                 orgData.persist();
                 dispose();

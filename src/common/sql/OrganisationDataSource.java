@@ -53,12 +53,12 @@ public interface OrganisationDataSource {
 
     /**
      * Extracts all the details of a Organisation from the table based on the
-     * name passed in.
+     * id passed in.
      *
-     * @param name The name as a String to search for.
-     * @return all details in a Organisation object for the name
+     * @param id The id as a integer to search for.
+     * @return all details in a Organisation object for the id
      */
-    Organisation getOrg(String name);
+    Organisation getOrg(Integer id);
 
     /**
      * Retrieves a set of assets from the data source that are used in
@@ -90,10 +90,10 @@ public interface OrganisationDataSource {
     void close();
 
     /**
-     * Retrieves a set of names from the data source that are used in
+     * Retrieves a set of ids from the data source that are used in
      * the name list.
      *
-     * @return set of names.
+     * @return set of ids.
      */
-    Set<String> OrgNameSet();
+    Set<Integer> OrgNameSet();
 }
