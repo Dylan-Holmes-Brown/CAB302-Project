@@ -1,6 +1,7 @@
 package Views;
 
 import client.NetworkDataSource;
+import common.Organisation;
 import common.User;
 import common.sql.CurrentData;
 import common.sql.OrganisationData;
@@ -271,7 +272,6 @@ public class buyArena extends JFrame implements Serializable {
                     qualityField.getText() != null && !qualityField.getText().equals("") &&
                     priceField.getText() != null && !priceField.getText().equals("")){
                 if (index == itemField.getText()){
-                    if ()
 
 
                 }
@@ -280,6 +280,17 @@ public class buyArena extends JFrame implements Serializable {
 
 
             }
+
+//            ListModel orgModel = orgData.getModel();
+//            for (int i = 0; i < orgData.getSize(); i++) {
+//                Organisation org = orgData.get(orgModel.getElementAt(i).toString());
+//                organisationList.add(org);
+//            }
+//            for (int i = 0; i < organisationList.size(); i++) {
+//                if (organisationList.get(i).getName().equals(selectedOrg)) {
+//                    orgList.add(organisationList.get(i).getAsset());
+//                }
+//            }
 
         }
 
