@@ -3,11 +3,16 @@ package server;
 import java.io.IOException;
 
 /**
- *
+ * Main class for the server
  *
  * @author Dylan Holmes-Brown
  */
+
 public class Main {
+
+    /**
+     * Initialises the server
+     */
     public static void main(String[] args) throws IOException {
         NetworkServer server = new NetworkServer();
         System.out.println("Asset Trading Server\n" +

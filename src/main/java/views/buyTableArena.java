@@ -14,6 +14,9 @@ import javax.swing.table.DefaultTableModel;
 
 public class buyTableArena extends JFrame{
 
+    /**
+     *
+     */
     public buyTableArena() {
 
         // create JFrame and JTable
@@ -169,6 +172,10 @@ public class buyTableArena extends JFrame{
         frame.setVisible(true);
 
     }
+
+    /**
+     *
+     */
     public static void main(String[] args) {
 
         new buyTableArena();

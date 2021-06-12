@@ -17,11 +17,21 @@ public class Organisation implements Serializable {
     private String assets;
     private int quantity = 0;
 
-
+    /**
+     * Empty constructor to create Organisation Object
+     */
     public Organisation() {
 
     }
 
+    /**
+     * Organisation Constructor
+     *
+     * @param name The name of the organisation
+     * @param credits The amount of credits an organisation has
+     * @param assets The name of assets the organisation has
+     * @param quantity The quantity of the assets
+     */
     public Organisation(String name, int credits, String assets, int quantity) {
         this.name = name;
         this.credits = credits;
@@ -29,6 +39,12 @@ public class Organisation implements Serializable {
         this.quantity = quantity;
     }
 
+    /**
+     * Organisation Constructor
+     *
+     * @param name The name of the organisation
+     * @param credits The amount of credits an organisation has
+     */
     public Organisation(String name, int credits) {
         this.name = name;
         this.credits = credits;
@@ -70,7 +86,7 @@ public class Organisation implements Serializable {
     public int getCredits() { return credits; }
 
     /**
-     *
+     * Set the credits of the organisation object.
      *
      * @param credits the credits to set
      */
@@ -96,6 +112,8 @@ public class Organisation implements Serializable {
     public int getQuantity() { return quantity; }
 
     /**
+     * Set the quantity of an asset the organisation object holds.
+     *
      * @param quantity the quantity to set
      */
     public void setQuantity(int quantity) { this.quantity = quantity; }

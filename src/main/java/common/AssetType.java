@@ -13,10 +13,17 @@ public class AssetType implements Serializable {
     private static final long serialVersionUID = 30L;
     private String assetType;
 
+    /**
+     * Empty constructor to create AssetType Object
+     */
     public AssetType() {
 
     }
 
+    /**
+     * Finalizes any resources used by the data source and ensures data is
+     * persisted.
+     */
     public AssetType(String assetType){
 
         this.assetType = assetType;

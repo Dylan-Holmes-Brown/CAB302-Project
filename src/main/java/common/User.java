@@ -28,10 +28,10 @@ public class User extends Object implements Serializable {
     /**
      * Member User Constructor
      *
-     * @param username
-     * @param password
-     * @param accountType
-     * @param org
+     * @param username The username of the member
+     * @param password The password of the member
+     * @param accountType The account type of the user
+     * @param org The organisation the user is apart of
      */
     public User(String username, String password, String accountType, String org){
         this.username = username;
@@ -43,9 +43,9 @@ public class User extends Object implements Serializable {
     /**
      * Admin User Constructor
      *
-     * @param username
-     * @param password
-     * @param accountType
+     * @param username The username of the admin
+     * @param password The password of the admin
+     * @param accountType The account type of the user
      */
     public User(String username, String password, String accountType){
         this.username = username;

@@ -36,6 +36,9 @@ public class JDBCAssetTypeDataSource implements AssetTypeDataSource {
     private static final String COUNT_ROWS = "SELECT COUNT(*) FROM asset_types";
     private PreparedStatement rowCount;
 
+    /**
+     * Constructor gets connection to database and prepares all sql statements
+     */
     public JDBCAssetTypeDataSource() {
         connection = DBConnection.getInstance();
         try {

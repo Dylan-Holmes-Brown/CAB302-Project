@@ -42,6 +42,9 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
     private static final String COUNT_ROWS = "SELECT COUNT(*) FROM user;";
     private PreparedStatement rowCount;
 
+    /**
+     * Constructor gets connection to database and prepares all sql statements
+     */
     public JDBCCurrentDataSource() {
         try {
             connection = DBConnection.getInstance();

@@ -36,6 +36,9 @@ public class NetworkServer {
     private CurrentDataSource tableCurrentTrade;
     private TradeHistoryDataSource tableTradeHistory;
 
+    /**
+     * Constructor that gets server information from server.props file
+     */
     public NetworkServer(){
         Properties properties = new Properties();
         FileInputStream in = null;
@@ -57,8 +60,9 @@ public class NetworkServer {
     }
 
     /**
+     * Handles the connection from the server socket
      *
-     * @param socket
+     * @param socket Socket used to communicate to the connected client
      */
     private void handleConnection(Socket socket) {
         try {
@@ -80,17 +84,18 @@ public class NetworkServer {
     }
 
     /**
+     * Handles a request from the client
      *
-     * @param socket
-     * @param inputStream
-     * @param outputStream
-     * @param commandAssetType
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * @param socket Socket for the client
+     * @param inputStream Input stream to read from
+     * @param outputStream Output stream to write to
+     * @param command Command being handled
+     * @throws IOException Client has been disconnected
+     * @throws ClassNotFoundException Client has sent an invalid object
      */
-    private void handleCommand (Socket socket, ObjectInputStream inputStream, ObjectOutputStream outputStream, Commands commandAssetType)
+    private void handleCommand (Socket socket, ObjectInputStream inputStream, ObjectOutputStream outputStream, Commands command)
             throws IOException, ClassNotFoundException {
-        switch (commandAssetType) {
+        switch (command) {
             /*
             Asset Commands
              */

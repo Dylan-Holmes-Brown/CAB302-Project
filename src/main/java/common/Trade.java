@@ -18,8 +18,23 @@ public class Trade implements Serializable {
     private int price;
     private Date date;
 
-    public Trade(){}
+    /**
+     * Empty constructor to create Trade Object
+     */
+    public Trade(){
 
+    }
+
+    /**
+     * Trade Constructor
+     *
+     * @param buySell The type of trade being either buy or sell
+     * @param org The organisation making the trade
+     * @param asset The asset name that will be traded
+     * @param quantity The quantity that will be traded
+     * @param price The price that the asset will be traded at
+     * @param date The date of the trade
+     */
     public Trade(String buySell, String org, String asset, int quantity, int price, Date date) {
         this.buySell = buySell;
         this.organisation = org;

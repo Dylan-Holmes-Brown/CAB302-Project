@@ -258,6 +258,10 @@ public class addingOrgAssets extends JFrame implements Serializable {
             }
         }
 
+        /**
+         * When the create button is pressed, add the trade information to the database
+         * or display error
+         */
         private void applyPressed() {
             // Get drop box value
             String selectedAsset = comboBox.getSelectedItem().toString();

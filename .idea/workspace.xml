@@ -6,6 +6,27 @@
   <component name="ChangeListManager">
     <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="maven integration complete, builds and unit tests all work, just needs team member information.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/NetworkDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/NetworkDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/AssetType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/AssetType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/Organisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/Organisation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/Trade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/UserPermissions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/JDBCAssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/JDBCAssetTypeDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/JDBCCurrentDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/JDBCCurrentDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/JDBCOrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/JDBCOrganisationDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/JDBCTradeHistoryDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/JDBCTradeHistoryDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/JDBCUserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/JDBCUserDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/NetworkServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/NetworkServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/views/addingOrgAssets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/addingOrgAssets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/views/bidList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/views/buyArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/buyArena.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/views/buyTableArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/buyTableArena.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/views/liveUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/liveUpdate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/common/TestHashPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/TestHashPassword.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -447,7 +468,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623472020905</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Removed a test that was not needed.">
+      <created>1623475881524</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1623475881524</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -463,7 +491,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="organisation selection added to create user, Chore: make admin not have org" />
     <MESSAGE value="User login almost completed" />
     <MESSAGE value="organisation creation complete" />
     <MESSAGE value="Fixed network server, missing GET_ASSET_NAME_SET, GUI's can now run" />
@@ -488,10 +515,11 @@
     <MESSAGE value="Documentation finalised for admin side" />
     <MESSAGE value="added missing id column to organisational_unit table and refactored code accordingly" />
     <MESSAGE value="maven integration complete, builds and unit tests all work, just needs team member information." />
-    <option name="LAST_COMMIT_MESSAGE" value="maven integration complete, builds and unit tests all work, just needs team member information." />
+    <MESSAGE value="Removed a test that was not needed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed a test that was not needed." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Project$TestJDBCUser.ic" NAME="TestJDBCUser Coverage Results" MODIFIED="1622538349921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Project$TestUserData.ic" NAME="TestUserData Coverage Results" MODIFIED="1622963461956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Project$TestCurrentTradeData.ic" NAME="TestCurrentTradeData Coverage Results" MODIFIED="1622963443358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -500,17 +528,17 @@
     <SUITE FILE_PATH="coverage/Project$TestOrganisationData.ic" NAME="TestOrganisationData Coverage Results" MODIFIED="1622963451173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Project$TestCurrentTradeData_testRemoveNoUser.ic" NAME="TestCurrentTradeData.testRemoveNoUser Coverage Results" MODIFIED="1622968037755" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Project$TestJDBCUser.ic" NAME="TestJDBCUser Coverage Results" MODIFIED="1622538349921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Project$TestUserData_testRemoveNoUser.ic" NAME="TestUserData.testRemoveNoUser Coverage Results" MODIFIED="1622968185439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Project$TestAssetTypeData.ic" NAME="TestAssetTypeData Coverage Results" MODIFIED="1622894484900" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Project$TestUserData.ic" NAME="TestUserData Coverage Results" MODIFIED="1622963461956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>test.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/Project$TestAssetTypeData_and_3_more.ic" NAME="TestAssetTypeData and 3 more Coverage Results" MODIFIED="1623053887653" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Project$TestUserData_testRemoveNoUser.ic" NAME="TestUserData.testRemoveNoUser Coverage Results" MODIFIED="1622968185439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Project$TestCurrentTradeData_testRemoveNoUser.ic" NAME="TestCurrentTradeData.testRemoveNoUser Coverage Results" MODIFIED="1622968037755" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
   </component>
