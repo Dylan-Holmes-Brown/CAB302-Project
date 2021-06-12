@@ -1,7 +1,7 @@
 package Views;
 
-import client.NetworkDataSource;
 import common.HashPassword;
+import common.Organisation;
 import common.User;
 import common.sql.OrganisationData;
 import common.sql.UserData;
@@ -12,6 +12,8 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Initialises the admin interface for the addingUserList UI. Button listeners are included
@@ -25,7 +27,7 @@ import java.io.Serializable;
 public class addingUserList extends JFrame implements Serializable {
 
     private static final long serialVersionUID = 62L;
-    private Object[] array;
+    private List<String> orgList;
     private UserData userData;
     private OrganisationData orgData;
     private User user;
@@ -58,7 +60,7 @@ public class addingUserList extends JFrame implements Serializable {
         this.userData = userData;
         this.orgData = orgData;
         this.user = user;
-        array = new String[orgData.getSize()];
+        orgList = new ArrayList<>();
 
         // Initialise the UI and listeners
         initUI();
@@ -96,9 +98,6 @@ public class addingUserList extends JFrame implements Serializable {
 
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeUserFieldPanel());
-
-//        contentPane.add(Box.createVerticalStrut(5));
-//        contentPane.add(makeDropDownPanel());
 
         contentPane.add(Box.createVerticalStrut(10));
         contentPane.add(makeRadioPanel());
@@ -163,10 +162,13 @@ public class addingUserList extends JFrame implements Serializable {
         // Initialise the ListModel and array of all elements of the organisation table
         ListModel model = orgData.getModel();
         for (int i = 0; i < orgData.getSize(); i++) {
-            array[i] = model.getElementAt(i).toString();
+            Organisation org = orgData.get(model.getElementAt(i));
+            if (!orgList.contains(org.getName())) {
+                orgList.add(org.getName());
+            }
         }
         // Initialise the Drop down box
-        comboBox = new JComboBox(array);
+        comboBox = new JComboBox(orgList.toArray());
         comboBox.setBackground(Color.white);
         comboBox.setPrototypeDisplayValue("Text Size");
         orgLabel = new JLabel("Organisation");
@@ -285,10 +287,11 @@ public class addingUserList extends JFrame implements Serializable {
 
     /**
      * Display the user details in the fields
+     *
      * @param user the selected user to display
      */
     private void display(User user) {
-        // Check that org is not null and set fields to org details
+        // Check that user is not null and set fields to org details
         if (user != null) {
             userField.setText(user.getUsername());
             passField.setText(user.getPassword());
