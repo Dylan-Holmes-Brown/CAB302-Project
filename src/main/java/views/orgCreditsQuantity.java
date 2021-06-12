@@ -431,7 +431,7 @@ public class orgCreditsQuantity extends JFrame implements Serializable{
                             }
                             // Organisation does not hold the asset
                             else{
-                                JOptionPane.showMessageDialog(null, String.format("Organisation does not hold the asset '%s'", selectedAsset), "Asset Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, String.format("Organisation '%s' does not hold the asset '%s'", orgBox.getSelectedItem(), selectedAsset), "Asset Error", JOptionPane.ERROR_MESSAGE);
                             }
                         }
                         // Check if remove quantity is selected
@@ -446,7 +446,7 @@ public class orgCreditsQuantity extends JFrame implements Serializable{
                             }
                             // Organisation does not hold the asset
                             else {
-                                JOptionPane.showMessageDialog(null, String.format("Organisation does not hold the asset '%s'", selectedAsset), "Asset Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, String.format("Organisation '%s' does not hold the asset '%s'", orgBox.getSelectedItem(), selectedAsset), "Asset Error", JOptionPane.ERROR_MESSAGE);
                             }
                         }
                     }

@@ -250,7 +250,13 @@ public class addingOrgAssets extends JFrame implements Serializable {
             JButton source = (JButton) e.getSource();
             if (source == applyButton) {
                 applyPressed();
+                // Persist data, close frame and return to admin menu
+                orgData.persist();
+                assetTypeData.persist();
+                dispose();
+                new adminOptions(user);
             } else if (source == backButton) {
+                // Persist data, close frame and return to admin menu
                 orgData.persist();
                 assetTypeData.persist();
                 dispose();

@@ -80,7 +80,7 @@ public class userOptions extends JFrame implements Serializable {
         // Initialise the JPanel
         JPanel layout = new JPanel(new GridBagLayout());
         JPanel buttonPanel = new JPanel();
-        GridLayout buttonLayout = new GridLayout(5, 1, 0, 20);
+        GridLayout buttonLayout = new GridLayout(6, 1, 0, 20);
         buttonPanel.setLayout(buttonLayout);
 
         // Initialise Buttons

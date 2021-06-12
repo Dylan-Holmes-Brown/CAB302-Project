@@ -1,6 +1,5 @@
 package views;
 
-import client.NetworkDataSource;
 import common.Organisation;
 import common.Trade;
 import common.User;
@@ -8,9 +7,13 @@ import common.sql.CurrentData;
 import common.sql.OrganisationData;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,17 +25,31 @@ import java.util.List;
 
 public class buyArena extends JFrame implements Serializable {
 
-    private static final long serialVersionUID = 62L;
-    private JList list;
+    private static final long serialVersionUID = 555;
+    private JList buyList;
+    private JList sellList;
+    private List<String> tradeBuyList;
+    private List<Integer> buyId;
+    private List<String> tradeSellList;
+    private List<Integer> sellId;
 
-    private List<String> tradeList;
+    private JLabel buyName;
+    private JTextField buyField;
+    private JLabel buyQuantity;
+    private JTextField buyQuantityField;
+    private JLabel buyPrice;
+    private JTextField buyPriceField;
+    private JLabel buyOrganisation;
+    private JTextField buyOrganisationField;
 
-    private JLabel itemName;
-    private JTextField itemField;
-    private JLabel itemquality;
-    private JTextField qualityField;
-    private JLabel itemPrice;
-    private JTextField priceField;
+    private JLabel sellName;
+    private JTextField sellField;
+    private JLabel sellQuantity;
+    private JTextField sellQuantityField;
+    private JLabel sellPrice;
+    private JTextField sellPriceField;
+    private JLabel sellOrganisation;
+    private JTextField sellOrganisationField;
 
 
     private static User user;
@@ -43,10 +60,8 @@ public class buyArena extends JFrame implements Serializable {
     Object[] array;
 
     private JButton sellButton;
-    private JButton deleteButton;
     private JButton buyButton;
 
-    //UserData userData;
     OrganisationData orgData;
     CurrentData tradeData;
 
@@ -63,11 +78,15 @@ public class buyArena extends JFrame implements Serializable {
         this.tradeData = tradeData;
         this.orgData = orgData;
         array = new String[orgData.getSize()];
-        tradeList = new ArrayList<>();
+        tradeBuyList = new ArrayList<>();
+        tradeSellList = new ArrayList<>();
+        buyId = new ArrayList<>();
+        sellId = new ArrayList<>();
 
         initUI();
 
         addButtonListeners(new ButtonListener());
+        addNameListListener(new NameListListener());
 
         // decorate the frame and make it visible
         setTitle("Buy/Sell");
@@ -87,21 +106,37 @@ public class buyArena extends JFrame implements Serializable {
 
         //list of buy items
         contentPane.add(Box.createVerticalStrut(20));
-        contentPane.add(buyListPane());
-
-        //list of sell items
-        contentPane.add(Box.createVerticalStrut(20));
-        contentPane.add(sellListPane());
-
-        //user inputs
-        contentPane.add(Box.createVerticalStrut(20));
-        contentPane.add(makeUserFieldPanel());
+        contentPane.add(makeBuyPane());
 
         //buttons
         contentPane.add(Box.createVerticalStrut(20));
-        contentPane.add(makeButtonsPanel());
+        contentPane.add(makeBuyButton());
+
+        //list of sell items
+        contentPane.add(Box.createVerticalStrut(20));
+        contentPane.add(makeSellPane());
+
+        //buttons
+        contentPane.add(Box.createVerticalStrut(20));
+        contentPane.add(makeSellButton());
 
         contentPane.add(Box.createVerticalStrut(20));
+    }
+
+    private JPanel makeBuyPane() {
+        // Initialise Border
+        Border empty = BorderFactory.createEmptyBorder();
+        Border border = BorderFactory.createTitledBorder(empty, "Buy:");
+
+        JPanel detailsPanel = new JPanel();
+        detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.X_AXIS));
+        detailsPanel.add(Box.createHorizontalStrut(20));
+        detailsPanel.add(buyListPane());
+        detailsPanel.add(Box.createHorizontalStrut(20));
+        detailsPanel.add(makeBuyFieldsPanel());
+        detailsPanel.add(Box.createHorizontalStrut(20));
+        detailsPanel.setBorder(border);
+        return detailsPanel;
     }
 
     /**
@@ -111,28 +146,128 @@ public class buyArena extends JFrame implements Serializable {
      * @return the scrolling name list panel
      */
     private JScrollPane buyListPane() {
+        String type = "Buy";
 
-        // Get the trade data in a presentable format
-        ListModel model = tradeData.getModel();
+        ListModel model = tradeData.getType(type);
         for (int i = 0; i < model.getSize(); i++) {
             Trade trade = tradeData.get(model.getElementAt(i));
-            tradeList.add(String.format("%s - %s", trade.getBuySell(), trade.getAsset()));
+            // Check that the trade against the user's organisation
+            if (!user.getOrganisationalUnit().equals(trade.getOrganisation())) {
+                Date date = trade.getDate();
+                tradeBuyList.add(String.format("%s %s %s for %s - %s", trade.getBuySell(), trade.getQuantity(), trade.getAsset(), trade.getPrice(), date));
+                buyId.add(trade.getID());
+            }
         }
 
-        // Initialise the JList and JScrollerPane
-        list = new JList(tradeList.toArray());
-        list.setFixedCellWidth(200);
+        buyList = new JList(tradeBuyList.toArray());
+        buyList.setFixedCellWidth(200);
 
-        JScrollPane scroller = new JScrollPane(list);
-        scroller.setViewportView(list);
+        JScrollPane scroller = new JScrollPane(buyList);
+        scroller.setViewportView(buyList);
         scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroller.setMinimumSize(new Dimension(200, 150));
         scroller.setPreferredSize(new Dimension(250, 150));
         scroller.setMaximumSize(new Dimension(250, 200));
 
-
         return scroller;
+    }
+
+    private JPanel makeBuyButton() {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        buyButton = new JButton("Buy");
+        buttonPanel.add(buyButton);
+        return buttonPanel;
+    }
+
+    /**
+     * Adds the buttons to the panel
+     *
+     * @return a panel containing the create user button
+     */
+    private JPanel makeSellButton() {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        sellButton = new JButton("Sell");
+        buttonPanel.add(sellButton);
+        return buttonPanel;
+    }
+
+    /**
+     * Makes a JPanel containing the information of a selected trade
+     *
+     * @return a panel containing the user fields
+     */
+    private JPanel makeBuyFieldsPanel() {
+        JPanel buyPanel = new JPanel();
+        GroupLayout layout = new GroupLayout(buyPanel);
+        buyPanel.setLayout(layout);
+
+        // Enable auto gaps between each line
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+
+        // Label of fields
+        buyName = new JLabel("Asset ");
+        buyQuantity = new JLabel("Quantity");
+        buyPrice= new JLabel("Price");
+        buyOrganisation = new JLabel("Organisation");
+
+        // Text Fields
+        buyField = new JTextField(30);
+        buyField.setPreferredSize(new Dimension(30, 20));
+        buyField.setEditable(false);
+
+        buyQuantityField = new JTextField(30);
+        buyQuantityField.setPreferredSize(new Dimension(30, 20));
+        buyQuantityField.setEditable(false);
+
+        buyPriceField = new JTextField(30);
+        buyPriceField.setPreferredSize(new Dimension(30, 20));
+        buyPriceField.setEditable(false);
+
+        buyOrganisationField = new JTextField(30);
+        buyOrganisationField.setPreferredSize(new Dimension(30, 20));
+        buyOrganisationField.setEditable(false);
+
+        // Create a sequential group for the horizontal axis
+        GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
+
+        // Three parallel groups 1. contains labels and the other the fields\
+        hGroup.addGroup(layout.createParallelGroup().addComponent(buyName).addComponent(buyQuantity).addComponent(buyPrice).addComponent(buyOrganisation));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(buyField).addComponent(buyQuantityField).addComponent(buyPriceField).addComponent(buyOrganisationField));
+        layout.setHorizontalGroup(hGroup);
+
+        // Create a sequential group for the vertical axis
+        GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(buyName).addComponent(buyField));
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(buyQuantity).addComponent(buyQuantityField));
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(buyPrice).addComponent(buyPriceField));
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(buyOrganisation).addComponent(buyOrganisationField));
+        layout.setVerticalGroup(vGroup);
+        return buyPanel;
+    }
+
+
+    private JPanel makeSellPane() {
+        // Initialise Border
+        Border empty = BorderFactory.createEmptyBorder();
+        Border border = BorderFactory.createTitledBorder(empty, "Sell:");
+
+        JPanel detailsPanel = new JPanel();
+        detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.X_AXIS));
+        detailsPanel.add(Box.createHorizontalStrut(20));
+        detailsPanel.add(sellListPane());
+        detailsPanel.add(Box.createHorizontalStrut(20));
+        detailsPanel.add(makeSellFieldsPanel());
+        detailsPanel.add(Box.createHorizontalStrut(20));
+        detailsPanel.setBorder(border);
+        return detailsPanel;
     }
 
     /**
@@ -142,114 +277,141 @@ public class buyArena extends JFrame implements Serializable {
      * @return the scrolling name list panel
      */
     private JScrollPane sellListPane() {
-//        list = new JList(tradeData.getType(type));
-//        list.setFixedCellWidth(200);
+        String type = "Sell";
 
-        // Get the trade data in a presentable format
-        ListModel model = tradeData.getModel();
+        ListModel model = tradeData.getType(type);
         for (int i = 0; i < model.getSize(); i++) {
             Trade trade = tradeData.get(model.getElementAt(i));
-            tradeList.add(String.format("%s - %s", trade.getBuySell(), trade.getAsset()));
-
+            // Check that the trade against the user's organisation
+            if (!user.getOrganisationalUnit().equals(trade.getOrganisation())) {
+                Date date = trade.getDate();
+                tradeSellList.add(String.format("%s %s %s for %s - %s", trade.getBuySell(), trade.getQuantity(), trade.getAsset(), trade.getPrice(), date));
+                sellId.add(trade.getID());
+            }
         }
-        // Initialise the JList and JScrollerPane
-        list = new JList(tradeList.toArray());
-        list.setFixedCellWidth(200);
 
-        JScrollPane scroller = new JScrollPane(list);
-        scroller.setViewportView(list);
+        sellList = new JList(tradeSellList.toArray());
+        sellList.setFixedCellWidth(200);
+
+        JScrollPane scroller = new JScrollPane(sellList);
+
+        scroller.setViewportView(sellList);
         scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scroller.setMaximumSize(new Dimension(250, 250));
+        scroller.setMinimumSize(new Dimension(200, 150));
+        scroller.setPreferredSize(new Dimension(250, 150));
+        scroller.setMaximumSize(new Dimension(250, 200));
 
         return scroller;
     }
 
     /**
-     * Makes a JPanel containing the username and password fields to be
-     * recorded.
+     * Makes a JPanel containing the information of a selected trade
      *
      * @return a panel containing the user fields
      */
-    private JPanel makeUserFieldPanel() {
-        JPanel userPanel = new JPanel();
-        GroupLayout layout = new GroupLayout(userPanel);
-        userPanel.setLayout(layout);
+    private JPanel makeSellFieldsPanel() {
+        JPanel buyPanel = new JPanel();
+        GroupLayout layout = new GroupLayout(buyPanel);
+        buyPanel.setLayout(layout);
 
         // Enable auto gaps between each line
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
 
         // Label of fields
-        itemName = new JLabel("Item Name ");
-        itemquality = new JLabel("Quantity");
-        itemPrice= new JLabel("Price");
+        sellName = new JLabel("Asset ");
+        sellQuantity = new JLabel("Quantity");
+        sellPrice= new JLabel("Price");
+        sellOrganisation = new JLabel("Organisation");
 
         // Text Fields
-        itemField = new JTextField(30);
-        itemField.setPreferredSize(new Dimension(30, 20));
+        sellField = new JTextField(30);
+        sellField.setPreferredSize(new Dimension(30, 20));
+        sellField.setEditable(false);
 
-        qualityField = new JTextField(30);
-        qualityField.setPreferredSize(new Dimension(30, 20));
+        sellQuantityField = new JTextField(30);
+        sellQuantityField.setPreferredSize(new Dimension(30, 20));
+        sellQuantityField.setEditable(false);
 
-        priceField = new JTextField(30);
-        priceField.setPreferredSize(new Dimension(30, 20));
+        sellPriceField = new JTextField(30);
+        sellPriceField.setPreferredSize(new Dimension(30, 20));
+        sellPriceField.setEditable(false);
+
+        sellOrganisationField = new JTextField(30);
+        sellOrganisationField.setPreferredSize(new Dimension(30, 20));
+        sellOrganisationField.setEditable(false);
 
         // Create a sequential group for the horizontal axis
         GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
 
         // Three parallel groups 1. contains labels and the other the fields\
-        hGroup.addGroup(layout.createParallelGroup().addComponent(itemName).addComponent(itemquality).addComponent(itemPrice));
-        hGroup.addGroup(layout.createParallelGroup().addComponent(itemField).addComponent(qualityField).addComponent(priceField));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(sellName).addComponent(sellQuantity).addComponent(sellPrice).addComponent(sellOrganisation));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(sellField).addComponent(sellQuantityField).addComponent(sellPriceField).addComponent(sellOrganisationField));
         layout.setHorizontalGroup(hGroup);
 
         // Create a sequential group for the vertical axis
         GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(itemName).addComponent(itemField));
+                .addComponent(sellName).addComponent(sellField));
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(itemquality).addComponent(qualityField));
+                .addComponent(sellQuantity).addComponent(sellQuantityField));
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(itemPrice).addComponent(priceField));
+                .addComponent(sellPrice).addComponent(sellPriceField));
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(sellOrganisation).addComponent(sellOrganisationField));
         layout.setVerticalGroup(vGroup);
-        return userPanel;
+        return buyPanel;
     }
 
     /**
-     * Adds the buttons to the panel
+     * Display the trade's details in the buy fields
      *
-     * @return a panel containing the create user button
+     * @param trade the selected trade to display
      */
-    private JPanel makeButtonsPanel() {
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        sellButton = new JButton("Create");
-        deleteButton = new JButton("Delete");
-        buyButton = new JButton("buy");
-        buttonPanel.add(Box.createHorizontalStrut(50));
-        buttonPanel.add(sellButton);
-        buttonPanel.add(Box.createHorizontalStrut(50));
-        buttonPanel.add(deleteButton);
-        buttonPanel.add(Box.createHorizontalStrut(50));
-        buttonPanel.add(buyButton);
-        buttonPanel.add(Box.createHorizontalStrut(50));
-        return buttonPanel;
+    private void displayBuy(Trade trade) {
+        // Check that the current trade is not null
+        if (trade != null) {
+            buyField.setText(trade.getAsset());
+            buyQuantityField.setText(String.valueOf(trade.getQuantity()));
+            buyPriceField.setText(String.valueOf(trade.getPrice()));
+            buyOrganisationField.setText(trade.getOrganisation());
+        }
     }
 
     /**
-     * Clear all input fields and radio buttons
+     * Display the trade's details in the buy fields
+     *
+     * @param trade the selected trade to display
      */
-    private void clearFields() {
-        itemField.setText("");
-        qualityField.setText("");
-
+    private void displaySell(Trade trade) {
+        // Check that the current trade is not null
+        if (trade != null) {
+            sellField.setText(trade.getAsset());
+            sellQuantityField.setText(String.valueOf(trade.getQuantity()));
+            sellPriceField.setText(String.valueOf(trade.getPrice()));
+            sellOrganisationField.setText(trade.getOrganisation());
+        }
     }
 
     /**
-     * Checks the size of the user table determining the state of the delete button
+     * Clear all buy input fields
      */
-    private void checkListSize() {
-        deleteButton.setEnabled(tradeData.getSize() != 0);
+    private void clearBuyFields() {
+        buyField.setText("");
+        buyQuantityField.setText("");
+        buyPriceField.setText("");
+        buyOrganisationField.setText("");
+    }
+
+    /**
+     * Clear all sell input fields
+     */
+    private void clearSellFields() {
+        sellField.setText("");
+        sellQuantityField.setText("");
+        sellPriceField.setText("");
+        sellOrganisationField.setText("");
     }
 
     /**
@@ -259,8 +421,17 @@ public class buyArena extends JFrame implements Serializable {
      */
     private void addButtonListeners(ActionListener listener) {
         sellButton.addActionListener(listener);
-        deleteButton.addActionListener(listener);
         buyButton.addActionListener(listener);
+    }
+
+    /**
+     * Adds a listener to the lists
+     *
+     * @param listener the listener for the lists
+     */
+    private void addNameListListener(ListSelectionListener listener) {
+        buyList.addListSelectionListener(listener);
+        sellList.addListSelectionListener(listener);
     }
 
     /**
@@ -278,9 +449,6 @@ public class buyArena extends JFrame implements Serializable {
             if (source == sellButton) {
                 sellPressed();
             }
-            else if (source == deleteButton) {
-                deletePressed();
-            }
             else if (source == buyButton) {
                 buyPressed();
             }
@@ -290,64 +458,37 @@ public class buyArena extends JFrame implements Serializable {
          * or display error
          */
         private void sellPressed() {
-            String index = list.getSelectedValue().toString();
-            int quant = Integer.parseInt(qualityField.getText());
-            int price = Integer.parseInt(priceField.getText());
+            Integer index = sellList.getSelectedIndex();
+            Organisation org = new Organisation();
+            int quantity = Integer.parseInt(sellQuantityField.getText());
+            int price = Integer.parseInt(sellPriceField.getText());
 
-            if(itemField.getText() != null && !itemField.getText().equals("") &&
-                    qualityField.getText() != null && !qualityField.getText().equals("") &&
-                    priceField.getText() != null && !priceField.getText().equals("")){
-
-                ListModel orgModel = orgData.getModel();
-                for (int i = 0; i < orgData.getSize(); i++) {
-                    Organisation org = orgData.get(orgModel.getElementAt(i).toString());
-                    organisationList.add(org);
+            ListModel orgModel = orgData.getModel();
+            for (int i = 0; i < orgData.getSize(); i++) {
+                Organisation o = orgData.get(orgModel.getElementAt(i));
+                organisationList.add(o);
+            }
+            for (int i = 0; i < organisationList.size(); i++) {
+                if (organisationList.get(i).getName().equals(user.getOrganisationalUnit()) &&
+                        organisationList.get(i).getAsset().equals(sellField)) {
+                    org = orgData.get(i);
                 }
-                for (int i = 0; i < organisationList.size(); i++) {
-                    if (organisationList.get(i).getName().equals(user.getOrganisationalUnit())) {
-                        orgList.add(orgData.get(user.getOrganisationalUnit()));
-                    }
-                }
-                if(orgList.contains(index)){
-                    if (quant <= orgList.get(1).getQuantity()){
-                        orgData.removeQuantity(organisationList.contains(user.getOrganisationalUnit()), String.valueOf(orgList.contains(index)), quant);
-                    }
-
-                }
+            }
+            if (quantity <= org.getQuantity()){
+                JOptionPane.showMessageDialog(null, "Sell Success");
+                //orgData.removeQuantity(organisationList.contains(user.getOrganisationalUnit()), String.valueOf(orgList.contains(index)), quant);
+            }
+            else {
+                JOptionPane.showMessageDialog(new JFrame(), "", "Field Error", JOptionPane.ERROR_MESSAGE);
+            }
 
                 //organisationList = list of organisations
                 //orgList  = list of assets from that organisation
 
+
+
                 //compare the org quantity to the quantity of a trade?
                 //so the first loop gets all organisations to a list, and the second gets all the assets of a given organisation.
-
-
-            }
-            else{
-                JOptionPane.showMessageDialog(new JFrame(), "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-        }
-
-
-        /**
-         * When the delete button is pressed, delete the trade information from the database
-         * or display error
-         */
-        private void deletePressed() {
-            int index = list.getSelectedIndex();
-            String itemName = itemField.getText();
-            tradeData.remove(list.getSelectedValue());
-            clearFields();
-            index--;
-            if (index == -1) {
-                if (tradeData.getSize() != 0) {
-                    index = 0;
-                }
-            }
-            list.setSelectedIndex(index);
-            checkListSize();
-            JOptionPane.showMessageDialog(null, String.format("User '%s' successfully deleted", itemName));
         }
 
         /**
@@ -355,43 +496,56 @@ public class buyArena extends JFrame implements Serializable {
          * or display error
          */
         private void buyPressed() {
-            String index = list.getSelectedValue().toString();
-            int quant = Integer.parseInt(qualityField.getText());
-            int price = Integer.parseInt(priceField.getText());
+//            String index = tradeList.getSelectedValue().toString();
+//            int quant = Integer.valueOf(qualityField.getText());
+//            int price = Integer.valueOf(priceField.getText());
+//            //variables
+//            if(itemField.getText() != null && !itemField.getText().equals("") &&
+//                    qualityField.getText() != null && !qualityField.getText().equals("") &&
+//                    priceField.getText() != null && !priceField.getText().equals("")){
+//                if (index == itemField.getText() && quant <= user.getOrganisationalUnit(tradeData)){
+//
+//
+//                }
+//
+//
+//            }
 
-            if(itemField.getText() != null && !itemField.getText().equals("") &&
-                    qualityField.getText() != null && !qualityField.getText().equals("") &&
-                    priceField.getText() != null && !priceField.getText().equals("")){
-
-                ListModel orgModel = orgData.getModel();
-                for (int i = 0; i < orgData.getSize(); i++) {
-                    Organisation org = orgData.get(orgModel.getElementAt(i).toString());
-                    organisationList.add(org);
+//            JOptionPane.showMessageDialog(null, String.format("You have bough the '%s' ", itemName));
+        }
+    }
+    /**
+     * Implements a ListSelectionListener for making the UI respond when a
+     * different element is selected from the list.
+     *
+     * @author Dylan Holmes-Brown
+     */
+    private class NameListListener implements ListSelectionListener {
+        /**
+         * @see ListSelectionListener#valueChanged(ListSelectionEvent)
+         */
+        public void valueChanged(ListSelectionEvent e) {
+            JList source = (JList) e.getSource();
+            if (source == buyList) {
+                // Check to see the selected item is not null or empty
+                if (buyList.getSelectedValue() != null
+                        && !buyList.getSelectedValue().equals("")) {
+                    // Display the trade
+                    Trade trade = tradeData.get(buyId.get(buyList.getSelectedIndex()));
+                    displayBuy(trade);
+                    clearSellFields();
                 }
-                for (int i = 0; i < organisationList.size(); i++) {
-                    if (organisationList.get(i).getName().equals(user.getOrganisationalUnit())) {
-                        orgList.add(orgData.get(user.getOrganisationalUnit()));
-                    }
-                }
-                if(orgList.contains(index)){
-                    if (quant <= orgList.get(1).getQuantity()){
-                        orgData.removeQuantity(organisationList.contains(user.getOrganisationalUnit()), String.valueOf(orgList.contains(index)), quant);
-                    }
-
-                }
-
-                //organisationList = list of organisations
-                //orgList  = list of assets from that organisation
-
-                //compare the org quantity to the quantity of a trade?
-                //so the first loop gets all organisations to a list, and the second gets all the assets of a given organisation.
-
-
             }
-            else{
-                JOptionPane.showMessageDialog(new JFrame(), "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
+            else if (source == sellList) {
+                // Check to see the selected item is not null or empty
+                if (sellList.getSelectedValue() != null
+                        && !sellList.getSelectedValue().equals("")) {
+                    // Display the trade
+                    Trade trade = tradeData.get(sellId.get(sellList.getSelectedIndex()));
+                    displaySell(trade);
+                    clearBuyFields();
+                }
             }
-
         }
     }
 }
