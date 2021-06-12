@@ -55,6 +55,9 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
     private static final String COUNT_ROWS = "SELECT COUNT(*) FROM organisational_unit";
     private PreparedStatement rowCount;
 
+    /**
+     * Constructor gets connection to database and prepares all sql statements
+     */
     public JDBCOrganisationDataSource() {
         try {
             connection = DBConnection.getInstance();

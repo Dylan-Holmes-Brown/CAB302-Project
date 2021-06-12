@@ -35,6 +35,9 @@ public class JDBCTradeHistoryDataSource implements TradeHistoryDataSource {
     private static final String COUNT_ROWS = "SELECT COUNT(*) FROM user;";
     private PreparedStatement rowCount;
 
+    /**
+     * Constructor gets connection to database and prepares all sql statements
+     */
     public JDBCTradeHistoryDataSource() {
         try {
             connection = DBConnection.getInstance();

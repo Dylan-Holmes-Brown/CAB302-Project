@@ -35,6 +35,9 @@ public class liveUpdate extends JFrame implements Serializable {
     UserData userData;
     OrganisationData orgData;
 
+    /**
+     *
+     */
     public liveUpdate(UserData userData, OrganisationData orgData) {
         this.userData = userData;
         this.orgData = orgData;
@@ -50,6 +53,9 @@ public class liveUpdate extends JFrame implements Serializable {
         setVisible(true);
     }
 
+    /**
+     *
+     */
     private void initUI() {
         Container contentPane = this.getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
@@ -62,6 +68,9 @@ public class liveUpdate extends JFrame implements Serializable {
         contentPane.add(Box.createVerticalStrut(20));
     }
 
+    /**
+     *
+     */
     private JScrollPane buyListPane() {
         userList = new JList(userData.getModel());
         userList.setFixedCellWidth(200);
@@ -77,6 +86,9 @@ public class liveUpdate extends JFrame implements Serializable {
         return scroller;
     }
 
+    /**
+     *
+     */
     public static void main(String[] args) {
 
         new liveUpdate(new UserData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));

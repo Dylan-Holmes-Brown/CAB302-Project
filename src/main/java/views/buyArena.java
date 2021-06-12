@@ -329,7 +329,7 @@ public class buyArena extends JFrame implements Serializable {
         }
 
         /**
-         * When the Buy button is pressed, item is sent to the users oragnisation database
+         * When the Buy button is pressed, item is sent to the users organisation database
          * or display error
          */
         private void buyPressed() {
@@ -372,11 +372,4 @@ public class buyArena extends JFrame implements Serializable {
 
         }
     }
-
-
-    public static void main(String[] args) {
-
-        new buyArena(user, new CurrentData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
-    }
-
 }

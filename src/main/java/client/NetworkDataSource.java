@@ -648,6 +648,10 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
         }
     }
 
+    /**
+     * Finalizes any resources used by the data source and ensures data is
+     * persisted.
+     */
     @Override
     public void close() {
     }
