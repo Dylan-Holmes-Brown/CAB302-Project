@@ -328,8 +328,14 @@ public class addingOrganisationList extends JFrame implements Serializable{
             JButton source = (JButton) e.getSource();
             if (source == createButton) {
                 createPressed();
+                // Persist data dispose the frame and return to admin options menu
+                orgData.persist();
+                assetTypeData.persist();
+                dispose();
+                new adminOptions(user);
             }
             else if (source == backButton) {
+                // Persist data dispose the frame and return to admin options menu
                 orgData.persist();
                 assetTypeData.persist();
                 dispose();

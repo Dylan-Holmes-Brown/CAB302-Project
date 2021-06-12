@@ -16,6 +16,7 @@ import java.awt.event.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Date;
 
 public class addingTrade extends JFrame implements Serializable {
 
@@ -28,6 +29,7 @@ public class addingTrade extends JFrame implements Serializable {
     private List<Organisation> organisationList;
     private List<String> orgList;
     private List<String> assetList;
+    private List<String> tradeBuyList;
     private List<String> tradeList;
 
     // JSwing Variables
@@ -142,7 +144,11 @@ public class addingTrade extends JFrame implements Serializable {
         ListModel model = tradeData.getModel();
         for (int i = 0; i < model.getSize(); i++) {
             Trade trade = tradeData.get(model.getElementAt(i));
-            tradeList.add(String.format("%s - %s", trade.getBuySell(), trade.getAsset()));
+            // Check that the trade against the user's organisation
+            if (user.getOrganisationalUnit().equals(trade.getOrganisation())) {
+                Date date = trade.getDate();
+                tradeList.add(String.format("%s %s %s for %s - %s", trade.getBuySell(), trade.getQuantity(), trade.getAsset(), trade.getPrice(), date));
+            }
         }
         // Initialise the JList and JScrollerPane
         list = new JList(tradeList.toArray());
@@ -415,10 +421,22 @@ public class addingTrade extends JFrame implements Serializable {
             // Check the create button was pressed
             if (source == createButton) {
                 createPressed();
+                // persist the data dispose the window and return to the user options menu
+                tradeData.persist();
+                assetData.persist();
+                orgData.persist();
+                dispose();
+                new userOptions(user);
             }
             // Check the delete button was pressed
             else if (source == deleteButton) {
                 deletePressed();
+                // persist the data dispose the window and return to the user options menu
+                tradeData.persist();
+                assetData.persist();
+                orgData.persist();
+                dispose();
+                new userOptions(user);
             }
             // Check the back button was pressed
             else if (source == backButton) {
@@ -487,17 +505,25 @@ public class addingTrade extends JFrame implements Serializable {
             String traFieldText = traPriceField.getText();
 
             // Remove trade from the database and clear the input fields
-            tradeData.remove(list.getSelectedValue());
-            clearFields();
-            index--;
-            if (index == -1) {
-                if (tradeData.getSize() != 0) {
-                    index = 0;
+            ListModel model = tradeData.getModel();
+            Trade trade = tradeData.get(model.getElementAt(index));
+
+            if (user.getOrganisationalUnit().equals(trade.getOrganisation())) {
+                tradeData.remove(trade.getID());
+                clearFields();
+                index--;
+                if (index == -1) {
+                    if (tradeData.getSize() != 0) {
+                        index = 0;
+                    }
                 }
+                list.setSelectedIndex(index);
+                checkListSize();
+                JOptionPane.showMessageDialog(null, String.format("Trade '%s - %s' successfully deleted", trade.getBuySell(), trade.getAsset()));
             }
-            list.setSelectedIndex(index);
-            checkListSize();
-            JOptionPane.showMessageDialog(null, String.format("Trade '%s' successfully deleted", traFieldText));
+            else {
+                JOptionPane.showMessageDialog(new JFrame(), "Cannot delete trade from another organisation", "Field Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
