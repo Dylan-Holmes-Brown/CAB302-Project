@@ -59,6 +59,7 @@ public class buyArena extends JFrame implements Serializable {
 
     private JButton sellButton;
     private JButton buyButton;
+    private JButton backButton;
 
     private OrganisationData orgData;
     private CurrentData tradeData;
@@ -114,6 +115,10 @@ public class buyArena extends JFrame implements Serializable {
         Container contentPane = this.getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
+        //Make return button
+        contentPane.add(Box.createVerticalStrut(20));
+        contentPane.add(makeReturnPane());
+
         //list of buy items
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeBuyPane());
@@ -131,6 +136,22 @@ public class buyArena extends JFrame implements Serializable {
         contentPane.add(makeSellButton());
 
         contentPane.add(Box.createVerticalStrut(20));
+    }
+
+    /**
+     * Create a JPanel with return button in the top right corner
+     *
+     * @return the created JPanel
+     */
+    private JPanel makeReturnPane() {
+        // Initialise the JPanel
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+        // Initialise the button and add to the panel
+        backButton = new JButton("Return to Menu");
+        buttonPanel.add(backButton);
+        return buttonPanel;
     }
 
     private JPanel makeBuyPane() {
@@ -432,6 +453,7 @@ public class buyArena extends JFrame implements Serializable {
     private void addButtonListeners(ActionListener listener) {
         sellButton.addActionListener(listener);
         buyButton.addActionListener(listener);
+        backButton.addActionListener(listener);
     }
 
     /**
@@ -470,6 +492,14 @@ public class buyArena extends JFrame implements Serializable {
             }
             else if (source == buyButton) {
                 buyPressed();
+            }
+            else if (source == backButton)
+            {
+                // Persist the data, close the frame and return to the user options
+                orgData.persist();
+                tradeData.persist();
+                dispose();
+                new userOptions(user);
             }
         }
         /**
