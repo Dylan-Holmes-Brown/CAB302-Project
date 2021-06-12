@@ -4,82 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="added missing id column to organisational_unit table and refactored code accordingly">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_7_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_7_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_7_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_7_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_xerial_sqlite_jdbc_3_34_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="maven integration complete, builds and unit tests all work, just needs team member information.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/addingAssetList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/addingAssetList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/addingOrgAssets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/addingOrgAssets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/addingOrganisationList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/addingOrganisationList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/addingTrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/addingTrade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/addingUserList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/addingUserList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/adminOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/adminOptions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/bidList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/bidList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/buyArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/buyArena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/buyTableArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/buyTableArena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/liveUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/liveUpdate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/loginGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/loginGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/orgCreditsQuantity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/orgCreditsQuantity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/selectOrg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/selectOrg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/updatePassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/updatePassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/userOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/userOptions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/NetworkDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/NetworkDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/AssetType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/AssetType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/HashPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/HashPassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/Organisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/Organisation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/Random.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/Random.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/Trade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/UserPermissions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/UserPermissions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/AssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/sql/AssetTypeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/AssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/sql/AssetTypeDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/sql/Commands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/CurrentData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/sql/CurrentData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/CurrentDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/sql/CurrentDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/OrganisationData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/sql/OrganisationData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/OrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/sql/OrganisationDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/TradeHistoryData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/sql/TradeHistoryData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/TradeHistoryDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/sql/TradeHistoryDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/sql/UserData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/sql/UserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/sql/UserDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/DBConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/JDBCAssetTypeDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/JDBCAssetTypeDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/JDBCCurrentDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/JDBCCurrentDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/JDBCOrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/JDBCOrganisationDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/JDBCTradeHistoryDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/JDBCTradeHistoryDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/JDBCUserDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/JDBCUserDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/NetworkServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/NetworkServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestAssetType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/TestAssetType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestAssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/TestAssetTypeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestCurrentTradeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/TestCurrentTradeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestHashPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/TestHashPassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestNetworkServerInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/server/TestNetworkServerInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestOrganisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/TestOrganisation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestOrganisationData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/TestOrganisationData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestTrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/TestTrade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestTradeHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/TestTradeHistory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/TestUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestUserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/TestUserData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/mocks/MockAssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/mocks/MockAssetTypeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/mocks/MockCurrentTradeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/mocks/MockCurrentTradeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/mocks/MockOrganisationData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/mocks/MockOrganisationData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/mocks/MockTradeHistoryData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/mocks/MockTradeHistoryData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/mocks/MockUserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/mocks/MockUserData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,13 +80,26 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestNetworkServerInfo">
+  <component name="RunManager" selected="Application.Main (1)">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="server.Main" />
+      <module name="Assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -187,36 +126,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="server" />
       <option name="MAIN_CLASS_NAME" value="server.TestNetworkServerInfo" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestTrade" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Assignment" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="common.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="common" />
-      <option name="MAIN_CLASS_NAME" value="common.TestTrade" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestTradeHistory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Assignment" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="common.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="common" />
-      <option name="MAIN_CLASS_NAME" value="common.TestTradeHistory" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -254,19 +163,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Project" />
-      <item itemvalue="JUnit.TestTrade" />
-      <item itemvalue="JUnit.TestTradeHistory" />
       <item itemvalue="JUnit.TestUser" />
       <item itemvalue="JUnit.TestUserData" />
       <item itemvalue="JUnit.TestNetworkServerInfo" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Main (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main (1)" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.TestNetworkServerInfo" />
         <item itemvalue="JUnit.TestUserData" />
         <item itemvalue="JUnit.TestUser" />
-        <item itemvalue="JUnit.TestTradeHistory" />
-        <item itemvalue="JUnit.TestTrade" />
       </list>
     </recent_temporary>
   </component>
@@ -531,7 +440,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623455361694</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="maven integration complete, builds and unit tests all work, just needs team member information.">
+      <created>1623472020905</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1623472020905</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -547,7 +463,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adding implemented just needs org unit selection" />
     <MESSAGE value="organisation selection added to create user, Chore: make admin not have org" />
     <MESSAGE value="User login almost completed" />
     <MESSAGE value="organisation creation complete" />
@@ -572,7 +487,8 @@
     <MESSAGE value="All admin options completed" />
     <MESSAGE value="Documentation finalised for admin side" />
     <MESSAGE value="added missing id column to organisational_unit table and refactored code accordingly" />
-    <option name="LAST_COMMIT_MESSAGE" value="added missing id column to organisational_unit table and refactored code accordingly" />
+    <MESSAGE value="maven integration complete, builds and unit tests all work, just needs team member information." />
+    <option name="LAST_COMMIT_MESSAGE" value="maven integration complete, builds and unit tests all work, just needs team member information." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestJDBCUser.ic" NAME="TestJDBCUser Coverage Results" MODIFIED="1622538349921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
