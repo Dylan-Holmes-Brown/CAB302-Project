@@ -34,13 +34,13 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
 
         try {
             // File to read
-            in = new FileInputStream("./main.server.props");
+            in = new FileInputStream("./server.props");
             properties.load(in);
             in.close();
 
             // Specify the main.server address and port
-            HOSTNAME = properties.getProperty("main.server.address");
-            String port = properties.getProperty("main.server.port");
+            HOSTNAME = properties.getProperty("server.address");
+            String port = properties.getProperty("server.port");
             PORT = Integer.parseInt(port);
 
             // Persist a single connection throughout the runtime.
