@@ -27,8 +27,8 @@ public class OrganisationData {
         listModel = new DefaultListModel();
         orgData = dataSource;
 
-        for (String name : orgData.OrgNameSet()){
-            listModel.addElement(name);
+        for (Integer id : orgData.OrgNameSet()){
+            listModel.addElement(id);
         }
     }
 
@@ -116,10 +116,10 @@ public class OrganisationData {
     /**
      * Retrieves Organisation details from the model.
      *
-     * @param key the name to retrieve.
+     * @param key the id to retrieve.
      * @return the Organisation object related to the name.
      */
-    public Organisation get(Object key) { return orgData.getOrg((String) key); }
+    public Organisation get(Object key) { return orgData.getOrg((Integer) key); }
 
     /**
      * Retrieves asset details from the model.

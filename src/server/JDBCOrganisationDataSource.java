@@ -17,7 +17,8 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
     private Connection connection;
     public static final String CREATE_TABLE =
             "CREATE TABLE IF NOT EXISTS organisational_unit ("
-                    + "name VARCHAR(30) PRIMARY KEY NOT NULL,"
+                    + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + "name VARCHAR(30) NOT NULL,"
                     + "credits INTEGER NOT NULL CHECK (credits >= 0),"
                     + "assets VARCHAR(20) NOT NULL,"
                     + "quantity INTEGER NOT NULL CHECK (quantity >= 0),"
@@ -39,10 +40,10 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
     private static final String REMOVE_QUANTITY = "UPDATE organisational_unit SET quantity = (quantity - ?) WHERE name = ? AND assets = ?";
     private PreparedStatement removeQuantity;
 
-    private static final String GET_ORGNAME = "SELECT name FROM organisational_unit";
+    private static final String GET_ORGNAME = "SELECT id FROM organisational_unit";
     private PreparedStatement getOrgNameList;
 
-    private static final String GET_ORG = "SELECT * FROM organisational_unit WHERE name=?";
+    private static final String GET_ORG = "SELECT * FROM organisational_unit WHERE id=?";
     private PreparedStatement getOrg;
 
     private static final String GET_ASSETS = "SELECT assets FROM organisational_unit WHERE name=?";
@@ -152,16 +153,17 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
     }
 
     /**
-     * @see OrganisationDataSource#getOrg(String)
+     * @see OrganisationDataSource#getOrg(Integer)
      */
-    public Organisation getOrg(String name) {
+    public Organisation getOrg(Integer id) {
         Organisation org = new Organisation();
         ResultSet resultSet = null;
 
         try {
-            getOrg.setString(1, name);
+            getOrg.setInt(1, id);
             resultSet = getOrg.executeQuery();
             resultSet.next();
+            org.setID(resultSet.getInt("id"));
             org.setName(resultSet.getString("name"));
             org.setCredits(resultSet.getInt("credits"));
             org.setAssets(resultSet.getString("assets"));
@@ -239,19 +241,19 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
     /**
      * @see OrganisationDataSource#OrgNameSet()
      */
-    public Set<String> OrgNameSet() {
-        Set<String> names = new TreeSet<String>();
+    public Set<Integer> OrgNameSet() {
+        Set<Integer> idSet = new TreeSet<Integer>();
         ResultSet resultSet = null;
 
         try {
             resultSet = getOrgNameList.executeQuery();
             while (resultSet.next()) {
-                names.add(resultSet.getString("name"));
+                idSet.add(resultSet.getInt("id"));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
-        return names;
+        return idSet;
     }
 }

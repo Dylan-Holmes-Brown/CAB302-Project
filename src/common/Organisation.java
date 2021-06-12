@@ -11,6 +11,7 @@ import java.io.Serializable;
 
 public class Organisation implements Serializable {
     private static final long serialVersionUID = 20L;
+    private int id;
     private String name;
     private int credits = 0;
     private String assets;
@@ -32,6 +33,20 @@ public class Organisation implements Serializable {
         this.name = name;
         this.credits = credits;
     }
+
+    /**
+     * Get the id of the organisation object.
+     *
+     * @return The id of the organisation trade.
+     */
+    public Integer getID() { return id; }
+
+    /**
+     * Set the id of the organisation object.
+     *
+     * @param id the id of the organisation to set.
+     */
+    public void setID(Integer id) { this.id = id; }
 
     /**
      * Get the name of the organisation object.

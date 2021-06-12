@@ -32,6 +32,7 @@ public class Main {
 //        organisationData.addOrg(organisation);
 //        userData.addUser(user);
 //        data.addTrade(trade);
-//        System.out.println(data.getCurrentSize());
+//        Organisation org = organisationData.getOrg(1);
+//        System.out.println(org.getName());
     }
 }

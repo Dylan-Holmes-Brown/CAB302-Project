@@ -1,6 +1,5 @@
 package Views;
 
-import client.NetworkDataSource;
 import common.Organisation;
 import common.User;
 import common.sql.AssetTypeData;
@@ -9,10 +8,11 @@ import common.sql.OrganisationData;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Initialises the admin interface for adding Organisations to the database.
@@ -29,9 +29,10 @@ public class addingOrganisationList extends JFrame implements Serializable{
     private AssetTypeData assetTypeData;
     private User user;
     private Object[] array;
+    private List<String> orgList;
 
     // JSwing Variables
-    private JList orgList;
+    private JList list;
     private JComboBox comboBox;
 
     private JLabel orgLabel;
@@ -58,6 +59,7 @@ public class addingOrganisationList extends JFrame implements Serializable{
         this.assetTypeData = assetTypeData;
         this.user = user;
         array = new String[assetTypeData.getSize()];
+        orgList = new ArrayList<>();
 
         // Initialise the UI and listeners
         initUI();
@@ -147,13 +149,18 @@ public class addingOrganisationList extends JFrame implements Serializable{
      * @return the scrolling organisation list panel
      */
     private JScrollPane makeOrgListPane() {
+        ListModel model = orgData.getModel();
+        for (int i = 0; i < orgData.getSize(); i++) {
+            Organisation org = orgData.get(model.getElementAt(i));
+            orgList.add(org.getName());
+        }
         // Initialise the JList and JScrollerPane
-        orgList = new JList(orgData.getModel());
-        orgList.setFixedCellWidth(200);
-        JScrollPane scroller = new JScrollPane(orgList);
+        list = new JList(orgList.toArray());
+        list.setFixedCellWidth(200);
+        JScrollPane scroller = new JScrollPane(list);
 
         // Set the scroller to display the orgList, initialise the scroll bars
-        scroller.setViewportView(orgList);
+        scroller.setViewportView(list);
         scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
@@ -295,7 +302,7 @@ public class addingOrganisationList extends JFrame implements Serializable{
      * @param listener the listener for the list to use
      */
     private void addOrganisationListListener(ListSelectionListener listener) {
-        orgList.addListSelectionListener(listener);
+        list.addListSelectionListener(listener);
     }
 
     /**
@@ -369,10 +376,10 @@ public class addingOrganisationList extends JFrame implements Serializable{
         public void valueChanged(ListSelectionEvent e) {
             // Check to see that the selected item is not null,
             // and does not have an empty string
-            if (orgList.getSelectedValue() != null
-                    && !orgList.getSelectedValue().equals("")) {
+            if (list.getSelectedValue() != null
+                    && !list.getSelectedValue().equals("")) {
                 // Display the organisation
-                display(orgData.get(orgList.getSelectedValue()));
+                display(orgData.get(list.getSelectedIndex() + 1));
             }
         }
     }

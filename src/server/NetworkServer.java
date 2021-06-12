@@ -223,12 +223,12 @@ public class NetworkServer {
             break;
 
             case GET_ORG: {
-                // Client sends the name of the organiation to retrieve
-                final String name = (String) inputStream.readObject();
+                // Client sends the id of the organisation to retrieve
+                final Integer id = (Integer) inputStream.readObject();
                 synchronized (tableOrg) {
                     // Synchronise both the get as well as the send,
                     // therefore half a organisation isn't sent
-                    final Organisation org = tableOrg.getOrg(name);
+                    final Organisation org = tableOrg.getOrg(id);
 
                     // Send the client back the asset type details or null
                     outputStream.writeObject(org);
@@ -272,7 +272,7 @@ public class NetworkServer {
                 }
                 outputStream.flush();
 
-                System.out.println(String.format("Sent size of %d to client %s",
+                System.out.println(String.format("Sent size of '%d' to client '%s'",
                         tableOrg.getOrgSize(), socket.toString()));
             }
             break;
@@ -286,7 +286,7 @@ public class NetworkServer {
                 }
                 outputStream.flush();
 
-                System.out.println(String.format("Sent name set to client %s",
+                System.out.println(String.format("Sent organisation id set to client '%s'",
                         socket.toString()));
             }
             break;
