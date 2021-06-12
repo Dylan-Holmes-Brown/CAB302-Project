@@ -19,6 +19,8 @@ public class CurrentData {
      * Constructor initializes the list model that holds names as Strings and
      * attempts to read any data saved from previous invocations of the
      * application.
+     *
+     * @param dataSource The data source used to access the current trade database
      */
     public CurrentData(CurrentDataSource dataSource) {
         listModel = new DefaultListModel();

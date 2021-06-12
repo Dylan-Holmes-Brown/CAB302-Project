@@ -40,10 +40,12 @@ public class addingOrgAssets extends JFrame implements Serializable {
     private JButton backButton;
 
     /**
-     * Initialises the admin interface for adding assets to an Organisations from the database.
-     * Listeners are included as sub-classes of this class
+     * Constructor initialises adding assets to organisation UI, adds button listeners and displays
      *
-     * @author Dylan Holmes-Brown
+     * @param user The signed in user
+     * @param org The organisation the user is in
+     * @param orgData The organisation data from the database
+     * @param assetTypeData The asset type data from the database
      */
     public addingOrgAssets(User user, Organisation org, OrganisationData orgData, AssetTypeData assetTypeData) {
         // Initialise data

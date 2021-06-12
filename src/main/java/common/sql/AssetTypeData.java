@@ -23,6 +23,8 @@ public class AssetTypeData {
      * Constructor initializes the list model that holds names as Strings and
      * attempts to read any data saved from previous invocations of the
      * application.
+     *
+     * @param dataSource The data source used to access the asset type database
      */
     public AssetTypeData(AssetTypeDataSource dataSource) {
         listModel = new DefaultListModel();
@@ -50,7 +52,7 @@ public class AssetTypeData {
     /**
      * Based on the name of the asset in the asset table, delete the asset.
      *
-     * @param key
+     * @param key The asset name to remove
      */
     public void remove(Object key) {
         // remove from both list and map

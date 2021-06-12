@@ -24,7 +24,7 @@ public class NetworkServer {
     // The timeout period between accepting clients, not reading from the socket itself
     private static final int SOCKET_ACCEPT_TIMEOUT = 100;
 
-    // The timout used for actual clients
+    // The timeout used for actual clients
     private static final int SOCKET_READ_TIMEOUT = 5000;
 
     private AtomicBoolean running = new AtomicBoolean( true);
@@ -105,7 +105,7 @@ public class NetworkServer {
                 synchronized (tableAssetType) {
                     tableAssetType.addAssetType(a);
                 }
-                System.out.println(String.format("Added asset '%s' to database from main.client '%s'.",
+                System.out.println(String.format("Added asset '%s' to database from client '%s'.",
                         a.getAsset(), socket.toString()));
             }
             break;
@@ -118,10 +118,10 @@ public class NetworkServer {
                     // therefore half a asset isn't sent
                     final AssetType assetTypes = tableAssetType.getAsset(assetName);
 
-                    // Send the main.client back the asset type details or null
+                    // Send the client back the asset type details or null
                     outputStream.writeObject(assetTypes);
                     if (assetTypes != null) {
-                        System.out.println(String.format("Sent asset '%s' to main.client '%s'.",
+                        System.out.println(String.format("Sent asset '%s' to client '%s'.",
                                 assetTypes.getAsset(), socket.toString()));
                     }
                     outputStream.flush();
@@ -135,33 +135,33 @@ public class NetworkServer {
                 synchronized (tableAssetType) {
                     tableAssetType.deleteAssetType(assetName);
                 }
-                System.out.println(String.format("Deleted asset '%s' on behalf of main.client '%s'.",
+                System.out.println(String.format("Deleted asset '%s' on behalf of client '%s'.",
                         assetName, socket.toString()));
             }
             break;
 
             case GET_ASSET_SIZE: {
                 // No parameters
-                // Send the main.client the size of the table
+                // Send the client the size of the table
                 synchronized (tableAssetType) {
                     outputStream.writeInt(tableAssetType.getAssetSize());
                 }
                 outputStream.flush();
-                System.out.println(String.format("Sent size of %d to main.client '%s'.",
+                System.out.println(String.format("Sent size of %d to client '%s'.",
                         tableAssetType.getAssetSize(), socket.toString()));
             }
             break;
 
             case GET_ASSET_NAME_SET: {
-                // no parameters sent by main.client
+                // no parameters sent by client
 
-                // send the main.client back the name set
+                // send the client back the name set
                 synchronized (tableAssetType) {
                     outputStream.writeObject(tableAssetType.AssetNameSet());
                 }
                 outputStream.flush();
 
-                System.out.println(String.format("Sent name set to main.client %s",
+                System.out.println(String.format("Sent name set to client %s",
                         socket.toString()));
             }
             break;
@@ -175,7 +175,7 @@ public class NetworkServer {
                 synchronized(tableOrg) {
                     tableOrg.addOrg(org);
                 }
-                System.out.println(String.format("Added Organisation '%s' to database with asset '%s' from the main.client '%s'.",
+                System.out.println(String.format("Added Organisation '%s' to database with asset '%s' from the client '%s'.",
                         org.getName(), org.getAsset(), socket.toString()));
             }
             break;
@@ -186,7 +186,7 @@ public class NetworkServer {
                 synchronized(tableOrg) {
                     tableOrg.addCredits(name, credits);
                 }
-                System.out.println(String.format("Added '%s' credits to '%s' from main.client '%s'.",
+                System.out.println(String.format("Added '%s' credits to '%s' from client '%s'.",
                         credits, name, socket.toString()));
             }
             break;
@@ -197,7 +197,7 @@ public class NetworkServer {
                 synchronized(tableOrg) {
                     tableOrg.removeCredits(name, credits);
                 }
-                System.out.println(String.format("Removed '%s' credits from '%s' from main.client '%s'.",
+                System.out.println(String.format("Removed '%s' credits from '%s' from client '%s'.",
                         credits, name, socket.toString()));
             }
             break;
@@ -209,7 +209,7 @@ public class NetworkServer {
                 synchronized(tableOrg) {
                     tableOrg.addQuantity(name, asset, quantity);
                 }
-                System.out.println(String.format("Added '%s' quantity to '%s' for '%s' from main.client '%s'.",
+                System.out.println(String.format("Added '%s' quantity to '%s' for '%s' from client '%s'.",
                         quantity, asset, name, socket.toString()));
             }
             break;
@@ -221,7 +221,7 @@ public class NetworkServer {
                 synchronized(tableOrg) {
                     tableOrg.removeQuantity(name, asset, quantity);
                 }
-                System.out.println(String.format("Removed '%s' quantity from '%s' for '%s' from main.client '%s'.",
+                System.out.println(String.format("Removed '%s' quantity from '%s' for '%s' from client '%s'.",
                         quantity, asset, name, socket.toString()));
             }
             break;
@@ -234,10 +234,10 @@ public class NetworkServer {
                     // therefore half a organisation isn't sent
                     final Organisation org = tableOrg.getOrg(id);
 
-                    // Send the main.client back the asset type details or null
+                    // Send the client back the asset type details or null
                     outputStream.writeObject(org);
                     if (org != null) {
-                        System.out.println(String.format("Sent organisation '%s' to main.client '%s'.",
+                        System.out.println(String.format("Sent organisation '%s' to client '%s'.",
                                 org.getName(), socket.toString()));
                     }
                     outputStream.flush();
@@ -252,7 +252,7 @@ public class NetworkServer {
                 }
                 outputStream.flush();
 
-                System.out.println(String.format("Sent assets of organisation '%s' to main.client '%s'.",
+                System.out.println(String.format("Sent assets of organisation '%s' to client '%s'.",
                         organisation, socket.toString()));
             }
 
@@ -262,35 +262,35 @@ public class NetworkServer {
                     tableOrg.deleteOrg(name);
                 }
 
-                System.out.println(String.format("Deleted organisation '%s' on behalf of main.client %s",
+                System.out.println(String.format("Deleted organisation '%s' on behalf of client %s",
                         name, socket.toString()));
             }
             break;
 
             case GET_ORG_SIZE: {
-                // no parameters sent by main.client
+                // no parameters sent by client
 
-                // send the main.client back the size of the organisation table
+                // send the client back the size of the organisation table
                 synchronized (tableOrg) {
                     outputStream.writeInt(tableOrg.getOrgSize());
                 }
                 outputStream.flush();
 
-                System.out.println(String.format("Sent size of '%d' to main.client '%s'",
+                System.out.println(String.format("Sent size of '%d' to client '%s'",
                         tableOrg.getOrgSize(), socket.toString()));
             }
             break;
 
             case GET_ORG_NAME_SET: {
-                // no parameters sent by main.client
+                // no parameters sent by client
 
-                // send the main.client back the name set
+                // send the client back the name set
                 synchronized (tableOrg) {
                     outputStream.writeObject(tableOrg.OrgNameSet());
                 }
                 outputStream.flush();
 
-                System.out.println(String.format("Sent organisation id set to main.client '%s'",
+                System.out.println(String.format("Sent organisation id set to client '%s'",
                         socket.toString()));
             }
             break;
@@ -303,7 +303,7 @@ public class NetworkServer {
                 synchronized (tableUser) {
                     tableUser.addUser(user);
                 }
-                System.out.println(String.format("Added user '%s' to database from main.client '%s'",
+                System.out.println(String.format("Added user '%s' to database from client '%s'",
                         user.getUsername(), socket.toString()));
             }
             break;
@@ -314,7 +314,7 @@ public class NetworkServer {
                 synchronized (tableUser) {
                     tableUser.updatePassword(username, password);
                 }
-                System.out.println(String.format("Updated password for '%s' from main.client '%s'",
+                System.out.println(String.format("Updated password for '%s' from client '%s'",
                         username, socket.toString()));
             }
             break;
@@ -326,7 +326,7 @@ public class NetworkServer {
 
                     outputStream.writeObject(user);
                     if (user != null)
-                        System.out.println(String.format("Sent user '%s' to main.client %s",
+                        System.out.println(String.format("Sent user '%s' to client %s",
                                 user.getUsername(), socket.toString()));
                 }
                 outputStream.flush();
@@ -338,7 +338,7 @@ public class NetworkServer {
                 synchronized (tableUser) {
                     tableUser.deleteUser(username);
                 }
-                System.out.println(String.format("Deleted user '%s' on behalf of main.client '%s'",
+                System.out.println(String.format("Deleted user '%s' on behalf of client '%s'",
                         username, socket.toString()));
             }
             break;
@@ -349,7 +349,7 @@ public class NetworkServer {
                 }
                 outputStream.flush();
 
-                System.out.println(String.format("Sent size of %d to main.client %s",
+                System.out.println(String.format("Sent size of %d to client %s",
                         tableUser.getUserSize(), socket.toString()));
             }
             break;
@@ -360,7 +360,7 @@ public class NetworkServer {
                 }
                 outputStream.flush();
 
-                System.out.println(String.format("Sent name set to main.client %s",
+                System.out.println(String.format("Sent name set to client %s",
                         socket.toString()));
             }
             break;
@@ -373,7 +373,7 @@ public class NetworkServer {
                 synchronized (tableCurrentTrade) {
                     tableCurrentTrade.addTrade(a);
                 }
-                System.out.println(String.format("Added trade '%s' to database from main.client '%s'.",
+                System.out.println(String.format("Added trade '%s' to database from client '%s'.",
                         a.getBuySell(), socket.toString()));
             }
             break;
@@ -385,7 +385,7 @@ public class NetworkServer {
 
                     outputStream.writeObject(trade);
                     if (trade != null)
-                        System.out.println(String.format("Sent current trade '%s' to main.client %s",
+                        System.out.println(String.format("Sent current trade '%s' to client %s",
                                 trade.getID(), socket.toString()));
                 }
                 outputStream.flush();
@@ -399,7 +399,7 @@ public class NetworkServer {
                 }
                 outputStream.flush();
 
-                System.out.println(String.format("Sent id of trades with type '%s' to main.client '%s'.",
+                System.out.println(String.format("Sent id of trades with type '%s' to client '%s'.",
                         type, socket.toString()));
             }
             break;
@@ -411,7 +411,7 @@ public class NetworkServer {
                 }
                 outputStream.flush();
 
-                System.out.println(String.format("Sent id of trades from organisation '%s' to main.client '%s'.",
+                System.out.println(String.format("Sent id of trades from organisation '%s' to client '%s'.",
                         organisation, socket.toString()));
             }
             break;
@@ -421,7 +421,7 @@ public class NetworkServer {
                 synchronized (tableCurrentTrade) {
                     tableCurrentTrade.deleteTrade(id);
                 }
-                System.out.println(String.format("Deleted trade '%s' on behalf of main.client '%s'.",
+                System.out.println(String.format("Deleted trade '%s' on behalf of client '%s'.",
                         id, socket.toString()));
             }
             break;
@@ -431,7 +431,7 @@ public class NetworkServer {
                     outputStream.writeInt(tableCurrentTrade.getCurrentSize());
                 }
                 outputStream.flush();
-                System.out.println(String.format("Sent size of '%d' to main.client '%s'.",
+                System.out.println(String.format("Sent size of '%d' to client '%s'.",
                         tableCurrentTrade.getCurrentSize(), socket.toString()));
             }
             break;
@@ -442,7 +442,7 @@ public class NetworkServer {
                 }
                 outputStream.flush();
 
-                System.out.println(String.format("Sent id set to main.client '%s'.",
+                System.out.println(String.format("Sent id set to client '%s'.",
                         socket.toString()));
             }
             break;
@@ -455,7 +455,7 @@ public class NetworkServer {
                 synchronized (tableTradeHistory) {
                     tableTradeHistory.addTradeHistory(trade);
                 }
-                System.out.println(String.format("Added trade history '%s' to database from main.client '%s'.",
+                System.out.println(String.format("Added trade history '%s' to database from client '%s'.",
                         trade.getID(), socket.toString()));
             }
             break;
@@ -467,7 +467,7 @@ public class NetworkServer {
                 }
                 outputStream.flush();
 
-                System.out.println(String.format("Sent id of trade history with asset '%s' to main.client '%s'.",
+                System.out.println(String.format("Sent id of trade history with asset '%s' to client '%s'.",
                         asset, socket.toString()));
             }
             break;
@@ -477,7 +477,7 @@ public class NetworkServer {
                     outputStream.writeInt(tableTradeHistory.getHistorySize());
                 }
                 outputStream.flush();
-                System.out.println(String.format("Sent size of '%d' to main.client '%s'.",
+                System.out.println(String.format("Sent size of '%d' to client '%s'.",
                         tableTradeHistory.getHistorySize(), socket.toString()));
             }
             break;
@@ -488,7 +488,7 @@ public class NetworkServer {
                 }
                 outputStream.flush();
 
-                System.out.println(String.format("Sent id set to main.client '%s'.",
+                System.out.println(String.format("Sent id set to client '%s'.",
                         socket.toString()));
             }
             break;
@@ -496,7 +496,7 @@ public class NetworkServer {
     }
 
     /**
-     * Returns the port the main.server is configured to use
+     * Returns the port the server is configured to use
      * @return the port number
      */
     public static int getPort() {return PORT;}
@@ -512,14 +512,14 @@ public class NetworkServer {
             serverSocket.setSoTimeout(SOCKET_ACCEPT_TIMEOUT);
             for (;;) {
                 if (!running.get()) {
-                    // The main.server is no longer running
+                    // The server is no longer running
                     break;
                 }
                 try {
                     final Socket socket = serverSocket.accept();
                     socket.setSoTimeout(SOCKET_READ_TIMEOUT);
 
-                    // Got connection from main.client. Use runnable and thread to handle main.client.
+                    // Got connection from client. Use runnable and thread to handle client.
                     // The lambda wraps the functional interface.
                     final Thread clientThread = new Thread(() -> handleConnection(socket));
                     clientThread.start();
@@ -530,7 +530,7 @@ public class NetworkServer {
                 catch (SocketTimeoutException ignored) {
                 }
                 // Report other exceptions by printing the stack trace
-                // Do not shut down the main.server.
+                // Do not shut down the server.
                 catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -542,15 +542,15 @@ public class NetworkServer {
             System.exit(1);
         }
 
-        // Close down the main.server
+        // Close down the server
         System.exit(0);
     }
 
     /**
-     * Requests the main.server to shut down.
+     * Requests the server to shut down.
      */
     public void shutdown() {
-        // Shut the main.server down
+        // Shut the server down
         running.set(false);
     }
 }

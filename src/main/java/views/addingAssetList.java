@@ -35,6 +35,7 @@ public class addingAssetList extends JFrame implements Serializable{
      * Constructor sets up UI, adds button listeners and displays
      *
      * @param assetTypeData the user data from the database
+     * @param user The signed in user
      */
     public addingAssetList(User user, AssetTypeData assetTypeData) {
         // Initialise data

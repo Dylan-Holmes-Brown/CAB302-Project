@@ -18,6 +18,8 @@ public class TradeHistoryData {
      * Constructor initializes the list model that holds names as Strings and
      * attempts to read any data saved from previous invocations of the
      * application.
+     *
+     * @param dataSource The data source used to access the trade history database
      */
     public TradeHistoryData(TradeHistoryDataSource dataSource) {
         listModel = new DefaultListModel();

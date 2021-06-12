@@ -13,8 +13,10 @@ public class Main {
 
     /**
      * Initialises the client
+     *
+     * @param args Array of arguments
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(Main::createAndShowLoginGUI);
     }
 

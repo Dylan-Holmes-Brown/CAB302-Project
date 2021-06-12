@@ -69,8 +69,9 @@ public class buyArena extends JFrame implements Serializable {
     /**
      * Constructor sets up UI frame and adds listeners
      *
-     * @param tradeData the user data accessor to the database
-     * @param orgData the organisation data accessor to the database
+     * @param tradeData The trade data accessor to the database
+     * @param orgData The organisation data accessor to the database
+     * @param user The user logged in
      */
     public buyArena(User user, CurrentData tradeData, OrganisationData orgData) {
         this.user = user;

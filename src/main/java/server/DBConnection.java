@@ -19,7 +19,7 @@ public class DBConnection {
    private static Connection instance = null;
 
    /**
-    * Constructor intializes the connection.
+    * Constructor initialises the connection.
     */
    private DBConnection() {
       Properties properties = new Properties();

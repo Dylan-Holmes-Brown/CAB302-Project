@@ -12,6 +12,9 @@ public class Main {
 
     /**
      * Initialises the server
+     *
+     * @param args Array of arguments
+     * @throws IOException Input/Output error
      */
     public static void main(String[] args) throws IOException {
         NetworkServer server = new NetworkServer();

@@ -20,6 +20,7 @@ public class OrganisationData {
      * attempts to read any data saved from previous invocations of the
      * application.
      *
+     * @param dataSource The data source used to access the organisation database
      */
     public OrganisationData(OrganisationDataSource dataSource) {
         listModel = new DefaultListModel();

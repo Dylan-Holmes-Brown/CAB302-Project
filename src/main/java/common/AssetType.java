@@ -23,6 +23,8 @@ public class AssetType implements Serializable {
     /**
      * Finalizes any resources used by the data source and ensures data is
      * persisted.
+     *
+     * @param assetType The name of the asset
      */
     public AssetType(String assetType){
 

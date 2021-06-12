@@ -36,6 +36,7 @@ public interface TradeHistoryDataSource {
     /**
      * Retrieves a set of id's from the data source given an asset
      *
+     * @param asset The asset to retrieve
      * @return set of id's.
      */
     Set<Integer> assetSet(String asset);

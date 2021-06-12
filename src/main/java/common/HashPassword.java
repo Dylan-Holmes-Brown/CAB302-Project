@@ -39,7 +39,6 @@ public class HashPassword {
      *
      * @param password The password the user has typed in the main.client.
      * @return String The hash of the password.
-     * @throws Exception Pass through exception that gets handled by the main.client.
      */
     public static String hashPassword(String password) {
         try {
@@ -59,7 +58,6 @@ public class HashPassword {
      * This function creates a random salt.
      *
      * @return byte[] A byte array salt.
-     * @throws Exception Pass through the main.server error.
      */
     public static byte[] getSalt() {
         return Random.String().getBytes();

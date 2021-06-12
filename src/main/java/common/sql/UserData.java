@@ -19,6 +19,8 @@ public class UserData {
      * attempts to read any data saved
      * from previous invocations of the
      * application.
+     *
+     * @param dataSource The data source used to access the user database
      */
     public UserData(UserDataSource dataSource) {
         listModel = new DefaultListModel();
