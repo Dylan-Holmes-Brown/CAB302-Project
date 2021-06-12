@@ -21,7 +21,6 @@ public class TestOrganisation {
     public void setupOrganisation()
     {
         organisation = new Organisation("Microsoft", 560, "CPU", 100);
-        organisation2 = new Organisation("Linux", 420);
     }
 
     /**
@@ -31,7 +30,6 @@ public class TestOrganisation {
     public void testGetName()
     {
         assertEquals("Microsoft", organisation.getName());
-        assertEquals("Linux", organisation2.getName());
     }
 
     /**
@@ -42,8 +40,6 @@ public class TestOrganisation {
     {
         organisation.setName("Valve");
         assertEquals("Valve", organisation.getName());
-        organisation2.setName("Riot");
-        assertEquals("Riot", organisation2.getName());
     }
 
     /**
@@ -53,7 +49,6 @@ public class TestOrganisation {
     public void testGetCredits()
     {
         assertEquals(560, organisation.getCredits());
-        assertEquals(420, organisation2.getCredits());
     }
 
     /**
@@ -64,8 +59,6 @@ public class TestOrganisation {
     {
         organisation.setCredits(1210);
         assertEquals(1210, organisation.getCredits());
-        organisation2.setCredits(690);
-        assertEquals(690, organisation2.getCredits());
     }
 
     /**
