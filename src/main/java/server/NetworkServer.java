@@ -219,7 +219,7 @@ public class NetworkServer {
                 final String asset = (String) inputStream.readObject();
                 final int quantity = (Integer) inputStream.readObject();
                 synchronized(tableOrg) {
-                    tableOrg.addQuantity(name, asset, quantity);
+                    tableOrg.removeQuantity(name, asset, quantity);
                 }
                 System.out.println(String.format("Removed '%s' quantity from '%s' for '%s' from main.client '%s'.",
                         quantity, asset, name, socket.toString()));

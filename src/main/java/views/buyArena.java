@@ -32,6 +32,7 @@ public class buyArena extends JFrame implements Serializable {
     private List<Integer> buyId;
     private List<String> tradeSellList;
     private List<Integer> sellId;
+    private ArrayList<Organisation> orgList = new ArrayList<Organisation>();
 
     private JLabel buyName;
     private JTextField buyField;
@@ -54,16 +55,14 @@ public class buyArena extends JFrame implements Serializable {
 
     private static User user;
 
-    ArrayList<Organisation> organisationList = new ArrayList<Organisation>();
-    ArrayList<Organisation> orgList = new ArrayList<Organisation>();
-
-    Object[] array;
+    private Object[] array;
 
     private JButton sellButton;
     private JButton buyButton;
 
-    OrganisationData orgData;
-    CurrentData tradeData;
+    private OrganisationData orgData;
+    private CurrentData tradeData;
+    private Organisation org = new Organisation();
 
 
 
@@ -75,6 +74,7 @@ public class buyArena extends JFrame implements Serializable {
      */
     public buyArena(User user, CurrentData tradeData, OrganisationData orgData) {
         this.user = user;
+        org = new Organisation();
         this.tradeData = tradeData;
         this.orgData = orgData;
         array = new String[orgData.getSize()];
@@ -83,10 +83,19 @@ public class buyArena extends JFrame implements Serializable {
         buyId = new ArrayList<>();
         sellId = new ArrayList<>();
 
+        ListModel model = orgData.getModel();
+        for (int i = 0; i < orgData.getSize(); i++) {
+            org = orgData.get(model.getElementAt(i));
+            if (org.getName().equals(user.getOrganisationalUnit())) {
+                orgList.add(org);
+            }
+        }
+
         initUI();
 
         addButtonListeners(new ButtonListener());
         addNameListListener(new NameListListener());
+        addClosingListener(new ClosingListener());
 
         // decorate the frame and make it visible
         setTitle("Buy/Sell");
@@ -146,7 +155,7 @@ public class buyArena extends JFrame implements Serializable {
      * @return the scrolling name list panel
      */
     private JScrollPane buyListPane() {
-        String type = "Buy";
+        String type = "Sell";
 
         ListModel model = tradeData.getType(type);
         for (int i = 0; i < model.getSize(); i++) {
@@ -277,7 +286,7 @@ public class buyArena extends JFrame implements Serializable {
      * @return the scrolling name list panel
      */
     private JScrollPane sellListPane() {
-        String type = "Sell";
+        String type = "Buy";
 
         ListModel model = tradeData.getType(type);
         for (int i = 0; i < model.getSize(); i++) {
@@ -435,6 +444,15 @@ public class buyArena extends JFrame implements Serializable {
     }
 
     /**
+     * Adds a listener to the JFrame
+     *
+     * @param listener the listener for the JFrame to use
+     */
+    private void addClosingListener(WindowListener listener) {
+        addWindowListener(listener);
+    }
+
+    /**
      * Handles events for the buttons on the UI.
      *
      * @author Dylan Holmes-Brown
@@ -458,38 +476,32 @@ public class buyArena extends JFrame implements Serializable {
          * or display error
          */
         private void sellPressed() {
-            Integer index = sellList.getSelectedIndex();
-            Organisation org = new Organisation();
+            Integer index = 999;
             int quantity = Integer.parseInt(sellQuantityField.getText());
             int price = Integer.parseInt(sellPriceField.getText());
+            String asset = sellField.getText();
 
-            ListModel orgModel = orgData.getModel();
-            for (int i = 0; i < orgData.getSize(); i++) {
-                Organisation o = orgData.get(orgModel.getElementAt(i));
-                organisationList.add(o);
-            }
-            for (int i = 0; i < organisationList.size(); i++) {
-                if (organisationList.get(i).getName().equals(user.getOrganisationalUnit()) &&
-                        organisationList.get(i).getAsset().equals(sellField)) {
-                    org = orgData.get(i);
+            for (int i = 0; i < orgList.size(); i++) {
+                if (orgList.get(i).getAsset().contains(asset)) {
+                    org = orgList.get(i);
+                    break;
                 }
             }
-            if (quantity <= org.getQuantity()){
-                JOptionPane.showMessageDialog(null, "Sell Success");
-                //orgData.removeQuantity(organisationList.contains(user.getOrganisationalUnit()), String.valueOf(orgList.contains(index)), quant);
+                if (quantity <= org.getQuantity()){
+                    orgData.removeQuantity(org.getName(), org.getAsset(), quantity);
+                    orgData.removeCredits(org.getName(), price);
+                    tradeData.remove(sellId.get(sellList.getSelectedIndex()));
+                    JOptionPane.showMessageDialog(null, String.format("You have successfully sold '%s %s for %s'", quantity, asset, price));
+                }
+                else {
+                    JOptionPane.showMessageDialog(new JFrame(), String.format("Your organisation does not have the quantity of asset '%s' available to sell", asset), "Field Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
-            else {
-                JOptionPane.showMessageDialog(new JFrame(), "", "Field Error", JOptionPane.ERROR_MESSAGE);
-            }
-
                 //organisationList = list of organisations
                 //orgList  = list of assets from that organisation
 
-
-
                 //compare the org quantity to the quantity of a trade?
                 //so the first loop gets all organisations to a list, and the second gets all the assets of a given organisation.
-        }
 
         /**
          * When the Buy button is pressed, item is sent to the users organisation database
@@ -546,6 +558,20 @@ public class buyArena extends JFrame implements Serializable {
                     clearBuyFields();
                 }
             }
+        }
+    }
+
+    /**
+     * Implements the windowClosing method from WindowAdapter to persist the contents of the
+     * user table
+     */
+    private class ClosingListener extends WindowAdapter {
+        /**
+         * @see WindowAdapter#windowClosing(WindowEvent)
+         */
+        public void windowClosing(WindowEvent e) {
+            // Stop the application
+            System.exit(0);
         }
     }
 }

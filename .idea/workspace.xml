@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="maven integration complete, builds and unit tests all work, just needs team member information.">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_12_30_am__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="error checked views, buyArena almost done.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/views/addingOrgAssets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/addingOrgAssets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/views/addingOrganisationList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/addingOrganisationList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/views/addingTrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/addingTrade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/JDBCOrganisationDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/JDBCOrganisationDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/NetworkServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/NetworkServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/views/buyArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/buyArena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/views/orgCreditsQuantity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/orgCreditsQuantity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/views/userOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/userOptions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -461,7 +457,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623475881524</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="error checked views, buyArena almost done.">
+      <created>1623494135532</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1623494135532</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -477,7 +480,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="User login almost completed" />
     <MESSAGE value="organisation creation complete" />
     <MESSAGE value="Fixed network server, missing GET_ASSET_NAME_SET, GUI's can now run" />
     <MESSAGE value="Added linkage to other pages" />
@@ -502,7 +504,8 @@
     <MESSAGE value="added missing id column to organisational_unit table and refactored code accordingly" />
     <MESSAGE value="maven integration complete, builds and unit tests all work, just needs team member information." />
     <MESSAGE value="Removed a test that was not needed." />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed a test that was not needed." />
+    <MESSAGE value="error checked views, buyArena almost done." />
+    <option name="LAST_COMMIT_MESSAGE" value="error checked views, buyArena almost done." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestJDBCUser.ic" NAME="TestJDBCUser Coverage Results" MODIFIED="1622538349921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
