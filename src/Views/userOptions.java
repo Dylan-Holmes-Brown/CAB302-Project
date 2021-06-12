@@ -139,7 +139,7 @@ public class userOptions extends JFrame implements Serializable {
             JButton source = (JButton) e.getSource();
             if (source == createTrade) {
                 dispose();
-                new addingTrade(user, new CurrentData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
+                new addingTrade(user, new CurrentData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
             } else if (source == viewTrades) {
                 dispose();
                 //new addingOrganisationList(user, new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));

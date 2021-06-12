@@ -20,7 +20,6 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
                     + "quantity INTEGER NOT NULL CHECK (quantity >= 0),"
                     + "price INTEGER NOT NULL CHECK (price >= 0),"
                     + "date DATE NOT NULL,"
-                    + "FOREIGN KEY (organisation) REFERENCES organisational_unit(name),"
                     + "FOREIGN KEY (asset) REFERENCES asset_types(assetType)"
                     + ");";
 
@@ -98,7 +97,7 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
             resultSet.next();
             trade.setID(resultSet.getInt("id"));
             trade.setBuySell(resultSet.getString("buySell"));
-            trade.setBuySell(resultSet.getString("organisation"));
+            trade.setOrganisation(resultSet.getString("organisation"));
             trade.setAsset(resultSet.getString("asset"));
             trade.setQuantity(resultSet.getInt("quantity"));
             trade.setPrice(resultSet.getInt("price"));
