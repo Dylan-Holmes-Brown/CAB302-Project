@@ -296,8 +296,6 @@ public class buyArena extends JFrame implements Serializable {
                 //organisationList = list of organisations
                 //orgList  = list of assets from that organisation
 
-
-
                 //compare the org quantity to the quantity of a trade?
                 //so the first loop gets all organisations to a list, and the second gets all the assets of a given organisation.
 
@@ -306,8 +304,6 @@ public class buyArena extends JFrame implements Serializable {
             else{
                 JOptionPane.showMessageDialog(new JFrame(), "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
             }
-
-
 
         }
 
@@ -337,24 +333,43 @@ public class buyArena extends JFrame implements Serializable {
          * or display error
          */
         private void buyPressed() {
-//            String index = tradeList.getSelectedValue().toString();
-//            int quant = Integer.valueOf(qualityField.getText());
-//            int price = Integer.valueOf(priceField.getText());
-//            //variables
-//            if(itemField.getText() != null && !itemField.getText().equals("") &&
-//                    qualityField.getText() != null && !qualityField.getText().equals("") &&
-//                    priceField.getText() != null && !priceField.getText().equals("")){
-//                if (index == itemField.getText() && quant <= user.getOrganisationalUnit(tradeData)){
-//
-//
-//                }
-//
-//
-//            }
+            String index = tradeList.getSelectedValue().toString();
+            int quant = Integer.parseInt(qualityField.getText());
+            int price = Integer.parseInt(priceField.getText());
+
+            if(itemField.getText() != null && !itemField.getText().equals("") &&
+                    qualityField.getText() != null && !qualityField.getText().equals("") &&
+                    priceField.getText() != null && !priceField.getText().equals("")){
+
+                ListModel orgModel = orgData.getModel();
+                for (int i = 0; i < orgData.getSize(); i++) {
+                    Organisation org = orgData.get(orgModel.getElementAt(i).toString());
+                    organisationList.add(org);
+                }
+                for (int i = 0; i < organisationList.size(); i++) {
+                    if (organisationList.get(i).getName().equals(user.getOrganisationalUnit())) {
+                        orgList.add(orgData.get(user.getOrganisationalUnit()));
+                    }
+                }
+                if(orgList.contains(index)){
+                    if (quant <= orgList.get(1).getQuantity()){
+                        orgData.removeQuantity(organisationList.contains(user.getOrganisationalUnit()), String.valueOf(orgList.contains(index)), quant);
+                    }
+
+                }
+
+                //organisationList = list of organisations
+                //orgList  = list of assets from that organisation
+
+                //compare the org quantity to the quantity of a trade?
+                //so the first loop gets all organisations to a list, and the second gets all the assets of a given organisation.
 
 
-            checkListSize();
-            JOptionPane.showMessageDialog(null, String.format("You have bough the '%s' ", itemName));
+            }
+            else{
+                JOptionPane.showMessageDialog(new JFrame(), "Please Complete All Fields!", "Field Error", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
     }
 
