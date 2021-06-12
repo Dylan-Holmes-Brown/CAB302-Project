@@ -2,6 +2,7 @@ package views;
 
 import client.NetworkDataSource;
 import common.Organisation;
+import common.Trade;
 import common.User;
 import common.sql.CurrentData;
 import common.sql.OrganisationData;
@@ -11,6 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Vipin Vijay
@@ -21,8 +23,9 @@ import java.util.ArrayList;
 public class buyArena extends JFrame implements Serializable {
 
     private static final long serialVersionUID = 62L;
-    private JList tradeList;
-    private JComboBox comboBox;
+    private JList list;
+
+    private List<String> tradeList;
 
     private JLabel itemName;
     private JTextField itemField;
@@ -60,6 +63,7 @@ public class buyArena extends JFrame implements Serializable {
         this.tradeData = tradeData;
         this.orgData = orgData;
         array = new String[orgData.getSize()];
+        tradeList = new ArrayList<>();
 
         initUI();
 
@@ -107,17 +111,26 @@ public class buyArena extends JFrame implements Serializable {
      * @return the scrolling name list panel
      */
     private JScrollPane buyListPane() {
-        String type = "Buy";
-        tradeList = new JList(tradeData.getType(type));
-        tradeList.setFixedCellWidth(200);
 
-        JScrollPane scroller = new JScrollPane(tradeList);
-        scroller.setViewportView(tradeList);
+        // Get the trade data in a presentable format
+        ListModel model = tradeData.getModel();
+        for (int i = 0; i < model.getSize(); i++) {
+            Trade trade = tradeData.get(model.getElementAt(i));
+            tradeList.add(String.format("%s - %s", trade.getBuySell(), trade.getAsset()));
+        }
+
+        // Initialise the JList and JScrollerPane
+        list = new JList(tradeList.toArray());
+        list.setFixedCellWidth(200);
+
+        JScrollPane scroller = new JScrollPane(list);
+        scroller.setViewportView(list);
         scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroller.setMinimumSize(new Dimension(200, 150));
         scroller.setPreferredSize(new Dimension(250, 150));
         scroller.setMaximumSize(new Dimension(250, 200));
+
 
         return scroller;
     }
@@ -129,13 +142,22 @@ public class buyArena extends JFrame implements Serializable {
      * @return the scrolling name list panel
      */
     private JScrollPane sellListPane() {
-        String type = "Sell";
-        tradeList = new JList(tradeData.getType(type));
-        tradeList.setFixedCellWidth(200);
+//        list = new JList(tradeData.getType(type));
+//        list.setFixedCellWidth(200);
 
-        JScrollPane scroller = new JScrollPane(tradeList);
+        // Get the trade data in a presentable format
+        ListModel model = tradeData.getModel();
+        for (int i = 0; i < model.getSize(); i++) {
+            Trade trade = tradeData.get(model.getElementAt(i));
+            tradeList.add(String.format("%s - %s", trade.getBuySell(), trade.getAsset()));
 
-        scroller.setViewportView(tradeList);
+        }
+        // Initialise the JList and JScrollerPane
+        list = new JList(tradeList.toArray());
+        list.setFixedCellWidth(200);
+
+        JScrollPane scroller = new JScrollPane(list);
+        scroller.setViewportView(list);
         scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroller.setMaximumSize(new Dimension(250, 250));
@@ -268,7 +290,7 @@ public class buyArena extends JFrame implements Serializable {
          * or display error
          */
         private void sellPressed() {
-            String index = tradeList.getSelectedValue().toString();
+            String index = list.getSelectedValue().toString();
             int quant = Integer.parseInt(qualityField.getText());
             int price = Integer.parseInt(priceField.getText());
 
@@ -313,9 +335,9 @@ public class buyArena extends JFrame implements Serializable {
          * or display error
          */
         private void deletePressed() {
-            int index = tradeList.getSelectedIndex();
+            int index = list.getSelectedIndex();
             String itemName = itemField.getText();
-            tradeData.remove(tradeList.getSelectedValue());
+            tradeData.remove(list.getSelectedValue());
             clearFields();
             index--;
             if (index == -1) {
@@ -323,7 +345,7 @@ public class buyArena extends JFrame implements Serializable {
                     index = 0;
                 }
             }
-            tradeList.setSelectedIndex(index);
+            list.setSelectedIndex(index);
             checkListSize();
             JOptionPane.showMessageDialog(null, String.format("User '%s' successfully deleted", itemName));
         }
@@ -333,7 +355,7 @@ public class buyArena extends JFrame implements Serializable {
          * or display error
          */
         private void buyPressed() {
-            String index = tradeList.getSelectedValue().toString();
+            String index = list.getSelectedValue().toString();
             int quant = Integer.parseInt(qualityField.getText());
             int price = Integer.parseInt(priceField.getText());
 

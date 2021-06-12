@@ -142,7 +142,7 @@ public class userOptions extends JFrame implements Serializable {
                 new addingTrade(user, new CurrentData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
             } else if (source == viewTrades) {
                 dispose();
-                //new addingOrganisationList(user, new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
+                new buyArena(user, new CurrentData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
             } else if (source == assetHistory) {
                 dispose();
                 //new addingOrgAssets(user, new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
