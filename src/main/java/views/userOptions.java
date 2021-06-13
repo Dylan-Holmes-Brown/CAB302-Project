@@ -139,10 +139,10 @@ public class userOptions extends JFrame implements Serializable {
                 new addingTrade(user, new CurrentData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
             } else if (source == viewTrades) {
                 dispose();
-                new buyArena(user, new CurrentData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
+                new buyArena(user, new CurrentData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()), new TradeHistoryData(new NetworkDataSource()));
             } else if (source == assetHistory) {
                 dispose();
-                new assetHistory(user, new TradeHistoryData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
+                new assetHistory(user, new TradeHistoryData(new NetworkDataSource()));
             } else if (source == updatePassword) {
                 dispose();
                 new updatePassword(user, new UserData(new NetworkDataSource()));

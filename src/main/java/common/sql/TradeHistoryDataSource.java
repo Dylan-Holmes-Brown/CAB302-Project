@@ -13,6 +13,15 @@ public interface TradeHistoryDataSource {
     void addTradeHistory(Trade trades);
 
     /**
+     * Extracts all the details of a Current Trade from the table based on the
+     * id passed in.
+     *
+     * @param id The id as a Integer to search for.
+     * @return all details in a Trade object for the given id
+     */
+    Trade getTradeHistory(Integer id);
+
+    /**
      * Gets the number of organisations in the table.
      *
      * @return size of organisation table.

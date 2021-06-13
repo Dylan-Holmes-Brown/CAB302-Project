@@ -19,12 +19,14 @@ public class JDBCTradeHistoryDataSource implements TradeHistoryDataSource {
                     + "quantity INTEGER NOT NULL CHECK (quantity >= 0),"
                     + "price INTEGER NOT NULL CHECK (price >= 0),"
                     + "date DATE NOT NULL,"
-                    + "FOREIGN KEY (organisation) REFERENCES organisational_unit(name),"
                     + "FOREIGN KEY (asset) REFERENCES asset_types(assetType)"
                     + ");";
 
     private static final String INSERT_TRADE = "INSERT INTO tradeHistory (buySell, organisation, asset, quantity, price, date) VALUES (?, ?, ?, ?, ?, ?);";
     private PreparedStatement addTrade;
+
+    private static final String GET_HISTORY = "SELECT * FROM tradeHistory WHERE id=?";
+    private PreparedStatement getHistory;
 
     private static final String GET_ASSETS = "SELECT * FROM tradeHistory WHERE asset=?;";
     private PreparedStatement getAssets;
@@ -47,6 +49,7 @@ public class JDBCTradeHistoryDataSource implements TradeHistoryDataSource {
 
             // Initialise prepared statements for table
             addTrade = connection.prepareStatement(INSERT_TRADE);
+            getHistory = connection.prepareStatement(GET_HISTORY);
             getAssets = connection.prepareStatement(GET_ASSETS);
             getTradeID = connection.prepareStatement(GET_TRADE_ID);
             rowCount = connection.prepareStatement(COUNT_ROWS);
@@ -72,6 +75,31 @@ public class JDBCTradeHistoryDataSource implements TradeHistoryDataSource {
         catch (SQLException sqle) {
             sqle.printStackTrace();
         }
+    }
+
+    /**
+     * @see TradeHistoryDataSource#getTradeHistory(Integer)
+     */
+    public Trade getTradeHistory(Integer id) {
+        Trade trade = new Trade();
+        ResultSet resultSet = null;
+
+        try {
+            getHistory.setInt(1, id);
+            resultSet = getHistory.executeQuery();
+            resultSet.next();
+            trade.setID(resultSet.getInt("id"));
+            trade.setBuySell(resultSet.getString("buySell"));
+            trade.setOrganisation(resultSet.getString("organisation"));
+            trade.setAsset(resultSet.getString("asset"));
+            trade.setQuantity(resultSet.getInt("quantity"));
+            trade.setPrice(resultSet.getInt("price"));
+            trade.setDate(resultSet.getDate("date"));
+        }
+        catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+        return trade;
     }
 
     /**

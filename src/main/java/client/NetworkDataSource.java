@@ -599,6 +599,24 @@ public class NetworkDataSource implements AssetTypeDataSource, OrganisationDataS
     }
 
     /**
+     * @see TradeHistoryDataSource#getTradeHistory(Integer)
+     */
+    public Trade getTradeHistory(Integer id) {
+        try {
+            // Tell the server to expect the current trades id, and send the details
+            outputStream.writeObject(Commands.GET_TRADE_HISTORY);
+            outputStream.writeObject(id);
+            outputStream.flush();
+
+            // Read the users details from the main.server
+            return (Trade) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException | ClassCastException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
      * @see TradeHistoryDataSource#getHistorySize()
      */
     @Override

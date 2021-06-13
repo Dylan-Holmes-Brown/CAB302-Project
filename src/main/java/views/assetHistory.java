@@ -18,18 +18,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Vipin Vijay
+ * Initialises the user interface for view trade history to the database.
+ * Listeners are included as sub-classes of this class
+ *
  * @author Dylan Holmes-Brown
  * @author Laku Jackson
  */
 
 public class assetHistory extends JFrame implements Serializable {
 
+    // Global Variables
     private static final long serialVersionUID = 555;
+    private static User user;
+    private TradeHistoryData tradeData;
+
+    // JSwing Variables
     private JList buyList;
-    private List<String> tradeBuyList;
+    private List<String> tradeList;
     private List<Integer> tradeId;
-    private ArrayList<Organisation> orgList = new ArrayList<Organisation>();
 
     private JLabel historyName;
     private JTextField historyField;
@@ -42,52 +48,29 @@ public class assetHistory extends JFrame implements Serializable {
     private JLabel historyType;
     private JTextField historyTField;
 
-
-
     private JButton backButton;
-    private static User user;
-
-    private Object[] array;
-
-
-    private OrganisationData orgData;
-    private TradeHistoryData tradeData;
-    private Organisation org = new Organisation();
-
-
 
     /**
      * Constructor sets up UI frame and adds listeners
      *
      * @param tradeData the user data accessor to the database
-     * @param orgData the organisation data accessor to the database
      */
-    public assetHistory(User user, TradeHistoryData tradeData, OrganisationData orgData) {
+    public assetHistory(User user, TradeHistoryData tradeData) {
+        // Initialise data
         this.user = user;
-        org = new Organisation();
         this.tradeData = tradeData;
-        this.orgData = orgData;
-        array = new String[orgData.getSize()];
-        tradeBuyList = new ArrayList<>();
+        tradeList = new ArrayList<>();
         tradeId = new ArrayList<>();
 
-        ListModel model = orgData.getModel();
-        for (int i = 0; i < orgData.getSize(); i++) {
-            org = orgData.get(model.getElementAt(i));
-            if (org.getName().equals(user.getOrganisationalUnit())) {
-                orgList.add(org);
-            }
-        }
-
+        // Initialise the ui and listeners
         initUI();
-
         addButtonListeners(new ButtonListener());
         addNameListListener(new NameListListener());
         addClosingListener(new ClosingListener());
 
-        // decorate the frame and make it visible
-        setTitle("Asset History");
-        setMinimumSize(new Dimension(900, 700));
+        // Decorate the frame and make it visible
+        setTitle("Asset Trading System - Asset History");
+        setMinimumSize(new Dimension(400, 400));
         setLocationRelativeTo(null);
         pack();
         setVisible(true);
@@ -101,13 +84,13 @@ public class assetHistory extends JFrame implements Serializable {
         Container contentPane = this.getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
+        // Display the return button
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeReturnPane());
 
         //list of buy items
         contentPane.add(Box.createVerticalStrut(20));
-        contentPane.add(makeBuyPane());
-
+        contentPane.add(makeHistoryPane());
         contentPane.add(Box.createVerticalStrut(20));
     }
 
@@ -127,13 +110,16 @@ public class assetHistory extends JFrame implements Serializable {
         return buttonPanel;
     }
 
-    private JPanel makeBuyPane() {
+    private JPanel makeHistoryPane() {
         // Initialise Border
         Border empty = BorderFactory.createEmptyBorder();
         Border border = BorderFactory.createTitledBorder(empty, "Past Buys:");
 
+        // Initialise the JPanel
         JPanel detailsPanel = new JPanel();
         detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.X_AXIS));
+
+        // Add trade list and fields to the panel
         detailsPanel.add(Box.createHorizontalStrut(20));
         detailsPanel.add(buyListPane());
         detailsPanel.add(Box.createHorizontalStrut(20));
@@ -150,31 +136,28 @@ public class assetHistory extends JFrame implements Serializable {
      * @return the scrolling name list panel
      */
     private JScrollPane buyListPane() {
+        // Get all the trades
+        ListModel model = tradeData.getModel();
+        for (int i = 0; i < model.getSize(); i++) {
+            Trade trade = tradeData.get(model.getElementAt(i));
+            // Check that the trade against the user's organisation
+            Date date = trade.getDate();
+            tradeList.add(String.format("%s %s %s for $%s - %s", trade.getBuySell(), trade.getQuantity(), trade.getAsset(), trade.getPrice(), date));
+            tradeId.add(trade.getID());
+        }
 
-
-//
-//        ListModel model = tradeData.getType(type);
-//        for (int i = 0; i < model.getSize(); i++) {
-//            Trade trade = tradeData.get(model.getElementAt(i));
-//            // Check that the trade against the user's organisation
-//            if (!user.getOrganisationalUnit().equals(trade.getOrganisation())) {
-//                Date date = trade.getDate();
-//                tradeBuyList.add(String.format("%s %s %s for $%s - %s", trade.getBuySell(), trade.getQuantity(), trade.getAsset(), trade.getPrice(), date));
-//                tradeId.add(trade.getID());
-//            }
-//        }
-
-        buyList = new JList(tradeBuyList.toArray());
+        // Initialise the JList and scroller
+        buyList = new JList(tradeList.toArray());
         buyList.setFixedCellWidth(200);
-
         JScrollPane scroller = new JScrollPane(buyList);
         scroller.setViewportView(buyList);
         scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        // Set Dimensions
         scroller.setMinimumSize(new Dimension(200, 150));
         scroller.setPreferredSize(new Dimension(250, 150));
         scroller.setMaximumSize(new Dimension(250, 200));
-
         return scroller;
     }
 
@@ -188,6 +171,7 @@ public class assetHistory extends JFrame implements Serializable {
      * @return a panel containing the user fields
      */
     private JPanel makeBuyFieldsPanel() {
+        // Initialise the panel
         JPanel buyPanel = new JPanel();
         GroupLayout layout = new GroupLayout(buyPanel);
         buyPanel.setLayout(layout);
@@ -255,7 +239,7 @@ public class assetHistory extends JFrame implements Serializable {
      *
      * @param trade the selected trade to display
      */
-    private void displayBuy(Trade trade) {
+    private void display(Trade trade) {
         // Check that the current trade is not null
         if (trade != null) {
             historyTField.setText(trade.getBuySell());
@@ -265,19 +249,6 @@ public class assetHistory extends JFrame implements Serializable {
             historyOrgField.setText(trade.getOrganisation());
         }
     }
-
-
-    /**
-     * Clear all buy input fields
-     */
-    private void clearBuyFields() {
-        historyTField.setText("");
-        historyField.setText("");
-        historyQField.setText("");
-        historyPField.setText("");
-        historyOrgField.setText("");
-    }
-
 
     /**
      * Adds a listener to the buttons
@@ -321,7 +292,6 @@ public class assetHistory extends JFrame implements Serializable {
             if (source == backButton) {
                 // persist the data dispose the window and return to the user options menu
                 tradeData.persist();
-                orgData.persist();
                 dispose();
                 new userOptions(user);
             }
@@ -339,20 +309,13 @@ public class assetHistory extends JFrame implements Serializable {
          * @see ListSelectionListener#valueChanged(ListSelectionEvent)
          */
         public void valueChanged(ListSelectionEvent e) {
-            JList source = (JList) e.getSource();
-            if (source == buyList) {
-                // Check to see the selected item is not null or empty
-                if (buyList.getSelectedValue() != null
-                        && !buyList.getSelectedValue().equals("")) {
-                    // Display the trade
-                    //Trade trade = tradeData.get(tradeId.get(buyList.getSelectedIndex()));
-                    //displayBuy(trade);
-                }
+            // Check to see the selected item is not null or empty
+            if (buyList.getSelectedValue() != null
+                    && !buyList.getSelectedValue().equals("")) {
+                // Display the trade
+                Trade trade = tradeData.get(tradeId.get(buyList.getSelectedIndex()));
+                display(trade);
             }
-            else {
-
-            }
-
         }
     }
 
@@ -365,7 +328,8 @@ public class assetHistory extends JFrame implements Serializable {
          * @see WindowAdapter#windowClosing(WindowEvent)
          */
         public void windowClosing(WindowEvent e) {
-            // Stop the application
+            // Persist the data, stop the application
+            tradeData.persist();
             System.exit(0);
         }
     }

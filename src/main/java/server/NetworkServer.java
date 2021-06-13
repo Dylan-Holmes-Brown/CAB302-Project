@@ -460,6 +460,20 @@ public class NetworkServer {
             }
             break;
 
+            case GET_TRADE_HISTORY: {
+                final Integer id = (Integer) inputStream.readObject();
+                synchronized (tableTradeHistory) {
+                    final Trade trade = tableTradeHistory.getTradeHistory(id);
+
+                    outputStream.writeObject(trade);
+                    if (trade != null)
+                        System.out.println(String.format("Sent trade history '%s' to client %s",
+                                trade.getID(), socket.toString()));
+                }
+                outputStream.flush();
+            }
+            break;
+
             case GET_TRADE_ASSETS: {
                 final String asset = (String) inputStream.readObject();
                 synchronized (tableTradeHistory) {
@@ -507,6 +521,7 @@ public class NetworkServer {
         tableOrg = new JDBCOrganisationDataSource();
         tableUser = new JDBCUserDataSource();
         tableCurrentTrade = new JDBCCurrentDataSource();
+        tableTradeHistory = new JDBCTradeHistoryDataSource();
 
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             serverSocket.setSoTimeout(SOCKET_ACCEPT_TIMEOUT);

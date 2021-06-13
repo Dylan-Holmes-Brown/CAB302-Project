@@ -104,7 +104,7 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
         try {
             addCredits.setInt(1, credits);
             addCredits.setString(2, name);
-            addCredits.execute();
+            addCredits.executeUpdate();
         }
         catch (SQLException sqle) {
             sqle.printStackTrace();
@@ -118,7 +118,7 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
         try {
             removeCredits.setInt(1, credits);
             removeCredits.setString(2, name);
-            removeCredits.execute();
+            removeCredits.executeUpdate();
         }
         catch (SQLException sqle) {
             sqle.printStackTrace();
@@ -133,7 +133,7 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
             addQuantity.setInt(1, quantity);
             addQuantity.setString(2, name);
             addQuantity.setString(3, asset);
-            addQuantity.execute();
+            addQuantity.executeUpdate();
         }
         catch (SQLException sqle) {
             sqle.printStackTrace();
@@ -148,10 +148,9 @@ public class JDBCOrganisationDataSource implements OrganisationDataSource {
             removeQuantity.setInt(1, quantity);
             removeQuantity.setString(2, name);
             removeQuantity.setString(3, asset);
-            removeQuantity.execute();
-        }
-        catch (SQLException sqle) {
-            sqle.printStackTrace();
+            removeQuantity.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 

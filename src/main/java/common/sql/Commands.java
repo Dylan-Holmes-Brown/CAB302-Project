@@ -39,6 +39,7 @@ public enum Commands {
 
     // Trade History Commands
     ADD_TRADE_HISTORY,
+    GET_TRADE_HISTORY,
     GET_TRADE_ASSETS,
     GET_TRADE_HISTORY_SIZE,
     GET_TRADE_HISTORY_ID_SET

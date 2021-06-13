@@ -116,7 +116,6 @@ public class JDBCCurrentDataSource implements CurrentDataSource {
     public Set<Integer> typeSet(String type) {
         Set<Integer> id = new TreeSet<Integer>();
         ResultSet resultSet = null;
-
         try {
             getBuySell.setString(1, type);
             resultSet = getBuySell.executeQuery();

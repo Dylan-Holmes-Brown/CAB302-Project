@@ -45,6 +45,14 @@ public class TradeHistoryData {
     }
 
     /**
+     * Retrieves trade details from the model.
+     *
+     * @param key the trade to retrieve.
+     * @return the Trade object related to the id.
+     */
+    public Trade get(Object key) { return historyData.getTradeHistory((Integer) key); }
+
+    /**
      * Saves the data in the current_traddes table using the persistence mechanism.
      */
     public void persist() { historyData.close(); }

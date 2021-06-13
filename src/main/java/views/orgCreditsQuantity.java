@@ -443,7 +443,7 @@ public class orgCreditsQuantity extends JFrame implements Serializable{
                                 // Get inputs and add quantity to an asset for an organisation
                                 input = assetQField.getText();
                                 inputInt = Integer.parseInt(input);
-                                orgData.removeQuantity(orgBox.getSelectedItem(), assetBox.getSelectedItem().toString(), inputInt);
+                                orgData.removeQuantity(orgBox.getSelectedItem().toString(), assetBox.getSelectedItem().toString(), inputInt);
                                 JOptionPane.showMessageDialog(null, String.format("'%s' quantity removed from asset '%s' for Organisation '%s' successfully", inputInt, assetBox.getSelectedItem().toString(), orgBox.getSelectedItem().toString()));
                             }
                             // Organisation does not hold the asset
