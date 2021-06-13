@@ -25,6 +25,7 @@ public class orgCreditsQuantity extends JFrame implements Serializable{
     private OrganisationData orgData;
     private AssetTypeData assetTypeData;
     private User user;
+    private Organisation org;
     private List<String> assetList;
     private List<String> orgList;
     private List<String> orgAssetList;
@@ -371,14 +372,13 @@ public class orgCreditsQuantity extends JFrame implements Serializable{
          */
         private void applyPressed() {
             // Initialise Variables
-            String input;
-            int inputInt;
             String selectedOrg = orgBox.getSelectedItem().toString();
 
             // Get all assets of an organisation
             for (int i = 0; i < organisationList.size(); i++) {
                 if (organisationList.get(i).getName().equals(selectedOrg)) {
                     orgAssetList.add(organisationList.get(i).getAsset());
+                    org = organisationList.get(i); // organisation equal the organisation that has that asset
                 }
             }
 
@@ -386,24 +386,27 @@ public class orgCreditsQuantity extends JFrame implements Serializable{
             if (addCredits.isSelected() || removeCredits.isSelected() || addQuantity.isSelected() || removeQuantity.isSelected()) {
                 // Check if a credits related button is selected
                 if (addCredits.isSelected() || removeCredits.isSelected()) {
+                    String credits = orgCreditsField.getText();
+                    int creditsInt = Integer.parseInt(credits);
                     // Check that credits has input
                     if (orgCreditsField != null && !orgCreditsField.getText().equals("")
                             && selectedOrg != null) {
                         // Check if add credits is selected
                         if (addCredits.isSelected()) {
-                            // Get the inputs and add credits to the org
-                            input = orgCreditsField.getText();
-                            inputInt = Integer.parseInt(input);
-                            orgData.addCredits(orgBox.getSelectedItem(), inputInt);
-                            JOptionPane.showMessageDialog(null, String.format("'%s' credits added to Organisation '%s' successfully", inputInt, orgBox.getSelectedItem().toString()));
+                            // add credits to the org
+                            orgData.addCredits(orgBox.getSelectedItem(), creditsInt);
+                            JOptionPane.showMessageDialog(null, String.format("'%s' credits added to Organisation '%s' successfully", creditsInt, orgBox.getSelectedItem().toString()));
                         }
                         // Check if remove credits is selected
                         else if (removeCredits.isSelected()) {
-                            // Get the inputs and remove credits from the org
-                            input = orgCreditsField.getText();
-                            inputInt = Integer.parseInt(input);
-                            orgData.removeCredits(orgBox.getSelectedItem(), inputInt);
-                            JOptionPane.showMessageDialog(null, String.format("'%s' credits removed from Organisation '%s' successfully", inputInt, orgBox.getSelectedItem().toString()));
+                            if (creditsInt <= org.getCredits()) {
+                                // remove credits from the org
+                                orgData.removeCredits(orgBox.getSelectedItem(), creditsInt);
+                                JOptionPane.showMessageDialog(null, String.format("'%s' credits removed from Organisation '%s' successfully", creditsInt, orgBox.getSelectedItem().toString()));
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(null, String.format("Cannot remove '%s' quantity from organisation '%s' '%s'!", creditsInt, orgBox.getSelectedItem().toString()), "Quantity Error", JOptionPane.ERROR_MESSAGE);
+                            }
                         }
                     }
                     // Fields not filled in
@@ -415,6 +418,8 @@ public class orgCreditsQuantity extends JFrame implements Serializable{
                 else if (addQuantity.isSelected() || removeQuantity.isSelected()) {
                     // Get drop box value
                     String selectedAsset = assetBox.getSelectedItem().toString();
+                    String quantity = assetQField.getText();
+                    int quantityInt = Integer.parseInt(quantity);
 
                     // Check that quantity has input
                     if (assetQField != null && !assetQField.getText().equals("")
@@ -423,13 +428,11 @@ public class orgCreditsQuantity extends JFrame implements Serializable{
                         if (addQuantity.isSelected()) {
                             // Check if organisation contains the selected asset
                             if (orgAssetList.contains(selectedAsset)) {
-                                // Get inputs and add quantity to an asset for an organisation
-                                input = assetQField.getText();
-                                inputInt = Integer.parseInt(input);
-                                orgData.addQuantity(orgBox.getSelectedItem(), assetBox.getSelectedItem().toString(), inputInt);
+                                // add quantity to an asset for an organisation
+                                orgData.addQuantity(orgBox.getSelectedItem(), assetBox.getSelectedItem().toString(), quantityInt);
                                 JOptionPane.showMessageDialog(null,
                                         String.format("'%s' quantity added to asset '%s' for Organisation '%s' successfully",
-                                                inputInt, assetBox.getSelectedItem().toString(), orgBox.getSelectedItem().toString()));
+                                                quantityInt, assetBox.getSelectedItem().toString(), orgBox.getSelectedItem().toString()));
                             }
                             // Organisation does not hold the asset
                             else{
@@ -438,17 +441,20 @@ public class orgCreditsQuantity extends JFrame implements Serializable{
                         }
                         // Check if remove quantity is selected
                         else if (removeQuantity.isSelected()) {
-                            // Check if organisation contains the selected asset
-                            if (orgAssetList.contains(selectedAsset)) {
-                                // Get inputs and add quantity to an asset for an organisation
-                                input = assetQField.getText();
-                                inputInt = Integer.parseInt(input);
-                                orgData.removeQuantity(orgBox.getSelectedItem().toString(), assetBox.getSelectedItem().toString(), inputInt);
-                                JOptionPane.showMessageDialog(null, String.format("'%s' quantity removed from asset '%s' for Organisation '%s' successfully", inputInt, assetBox.getSelectedItem().toString(), orgBox.getSelectedItem().toString()));
+                            if (quantityInt <= org.getQuantity()) {
+                                // Check if organisation contains the selected asset
+                                if (orgAssetList.contains(selectedAsset)) {
+                                    // Get inputs and add quantity to an asset for an organisation
+                                    orgData.removeQuantity(orgBox.getSelectedItem().toString(), assetBox.getSelectedItem().toString(), quantityInt);
+                                    JOptionPane.showMessageDialog(null, String.format("'%s' quantity removed from asset '%s' for Organisation '%s' successfully", quantityInt, assetBox.getSelectedItem().toString(), orgBox.getSelectedItem().toString()));
+                                }
+                                // Organisation does not hold the asset
+                                else {
+                                    JOptionPane.showMessageDialog(null, String.format("Organisation '%s' does not hold the asset '%s'", orgBox.getSelectedItem(), selectedAsset), "Asset Error", JOptionPane.ERROR_MESSAGE);
+                                }
                             }
-                            // Organisation does not hold the asset
                             else {
-                                JOptionPane.showMessageDialog(null, String.format("Organisation '%s' does not hold the asset '%s'", orgBox.getSelectedItem(), selectedAsset), "Asset Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, String.format("Cannot remove '%s' quantity from asset '%s'!", quantityInt, assetBox.getSelectedItem().toString()), "Quantity Error", JOptionPane.ERROR_MESSAGE);
                             }
                         }
                     }
