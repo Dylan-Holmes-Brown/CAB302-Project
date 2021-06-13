@@ -53,7 +53,8 @@ public class assetHistory extends JFrame implements Serializable {
     /**
      * Constructor sets up UI frame and adds listeners
      *
-     * @param tradeData the user data accessor to the database
+     * @param tradeData the trade data accessor to the database
+     * @param user The signed in user
      */
     public assetHistory(User user, TradeHistoryData tradeData) {
         // Initialise data
