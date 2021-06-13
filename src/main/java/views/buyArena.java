@@ -5,6 +5,7 @@ import common.Trade;
 import common.User;
 import common.sql.CurrentData;
 import common.sql.OrganisationData;
+import common.sql.TradeHistoryData;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -52,14 +53,13 @@ public class buyArena extends JFrame implements Serializable {
     private JLabel sellOrganisation;
     private JTextField sellOrganisationField;
 
-
+    private JButton backButton;
     private static User user;
 
     private Object[] array;
 
     private JButton sellButton;
     private JButton buyButton;
-    private JButton backButton;
 
     private OrganisationData orgData;
     private CurrentData tradeData;
@@ -116,6 +116,9 @@ public class buyArena extends JFrame implements Serializable {
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
         //Make return button
+        contentPane.add(Box.createVerticalStrut(20));
+        contentPane.add(makeReturnPane());
+
         contentPane.add(Box.createVerticalStrut(20));
         contentPane.add(makeReturnPane());
 
@@ -185,7 +188,7 @@ public class buyArena extends JFrame implements Serializable {
             // Check that the trade against the user's organisation
             if (!user.getOrganisationalUnit().equals(trade.getOrganisation())) {
                 Date date = trade.getDate();
-                tradeBuyList.add(String.format("%s %s %s for %s - %s", trade.getBuySell(), trade.getQuantity(), trade.getAsset(), trade.getPrice(), date));
+                tradeBuyList.add(String.format("%s %s %s for $%s - %s", trade.getBuySell(), trade.getQuantity(), trade.getAsset(), trade.getPrice(), date));
                 buyId.add(trade.getID());
             }
         }
@@ -501,20 +504,26 @@ public class buyArena extends JFrame implements Serializable {
                 dispose();
                 new userOptions(user);
             }
+            else if (source == backButton) {
+                // persist the data dispose the window and return to the user options menu
+                tradeData.persist();
+                orgData.persist();
+                dispose();
+                new userOptions(user);
+            }
         }
         /**
          * When the create user button is pressed, add the user information to the database
          * or display error
          */
         private void sellPressed() {
-            Integer index = 999;
             int quantity = Integer.parseInt(sellQuantityField.getText());
             int price = Integer.parseInt(sellPriceField.getText());
             String asset = sellField.getText();
 
             for (int i = 0; i < orgList.size(); i++) {
-                if (orgList.get(i).getAsset().contains(asset)) {
-                    org = orgList.get(i);
+                if (orgList.get(i).getAsset().contains(asset)) { // get asset with same name
+                    org = orgList.get(i); // organisation equal the organisation that has that asset
                     break;
                 }
             }
@@ -522,12 +531,13 @@ public class buyArena extends JFrame implements Serializable {
                     orgData.removeQuantity(org.getName(), org.getAsset(), quantity);
                     orgData.removeCredits(org.getName(), price);
                     tradeData.remove(sellId.get(sellList.getSelectedIndex()));
+                    //TradeHistoryData his = tradeData.add(sellId.get(sellList.getSelectedIndex()));
                     JOptionPane.showMessageDialog(null, String.format("You have successfully sold '%s %s for %s'", quantity, asset, price));
                 }
                 else {
                     JOptionPane.showMessageDialog(new JFrame(), String.format("Your organisation does not have the quantity of asset '%s' available to sell", asset), "Field Error", JOptionPane.ERROR_MESSAGE);
                 }
-            }
+        }
                 //organisationList = list of organisations
                 //orgList  = list of assets from that organisation
 
@@ -539,22 +549,26 @@ public class buyArena extends JFrame implements Serializable {
          * or display error
          */
         private void buyPressed() {
-//            String index = tradeList.getSelectedValue().toString();
-//            int quant = Integer.valueOf(qualityField.getText());
-//            int price = Integer.valueOf(priceField.getText());
-//            //variables
-//            if(itemField.getText() != null && !itemField.getText().equals("") &&
-//                    qualityField.getText() != null && !qualityField.getText().equals("") &&
-//                    priceField.getText() != null && !priceField.getText().equals("")){
-//                if (index == itemField.getText() && quant <= user.getOrganisationalUnit(tradeData)){
-//
-//
-//                }
-//
-//
-//            }
 
-//            JOptionPane.showMessageDialog(null, String.format("You have bough the '%s' ", itemName));
+            int quantity = Integer.parseInt(buyQuantityField.getText());
+            int price = Integer.parseInt(buyPriceField.getText());
+            String asset = buyField.getText();
+
+            for (int i = 0; i < orgList.size(); i++) {
+                if (orgList.get(i).getAsset().contains(asset)) {
+                    org = orgList.get(i);
+                    break;
+                }
+            }
+            if (price < org.getCredits()){
+                orgData.addQuantity(org.getName(), org.getAsset(), quantity);
+                orgData.addCredits(org.getName(), price);
+                tradeData.remove(buyId.get(buyList.getSelectedIndex()));
+                JOptionPane.showMessageDialog(null, String.format("You have successfully Bought '%s %s for %s'", quantity, asset, price));
+            }
+            else {
+                JOptionPane.showMessageDialog(new JFrame(), String.format("Your organisation does not have enough credits to purchase '%s' ", asset), "Field Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
     /**

@@ -2,10 +2,7 @@ package views;
 
 import client.NetworkDataSource;
 import common.User;
-import common.sql.AssetTypeData;
-import common.sql.CurrentData;
-import common.sql.OrganisationData;
-import common.sql.UserData;
+import common.sql.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -145,7 +142,7 @@ public class userOptions extends JFrame implements Serializable {
                 new buyArena(user, new CurrentData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
             } else if (source == assetHistory) {
                 dispose();
-                //new addingOrgAssets(user, new OrganisationData(new NetworkDataSource()), new AssetTypeData(new NetworkDataSource()));
+                new assetHistory(user, new TradeHistoryData(new NetworkDataSource()), new OrganisationData(new NetworkDataSource()));
             } else if (source == updatePassword) {
                 dispose();
                 new updatePassword(user, new UserData(new NetworkDataSource()));
