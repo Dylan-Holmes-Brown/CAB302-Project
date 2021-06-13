@@ -201,11 +201,13 @@ public class orgCreditsQuantity extends JFrame implements Serializable{
 
         // Initialise the organisation model, add the organisation name to a list
         // and organisation object to a separate list
-        ListModel orgModel = orgData.getModel();
+        ListModel model = orgData.getModel();
         for (int i = 0; i < orgData.getSize(); i++) {
-            Organisation org = orgData.get(orgModel.getElementAt(i));
-            organisationList.add(org);
-            orgList.add(org.getName());
+            Organisation org = orgData.get(model.getElementAt(i));
+            if (!orgList.contains(org.getName())) {
+                orgList.add(org.getName());
+                organisationList.add(org);
+            }
         }
 
         // Initialise the Drop down boxes and panel
@@ -405,7 +407,7 @@ public class orgCreditsQuantity extends JFrame implements Serializable{
                                 JOptionPane.showMessageDialog(null, String.format("'%s' credits removed from Organisation '%s' successfully", creditsInt, orgBox.getSelectedItem().toString()));
                             }
                             else {
-                                JOptionPane.showMessageDialog(null, String.format("Cannot remove '%s' quantity from organisation '%s' '%s'!", creditsInt, orgBox.getSelectedItem().toString()), "Quantity Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, String.format("Cannot remove '%s' quantity from organisation '%s'!", creditsInt, orgBox.getSelectedItem().toString()), "Quantity Error", JOptionPane.ERROR_MESSAGE);
                             }
                         }
                     }

@@ -29,7 +29,7 @@ public class addingTrade extends JFrame implements Serializable {
     private List<Organisation> organisationList;
     private List<String> orgList;
     private List<String> assetList;
-    private List<String> tradeBuyList;
+    private List<Trade> tradeID;
     private List<String> tradeList;
 
     // JSwing Variables
@@ -70,6 +70,7 @@ public class addingTrade extends JFrame implements Serializable {
         orgList = new ArrayList<>();
         assetList = new ArrayList<>();
         tradeList = new ArrayList<>();
+        tradeID = new ArrayList<>();
 
         // Initialise the UI and listen for a Button press or window close
         initUI();
@@ -148,6 +149,7 @@ public class addingTrade extends JFrame implements Serializable {
             if (user.getOrganisationalUnit().equals(trade.getOrganisation())) {
                 Date date = trade.getDate();
                 tradeList.add(String.format("%s %s %s for %s - %s", trade.getBuySell(), trade.getQuantity(), trade.getAsset(), trade.getPrice(), date));
+                tradeID.add(trade);
             }
         }
         // Initialise the JList and JScrollerPane
@@ -467,8 +469,8 @@ public class addingTrade extends JFrame implements Serializable {
         private void createPressed() {
             // Initialise data
             Trade t = new Trade();
-            String selectedValue = dropDownBox.getSelectedItem().toString();
             String orderType = "Buy";
+            String selectedValue = "";
             int assetPrice = Integer.parseInt(assetQField.getText());
             int tradePrice = Integer.parseInt(traPriceField.getText());
 
@@ -478,9 +480,11 @@ public class addingTrade extends JFrame implements Serializable {
                 // Check the buy button is selected an set the trade type
                 if (buyButton.isSelected()) {
                     orderType = "Buy";
+                    selectedValue = assetBox.getSelectedItem().toString();
                 }
                 else if (sellButton.isSelected()) {
                     orderType = "Sell";
+                    selectedValue = dropDownBox.getSelectedItem().toString();
                 }
                 // Add trade to database and clear fields
                 t = new Trade(orderType, user.getOrganisationalUnit(), selectedValue, assetPrice, tradePrice, currDate());
@@ -542,7 +546,8 @@ public class addingTrade extends JFrame implements Serializable {
             if (list.getSelectedValue() != null
                     && !list.getSelectedValue().equals("")) {
                 // Display the trade
-                display(tradeData.get(list.getSelectedIndex() + 1));
+                Trade trade = tradeData.get(tradeID.get(list.getSelectedIndex()).getID());
+                display(trade);
             }
         }
     }

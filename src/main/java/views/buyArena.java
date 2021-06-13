@@ -195,11 +195,11 @@ public class buyArena extends JFrame implements Serializable {
         // Get a list of all buy trades and a corresponding ID list of the trades
         ListModel model = tradeData.getType(type);
         for (int i = 0; i < model.getSize(); i++) {
-            Trade trade = tradeData.get(model.getElementAt(i + 1));
+            Trade trade = tradeData.get(model.getElementAt(i));
             // Check that the trade against the user's organisation
             if (!user.getOrganisationalUnit().equals(trade.getOrganisation())) {
                 Date date = trade.getDate();
-                tradeBuyList.add(String.format("%s %s %s for $%s - %s", trade.getBuySell(), trade.getQuantity(), trade.getAsset(), trade.getPrice(), date));
+                tradeBuyList.add(String.format("%s %s for $%s - %s", trade.getQuantity(), trade.getAsset(), trade.getPrice(), date));
                 buyId.add(trade);
             }
         }
@@ -353,7 +353,7 @@ public class buyArena extends JFrame implements Serializable {
             // Check that the trade against the user's organisation
             if (!user.getOrganisationalUnit().equals(trade.getOrganisation())) {
                 Date date = trade.getDate();
-                tradeSellList.add(String.format("%s %s %s for %s - %s", trade.getBuySell(), trade.getQuantity(), trade.getAsset(), trade.getPrice(), date));
+                tradeSellList.add(String.format("%s %s for %s - %s", trade.getQuantity(), trade.getAsset(), trade.getPrice(), date));
                 sellId.add(trade);
             }
         }
@@ -569,12 +569,26 @@ public class buyArena extends JFrame implements Serializable {
             String asset = sellField.getText();
 
             // Get the organisation related to the asset
+            ListModel model = orgData.getModel();
             for (int i = 0; i < orgList.size(); i++) {
                 if (orgList.get(i).getAsset().contains(asset)) { // get asset with same name
                     org = orgList.get(i); // organisation equal the organisation that has that asset
                     break;
                 }
+                else
+                {
+                    Trade trade = tradeData.get(sellId.get(sellList.getSelectedIndex()).getID());
+                    for (int j = 0; j < orgData.getSize(); j++)
+                    {
+                        Organisation o = orgData.get(model.getElementAt(j));
+                        if (o.getName().equals(trade.getOrganisation()));
+                        {
+                            org = new Organisation(trade.getOrganisation(), o.getCredits(), asset, 0);
+                        }
+                    }
+                }
             }
+
             // Check the quantity not higher than available quantity
             if (quantity <= org.getQuantity()) {
                 // Remove quantity and credits from the organisation,
@@ -587,7 +601,7 @@ public class buyArena extends JFrame implements Serializable {
                 orgData.addCredits(trade.getOrganisation(), price);
 
                 // Remove trade from the current trade and add to the trad history
-                tradeData.remove(sellId.get(sellList.getSelectedIndex()));
+                tradeData.remove(sellId.get(sellList.getSelectedIndex()).getID());
                 historyData.add(trade);
                 JOptionPane.showMessageDialog(null, String.format("You have successfully sold '%s %s for %s'", quantity, asset, price));
             }
@@ -613,11 +627,14 @@ public class buyArena extends JFrame implements Serializable {
                     org = orgList.get(i);
                     break;
                 }
+                else {
+                    org = new Organisation (user.getOrganisationalUnit(), orgList.get(i).getCredits(), asset, 0);
+                }
             }
             // Check the amount of credits does not exceed the organisations credits
             if (price < org.getCredits()){
                 // Add quantity and credits to the trade creater
-                Trade trade = tradeData.get(buyId.get(buyList.getSelectedIndex()));
+                Trade trade = tradeData.get(buyId.get(buyList.getSelectedIndex()).getID());
                 orgData.addQuantity(trade.getOrganisation(), asset, quantity);
                 orgData.addCredits(trade.getOrganisation(), price);
 
@@ -653,7 +670,7 @@ public class buyArena extends JFrame implements Serializable {
                 if (buyList.getSelectedValue() != null
                         && !buyList.getSelectedValue().equals("")) {
                     // Display the trade
-                    Trade trade = tradeData.get(buyId.get(buyList.getSelectedIndex()));
+                    Trade trade = buyId.get(buyList.getSelectedIndex());
                     displayBuy(trade);
                     clearSellFields();
                 }
@@ -663,7 +680,7 @@ public class buyArena extends JFrame implements Serializable {
                 if (sellList.getSelectedValue() != null
                         && !sellList.getSelectedValue().equals("")) {
                     // Display the trade
-                    Trade trade = tradeData.get(sellId.get(sellList.getSelectedIndex()));
+                    Trade trade = sellId.get(sellList.getSelectedIndex());
                     displaySell(trade);
                     clearBuyFields();
                 }
