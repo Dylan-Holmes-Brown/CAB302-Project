@@ -13,15 +13,17 @@ import common.User;
 public class TestUser {
     User user;
     User user2;
+    User user3;
 
     /**
-     * Before each test.test initialise any used data for the tests
+     * Before each test initialise any used data for the tests
      */
     @BeforeEach @Test
     public void setupUser()
     {
         user = new User("Adam", "1234", "Member", "Woolies");
         user2 = new User("Mitch", "4321", "Admin");
+        user3 = new User();
     }
 
     /**

@@ -40,14 +40,20 @@ public class Organisation implements Serializable {
     }
 
     /**
-     * Organisation Constructor
+     * Organisation Constructor for testing
      *
+     * @param id the ide of the organisation
      * @param name The name of the organisation
      * @param credits The amount of credits an organisation has
+     * @param assets The name of assets the organisation has
+     * @param quantity The quantity of the assets
      */
-    public Organisation(String name, int credits) {
+    public Organisation(int id, String name, int credits, String assets, int quantity) {
+        this.id = id;
         this.name = name;
         this.credits = credits;
+        this.assets = assets;
+        this.quantity = quantity;
     }
 
     /**

@@ -113,9 +113,4 @@ public class User extends Object implements Serializable {
      * @param org the org to set
      */
     public void setOrganisationalUnit(String org) { this.org = org; }
-
-    /**
-     * @see Object#toString()
-     */
-    public String toString() { return username + ", " + password + ", " + accountType + ", " + org; }
 }

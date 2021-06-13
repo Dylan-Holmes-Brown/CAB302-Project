@@ -12,6 +12,7 @@ import common.AssetType;
 
 public class TestAssetType {
     AssetType asset;
+    AssetType asset2;
 
     /**
      * Before each test.test initialise any used data for the tests
@@ -20,6 +21,7 @@ public class TestAssetType {
     public void setupAssetType()
     {
         asset = new AssetType("CPU");
+        asset2 = new AssetType();
     }
 
     /**

@@ -13,6 +13,7 @@ import java.sql.Date;
 
 public class TestTrade {
     Trade trade;
+    Trade trade2;
     Date date;
 
     /**
@@ -24,6 +25,7 @@ public class TestTrade {
         date = new Date(System.currentTimeMillis());
         trade = new Trade("Buy", "Apple", "CPU", 4, 20, date);
         trade.setID(1);
+        trade2 = new Trade();
     }
 
     /**

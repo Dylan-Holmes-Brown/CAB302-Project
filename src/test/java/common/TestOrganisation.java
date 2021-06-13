@@ -2,7 +2,6 @@ package common;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
-import common.Organisation;
 
 /**
  * Test class for testing all the functionality of the organisation object
@@ -13,14 +12,33 @@ import common.Organisation;
 public class TestOrganisation {
     Organisation organisation;
     Organisation organisation2;
+    Organisation organisation3;
 
     /**
-     * Before each test.test initialise any used data for the tests
+     * Before each test initialise any used data for the tests
      */
     @BeforeEach @Test
     public void setupOrganisation()
     {
-        organisation = new Organisation("Microsoft", 560, "CPU", 100);
+        organisation = new Organisation(1,"Microsoft", 560, "CPU", 100);
+        organisation2 = new Organisation("Apple", 100, "Phone", 50);
+        organisation3 = new Organisation();
+    }
+
+    /**
+     * Test getting an organisation's id
+     */
+    @Test
+    public void testGetID() {assertEquals(1, organisation.getID());}
+
+    /**
+     * Test setting an organisation's id
+     */
+    @Test
+    public void testSetID()
+    {
+        organisation.setID(2);
+        assertEquals(2, organisation.getID());
     }
 
     /**

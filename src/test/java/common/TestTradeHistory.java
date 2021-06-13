@@ -26,8 +26,11 @@ public class TestTradeHistory {
         tradeList = new ArrayList<>();
         data = new MockTradeHistoryData();
         trade = new Trade("Buy", "org1", "CPU", 10, 40, new Date(2021, 06, 06));
+        trade.setID(1);
         trade2 = new Trade("Sell", "org1", "CPU", 10, 40, new Date(2021, 06, 06));
+        trade.setID(2);
         trade3 = new Trade("Buy", "org3", "Hard Drive", 10, 40, new Date(2021, 06, 06));
+        trade.setID(3);
     }
 
     /**
@@ -57,6 +60,14 @@ public class TestTradeHistory {
     public void testAddDuplicateTrade() {
         data.add(trade);
         assertThrows(IllegalArgumentException.class, () -> data.add(trade));
+    }
+
+    /**
+     * Test get trade where trade doesn't exist
+     */
+    @Test
+    public void testGetWrongTrade() {
+        assertNull(data.get(5));
     }
 
     /**

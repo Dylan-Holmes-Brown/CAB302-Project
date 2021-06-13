@@ -26,7 +26,7 @@ public class Main {
         }
         catch (IOException e) {
             // In the case of an exception, show an error message and terminate
-            System.out.println("Error starting the main.server");
+            System.out.println("Error starting the server");
             System.exit(1);
         }
     }

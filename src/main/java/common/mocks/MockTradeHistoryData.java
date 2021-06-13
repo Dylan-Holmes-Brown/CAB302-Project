@@ -48,7 +48,7 @@ public class MockTradeHistoryData {
         // Loop through the entire list
         for (int i = 0; i< tradeList.size(); i++) {
             // Check if the key is in the list
-            if (tradeList.get(i).equals(key)) {
+            if (tradeList.get(i).getID().equals(key)) {
                 return tradeList.get(i);
             }
         }
