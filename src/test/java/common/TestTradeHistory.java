@@ -39,7 +39,7 @@ public class TestTradeHistory {
     @Test
     public void testAddTrade() {
         data.add(trade);
-        assertEquals(trade, data.get(trade));
+        assertEquals(trade, data.get(trade.getID()));
     }
 
     /**
@@ -49,8 +49,8 @@ public class TestTradeHistory {
     public void testAddTwoTrades() {
         data.add(trade);
         data.add(trade2);
-        assertEquals(trade, data.get(trade));
-        assertEquals(trade2, data.get(trade2));
+        assertEquals(trade, data.get(trade.getID()));
+        assertEquals(trade2, data.get(trade2.getID()));
     }
 
     /**

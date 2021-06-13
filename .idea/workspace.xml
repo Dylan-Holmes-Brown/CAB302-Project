@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Check for quantity and credits not going negative implemented">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/HashPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/HashPassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/Organisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/Organisation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/Random.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/common/TestAssetType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/TestAssetType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/common/TestOrganisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/TestOrganisation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/common/TestTrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/TestTrade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/common/TestTradeHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/TestTradeHistory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/common/TestUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/common/TestUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/common/mocks/MockAssetTypeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/mocks/MockAssetTypeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/common/mocks/MockCurrentTradeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/mocks/MockCurrentTradeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/common/mocks/MockOrganisationData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/mocks/MockOrganisationData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/common/mocks/MockTradeHistoryData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/mocks/MockTradeHistoryData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/common/mocks/MockUserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/mocks/MockUserData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/server/TestNetworkServerInfo.java" beforeDir="false" />
-    </list>
+    <list default="true" id="e432b0f1-af87-4005-a993-ecde776ea0df" name="Default Changelist" comment="Ammended tests, 100% code coverage now with mock classes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,7 +78,7 @@
       <recent name="Views" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestTradeHistory.testGetWrongTrade">
+  <component name="RunManager" selected="JUnit.TestTradeHistory.testAddTrade">
     <configuration name="Project" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="15" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -106,26 +88,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestAssetType and 9 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Assignment" />
-      <option name="TEST_OBJECT" value="pattern" />
-      <patterns>
-        <pattern testClass="common.TestAssetType" />
-        <pattern testClass="common.TestAssetTypeData" />
-        <pattern testClass="common.TestCurrentTradeData" />
-        <pattern testClass="common.TestHashPassword" />
-        <pattern testClass="common.TestOrganisation" />
-        <pattern testClass="common.TestOrganisationData" />
-        <pattern testClass="common.TestTrade" />
-        <pattern testClass="common.TestTradeHistory" />
-        <pattern testClass="common.TestUser" />
-        <pattern testClass="common.TestUserData" />
-      </patterns>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestAssetTypeData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestTradeHistory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
@@ -134,23 +97,40 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="common" />
-      <option name="MAIN_CLASS_NAME" value="common.TestAssetTypeData" />
+      <option name="MAIN_CLASS_NAME" value="common.TestTradeHistory" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestNetworkServerInfo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestTradeHistory.testAddTrade" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Assignment" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="server.*" />
+          <option name="PATTERN" value="common.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="server" />
-      <option name="MAIN_CLASS_NAME" value="server.TestNetworkServerInfo" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="common" />
+      <option name="MAIN_CLASS_NAME" value="common.TestTradeHistory" />
+      <option name="METHOD_NAME" value="testAddTrade" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestTradeHistory.testAddTwoTrades" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="common.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="common" />
+      <option name="MAIN_CLASS_NAME" value="common.TestTradeHistory" />
+      <option name="METHOD_NAME" value="testAddTwoTrades" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -189,19 +169,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Project" />
-      <item itemvalue="JUnit.TestNetworkServerInfo" />
-      <item itemvalue="JUnit.TestAssetType and 9 more" />
-      <item itemvalue="JUnit.TestAssetTypeData" />
       <item itemvalue="JUnit.TestTradeHistory.testGetWrongAsset" />
       <item itemvalue="JUnit.TestTradeHistory.testGetWrongTrade" />
+      <item itemvalue="JUnit.TestTradeHistory" />
+      <item itemvalue="JUnit.TestTradeHistory.testAddTwoTrades" />
+      <item itemvalue="JUnit.TestTradeHistory.testAddTrade" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestTradeHistory.testAddTrade" />
+        <item itemvalue="JUnit.TestTradeHistory.testAddTwoTrades" />
+        <item itemvalue="JUnit.TestTradeHistory" />
         <item itemvalue="JUnit.TestTradeHistory.testGetWrongTrade" />
         <item itemvalue="JUnit.TestTradeHistory.testGetWrongAsset" />
-        <item itemvalue="JUnit.TestAssetTypeData" />
-        <item itemvalue="JUnit.TestAssetType and 9 more" />
-        <item itemvalue="JUnit.TestNetworkServerInfo" />
       </list>
     </recent_temporary>
   </component>
@@ -487,7 +467,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623567524879</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Ammended tests, 100% code coverage now with mock classes">
+      <created>1623569676664</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1623569676664</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -503,7 +490,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="organisation creation complete" />
     <MESSAGE value="Fixed network server, missing GET_ASSET_NAME_SET, GUI's can now run" />
     <MESSAGE value="Added linkage to other pages" />
     <MESSAGE value="Test for all data completed" />
@@ -528,7 +514,8 @@
     <MESSAGE value="maven integration complete, builds and unit tests all work, just needs team member information." />
     <MESSAGE value="Removed a test that was not needed." />
     <MESSAGE value="Check for quantity and credits not going negative implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="Check for quantity and credits not going negative implemented" />
+    <MESSAGE value="Ammended tests, 100% code coverage now with mock classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ammended tests, 100% code coverage now with mock classes" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project$TestJDBCUser.ic" NAME="TestJDBCUser Coverage Results" MODIFIED="1622538349921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -547,6 +534,9 @@
       <FILTER>common.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Project$TestHashPassword.ic" NAME="TestHashPassword Coverage Results" MODIFIED="1623568781598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>common.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Project$TestTradeHistory_testGetWrongTrade.ic" NAME="TestTradeHistory.testGetWrongTrade Coverage Results" MODIFIED="1623569343894" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>common.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Project$TestUserData_testRemoveNoUser.ic" NAME="TestUserData.testRemoveNoUser Coverage Results" MODIFIED="1622968185439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
