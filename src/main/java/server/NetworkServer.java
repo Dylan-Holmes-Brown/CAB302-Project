@@ -14,7 +14,7 @@ import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- *
+ * Creates and handles all methods regarding the network server
  *
  * @author Dylan Holmes-Brown
  */
@@ -181,6 +181,7 @@ public class NetworkServer {
             break;
 
             case ADD_CREDITS: {
+                // Client is sending information to add credits to an organisation
                 final String name = (String) inputStream.readObject();
                 final int credits = (Integer) inputStream.readObject();
                 synchronized(tableOrg) {
@@ -192,6 +193,7 @@ public class NetworkServer {
             break;
 
             case REMOVE_CREDITS: {
+                // Client is sending information to remove credits to an organisation
                 final String name = (String) inputStream.readObject();
                 final int credits = (Integer) inputStream.readObject();
                 synchronized(tableOrg) {
@@ -203,6 +205,7 @@ public class NetworkServer {
             break;
 
             case ADD_QUANTITY: {
+                // Client is sending information to add quantity of an asset to an organisation
                 final String name = (String) inputStream.readObject();
                 final String asset = (String) inputStream.readObject();
                 final int quantity = (Integer) inputStream.readObject();
@@ -215,6 +218,7 @@ public class NetworkServer {
             break;
 
             case REMOVE_QUANTITY: {
+                // Client is sending information to add quantity of an asset to an organisation
                 final String name = (String) inputStream.readObject();
                 final String asset = (String) inputStream.readObject();
                 final int quantity = (Integer) inputStream.readObject();
@@ -246,6 +250,7 @@ public class NetworkServer {
             break;
 
             case GET_ORG_ASSET_SET: {
+                // Client is sending a request for all assets of an organisation
                 final String organisation = (String) inputStream.readObject();
                 synchronized (tableOrg) {
                     outputStream.writeObject((tableOrg.orgAssetSet(organisation)));
@@ -257,6 +262,7 @@ public class NetworkServer {
             }
 
             case DELETE_ORG: {
+                // Delete an organisation from the database
                 final String name = (String) inputStream.readObject();
                 synchronized (tableOrg) {
                     tableOrg.deleteOrg(name);
@@ -299,6 +305,7 @@ public class NetworkServer {
             User Commands
              */
             case ADD_USER: {
+                // Client is sending a new user
                 final User user = (User) inputStream.readObject();
                 synchronized (tableUser) {
                     tableUser.addUser(user);
@@ -309,6 +316,7 @@ public class NetworkServer {
             break;
 
             case UPDATE_PASSWORD: {
+                // Client is requesting for the password of a user to be changed
                 final String username = (String) inputStream.readObject();
                 final String password = (String) inputStream.readObject();
                 synchronized (tableUser) {
@@ -320,10 +328,10 @@ public class NetworkServer {
             break;
 
             case GET_USER: {
+                // Client sends us the name of the user to retrieve
                 final String username = (String) inputStream.readObject();
                 synchronized (tableUser) {
                     final User user = tableUser.getUser(username);
-
                     outputStream.writeObject(user);
                     if (user != null)
                         System.out.println(String.format("Sent user '%s' to client %s",
@@ -334,6 +342,7 @@ public class NetworkServer {
             break;
 
             case DELETE_USER: {
+                // Client sends the name of the user to delete
                 final String username = (String) inputStream.readObject();
                 synchronized (tableUser) {
                     tableUser.deleteUser(username);
@@ -344,6 +353,7 @@ public class NetworkServer {
             break;
 
             case GET_USER_SIZE: {
+                // Send the client the size of the database
                 synchronized (tableUser) {
                     outputStream.writeInt(tableUser.getUserSize());
                 }
@@ -355,6 +365,7 @@ public class NetworkServer {
             break;
 
             case GET_USER_NAME_SET: {
+                // Send the client the name set of users
                 synchronized (tableUser) {
                     outputStream.writeObject(tableUser.UsernameSet());
                 }
@@ -369,6 +380,7 @@ public class NetworkServer {
             CurrentTrade Commands
              */
             case ADD_TRADE: {
+                // Client is sending a new trade to add
                 final Trade a = (Trade) inputStream.readObject();
                 synchronized (tableCurrentTrade) {
                     tableCurrentTrade.addTrade(a);
@@ -379,6 +391,7 @@ public class NetworkServer {
             break;
 
             case GET_CURRENT_TRADE: {
+                // Client sends the id of the current trade to retrieve
                 final Integer id = (Integer) inputStream.readObject();
                 synchronized (tableCurrentTrade) {
                     final Trade trade = tableCurrentTrade.getCurrentTrade(id);
@@ -393,6 +406,7 @@ public class NetworkServer {
             break;
 
             case GET_BUY_SELL: {
+                // Send the client the id set of trades of a given type
                 final String type = (String) inputStream.readObject();
                 synchronized (tableCurrentTrade) {
                     outputStream.writeObject((tableCurrentTrade.typeSet(type)));
@@ -405,6 +419,7 @@ public class NetworkServer {
             break;
 
             case GET_ORGTRADE: {
+                // Send the client the id set of trades of a given type
                 final String organisation = (String) inputStream.readObject();
                 synchronized (tableCurrentTrade) {
                     outputStream.writeObject((tableCurrentTrade.orgSet(organisation)));
@@ -417,6 +432,7 @@ public class NetworkServer {
             break;
 
             case DELETE_TRADE: {
+                // Client sends the id of the trade to delete
                 final int id = (int) inputStream.readObject();
                 synchronized (tableCurrentTrade) {
                     tableCurrentTrade.deleteTrade(id);
@@ -427,6 +443,7 @@ public class NetworkServer {
             break;
 
             case GET_TRADE_SIZE: {
+                // Send the size of the current trade table to the client
                 synchronized (tableCurrentTrade) {
                     outputStream.writeInt(tableCurrentTrade.getCurrentSize());
                 }
@@ -437,6 +454,7 @@ public class NetworkServer {
             break;
 
             case GET_TRADE_NAME_SET: {
+                // Client sends the id set of the trade table
                 synchronized (tableCurrentTrade) {
                     outputStream.writeObject((tableCurrentTrade.idSet()));
                 }
@@ -451,6 +469,7 @@ public class NetworkServer {
             Trade History Commands
              */
             case ADD_TRADE_HISTORY: {
+                // Client is sending a new trade history
                 final Trade trade = (Trade) inputStream.readObject();
                 synchronized (tableTradeHistory) {
                     tableTradeHistory.addTradeHistory(trade);
@@ -461,6 +480,7 @@ public class NetworkServer {
             break;
 
             case GET_TRADE_HISTORY: {
+                // Client sends the id of the trade to retrieve
                 final Integer id = (Integer) inputStream.readObject();
                 synchronized (tableTradeHistory) {
                     final Trade trade = tableTradeHistory.getTradeHistory(id);
@@ -475,6 +495,7 @@ public class NetworkServer {
             break;
 
             case GET_TRADE_ASSETS: {
+                // Send the client the id set of trades of a given asset
                 final String asset = (String) inputStream.readObject();
                 synchronized (tableTradeHistory) {
                     outputStream.writeObject((tableTradeHistory.assetSet(asset)));
@@ -487,6 +508,7 @@ public class NetworkServer {
             break;
 
             case GET_TRADE_HISTORY_SIZE: {
+                // Send the size of the table to the client
                 synchronized (tableTradeHistory) {
                     outputStream.writeInt(tableTradeHistory.getHistorySize());
                 }
@@ -497,6 +519,7 @@ public class NetworkServer {
             break;
 
             case GET_TRADE_HISTORY_ID_SET: {
+                // Send the client the id set of trades
                 synchronized (tableTradeHistory) {
                     outputStream.writeObject((tableTradeHistory.historySet()));
                 }
@@ -526,6 +549,7 @@ public class NetworkServer {
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             serverSocket.setSoTimeout(SOCKET_ACCEPT_TIMEOUT);
             for (;;) {
+
                 if (!running.get()) {
                     // The server is no longer running
                     break;
